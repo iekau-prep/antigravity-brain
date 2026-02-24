@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>賃貸 vs 持ち家 シミュレーション | マイホーム診断</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>🏠 賃貸 vs 持ち家：正直シミュレーション</h1>
+        <p style="text-align: center; color: #64748b; margin-bottom: 2rem;">
+            「家賃を払い続ける」のと「マイホームを買う」の、どちらが本当にお得か計算します。<br>
+            隠れたコスト（更新料や固定資産税など）も含めて比較しましょう。
+        </p>
+
+        <!-- Section: Timeline & Age (New) -->
+        <div class="input-group">
+            <h2>⏱️ ライフプランとタイミング</h2>
+
+            <div class="grid">
+                <div>
+                    <label for="current-age">現在の年齢</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="current-age" value="30">
+                        <span class="unit">歳</span>
+                    </div>
+                    <div class="helper">ローンの完済年齢や、団信の確認目安を出すために使います。</div>
+                </div>
+                <div>
+                    <label for="loan-term-input">希望ローン年数</label>
+                    <div class="input-wrapper" style="display: flex; gap: 0.5rem;">
+                        <input type="number" id="loan-term-input" value="35" min="1" max="50" style="width: 70px;">
+                        <span class="unit" style="right: auto; position: static; align-self: center;">年</span>
+
+                        <!-- Preset Dropdown -->
+                        <select id="loan-term-preset"
+                            style="flex: 1; padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; color: #64748b;">
+                            <option value="">選択...</option>
+                            <option value="15">15年</option>
+                            <option value="20">20年</option>
+                            <option value="25">25年</option>
+                            <option value="30">30年</option>
+                            <option value="35">35年</option>
+                            <option value="40">40年</option>
+                            <option value="50">50年</option>
+                        </select>
+                    </div>
+                    <div class="helper">希望する返済期間です。完済年齢の目安に影響します。</div>
+                    <div class="loan-auto-adjust-hint" style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">
+                        ※完済年齢が85歳以上になる入力は、自動で調整されます。
+                    </div>
+
+                    <!-- Extended Loan Warning (Red) -->
+                    <div id="loan-extended-warning"
+                        style="display:none; margin-top: 0.5rem; color: #b91c1c; font-size: 0.85rem; line-height: 1.4; background: #fef2f2; padding: 0.5rem; border-radius: 4px; border: 1px solid #fecaca;">
+                        <strong>※81〜85歳完済の想定</strong><br>
+                        多くの金融機関では80歳未満完済が一般的です。<br>
+                        ここでは※85歳未満完済の金融機関を想定しています。
+                    </div>
+
+                    <!-- Loan Not Possible Warning (Red) -->
+                    <div id="loan-not-possible-warning"
+                        style="display:none; margin-top: 0.5rem; color: #b91c1c; font-size: 0.85rem; line-height: 1.4; background: #fef2f2; padding: 0.5rem; border-radius: 4px; border: 1px solid #fecaca;">
+                        <strong>⚠️ 住宅ローンの制限</strong><br>
+                        現在の年齢と購入時期では、一般的な住宅ローン年数が組めない可能性があります。
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 1.5rem; background: #f0f9ff; padding: 1rem; border-radius: 8px; border: 1px dashed #bae6fd;">
+                <label style="color:#0369a1; font-weight:bold; display:block; margin-bottom:0.5rem;">📅
+                    シミュレーション期間設定</label>
+
+                <div class="grid" style="margin-top:0.5rem;">
+                    <div>
+                        <label for="years-wait" style="font-size:0.85rem;">① 何年後に買いますか？</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="years-wait" value="0">
+                            <span class="unit">年後</span>
+                        </div>
+                        <div class="helper">0なら「今すぐ購入」</div>
+                    </div>
+                    <div>
+                        <label for="years-own" style="font-size:0.85rem;">② 買ったあと何年住みますか？</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="years-own" value="35">
+                            <span class="unit">年間</span>
+                        </div>
+                        <div class="helper">売却までの保有期間</div>
+                    </div>
+                </div>
+
+                <div style="margin-top:0.8rem; text-align:right; font-size:0.9rem; color:#0369a1; font-weight:bold;">
+                    比較期間合計: <span id="total-years-display">35</span> 年間
+                </div>
+            </div>
+
+            <!-- Age Warning Display -->
+            <div id="age-warning"
+                style="display:none; margin-top:0.8rem; color:#b45309; font-size:0.9rem; background:#fffbeb; padding:0.8rem; border-radius:6px; border:1px solid #fcd34d;">
+                ⚠️ 完済時の年齢が80歳を超えています。
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- RENT Column -->
+            <div class="column">
+                <h2>📦 賃貸を続ける場合</h2>
+
+                <div class="input-group">
+                    <label>現在の家賃（管理費込み）</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="rent-monthly" value="140000">
+                        <span class="unit">円</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>管理費・共益費（月額）</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="rent-mgmt" value="10000">
+                        <span class="unit">円</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>更新料（2年に1回）</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="rent-renewal" value="1.0" step="0.5">
+                        <span class="unit">ヶ月分</span>
+                    </div>
+                    <div class="helper">多くの賃貸契約では「新家賃の1ヶ月分」です。</div>
+                </div>
+
+                <div class="input-group">
+                    <label>引越し・初期費用</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="rent-initial" value="4.0" step="0.5">
+                        <span class="unit">ヶ月分</span>
+                    </div>
+                    <div class="helper">敷金・礼金・仲介手数料・保証料など（目安：4.0ヶ月）。</div>
+                </div>
+            </div>
+
+            <!-- BUY Column -->
+            <div class="column">
+                <h2>🔑 マイホームを買う場合</h2>
+
+                <div class="input-group">
+                    <label>物件価格</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="buy-price" value="5000">
+                        <span class="unit">万円</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>住宅ローンの金利</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="buy-rate" value="0.5" step="0.05">
+                        <span class="unit">%</span>
+                    </div>
+                    <div class="helper">変動金利: 0.3〜0.5%、フラット35: 1.8%前後</div>
+                </div>
+
+                <div class="input-group">
+                    <label>購入時の諸費用</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="buy-initial-pct" value="7.0" step="0.5">
+                        <span class="unit">%</span>
+                    </div>
+                    <div class="helper">仲介手数料・登記費用・ローン手数料など（目安：7%）。</div>
+                </div>
+
+                <div class="input-group">
+                    <label>管理費・修繕積立金（月額）</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="buy-mgmt" value="25000">
+                        <span class="unit">円</span>
+                    </div>
+                    <div class="helper">マンションの場合は必須。戸建ても修繕費として積立推奨。</div>
+                </div>
+
+                <div class="input-group">
+                    <label>固定資産税（年額）</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="buy-tax" value="150000">
+                        <span class="unit">円</span>
+                    </div>
+                    <div class="helper">目安：10万〜15万円（軽減措置あり）。</div>
+                </div>
+
+                <div class="input-group"
+                    style="background: #fffbe6; padding: 10px; border-radius: 6px; border: 1px solid #ffe58f;">
+                    <label>売却時の価格予想（資産価値）</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="buy-resale" value="85" step="5">
+                        <span class="unit">%</span>
+                    </div>
+                    <div class="helper">購入価格の何%で売れると思いますか？（楽観: 100%、現実: 80%）</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diagnosis Trigger -->
+        <div style="text-align: center; margin: 2rem 0;">
+            <div id="update-hint" style="display:none; color: #64748b; font-size: 0.9rem; margin-bottom: 0.8rem;">
+                ※入力を変更しました。『診断する』を押すと結果が更新されます。
+            </div>
+            <button id="submit-button" class="primary-button">
+                診断する
+            </button>
+        </div>
+
+        <!-- Results -->
+        <div class="results-section" style="display:none;">
+            <div id="result-header">計算中...</div>
+            <div id="result-text">数値を入力すると自動で比較します。</div>
+
+            <!-- Caution Box (Stage A) -->
+            <div id="caution-box-container" style="display:none; margin: 1.5rem 0;">
+                <!-- JS will inject details here -->
+            </div>
+
+            <div class="comparison-grid">
+                <div class="stat-box">
+                    <div class="stat-title">賃貸の総支払額</div>
+                    <div class="stat-value" id="rent-total">¥0</div>
+                    <div class="stat-detail" id="rent-breakdown">...</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-title">購入の実質コスト</div>
+                    <div class="stat-value" id="buy-net">¥0</div>
+                    <div class="stat-detail" id="buy-breakdown">...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Personality Result -->
+        <div class="explanation-section" id="explanation-box" style="display:none;">
+            <div class="reason-title" id="reason-title">🤔 診断中...</div>
+            <div class="reason-text" id="reason-text">
+                <!-- JS will inject text here -->
+            </div>
+        </div>
+
+        <!-- Calls to Action -->
+        <div class="cta-section">
+            <div class="cta-title">「隠れたコスト」を知っていますか？</div>
+            <div class="cta-text">
+                賃貸の「更新料」や持ち家の「修繕積立金」など、目に見えにくいコストが将来の負担を大きく変えます。
+            </div>
+            <!-- Placeholder link logic -->
+            <a href="#" class="cta-button" onclick="alert('記事ページへ移動します（準備中）')">📚 賢い選び方の記事を読む</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem; color: #94a3b8; font-size: 0.8rem;">
+            ※このシミュレーションは概算です。市場変動や税制改正により実際とは異なる場合があります。
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
