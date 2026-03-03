@@ -1,4 +1,5 @@
 // 🧠 Calculator Logic (Refactor for "Buy Later" Flow)
+window.__scenarioYearsTouched = false;
 
 function calculateRentVsBuy(inputs) {
     const {
@@ -51,7 +52,7 @@ function calculateRentVsBuy(inputs) {
     // -- 2b. Mortgage
     const principal = propertyPrice;
     const r = (interestRatePct / 100) / 12;
-    const n = loanTerm * 12;
+    const n = Math.max(1, loanTerm * 12); // Safety: prevent n=0
 
     let monthlyPmt = 0;
     if (r > 0) {
@@ -59,6 +60,9 @@ function calculateRentVsBuy(inputs) {
     } else {
         monthlyPmt = principal / n;
     }
+
+    // Safety check for NaN payment
+    if (isNaN(monthlyPmt)) monthlyPmt = 0;
 
     // We pay mortgage for Y years (or until loan ends if Y > loanTerm)
     const monthsPaying = Math.min(yearsOwn * 12, n);
@@ -80,8 +84,14 @@ function calculateRentVsBuy(inputs) {
         }
     }
 
-    const resaleValue = propertyPrice * (resaleValuePct / 100);
-    const equity = resaleValue - remainingDebt;
+    // New Resale Logic (Requirement Step 2)
+    // resalePrice = propertyPrice * (resaleValuePct/100)
+    const resalePrice = propertyPrice * (resaleValuePct / 100);
+    const sellingCost = resalePrice * 0.04;
+    const netAfterSale = resalePrice - remainingDebt - sellingCost;
+
+    // Equity for total cost calculation (net gain from selling)
+    const equity = netAfterSale;
 
     // Net Cost of Phase 2
     // Cash Out = Initial + Mortgage + Recurring
@@ -125,8 +135,10 @@ function calculateRentVsBuy(inputs) {
                 initialBuy: buyInitialCost,
                 mortgage: totalMortgagePaid,
                 recurring: buyRecurring,
-                resale: resaleValue,
-                debt: remainingDebt
+                resalePrice: resalePrice,
+                sellingCost: sellingCost,
+                debt: remainingDebt,
+                netAfterSale: netAfterSale
             }
         }
     };
@@ -137,24 +149,38 @@ function calculateRentVsBuy(inputs) {
 let committedInputs = null;
 
 function getInputsFromUI() {
-    const getVal = (id) => parseFloat(document.getElementById(id).value) || 0;
-    const getValInt = (id) => parseInt(document.getElementById(id).value) || 0;
+    const getVal = (id, fallback = 0) => {
+        const el = document.getElementById(id);
+        if (!el) return fallback;
+        const val = parseFloat(el.value);
+        return isNaN(val) ? fallback : val;
+    };
+
+    const getValInt = (id, fallback = 0) => {
+        const el = document.getElementById(id);
+        if (!el) return fallback;
+        const val = parseInt(el.value, 10);
+        return isNaN(val) ? fallback : val;
+    };
+
+    // Robust retrieval for resale percentage with fallback
+    const resaleValuePct = getVal('buy-resale', 85);
 
     return {
-        currentAge: getValInt('current-age'),
-        yearsWait: getValInt('years-wait'),
-        yearsOwn: getValInt('years-own'),
-        loanTerm: getValInt('loan-term-input'),
-        monthlyRent: getVal('rent-monthly'),
-        mgmtFeeRent: getVal('rent-mgmt'),
-        renewalFeeMonths: getVal('rent-renewal'),
-        detailsInitialRentMonths: getVal('rent-initial'),
-        propertyPrice: getVal('buy-price') * 10000,
-        interestRatePct: getVal('buy-rate'),
-        initialBuyCostPct: getVal('buy-initial-pct'),
-        monthlyMgmtBuy: getVal('buy-mgmt'),
-        yearlyPropertyTax: getVal('buy-tax'),
-        resaleValuePct: getVal('buy-resale')
+        currentAge: getValInt('current-age', 30),
+        yearsWait: getValInt('years-wait', 0),
+        yearsOwn: getValInt('years-own', 35),
+        loanTerm: getValInt('loan-term-input', 35),
+        monthlyRent: getVal('rent-monthly', 0),
+        mgmtFeeRent: getVal('rent-mgmt', 0),
+        renewalFeeMonths: getVal('rent-renewal', 1.0),
+        detailsInitialRentMonths: getVal('rent-initial', 4.0),
+        propertyPrice: getVal('buy-price', 0) * 10000,
+        interestRatePct: getVal('buy-rate', 0.5),
+        initialBuyCostPct: getVal('buy-initial-pct', 7.0),
+        monthlyMgmtBuy: getVal('buy-mgmt', 0),
+        yearlyPropertyTax: getVal('buy-tax', 0),
+        resaleValuePct: resaleValuePct
     };
 }
 
@@ -209,7 +235,28 @@ function validateLoanTermImmediate() {
 
 function runDiagnosis() {
     validateLoanTermImmediate(); // Final safety check
+
+    // If years-own was manually touched by slider/nudge, ensure we don't overwrite it with defaults
+    if (window.__scenarioYearsTouched) {
+        // Optionally sync from slider if it exists to ensure current UI value is used
+        const scnSlider = document.getElementById('scenario-years-slider');
+        const mainInp = document.getElementById('years-own');
+        if (scnSlider && mainInp) mainInp.value = scnSlider.value;
+    } else {
+        // Here you could add logic to auto-calculate yearsOwn (e.g. 65 - age) if not touched
+    }
+
     const inputs = getInputsFromUI();
+
+    // Comprehensive Debug Logs (Requirement Step 1)
+    console.log('--- Diagnosis Inputs ---');
+    console.log('propertyPrice:', inputs.propertyPrice);
+    console.log('interestRatePct:', inputs.interestRatePct);
+    console.log('loanTerm:', inputs.loanTerm);
+    console.log('resaleValuePct:', inputs.resaleValuePct);
+    console.log('yearsWait:', inputs.yearsWait);
+    console.log('yearsOwn:', inputs.yearsOwn);
+    console.log('------------------------');
 
     // 2. Commit State
     committedInputs = { ...inputs };
@@ -217,15 +264,69 @@ function runDiagnosis() {
     // 3. UI Updates
     document.getElementById('total-years-display').textContent = inputs.yearsWait + inputs.yearsOwn;
     document.getElementById('update-hint').style.display = 'none';
-    document.getElementById('submit-button').textContent = '診断を更新する';
+    document.getElementById('submit-button').textContent = '結果を更新する';
 
     // Show results section
     document.querySelector('.results-section').style.display = 'block';
+    // Show accuracy card
+    const accCard = document.getElementById('accuracy-card');
+    if (accCard) accCard.style.display = 'block';
+
+    // Add class to container for reordering
+    document.querySelector('.container').classList.add('has-results');
+
+    // Add class to container for reordering
+    document.querySelector('.container').classList.add('has-results');
 
     // 4. Calculate & Render
     const result = calculateRentVsBuy(inputs);
     renderResults(result, inputs);
     renderCautionBox(inputs);
+    updateAccuracy();
+    mountScenarioLab();
+
+    // ✅ Breakeven Point Analysis
+    updateBreakevenAnalysis(inputs);
+
+    // Phase 2: Auto-scroll to results
+    document.querySelector('.results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function updateAccuracy() {
+    const fields = [
+        'current-age', 'years-wait', 'years-own', 'loan-term-input',
+        'rent-monthly', 'rent-mgmt', 'buy-price', 'buy-rate',
+        'buy-mgmt', 'buy-tax', 'buy-resale'
+    ];
+
+    let filledCount = 0;
+    fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.value && el.value !== '0' && el.value !== '') {
+            filledCount++;
+        }
+    });
+
+    const totalFields = fields.length;
+    const accuracy = Math.round((filledCount / totalFields) * 100);
+
+    const pctEl = document.getElementById('accuracy-pct');
+    const barEl = document.getElementById('accuracy-bar-fill');
+    const suggestionEl = document.getElementById('accuracy-suggestion');
+
+    if (pctEl) pctEl.textContent = accuracy;
+    if (barEl) barEl.style.width = accuracy + '%';
+
+    if (suggestionEl) {
+        if (accuracy < 70) {
+            const needed = Math.ceil(totalFields * 0.7);
+            const needCount = Math.max(0, needed - filledCount);
+            suggestionEl.textContent = `あと ${needCount}項目 入れると 70% になります（おすすめ）`;
+            suggestionEl.style.display = 'block';
+        } else {
+            suggestionEl.style.display = 'none';
+        }
+    }
 }
 
 function renderCautionBox(inputs) {
@@ -321,13 +422,72 @@ function renderResults(res, inputs) {
     document.getElementById('buy-net').textContent = fmt(res.buyLater.total);
     let phase1Text = res.yearsWait > 0 ? `賃貸期間(${res.yearsWait}年): ${fmt(res.buyLater.phase1Rent)}<br>` : "";
 
+    // Improved Two-line Summary (Requirement Step 4)
+    const totalPayment = res.buyLater.phase1Rent + res.buyLater.phase2Cash;
+    const netCost = res.buyLater.total;
+
     document.getElementById('buy-breakdown').innerHTML = `
         ${phase1Text}
-        購入期間(${res.yearsOwn}年): 実質${fmt(res.buyLater.phase2Net)}<br>
-        <span style="color:#64748b; font-size:0.75rem;">(資産価値: -${fmt(res.buyLater.equity)} を控除済)</span>
+        支払い総額: ${fmt(totalPayment)}<br>
+        実質コスト: ${fmt(netCost)} (${res.yearsOwn}年居住)<br>
+        <div style="margin-top: 4px; border-top: 1px dotted #ccc; padding-top: 4px; font-size: 0.75rem; color: #64748b;">
+            売却時の想定価格: ${fmt(res.buyLater.breakdown.resalePrice)}<br>
+            ローン残債: -${fmt(res.buyLater.breakdown.debt)}<br>
+            売却諸経費(4%): -${fmt(res.buyLater.breakdown.sellingCost)}<br>
+            <strong>売却手取り額: ${fmt(res.buyLater.breakdown.netAfterSale)}</strong>
+        </div>
     `;
 
     updatePersonalityResult(res, inputs); // Pass inputs for age context if needed
+    renderCTASection(res, inputs);
+}
+
+function renderCTASection(res, inputs) {
+    const ctaContainer = document.getElementById('cta-section');
+    if (!ctaContainer) return;
+
+    // Minimal logic for payment level
+    // calculate monthly loan payment from breakdown
+    const monthlyLoan = res.buyLater.breakdown.mortgage / (inputs.loanTerm * 12);
+    let advice = "";
+    if (monthlyLoan > 150000) {
+        advice = "返済額がやや高めです。家計に余裕があるか再確認しましょう。";
+    } else {
+        advice = "無理のない返済水準です。借入条件をより具体的に詰めましょう。";
+    }
+
+    ctaContainer.innerHTML = `
+        <div class="next-steps">
+            <h3>次に進む（無料）</h3>
+            <p class="next-steps-subtitle">いまの結果をもとに、次のステップをチェックできます。</p>
+            
+            <div class="payment-level">
+                <span class="result-badge">あなたの診断結果</span>
+                <div class="payment-level-title">支払い水準チェック</div>
+                <div class="payment-level-body">${advice}</div>
+                <div class="payment-disclaimer">※あくまで目安です。実際は家計状況や借入条件で変わります。</div>
+                <p class="payment-note">※購入タイミングや返済額の設定次第で、生涯支出が500万〜1000万円以上変わるケースもあります。</p>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#" class="cta-btn cta-btn-primary">
+                    <span class="cta-label">まずはここから</span>
+                    <span class="cta-btn-text">借りられる目安チェック</span>
+                    <span class="cta-arrow">›</span>
+                </a>
+                <a href="#" class="cta-btn">
+                    <span class="cta-label">安心返済は？</span>
+                    <span class="cta-btn-text">無理ない返済額診断</span>
+                    <span class="cta-arrow">›</span>
+                </a>
+                <a href="#" class="cta-btn">
+                    <span class="cta-label">迷わない軸づくり</span>
+                    <span class="cta-btn-text">物件の優先順位診断</span>
+                    <span class="cta-arrow">›</span>
+                </a>
+            </div>
+        </div>
+    `;
 }
 
 function updatePersonalityResult(res, inputs) {
@@ -422,4 +582,767 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial validation to set max attributes and initial warnings
     validateLoanTermImmediate();
+
+    // ---------------------------------------------------------
+    // UI REFINEMENTS (Ref: Step 855)
+    // ---------------------------------------------------------
+
+    // 1. Real-time Age Previews
+    const updateAgePreviews = () => {
+        const currentAge = parseInt(document.getElementById('current-age').value) || 0;
+        const yearsWait = parseInt(document.getElementById('years-wait').value) || 0;
+        const yearsOwn = parseInt(document.getElementById('years-own').value) || 0;
+
+        const buyAgeEl = document.getElementById('buyAge');
+        const sellAgeEl = document.getElementById('sellAge');
+        const totalDispEl = document.getElementById('total-years-display');
+
+        if (buyAgeEl) buyAgeEl.textContent = currentAge + yearsWait;
+        if (sellAgeEl) sellAgeEl.textContent = currentAge + yearsWait + yearsOwn;
+        if (totalDispEl) totalDispEl.textContent = yearsWait + yearsOwn;
+    };
+
+    const simInputs = ['current-age', 'years-wait', 'years-own'];
+    simInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', updateAgePreviews);
+    });
+    updateAgePreviews();
+
+    // ---------------------------------------------------------
+    // Philosophy Modal Logic
+    // ---------------------------------------------------------
+    const philBtn = document.getElementById('philosophy-btn');
+    window.closePhilosophyModal = () => {
+        document.getElementById('philosophy-modal').style.display = 'none';
+        document.getElementById('philosophy-backdrop').style.display = 'none';
+    };
+    window.openPhilosophyModal = () => {
+        document.getElementById('philosophy-modal').style.display = 'block';
+        document.getElementById('philosophy-backdrop').style.display = 'block';
+    };
+    if (philBtn) philBtn.addEventListener('click', openPhilosophyModal);
+
+    // ---------------------------------------------------------
+    // Light Diagnosis Wiring (Phase 1 & 3)
+    // ---------------------------------------------------------
+    const lightAge = document.getElementById('light-age');
+    const lightIncome = document.getElementById('light-income');
+    const lightRent = document.getElementById('light-rent');
+    const baseAge = document.getElementById('current-age');
+    const baseRent = document.getElementById('rent-monthly');
+
+    if (lightAge && baseAge) {
+        lightAge.addEventListener('input', (e) => {
+            baseAge.value = e.target.value;
+            // Removed runDiagnosis() for manual control (Phase 3)
+        });
+    }
+
+    if (lightRent && baseRent) {
+        lightRent.addEventListener('input', (e) => {
+            baseRent.value = e.target.value;
+        });
+    }
+
+    // Income sync (Mental model only as per previous plan, but let's sync if target exists)
+    // In this codebase, income doesn't map to a specific calc input, but we keep the structure.
+
+    // 2. Tooltip Logic
+    const TOOLTIP_TEXTS = {
+        maintenance: `• マンションは 管理費＋修繕積立金 の合計目安です。\n• 戸建ては管理費がないため、将来の外壁・屋根・給湯器などに備えて 修繕積立（自分で積む） を推奨します。\n\n目安：\n・築浅〜60㎡：2.0〜3.0万/月\n・築古〜60㎡：2.6〜3.8万/月\n・築浅70㎡〜：2.5〜3.5万/月\n・築古70㎡〜：3.0〜4.0万/月\n・戸建て積立：2.0〜4.0万/月（迷ったら2.5万）`,
+        tax: `• 固定資産税は 自治体・評価額・新築軽減で金額が変わります。\n\n目安：\n・マンション：6〜16万/年（広さ・築年で変動）\n・戸建て：10〜25万/年（建物＋土地。迷ったら15万）`,
+        resale: `• 「購入価格の何％で売れるか」の目安です（相場や築年数で変動）。\n\n目安：\n・楽観：100〜110%\n・現実：80〜90%\n・最悪：60〜70%\n\n戸建ては 建物は下がりやすく、\n土地は残りやすいため立地で差が出ます。`
+    };
+
+    window.closeModal = () => {
+        document.getElementById('coming-soon-modal').style.display = 'none';
+        document.getElementById('modal-backdrop').style.display = 'none';
+    };
+    window.openModal = () => {
+        document.getElementById('coming-soon-modal').style.display = 'block';
+        document.getElementById('modal-backdrop').style.display = 'block';
+    };
+
+    document.querySelectorAll('.info-icon').forEach(icon => {
+        const handler = () => {
+            const key = icon.getAttribute('data-tooltip');
+            const text = TOOLTIP_TEXTS[key] || "";
+            if (text) alert(text); // Basic alert as fallback for "existing system"
+        };
+        icon.addEventListener('click', handler);
+        icon.addEventListener('mouseenter', () => { icon.style.opacity = "1"; });
+        icon.addEventListener('mouseleave', () => { icon.style.opacity = "0.7"; });
+    });
+
+
 });
+
+// --- Scenario Lab (Robust Implementation) ---
+
+function mountScenarioLab() {
+    const resultsSection = document.querySelector('.results-section');
+    if (!resultsSection) return;
+
+    // resultsSection が表示されていない場合でも、runDiagnosis内で display:block にしている想定
+    // 念のため
+    if (resultsSection.style.display === 'none') resultsSection.style.display = 'block';
+
+    // 既存があれば再利用
+    let lab = document.getElementById('scenario-lab');
+    const isNewLab = !lab;
+    if (isNewLab) {
+        lab = document.createElement('div');
+        lab.id = 'scenario-lab';
+        lab.className = 'scenario-lab';
+        // 初期は閉じる
+        lab.dataset.collapsed = "1";
+        lab.style.display = "none";
+    }
+
+    // ✅ トグルボタンの追加（重複防止）
+    let toggleBtn = document.getElementById('more-diagnosis-toggle');
+    if (!toggleBtn) {
+        toggleBtn = document.createElement('button');
+        toggleBtn.id = 'more-diagnosis-toggle';
+        toggleBtn.className = 'more-diagnosis-toggle';
+        toggleBtn.type = 'button';
+        toggleBtn.textContent = (lab.style.display === 'none') ? 'さらに診断する！' : '詳細設定を閉じる';
+
+        // 挿入位置：resultsSection の最初の要素（通常見出しや結論メッセージ）の直後に挿入
+        if (resultsSection.firstChild) {
+            resultsSection.insertBefore(toggleBtn, resultsSection.firstChild.nextSibling);
+        } else {
+            resultsSection.appendChild(toggleBtn);
+        }
+
+        toggleBtn.onclick = () => {
+            const isHidden = lab.style.display === 'none';
+            if (isHidden) {
+                lab.style.display = 'block';
+                lab.dataset.collapsed = "0";
+                toggleBtn.textContent = '詳細設定を閉じる';
+                // スムーズスクロール
+                setTimeout(() => {
+                    lab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
+            } else {
+                lab.style.display = 'none';
+                lab.dataset.collapsed = "1";
+                toggleBtn.textContent = 'さらに診断する！';
+            }
+        };
+    }
+
+    // ✅ “結果直下（トグルボタンの下）” を保証
+    resultsSection.insertBefore(lab, toggleBtn.nextSibling);
+
+    // UI描画（毎回上書きでOK）
+    lab.innerHTML = `
+    <div class="scenario-lab__inner">
+      <div class="scenario-lab__title">条件を変えて再計算（シナリオ）</div>
+      <div class="scenario-lab__buttons">
+        <div class="scenario-item">
+          <button type="button" class="scenario-btn" data-scn="rate_up">金利 +0.1%</button>
+          <div class="scenario-presets">
+            <button type="button" class="scenario-preset-btn" data-rate="0.8">変動 0.8%</button>
+            <button type="button" class="scenario-preset-btn" data-rate="2.0">固定 2.0%</button>
+          </div>
+          <div class="scenario-nudge">
+            <button type="button" class="scenario-nudge-btn" data-nudge="rate" data-dir="-1" aria-label="金利を下げる">−</button>
+            <button type="button" class="scenario-nudge-btn" data-nudge="rate" data-dir="1" aria-label="金利を上げる">＋</button>
+          </div>
+        </div>
+        <div class="scenario-item">
+          <button type="button" class="scenario-btn" data-scn="rent_up">家賃 +5,000円</button>
+          <div class="scenario-nudge">
+            <button type="button" class="scenario-nudge-btn" data-nudge="rent" data-dir="-1" aria-label="家賃を下げる">−</button>
+            <button type="button" class="scenario-nudge-btn" data-nudge="rent" data-dir="1" aria-label="家賃を上げる">＋</button>
+          </div>
+        </div>
+        <div class="scenario-item">
+          <button type="button" class="scenario-btn" data-scn="resale_down">売却補正 -10%</button>
+          <div class="scenario-nudge">
+            <button type="button" class="scenario-nudge-btn" data-nudge="resale" data-dir="-1" aria-label="売却補正を下げる">−</button>
+            <button type="button" class="scenario-nudge-btn" data-nudge="resale" data-dir="1" aria-label="売却補正を上げる">＋</button>
+          </div>
+        </div>
+        <div class="scenario-item">
+          <button type="button" class="scenario-btn" data-scn="mgmt_up">修繕/管理 +5,000円</button>
+          <div class="scenario-nudge">
+            <button type="button" class="scenario-nudge-btn" data-nudge="mgmt" data-dir="-1" aria-label="修繕・管理費を下げる">−</button>
+            <button type="button" class="scenario-nudge-btn" data-nudge="mgmt" data-dir="1" aria-label="修繕・管理費を上げる">＋</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Residency Slider in Scenario Lab -->
+      <div class="scenario-residency-section">
+        <label class="scenario-residency-label">居住年数（売却タイミング）: <span id="scenario-years-display">—</span>年</label>
+        <div class="scenario-slider-container">
+          <input type="range" id="scenario-years-slider" min="1" max="50" step="1" value="35">
+          <div id="scenario-breakeven-marker" class="scenario-breakeven-marker" style="display:none;"></div>
+        </div>
+      </div>
+      
+      <!-- 現在の適用条件表示エリア -->
+      <div class="scenario-status" id="scenario-conditions-box">
+        <div class="scenario-status-title">現在の適用条件</div>
+        <div class="scenario-status-body" id="scenario-status-body">—</div>
+      </div>
+
+      <div class="scenario-lab__footer">
+        <div id="scenario-active-label" class="scenario-active-label"></div>
+        <button id="scenario-reset" class="scenario-reset" type="button" style="display:none;">元に戻す</button>
+      </div>
+      <div class="scenario-lab__note">※ ボタンは入力値を上書きして即再計算します（計算ロジックは変更しません）</div>
+    </div>
+  `;
+
+    // イベント付与
+    lab.querySelectorAll('button[data-scn]').forEach(btn => {
+        btn.onclick = () => applyScenario(btn.dataset.scn, btn.textContent);
+    });
+
+    // 金利プリセットのイベント
+    lab.querySelectorAll('.scenario-preset-btn').forEach(btn => {
+        btn.onclick = () => {
+            const ids = ['buy-rate', 'interestRate', 'interest-rate', 'loanRate', 'rate', 'loan-rate', 'interestRatePct'];
+            const rateInput = findElByIds(ids);
+            if (rateInput) {
+                rateInput.value = btn.dataset.rate;
+                // 保存
+                if (!window.__scenarioOriginalInputs) {
+                    const fields = ['current-age', 'years-wait', 'years-own', 'loan-term-input', 'rent-monthly', 'rent-mgmt', 'rent-renewal', 'rent-initial', 'buy-price', 'buy-rate', 'buy-initial-pct', 'buy-mgmt', 'buy-tax', 'buy-resale'];
+                    window.__scenarioOriginalInputs = {};
+                    fields.forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) window.__scenarioOriginalInputs[id] = el.value;
+                    });
+                    const rbtn = document.getElementById('scenario-reset');
+                    if (rbtn) rbtn.style.display = 'block';
+                }
+                if (typeof runDiagnosis === 'function') runDiagnosis();
+                if (typeof updateScenarioStatus === 'function') updateScenarioStatus();
+            }
+        };
+    });
+
+    const resetBtn = document.getElementById('scenario-reset');
+    if (resetBtn) {
+        resetBtn.onclick = resetScenario;
+        // Always show if Scenario Lab is open (user requirement)
+        resetBtn.style.display = 'block';
+    }
+
+    // ステータス復元
+    if (window.__scenarioActiveLabel) {
+        const labelEl = document.getElementById('scenario-active-label');
+        if (labelEl) labelEl.textContent = `適用中：${window.__scenarioActiveLabel}`;
+    }
+
+    // Residency Slider Sync
+    const scnSlider = document.getElementById('scenario-years-slider');
+    const scnDisplay = document.getElementById('scenario-years-display');
+    const mainYearsInp = document.getElementById('years-own');
+    if (scnSlider && mainYearsInp) {
+        scnSlider.value = mainYearsInp.value;
+        if (scnDisplay) scnDisplay.textContent = mainYearsInp.value;
+
+        // Ensure slider is interactive and above marker
+        scnSlider.style.position = 'relative';
+        scnSlider.style.zIndex = '2';
+        scnSlider.style.pointerEvents = 'auto';
+
+        const scnMarkerEl = document.getElementById('scenario-breakeven-marker');
+        if (scnMarkerEl) {
+            scnMarkerEl.style.pointerEvents = 'none';
+            scnMarkerEl.style.zIndex = '1';
+        }
+
+        scnSlider.oninput = () => {
+            window.__scenarioYearsTouched = true;
+            mainYearsInp.value = scnSlider.value;
+            if (scnDisplay) scnDisplay.textContent = scnSlider.value;
+        };
+
+        scnSlider.onchange = () => {
+            if (typeof runDiagnosis === 'function') runDiagnosis();
+            if (typeof updateScenarioStatus === 'function') updateScenarioStatus();
+        };
+
+        // main -> scn sync
+        mainYearsInp.addEventListener('input', () => {
+            window.__scenarioYearsTouched = true;
+            scnSlider.value = mainYearsInp.value;
+            if (scnDisplay) scnDisplay.textContent = mainYearsInp.value;
+        });
+
+        // Final Verify (SelfCheck)
+        setTimeout(() => {
+            if (typeof selfCheckScenarioUI === 'function') selfCheckScenarioUI();
+        }, 100);
+    }
+
+    // ===== Nudge (Press & Hold) - Safe Stop Guard =====
+    if (typeof __stopNudge === 'undefined') {
+        window.__nudgeTimer = null;
+        window.__nudgeHold = false;
+
+        window.__stopNudge = function () {
+            window.__nudgeHold = false;
+            if (window.__nudgeTimer) {
+                clearInterval(window.__nudgeTimer);
+                window.__nudgeTimer = null;
+            }
+        };
+
+        window.__startNudge = function (fn) {
+            window.__stopNudge();
+            window.__nudgeHold = true;
+            fn(); // 1回目は即時
+            window.__nudgeTimer = setInterval(() => {
+                if (!window.__nudgeHold) return;
+                fn();
+            }, 120);
+        };
+
+        window.__bindNudgeStopEvents = function () {
+            const stopEvents = ['pointerup', 'pointercancel', 'mouseup', 'touchend', 'touchcancel'];
+            stopEvents.forEach(ev => window.addEventListener(ev, window.__stopNudge, { passive: true }));
+            window.addEventListener('blur', window.__stopNudge);
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) window.__stopNudge();
+            });
+        };
+
+        if (!window.__scenarioNudgeStopBound) {
+            window.__scenarioNudgeStopBound = true;
+            window.__bindNudgeStopEvents();
+        }
+    }
+
+    lab.querySelectorAll('.scenario-nudge-btn').forEach(btn => {
+        const kind = btn.dataset.nudge;
+        const dir = Number(btn.dataset.dir || 0);
+
+        // クリック（単発）
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.__stopNudge();
+            nudgeScenarioValue(kind, dir);
+        });
+
+        // 長押し開始
+        btn.addEventListener('pointerdown', (e) => {
+            e.preventDefault();
+            if (btn.setPointerCapture) btn.setPointerCapture(e.pointerId);
+            window.__startNudge(() => nudgeScenarioValue(kind, dir));
+        });
+
+        // 保険の停止
+        btn.addEventListener('pointerup', window.__stopNudge);
+        btn.addEventListener('pointercancel', window.__stopNudge);
+    });
+
+    // 詳細条件表示の更新
+    updateScenarioStatus();
+}
+
+// 既存UIの入力欄IDが環境により揺れている可能性があるので、候補を複数持ちます
+function applyScenario(scnKey, label) {
+    const getEl = (ids) => {
+        for (const id of ids) {
+            const el = document.getElementById(id);
+            if (el) return el;
+        }
+        return null;
+    };
+
+    // 1. 初回適用時に現在の入力値を保存
+    if (!window.__scenarioOriginalInputs) {
+        const fields = [
+            'current-age', 'years-wait', 'years-own', 'loan-term-input',
+            'rent-monthly', 'rent-mgmt', 'rent-renewal', 'rent-initial',
+            'buy-price', 'buy-rate', 'buy-initial-pct', 'buy-mgmt', 'buy-tax', 'buy-resale'
+        ];
+        window.__scenarioOriginalInputs = {};
+        fields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) window.__scenarioOriginalInputs[id] = el.value;
+        });
+    }
+
+    // 主要フィールド候補
+    const elBuyRate = getEl(['buy-rate', 'interest-rate', 'interestRate', 'interestRatePct']);
+    const elRentMonthly = getEl(['rent-monthly', 'light-rent', 'rentMonthly']);
+    const elResalePct = getEl(['buy-resale', 'resale-value', 'resaleValuePct']);
+    const elBuyMgmt = getEl(['buy-mgmt', 'management-fee', 'buyMgmt']);
+    const elRentMgmt = getEl(['rent-mgmt', 'rentMgmt']);
+
+    // 値の更新（存在するものだけ更新）
+    if (scnKey === 'rate_up' && elBuyRate) {
+        const v = parseFloat(elBuyRate.value || '0');
+        elBuyRate.value = String(v + 0.1);
+    }
+
+    if (scnKey === 'rent_up' && elRentMonthly) {
+        const v = parseFloat(elRentMonthly.value || '0');
+        elRentMonthly.value = String(v + 5000);
+    }
+
+    if (scnKey === 'resale_down' && elResalePct) {
+        const v = parseFloat(elResalePct.value || '0');
+        if (!Number.isNaN(v)) elResalePct.value = String(Math.max(0, v - 10));
+    }
+
+    if (scnKey === 'mgmt_up') {
+        const target = elBuyMgmt || elRentMgmt;
+        if (target) {
+            const v = parseFloat(target.value || '0');
+            target.value = String(v + 5000);
+        }
+    }
+
+    // 適用中ラベルを保存
+    window.__scenarioActiveLabel = label;
+
+    // ✅ 既存ロジックで再計算
+    setTimeout(() => {
+        if (typeof runDiagnosis === 'function') {
+            runDiagnosis();
+            updateScenarioStatus();
+        }
+    }, 0);
+}
+
+function resetScenario() {
+    if (!window.__scenarioOriginalInputs) return;
+
+    // Reset touch flag
+    window.__scenarioYearsTouched = false;
+
+    // 保存しておいた値を反映
+    Object.keys(window.__scenarioOriginalInputs).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = window.__scenarioOriginalInputs[id];
+    });
+
+    // Sync Scenario Lab UI (Residency)
+    const scnSlider = document.getElementById('scenario-years-slider');
+    const scnDisplay = document.getElementById('scenario-years-display');
+    const originalYears = (window.__scenarioOriginalInputs && window.__scenarioOriginalInputs['years-own']) || 35;
+    if (scnSlider) scnSlider.value = String(originalYears);
+    if (scnDisplay) scnDisplay.textContent = String(originalYears);
+
+    // 状態クリア
+    window.__scenarioOriginalInputs = null;
+    window.__scenarioActiveLabel = null;
+    window.__scenarioYearsTouched = false;
+
+    // 再計算
+    if (typeof runDiagnosis === 'function') {
+        runDiagnosis();
+        updateScenarioStatus();
+    }
+}
+
+function nudgeScenarioValue(kind, dir) {
+    // dir: +1 or -1
+    const bump = (idList, delta, min, max, step) => {
+        // 代表inputを拾う（既存のID揺れ吸収ロジックに合わせる）
+        let el = null;
+        for (const id of idList) {
+            el = document.getElementById(id);
+            if (el) break;
+        }
+        if (!el) return;
+
+        // 保存（元に戻す機能を活かすため初回のみ保存）
+        if (!window.__scenarioOriginalInputs) {
+            const fields = [
+                'current-age', 'years-wait', 'years-own', 'loan-term-input',
+                'rent-monthly', 'rent-mgmt', 'rent-renewal', 'rent-initial',
+                'buy-price', 'buy-rate', 'buy-initial-pct', 'buy-mgmt', 'buy-tax', 'buy-resale'
+            ];
+            window.__scenarioOriginalInputs = {};
+            fields.forEach(id => {
+                const inp = document.getElementById(id);
+                if (inp) window.__scenarioOriginalInputs[id] = inp.value;
+            });
+            // 元に戻すボタンを表示
+            const resetBtn = document.getElementById('scenario-reset');
+            if (resetBtn) resetBtn.style.display = 'block';
+        }
+
+        const cur = Number(el.value || 0);
+        const nextRaw = cur + (delta * dir);
+        const clamped = Math.max(min, Math.min(max, nextRaw));
+        const snapped = Math.round(clamped / step) * step;
+        el.value = String(snapped);
+    };
+
+    // UI微調整の量（計算ロジックは既存のまま）
+    if (kind === 'rate') {
+        bump(['buy-rate', 'interestRate', 'interest-rate', 'loanRate', 'rate'], 0.1, 0, 20, 0.1);
+    }
+    if (kind === 'rent') {
+        bump(['rent-monthly', 'light-rent', 'rentMonthly', 'rent', 'currentRent', 'monthlyRent'], 5000, 0, 1000000, 1000);
+    }
+    if (kind === 'resale') {
+        bump(['buy-resale', 'resale-value', 'resaleValuePct', 'resaleValue'], 1, -100, 100, 1);
+    }
+    if (kind === 'mgmt') {
+        bump(['buy-mgmt', 'management-fee', 'maintenanceFee', 'mgmtFee', 'rent-mgmt', 'rentMgmt', 'maintenance', 'monthlyMaintenance'], 5000, 0, 500000, 1000);
+    }
+
+    // 再計算
+    if (typeof runDiagnosis === 'function') runDiagnosis();
+    if (typeof updateScenarioStatus === 'function') updateScenarioStatus();
+}
+
+function findElByIds(ids) {
+    for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el) return el;
+    }
+    return null;
+}
+
+function readNumberValue(ids) {
+    const el = findElByIds(ids);
+    if (!el) return null;
+    const v = (el.value ?? "").toString().replace(/,/g, "").trim();
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+}
+
+function fmtYen(n) {
+    if (n == null) return "—";
+    return "¥" + Math.round(n).toLocaleString("ja-JP");
+}
+
+function fmtPct(n) {
+    if (n == null) return "—";
+    return (Math.round(n * 1000) / 1000) + "%";
+}
+
+function updateScenarioStatus() {
+    const box = document.getElementById("scenario-status-body");
+    if (!box) return;
+
+    // applyScenario の getEl と同じ優先順位で取得
+    const rate = readNumberValue(['buy-rate', 'interest-rate', 'interestRate', 'interestRatePct', 'loanRate', 'rate', 'loan-rate']);
+    const rent = readNumberValue(['rent-monthly', 'light-rent', 'rentMonthly', 'rent', 'currentRent', 'monthlyRent']);
+    const price = readNumberValue(['buy-price', 'buyPrice', 'price', 'purchasePrice', 'propertyPrice']);
+    const resalePct = readNumberValue(['buy-resale', 'resale-value', 'resaleValuePct']);
+    const maint = readNumberValue(['buy-mgmt', 'management-fee', 'buyMgmt', 'rent-mgmt', 'rentMgmt', 'maintenance', 'maintenanceFee', 'mgmtFee', 'monthlyMaintenance', 'repairMonthly']);
+
+    // 物件価格は「万円」単位なので表示時に調整
+    const displayPrice = price != null ? price * 10000 : null;
+
+    box.textContent =
+        `金利: ${fmtPct(rate)} / 家賃: ${fmtYen(rent)} / 物件価格: ${fmtYen(displayPrice)} / 売却補正: ${resalePct != null ? resalePct + '%' : '—'} / 修繕・管理: ${fmtYen(maint)}（月）`;
+}
+
+(function setupRangeSync() {
+    function clamp(v, min, max) {
+        return Math.max(min, Math.min(max, v));
+    }
+
+    function initOne(rangeEl) {
+        const targetId = rangeEl.getAttribute('data-target');
+        const numEl = document.getElementById(targetId);
+        if (!numEl) return;
+
+        const min = Number(rangeEl.min);
+        const max = Number(rangeEl.max);
+
+        // 初期同期（number優先）
+        const start = (numEl.value !== '' ? Number(numEl.value) : Number(rangeEl.value));
+        const safe = clamp(start, min, max);
+        numEl.value = String(safe);
+        rangeEl.value = String(safe);
+
+        // range -> number
+        rangeEl.addEventListener('input', () => {
+            const step = Number(rangeEl.step || 1);
+            const raw = Number(rangeEl.value || 0);
+            const clamped = clamp(raw, min, max);
+            const snapped = Math.round(clamped / step) * step;
+            rangeEl.value = String(snapped);
+            numEl.value = String(snapped);
+        });
+
+        // number -> range
+        numEl.addEventListener('input', () => {
+            const step = Number(rangeEl.step || 1);
+            const raw = Number(numEl.value || 0);
+            const clamped = clamp(raw, min, max);
+            const snapped = Math.round(clamped / step) * step;
+            numEl.value = String(snapped);
+            rangeEl.value = String(snapped);
+        });
+    }
+
+    // DOM準備後に初期化
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.range-sync').forEach(initOne);
+        });
+    } else {
+        document.querySelectorAll('.range-sync').forEach(initOne);
+    }
+})();
+
+// ===== Breakeven Analysis & Dynamic UI (Strict PhC) =====
+function updateBreakevenAnalysis(baseInputs) {
+    const resultsSection = document.querySelector('.results-section');
+    const yearsOwnInp = document.getElementById('years-own');
+    if (!resultsSection || !yearsOwnInp) return;
+
+    // 1. Ensure Breakeven Badge
+    let badge = document.getElementById('breakeven-badge');
+    if (!badge) {
+        badge = document.createElement('div');
+        badge.id = 'breakeven-badge';
+        badge.className = 'breakeven-badge';
+        // Insert at the top of results content (after the header/text)
+        const resultText = document.getElementById('result-text');
+        if (resultText) {
+            resultText.parentNode.insertBefore(badge, resultText.nextSibling);
+        } else {
+            resultsSection.prepend(badge);
+        }
+    }
+
+    // 2. Ensure Residency Slider & Marker
+    let wrapper = yearsOwnInp.closest('.residency-slider-wrapper');
+    if (!wrapper) {
+        wrapper = document.createElement('div');
+        wrapper.className = 'residency-slider-wrapper';
+        yearsOwnInp.parentNode.insertBefore(wrapper, yearsOwnInp.nextSibling);
+
+        // Create range slider
+        const slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'range-sync';
+        slider.dataset.target = 'years-own';
+        slider.min = '1';
+        slider.max = '50';
+        slider.step = '1';
+        slider.value = yearsOwnInp.value;
+        slider.style.width = '100%';
+        wrapper.appendChild(slider);
+
+        // Create marker
+        const marker = document.createElement('div');
+        marker.className = 'breakeven-marker';
+        marker.id = 'breakeven-marker';
+        marker.style.display = 'none';
+        wrapper.appendChild(marker);
+
+        // Initialize sync (since it's dynamically added)
+        if (window.setupRangeSyncOne) {
+            window.setupRangeSyncOne(slider);
+        } else {
+            // Manual sync fallback
+            slider.addEventListener('input', () => { yearsOwnInp.value = slider.value; checkInputsChanged(); });
+            yearsOwnInp.addEventListener('input', () => { slider.value = yearsOwnInp.value; });
+        }
+    }
+
+    // 3. Calculation Search (1-50 years)
+    let breakevenYear = null;
+    for (let y = 1; y <= 50; y++) {
+        // Clone inputs and test
+        const testInputs = { ...baseInputs, yearsOwn: y };
+        const res = calculateRentVsBuy(testInputs);
+        if (res.winner === 'buy') {
+            breakevenYear = y;
+            break;
+        }
+    }
+
+    // 4. Update Badge UI
+    if (breakevenYear) {
+        badge.innerHTML = `<span>⚖️ 損益分岐点</span> <strong>${breakevenYear}年目</strong>`;
+        badge.style.display = 'flex';
+    } else {
+        badge.innerHTML = `<span>⚖️ 損益分岐点</span> <strong>未到達</strong>`;
+        badge.style.border = '1px solid #fecaca';
+        badge.style.background = '#fef2f2';
+    }
+
+    // 5. Update Marker Positioning
+    const marker = document.getElementById('breakeven-marker');
+    const scnMarker = document.getElementById('scenario-breakeven-marker');
+
+    // Robust year retrieval: try internal var, then try parsing DOM
+    let finalBreakeven = breakevenYear;
+    if (finalBreakeven === null) {
+        const badgeText = badge.textContent || "";
+        const m = badgeText.match(/(\d+)\s*年目/);
+        if (m) finalBreakeven = parseInt(m[1], 10);
+    }
+
+    const updatePos = (m) => {
+        if (!m) return;
+        if (finalBreakeven && finalBreakeven <= 50) {
+            m.style.display = 'block';
+            // Correct mapping for 1-50 years on the slider track
+            const pct = (Math.max(1, Math.min(50, finalBreakeven)) - 1) / (49) * 100;
+            m.style.left = `calc(${pct}% + 4px)`;
+            m.style.pointerEvents = 'none'; // Ensure no blocking
+            m.style.zIndex = '1';
+        } else {
+            m.style.display = 'none';
+        }
+    };
+
+    updatePos(marker);
+    updatePos(scnMarker);
+}
+
+// Support for dynamic slider sync
+if (typeof window.setupRangeSyncOne === 'undefined') {
+    window.setupRangeSyncOne = function (rangeEl) {
+        function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+        const targetId = rangeEl.getAttribute('data-target');
+        const numEl = document.getElementById(targetId);
+        if (!numEl) return;
+        const min = Number(rangeEl.min);
+        const max = Number(rangeEl.max);
+        rangeEl.addEventListener('input', () => {
+            const step = Number(rangeEl.step || 1);
+            const raw = Number(rangeEl.value || 0);
+            const snapped = Math.round(clamp(raw, min, max) / step) * step;
+            numEl.value = String(snapped);
+            if (typeof checkInputsChanged === 'function') checkInputsChanged();
+        });
+        numEl.addEventListener('input', () => {
+            rangeEl.value = numEl.value;
+        });
+    };
+}
+
+// Developer Self-Check (Safety Verification)
+function selfCheckScenarioUI() {
+    const slider = document.getElementById('scenario-years-slider');
+    const marker = document.getElementById('scenario-breakeven-marker');
+    if (slider) {
+        if (getComputedStyle(slider).pointerEvents === 'none') {
+            console.warn('Slider pointer-events is "none"! Forcing "auto".');
+            slider.style.setProperty('pointer-events', 'auto', 'important');
+        }
+        if (getComputedStyle(slider).zIndex === 'auto' || parseInt(getComputedStyle(slider).zIndex) < 5) {
+            slider.style.zIndex = '10';
+        }
+    }
+    if (marker) {
+        marker.style.pointerEvents = 'none';
+        if (parseInt(getComputedStyle(marker).zIndex) >= parseInt(getComputedStyle(slider).zIndex)) {
+            marker.style.zIndex = '1';
+        }
+    }
+}
