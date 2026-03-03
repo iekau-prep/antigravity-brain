@@ -440,6 +440,9 @@ function renderResults(res, inputs) {
 
     updatePersonalityResult(res, inputs); // Pass inputs for age context if needed
     renderCTASection(res, inputs);
+
+    // ✅ Sync new UI (Phase 2)
+    syncResultUI(res, inputs);
 }
 
 function renderCTASection(res, inputs) {
@@ -735,58 +738,73 @@ function mountScenarioLab() {
     }
 
     // ✅ “結果直下（トグルボタンの下）” を保証
-    resultsSection.insertBefore(lab, toggleBtn.nextSibling);
+    const recalcPlaceholder = document.getElementById('recalc-panel');
+    if (recalcPlaceholder) {
+        recalcPlaceholder.appendChild(lab);
+        lab.style.display = 'block';
+    } else {
+        resultsSection.insertBefore(lab, toggleBtn.nextSibling);
+    }
 
     // UI描画（毎回上書きでOK）
     lab.innerHTML = `
     <div class="scenario-lab__inner">
-      <div class="scenario-lab__title">条件を変えて再計算（シナリオ）</div>
-      <div class="scenario-lab__buttons">
-        <div class="scenario-item">
-          <button type="button" class="scenario-btn" data-scn="rate_up">金利 +0.1%</button>
-          <div class="scenario-presets">
-            <button type="button" class="scenario-preset-btn" data-rate="0.8">変動 0.8%</button>
-            <button type="button" class="scenario-preset-btn" data-rate="2.0">固定 2.0%</button>
-          </div>
-          <div class="scenario-nudge">
-            <button type="button" class="scenario-nudge-btn" data-nudge="rate" data-dir="-1" aria-label="金利を下げる">−</button>
-            <button type="button" class="scenario-nudge-btn" data-nudge="rate" data-dir="1" aria-label="金利を上げる">＋</button>
-          </div>
+      <div class="scenario-lab__grid">
+        <!-- Sliders -->
+        <div class="scenario-item-full">
+            <label class="scenario-slider-label">ローン年数: <span id="loan-term-display">${document.getElementById('loan-term-input')?.value || 35}</span>年</label>
+            <div class="scenario-slider-container">
+              <input type="range" class="scenario-slider" min="1" max="50" value="${document.getElementById('loan-term-input')?.value || 35}" 
+                     oninput="document.getElementById('loan-term-input').value = this.value; document.getElementById('loan-term-display').textContent = this.value; checkInputsChanged();"
+                     onchange="runDiagnosis(); updateScenarioStatus();">
+            </div>
         </div>
-        <div class="scenario-item">
-          <button type="button" class="scenario-btn" data-scn="rent_up">家賃 +5,000円</button>
-          <div class="scenario-nudge">
-            <button type="button" class="scenario-nudge-btn" data-nudge="rent" data-dir="-1" aria-label="家賃を下げる">−</button>
-            <button type="button" class="scenario-nudge-btn" data-nudge="rent" data-dir="1" aria-label="家賃を上げる">＋</button>
-          </div>
+        <div class="scenario-item-full" style="order: -1;">
+            <label class="scenario-residency-label">居住年数（売却タイミング）: <span id="scenario-years-display">${document.getElementById('years-own')?.value || 35}</span>年</label>
+            <div class="scenario-slider-container" style="position: relative;">
+                <input type="range" id="scenario-years-slider" class="scenario-years-slider" min="1" max="50" step="1" 
+                    value="${document.getElementById('years-own')?.value || 35}">
+                <div id="scenario-breakeven-marker" class="scenario-breakeven-marker" title="損益分岐点" style="display:none;"></div>
+            </div>
         </div>
-        <div class="scenario-item">
-          <button type="button" class="scenario-btn" data-scn="resale_down">売却補正 -10%</button>
-          <div class="scenario-nudge">
-            <button type="button" class="scenario-nudge-btn" data-nudge="resale" data-dir="-1" aria-label="売却補正を下げる">−</button>
-            <button type="button" class="scenario-nudge-btn" data-nudge="resale" data-dir="1" aria-label="売却補正を上げる">＋</button>
-          </div>
-        </div>
-        <div class="scenario-item">
-          <button type="button" class="scenario-btn" data-scn="mgmt_up">修繕/管理 +5,000円</button>
-          <div class="scenario-nudge">
-            <button type="button" class="scenario-nudge-btn" data-nudge="mgmt" data-dir="-1" aria-label="修繕・管理費を下げる">−</button>
-            <button type="button" class="scenario-nudge-btn" data-nudge="mgmt" data-dir="1" aria-label="修繕・管理費を上げる">＋</button>
-          </div>
-        </div>
-      </div>
 
-      <!-- Residency Slider in Scenario Lab -->
-      <div class="scenario-residency-section">
-        <label class="scenario-residency-label">居住年数（売却タイミング）: <span id="scenario-years-display">—</span>年</label>
-        <div class="scenario-slider-container">
-          <input type="range" id="scenario-years-slider" min="1" max="50" step="1" value="35">
-          <div id="scenario-breakeven-marker" class="scenario-breakeven-marker" style="display:none;"></div>
+        <!-- 2-column Nudges -->
+        <div class="scenario-item">
+            <div class="scenario-label-mini">物件価格</div>
+            <div class="scenario-nudge">
+                <button type="button" class="scenario-nudge-btn" data-nudge="price" data-dir="-1">−</button>
+                <div class="scenario-nudge-val">${(Number(document.getElementById('buy-price')?.value) || 5000).toLocaleString()}万</div>
+                <button type="button" class="scenario-nudge-btn" data-nudge="price" data-dir="1">＋</button>
+            </div>
+        </div>
+        <div class="scenario-item">
+            <div class="scenario-label-mini">金利</div>
+            <div class="scenario-nudge">
+                <button type="button" class="scenario-nudge-btn" data-nudge="rate" data-dir="-1">−</button>
+                <div class="scenario-nudge-val">${(Number(document.getElementById('buy-rate')?.value) || 0.5).toFixed(1)}%</div>
+                <button type="button" class="scenario-nudge-btn" data-nudge="rate" data-dir="1">＋</button>
+            </div>
+        </div>
+        <div class="scenario-item">
+            <div class="scenario-label-mini">管理費・修繕費</div>
+            <div class="scenario-nudge">
+                <button type="button" class="scenario-nudge-btn" data-nudge="mgmt" data-dir="-1">−</button>
+                <div class="scenario-nudge-val">${(Number(document.getElementById('buy-mgmt')?.value) / 1000 || 25).toLocaleString()}k</div>
+                <button type="button" class="scenario-nudge-btn" data-nudge="mgmt" data-dir="1">＋</button>
+            </div>
+        </div>
+        <div class="scenario-item">
+            <div class="scenario-label-mini">売却補正</div>
+            <div class="scenario-nudge">
+                <button type="button" class="scenario-nudge-btn" data-nudge="resale" data-dir="-1">−</button>
+                <div class="scenario-nudge-val">${document.getElementById('buy-resale')?.value || 85}%</div>
+                <button type="button" class="scenario-nudge-btn" data-nudge="resale" data-dir="1">＋</button>
+            </div>
         </div>
       </div>
       
       <!-- 現在の適用条件表示エリア -->
-      <div class="scenario-status" id="scenario-conditions-box">
+      <div class="scenario-status" id="scenario-conditions-box" style="display:none;">
         <div class="scenario-status-title">現在の適用条件</div>
         <div class="scenario-status-body" id="scenario-status-body">—</div>
       </div>
@@ -795,9 +813,8 @@ function mountScenarioLab() {
         <div id="scenario-active-label" class="scenario-active-label"></div>
         <button id="scenario-reset" class="scenario-reset" type="button" style="display:none;">元に戻す</button>
       </div>
-      <div class="scenario-lab__note">※ ボタンは入力値を上書きして即再計算します（計算ロジックは変更しません）</div>
     </div>
-  `;
+    `;
 
     // イベント付与
     lab.querySelectorAll('button[data-scn]').forEach(btn => {
@@ -1095,6 +1112,12 @@ function nudgeScenarioValue(kind, dir) {
     if (kind === 'mgmt') {
         bump(['buy-mgmt', 'management-fee', 'maintenanceFee', 'mgmtFee', 'rent-mgmt', 'rentMgmt', 'maintenance', 'monthlyMaintenance'], 5000, 0, 500000, 1000);
     }
+    if (kind === 'price') {
+        bump(['buy-price', 'propertyPrice', 'price'], 100, 100, 50000, 50); // 万単位
+    }
+    if (kind === 'loan_term') {
+        bump(['loan-term-input', 'loanTerm', 'years'], 1, 1, 50, 1);
+    }
 
     // 再計算
     if (typeof runDiagnosis === 'function') runDiagnosis();
@@ -1345,4 +1368,94 @@ function selfCheckScenarioUI() {
             marker.style.zIndex = '1';
         }
     }
+}
+
+/**
+ * Phase 2: Sync calculated results to the new comparison table and handle modals.
+ * Does NOT change calculation logic.
+ */
+function syncResultUI(res, inputs) {
+    const fmt = (num) => '¥' + Math.round(num).toLocaleString('ja-JP');
+
+    // 1. Map Monthly Stats
+    const rentMonthlyEl = document.getElementById('rent-monthly-result');
+    const buyMonthlyEl = document.getElementById('buy-monthly-result');
+
+    if (rentMonthlyEl) {
+        // Rent Monthly = Rent + Mgmt
+        rentMonthlyEl.textContent = fmt(inputs.monthlyRent + inputs.mgmtFeeRent);
+    }
+    if (buyMonthlyEl) {
+        // Buy Monthly = Mortgage + Mgmt + (Tax/12)
+        // Recalculate monthlyPmt for comparison table display
+        const principal = inputs.propertyPrice;
+        const r = (inputs.interestRatePct / 100) / 12;
+        const n = Math.max(1, inputs.loanTerm * 12);
+        let monthlyPmt = 0;
+        if (r > 0) {
+            monthlyPmt = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+        } else {
+            monthlyPmt = principal / n;
+        }
+        const buyMonthlyTotal = monthlyPmt + inputs.monthlyMgmtBuy + (inputs.yearlyPropertyTax / 12);
+        buyMonthlyEl.textContent = fmt(buyMonthlyTotal);
+    }
+
+    // 2. Map Total Stats
+    const rentTotalEl = document.getElementById('rent-total');
+    const buyNetEl = document.getElementById('buy-net');
+    if (rentTotalEl) rentTotalEl.textContent = fmt(res.rentForever.total);
+    if (buyNetEl) buyNetEl.textContent = fmt(res.buyLater.total);
+
+    // 3. Map Win Labels
+    const rentWin = document.getElementById('rent-win-label');
+    const buyWin = document.getElementById('buy-win-label');
+    const rowLabelWin = document.querySelector('.win-row .row-label');
+
+    // Clear center label if it exists in HTML
+    if (rowLabelWin) rowLabelWin.textContent = '';
+
+    if (rentWin && buyWin) {
+        // Comparison based on res.winner (Total Cost)
+        rentWin.textContent = res.winner === 'rent' ? 'win!' : '';
+        buyWin.textContent = res.winner === 'buy' ? 'win!' : '';
+    }
+
+    // 4. Setup Breakdown Modal Triggers
+    const rentLink = document.getElementById('rent-breakdown-link');
+    const buyLink = document.getElementById('buy-breakdown-link');
+
+    if (rentLink) {
+        rentLink.onclick = () => {
+            const content = document.getElementById('rent-breakdown');
+            if (content) showBreakdownModal('賃貸プランの内訳', content.innerHTML);
+        };
+    }
+    if (buyLink) {
+        buyLink.onclick = () => {
+            const content = document.getElementById('buy-breakdown');
+            if (content) showBreakdownModal('購入プランの内訳', document.getElementById('buy-breakdown').innerHTML);
+        };
+    }
+}
+
+function showBreakdownModal(title, html) {
+    const modal = document.getElementById('breakdown-modal');
+    const backdrop = document.getElementById('breakdown-backdrop');
+    const body = document.getElementById('breakdown-modal-body');
+    const header = document.getElementById('breakdown-modal-header');
+
+    if (modal && backdrop && body) {
+        header.textContent = title;
+        body.innerHTML = html;
+        modal.style.display = 'block';
+        backdrop.style.display = 'block';
+    }
+}
+
+function closeBreakdown() {
+    const modal = document.getElementById('breakdown-modal');
+    const backdrop = document.getElementById('breakdown-backdrop');
+    if (modal) modal.style.display = 'none';
+    if (backdrop) backdrop.style.display = 'none';
 }

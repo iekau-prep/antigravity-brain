@@ -1211,14 +1211,10 @@ body {
     color: #64748b;
 }
 
-.val-monthly {
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-
-.val-total {
-    font-weight: 700;
-    font-size: 1.2rem;
+.comparison-table .val {
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: #0f172a;
 }
 
 .row-label {

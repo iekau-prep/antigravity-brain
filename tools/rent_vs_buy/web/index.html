@@ -324,7 +324,7 @@
                     <!-- JS will inject details here -->
                 </div>
 
-                <!-- Comparison Table (Mockup Style) -->
+                <!-- Comparison Table (3-column Style) -->
                 <div class="comparison-table-container">
                     <table class="comparison-table">
                         <thead>
@@ -336,14 +336,14 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="val-monthly"><span id="rent-monthly-result">0</span> 円</td>
+                                <td class="val"><span id="rent-monthly-result">—</span></td>
                                 <td class="row-label">月々の支払い</td>
-                                <td class="val-monthly"><span id="buy-monthly-result">0</span> 円</td>
+                                <td class="val"><span id="buy-monthly-result">—</span></td>
                             </tr>
                             <tr>
-                                <td class="val-total"><span id="rent-total">¥0</span></td>
+                                <td class="val"><span id="rent-total">—</span></td>
                                 <td class="row-label">総支払額</td>
-                                <td class="val-total"><span id="buy-net">¥0</span></td>
+                                <td class="val"><span id="buy-net">—</span></td>
                             </tr>
                             <tr class="win-row">
                                 <td id="rent-win-label" class="win-label"></td>
@@ -352,18 +352,26 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    <div class="breakdown-links">
+                        <a href="javascript:void(0)" id="rent-breakdown-link" class="breakdown-link">内訳</a>
+                        <a href="javascript:void(0)" id="buy-breakdown-link" class="breakdown-link">内訳</a>
+                    </div>
                 </div>
 
-                <!-- Breakdown Links -->
-                <div class="breakdown-links">
-                    <a href="javascript:void(0)" id="rent-breakdown-trigger" class="breakdown-link">内訳</a>
-                    <a href="javascript:void(0)" id="buy-breakdown-trigger" class="breakdown-link">内訳</a>
-                </div>
-
-                <!-- Recalculation Panel Placeholder (Scenario Lab will go here) -->
+                <!-- Recalculation Panel Placeholder -->
                 <div id="recalc-panel" class="recalc-panel">
-                    <!-- Scenario Lab will be injected here if we adjust app.js or keep auto-inject -->
+                    <!-- Scenario Lab will be injected here -->
                 </div>
+
+                <!-- Undo Button (Phase 2 Add) -->
+                <div class="undo-container">
+                    <button type="button" class="undo-button" onclick="location.reload()">元に戻す</button>
+                </div>
+
+                <!-- Hidden Breakdown Data Container (Used by app.js to store HTML for modal) -->
+                <div id="rent-breakdown" style="display:none;"></div>
+                <div id="buy-breakdown" style="display:none;"></div>
             </div>
 
         </div> <!-- End of .container -->
