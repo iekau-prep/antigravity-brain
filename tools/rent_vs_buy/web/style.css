@@ -1174,6 +1174,93 @@ body {
     word-break: break-word;
 }
 
+/* ===== Comparison Table (Mockup Style) ===== */
+.comparison-table-container {
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.comparison-table th {
+    padding: 10px;
+    font-size: 0.9rem;
+    color: #1e293b;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.comparison-table td {
+    padding: 12px 10px;
+}
+
+.col-rent,
+.col-buy {
+    width: 35%;
+}
+
+.col-label {
+    width: 30%;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.val-monthly {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.val-total {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.row-label {
+    font-size: 0.8rem;
+    color: #64748b;
+    background: #f8fafc;
+    border-radius: 4px;
+}
+
+.win-row {
+    height: 40px;
+}
+
+.win-label {
+    color: #ef4444;
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+/* Breakdown Links */
+.breakdown-links {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.breakdown-link {
+    font-size: 0.85rem;
+    color: #2563eb;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Recalc Panel Container */
+.recalc-panel {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
 /* ===== Breakeven Visualization (Dynamic) ===== */
 .breakeven-badge {
     background: #f0fdf4;

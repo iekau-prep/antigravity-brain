@@ -324,17 +324,45 @@
                     <!-- JS will inject details here -->
                 </div>
 
-                <div class="comparison-grid">
-                    <div class="stat-box">
-                        <div class="stat-title">賃貸の総支払額</div>
-                        <div class="stat-value" id="rent-total">¥0</div>
-                        <div class="stat-detail" id="rent-breakdown">...</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-title">購入の実質コスト</div>
-                        <div class="stat-value" id="buy-net">¥0</div>
-                        <div class="stat-detail" id="buy-breakdown">...</div>
-                    </div>
+                <!-- Comparison Table (Mockup Style) -->
+                <div class="comparison-table-container">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th class="col-rent">賃貸</th>
+                                <th class="col-label"></th>
+                                <th class="col-buy">購入</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="val-monthly"><span id="rent-monthly-result">0</span> 円</td>
+                                <td class="row-label">月々の支払い</td>
+                                <td class="val-monthly"><span id="buy-monthly-result">0</span> 円</td>
+                            </tr>
+                            <tr>
+                                <td class="val-total"><span id="rent-total">¥0</span></td>
+                                <td class="row-label">総支払額</td>
+                                <td class="val-total"><span id="buy-net">¥0</span></td>
+                            </tr>
+                            <tr class="win-row">
+                                <td id="rent-win-label" class="win-label"></td>
+                                <td class="row-label">win!</td>
+                                <td id="buy-win-label" class="win-label"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Breakdown Links -->
+                <div class="breakdown-links">
+                    <a href="javascript:void(0)" id="rent-breakdown-trigger" class="breakdown-link">内訳</a>
+                    <a href="javascript:void(0)" id="buy-breakdown-trigger" class="breakdown-link">内訳</a>
+                </div>
+
+                <!-- Recalculation Panel Placeholder (Scenario Lab will go here) -->
+                <div id="recalc-panel" class="recalc-panel">
+                    <!-- Scenario Lab will be injected here if we adjust app.js or keep auto-inject -->
                 </div>
             </div>
 
@@ -393,6 +421,20 @@
                 <div class="modal-actions">
                     <a href="#" class="modal-btn primary">LINEで受け取る（準備中）</a>
                     <button class="modal-btn secondary" onclick="closeModal()">閉じる</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breakdown Modal -->
+        <div id="breakdown-backdrop" class="modal-backdrop" onclick="closeBreakdown()"></div>
+        <div id="breakdown-modal" class="modal">
+            <div class="modal-content">
+                <div id="breakdown-modal-header" class="modal-header">内訳</div>
+                <div id="breakdown-modal-body" class="modal-body">
+                    <!-- JS will inject breakdown HTML here -->
+                </div>
+                <div class="modal-actions">
+                    <button class="modal-btn secondary" onclick="closeBreakdown()">閉じる</button>
                 </div>
             </div>
         </div>
