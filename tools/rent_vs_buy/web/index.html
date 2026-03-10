@@ -316,8 +316,17 @@
             <!-- Results -->
             <div class="results-section" style="display:none;">
 
-                <div id="result-header">計算中...</div>
-                <div id="result-text">数値を入力すると自動で比較します。</div>
+                <div id="result-summary-block" class="result-summary-block">
+                    <div id="result-diff-label" class="result-diff-label">差額</div>
+                    <h2 id="result-diff-display">—</h2>
+                    <div class="result-summary-lines">
+                        <div id="result-conclusion-line" class="result-summary-line">—</div>
+                        <div id="result-reason-line" class="result-summary-line">—</div>
+                    </div>
+                </div>
+
+                <div id="result-header" style="display:none;">計算中...</div>
+                <div id="result-text" style="display:none;">数値を入力すると自動で比較します。</div>
 
                 <!-- Caution Box (Stage A) -->
                 <div id="caution-box-container" style="display:none; margin: 1.5rem 0;">
@@ -344,11 +353,6 @@
                                 <td class="val"><span id="rent-total">—</span></td>
                                 <td class="row-label">総支払額</td>
                                 <td class="val"><span id="buy-net">—</span></td>
-                            </tr>
-                            <tr class="win-row">
-                                <td id="rent-win-label" class="win-label"></td>
-                                <td class="row-label">win!</td>
-                                <td id="buy-win-label" class="win-label"></td>
                             </tr>
                         </tbody>
                     </table>

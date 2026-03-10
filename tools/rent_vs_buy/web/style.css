@@ -167,6 +167,67 @@ input:focus {
     color: #d97706;
 }
 
+/* Result Summary Block */
+.result-summary-block {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+.results-section.winner-buy .result-summary-block {
+    border-color: #fbbf24;
+    background: #fffcf0;
+}
+
+.results-section.winner-rent .result-summary-block {
+    border-color: #7dd3fc;
+    background: #f0f9ff;
+}
+
+.result-diff-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #64748b;
+    margin-bottom: 0.2rem;
+}
+
+#result-diff-display {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0.5rem 0;
+    line-height: 1.2;
+}
+
+.results-section.winner-buy #result-diff-display {
+    color: #d97706;
+}
+
+.results-section.winner-rent #result-diff-display {
+    color: #0284c7;
+}
+
+.result-summary-lines {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.result-summary-line {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #334155;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.5);
+    display: inline-block;
+}
+
 /* Orange/Gold */
 
 .comparison-grid {

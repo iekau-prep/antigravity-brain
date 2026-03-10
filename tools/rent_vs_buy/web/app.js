@@ -399,14 +399,36 @@ function renderResults(res, inputs) {
         timelineText = `<strong>${res.yearsWait}年後</strong>に購入して、<strong>${res.yearsOwn}年間</strong>住む`;
     }
 
+    const diffVal = fmt(res.diff);
+    const diffDisplay = document.getElementById('result-diff-display');
+    const conclusionEl = document.getElementById('result-conclusion-line');
+    const reasonEl = document.getElementById('result-reason-line');
+    const resultsContainer = document.querySelector('.results-section');
+
     if (res.winner === 'buy') {
         resultHeader.className = 'winner-buy';
+        if (resultsContainer) {
+            resultsContainer.classList.add('winner-buy');
+            resultsContainer.classList.remove('winner-rent');
+        }
         resultHeader.textContent = '🎉 購入プランがお得！';
-        resultText.innerHTML = `${timelineText}プランの方が、<br>ずっと賃貸より<strong>${fmt(res.diff)}</strong>安く済みそうです。`;
+        resultText.innerHTML = `${timelineText}プランの方が、<br>ずっと賃貸より<strong>${diffVal}</strong>安く済みそうです。`;
+
+        if (diffDisplay) diffDisplay.textContent = `+${diffVal}`;
+        if (conclusionEl) conclusionEl.textContent = `結論：今は「購入」優位`;
+        if (reasonEl) reasonEl.textContent = `理由：${res.totalYears}年計で総コストが賃貸より低い`;
     } else {
         resultHeader.className = 'winner-rent';
+        if (resultsContainer) {
+            resultsContainer.classList.add('winner-rent');
+            resultsContainer.classList.remove('winner-buy');
+        }
         resultHeader.textContent = '📉 賃貸継続がお得！';
-        resultText.innerHTML = `無理に${timelineText}よりも、<br>ずっと賃貸の方が<strong>${fmt(res.diff)}</strong>安く済みそうです。`;
+        resultText.innerHTML = `無理に${timelineText}よりも、<br>ずっと賃貸の方が<strong>${diffVal}</strong>安く済みそうです。`;
+
+        if (diffDisplay) diffDisplay.textContent = `+${diffVal}`;
+        if (conclusionEl) conclusionEl.textContent = `結論：今は「賃貸」継続が有利`;
+        if (reasonEl) reasonEl.textContent = `理由：${res.totalYears}年計で総コストが購入より低い`;
     }
 
     // Detail Grid Update
@@ -1407,7 +1429,8 @@ function syncResultUI(res, inputs) {
     if (rentTotalEl) rentTotalEl.textContent = fmt(res.rentForever.total);
     if (buyNetEl) buyNetEl.textContent = fmt(res.buyLater.total);
 
-    // 3. Map Win Labels
+    // 3. Map Win Labels (Disabled for new UI)
+    /*
     const rentWin = document.getElementById('rent-win-label');
     const buyWin = document.getElementById('buy-win-label');
     const rowLabelWin = document.querySelector('.win-row .row-label');
@@ -1420,6 +1443,7 @@ function syncResultUI(res, inputs) {
         rentWin.textContent = res.winner === 'rent' ? 'win!' : '';
         buyWin.textContent = res.winner === 'buy' ? 'win!' : '';
     }
+    */
 
     // 4. Setup Breakdown Modal Triggers
     const rentLink = document.getElementById('rent-breakdown-link');
