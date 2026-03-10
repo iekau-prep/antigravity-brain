@@ -1045,6 +1045,10 @@ body {
     font-size: 0.95rem !important;
 }
 
+#recalc-panel {
+    margin-top: 2.5rem !important;
+}
+
 /* Scenario Lab Styles */
 .scenario-lab {
     padding: 14px;
@@ -1055,49 +1059,93 @@ body {
     background: #fff7ef;
     border: 1px solid #f0d8c2;
     border-radius: 14px;
-    padding: 14px;
+    padding: 20px;
     text-align: left;
 }
 
-.scenario-lab__title {
+.scenario-lab__grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px 24px !important;
+}
+
+.scenario-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+.scenario-item-full {
+    grid-column: 1 / -1;
+    margin-bottom: 8px;
+}
+
+.scenario-label-mini {
+    flex: 1;
+    font-size: 0.9rem;
     font-weight: 700;
-    margin-bottom: 10px;
+    color: #854d0e;
+    margin-bottom: 0 !important;
+    white-space: nowrap;
+    order: 1;
 }
 
-.scenario-lab__buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 10px;
+.scenario-nudge {
+    display: contents !important;
 }
 
-.scenario-btn {
-    padding: 10px 12px;
-    font-size: 13px;
-    border-radius: 999px;
-    background: #fff;
-    border: 1px solid #f0c7a5;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.15s ease;
+.scenario-nudge-val {
+    width: 65px;
     text-align: center;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: #1e293b;
+    order: 2;
 }
 
-.scenario-btn:hover {
-    filter: brightness(0.98);
+.scenario-nudge-btn {
+    width: 34px !important;
+    height: 34px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
+    background: #fff !important;
+    border: 1px solid #f0c7a5 !important;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    color: #854d0e;
+    transition: all 0.15s ease;
 }
 
-.scenario-btn:active {
-    transform: scale(0.96);
-    background: #ffe6cf;
+.scenario-nudge-btn[data-dir="-1"] {
+    order: 3;
+}
+
+.scenario-nudge-btn[data-dir="1"] {
+    order: 4;
+}
+
+.scenario-nudge-btn:hover {
+    background: #fff7ef !important;
+    border-color: #d97706 !important;
+}
+
+#more-diagnosis-toggle {
+    display: none !important;
+}
+
+.undo-container {
+    display: none !important;
 }
 
 .scenario-lab__footer {
-    margin-top: 12px;
+    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 30px;
 }
 
 .scenario-active-label {
@@ -1115,22 +1163,6 @@ body {
     font-size: 0.85rem;
 }
 
-.scenario-reset:hover {
-    background: #f1f5f9;
-}
-
-.scenario-lab__note {
-    margin-top: 10px;
-    font-size: 12px;
-    opacity: 0.8;
-}
-
-/* PCでは横4並び */
-@media (min-width: 768px) {
-    .scenario-lab__buttons {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
 
 /* ===== Range Slider (Number stays) ===== */
 .range-sync {
@@ -1151,28 +1183,51 @@ body {
     }
 }
 
-/* ===== Scenario Applied Status ===== */
+/* Summary Box Styling */
 .scenario-status {
-    margin-top: 10px;
-    padding: 10px 12px;
-    border-radius: 12px;
-    background: #fff;
-    border: 1px solid #f0c7a5;
+    margin-top: 30px !important;
+    padding: 20px !important;
+    border-radius: 14px !important;
+    background: #ffffff !important;
+    border: 1px solid #f0d8c2 !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(133, 77, 14, 0.05) !important;
+    display: block !important;
 }
 
 .scenario-status-title {
-    font-size: 12px;
+    display: none !important;
+}
+
+.scenario-status::before {
+    content: "Current Applied Conditions";
+    display: block;
+    font-size: 14px;
     font-weight: 700;
-    opacity: .85;
-    margin-bottom: 6px;
+    color: #854d0e;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #f0d8c2;
+    padding-bottom: 6px;
 }
 
 .scenario-status-body {
-    font-size: 12px;
-    line-height: 1.5;
-    opacity: .9;
-    word-break: break-word;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #4b5563;
+    font-family: monospace;
+    word-break: break-all;
 }
+
+@media (max-width: 600px) {
+    .scenario-lab__grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .scenario-item {
+        justify-content: space-between;
+    }
+}
+
 
 /* ===== Comparison Table (Mockup Style) ===== */
 .comparison-table-container {
