@@ -233,7 +233,7 @@ function validateLoanTermImmediate() {
     }
 }
 
-function runDiagnosis() {
+function runDiagnosis(options = {}) {
     validateLoanTermImmediate(); // Final safety check
 
     // If years-own was manually touched by slider/nudge, ensure we don't overwrite it with defaults
@@ -289,7 +289,9 @@ function runDiagnosis() {
     updateBreakevenAnalysis(inputs);
 
     // Phase 2: Auto-scroll to results
-    document.querySelector('.results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!options.skipScroll) {
+        document.querySelector('.results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 function updateAccuracy() {
@@ -913,7 +915,7 @@ function mountScenarioLab() {
         };
 
         scnSlider.onchange = () => {
-            if (typeof runDiagnosis === 'function') runDiagnosis();
+            if (typeof runDiagnosis === 'function') runDiagnosis({ skipScroll: true });
             if (typeof updateScenarioStatus === 'function') updateScenarioStatus();
         };
 
@@ -1056,7 +1058,7 @@ function applyScenario(scnKey, label) {
     // ✅ 既存ロジックで再計算
     setTimeout(() => {
         if (typeof runDiagnosis === 'function') {
-            runDiagnosis();
+            runDiagnosis({ skipScroll: true });
             updateScenarioStatus();
         }
     }, 0);
@@ -1088,7 +1090,7 @@ function resetScenario() {
 
     // 再計算
     if (typeof runDiagnosis === 'function') {
-        runDiagnosis();
+        runDiagnosis({ skipScroll: true });
         updateScenarioStatus();
     }
 }
@@ -1149,7 +1151,7 @@ function nudgeScenarioValue(kind, dir) {
     }
 
     // 再計算
-    if (typeof runDiagnosis === 'function') runDiagnosis();
+    if (typeof runDiagnosis === 'function') runDiagnosis({ skipScroll: true });
     if (typeof updateScenarioStatus === 'function') updateScenarioStatus();
 }
 
