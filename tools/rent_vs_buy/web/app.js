@@ -431,6 +431,14 @@ function renderResults(res, inputs) {
         if (reasonEl) reasonEl.textContent = `理由：${res.totalYears}年計で総コストが購入より低い`;
     }
 
+    // Show CTA and Sticky Bar (Phase 3)
+    const ctaContainer = document.getElementById('cta-container');
+    const stickyBar = document.getElementById('diagnosis-conditions-sticky');
+    if (ctaContainer) ctaContainer.style.display = 'block';
+    if (stickyBar) stickyBar.style.display = 'block';
+
+    updateScenarioStatus(); // Populate bar
+
     // Detail Grid Update
     // Left: Rent Forever
     document.getElementById('rent-total').textContent = fmt(res.rentForever.total);
@@ -825,11 +833,7 @@ function mountScenarioLab() {
         </div>
       </div>
       
-      <!-- 現在の適用条件表示エリア -->
-      <div class="scenario-status" id="scenario-conditions-box" style="display:none;">
-        <div class="scenario-status-title">現在の適用条件</div>
-        <div class="scenario-status-body" id="scenario-status-body">—</div>
-      </div>
+      <div class="scenario-lab__footer">
 
       <div class="scenario-lab__footer">
         <div id="scenario-active-label" class="scenario-active-label"></div>
@@ -1174,7 +1178,8 @@ function fmtPct(n) {
 
 function updateScenarioStatus() {
     const box = document.getElementById("scenario-status-body");
-    if (!box) return;
+    const stickyText = document.getElementById("sticky-status-text");
+    if (!box && !stickyText) return;
 
     // applyScenario の getEl と同じ優先順位で取得
     const rate = readNumberValue(['buy-rate', 'interest-rate', 'interestRate', 'interestRatePct', 'loanRate', 'rate', 'loan-rate']);
@@ -1186,8 +1191,10 @@ function updateScenarioStatus() {
     // 物件価格は「万円」単位なので表示時に調整
     const displayPrice = price != null ? price * 10000 : null;
 
-    box.textContent =
-        `金利: ${fmtPct(rate)} / 家賃: ${fmtYen(rent)} / 物件価格: ${fmtYen(displayPrice)} / 売却補正: ${resalePct != null ? resalePct + '%' : '—'} / 修繕・管理: ${fmtYen(maint)}（月）`;
+    const statusStr = `ローン金利: ${fmtPct(rate)} / 家賃: ${fmtYen(rent)} / 購入価格: ${fmtYen(displayPrice)} / 売りやすさ: ${resalePct != null ? resalePct + '%' : '—'} / 維持費: ${fmtYen(maint)}`;
+
+    if (box) box.textContent = statusStr;
+    if (stickyText) stickyText.textContent = statusStr;
 }
 
 (function setupRangeSync() {
@@ -1483,3 +1490,22 @@ function closeBreakdown() {
     if (modal) modal.style.display = 'none';
     if (backdrop) backdrop.style.display = 'none';
 }
+
+// Result CTA Scroll Interaction (Phase 3)
+document.addEventListener('DOMContentLoaded', () => {
+    const ctaBtn = document.getElementById('cta-to-details');
+    const accordion = document.getElementById('detailed-settings-accordion');
+
+    if (ctaBtn && accordion) {
+        ctaBtn.addEventListener('click', () => {
+            // Open the accordion if it's closed
+            if (!accordion.open) {
+                accordion.open = true;
+            }
+            // Smooth scroll to the top of the accordion with some margin
+            const yOffset = -80; // Margin for mobile and sticky bar
+            const y = accordion.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        });
+    }
+});

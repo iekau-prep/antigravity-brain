@@ -60,7 +60,14 @@
                     </div>
                 </div>
 
-                <details class="detailed-settings">
+                <div id="diagnosis-conditions-sticky" class="conditions-bar" style="display:none;">
+                    <div class="conditions-bar-inner">
+                        <span class="conditions-bar-label">現在の診断条件：</span>
+                        <span id="sticky-status-text">金利 0.5% / 家賃 ¥100,000 ...</span>
+                    </div>
+                </div>
+
+                <details class="detailed-settings" id="detailed-settings-accordion">
                     <summary class="details-summary">診断精度を上げる（任意）</summary>
 
                     <div class="details-content">
@@ -361,6 +368,14 @@
                         <a href="javascript:void(0)" id="rent-breakdown-link" class="breakdown-link">内訳</a>
                         <a href="javascript:void(0)" id="buy-breakdown-link" class="breakdown-link">内訳</a>
                     </div>
+                </div>
+
+                <!-- Main CTA to Detailed Settings -->
+                <div id="cta-container" class="cta-container" style="display:none;">
+                    <button id="cta-to-details" class="cta-button">
+                        この条件で本当に安全か確認する
+                        <span class="cta-arrow">→</span>
+                    </button>
                 </div>
 
 
