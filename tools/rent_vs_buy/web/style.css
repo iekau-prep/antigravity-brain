@@ -1219,6 +1219,56 @@ body {
     justify-content: space-between;
 }
 
+}
+
+/* --- Scenario Mode Tabs --- */
+.scenario-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 8px;
+}
+
+.scenario-tab {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.scenario-tab.active {
+    background: #0ea5e9;
+    color: #white;
+    border-color: #0ea5e9;
+    box-shadow: 0 2px 4px rgba(14, 165, 233, 0.2);
+}
+
+.scenario-tab.active {
+    background: #0ea5e9;
+    color: #fff;
+    border-color: #0ea5e9;
+}
+
+/* --- Mode Visibility Logic --- */
+.scenario-lab .is-pro-only {
+    display: none !important;
+}
+
+.scenario-lab.is-pro-mode .is-pro-only {
+    display: flex !important;
+}
+
+/* Adjust grid if in single column for pro-only labels */
+.scenario-lab.is-pro-mode .scenario-item-full.is-pro-only {
+    display: block !important;
+}
+
 .scenario-active-label {
     font-size: 0.85rem;
     color: #854d0e;

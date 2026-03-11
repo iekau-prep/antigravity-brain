@@ -781,14 +781,19 @@ function mountScenarioLab() {
     // UI描画（毎回上書きでOK）
     lab.innerHTML = `
     <div class="scenario-lab__inner">
+      <div class="scenario-tabs">
+        <button type="button" class="scenario-tab active" data-mode="simple">かんたん</button>
+        <button type="button" class="scenario-tab" data-mode="pro">実務</button>
+      </div>
+
       <div class="scenario-lab__grid">
         <!-- Sliders -->
-        <div class="scenario-item-full">
+        <div class="scenario-item-full is-pro-only">
             <label class="scenario-slider-label">ローン年数: <span id="loan-term-display">${document.getElementById('loan-term-input')?.value || 35}</span>年</label>
             <div class="scenario-slider-container">
               <input type="range" class="scenario-slider" min="1" max="50" value="${document.getElementById('loan-term-input')?.value || 35}" 
                      oninput="document.getElementById('loan-term-input').value = this.value; document.getElementById('loan-term-display').textContent = this.value; checkInputsChanged();"
-                     onchange="runDiagnosis(); updateScenarioStatus();">
+                     onchange="runDiagnosis({ skipScroll: true }); updateScenarioStatus();">
             </div>
         </div>
         <div class="scenario-item-full" style="order: -1;">
@@ -825,7 +830,7 @@ function mountScenarioLab() {
                 <button type="button" class="scenario-nudge-btn" data-nudge="mgmt" data-dir="1">＋</button>
             </div>
         </div>
-        <div class="scenario-item">
+        <div class="scenario-item is-pro-only">
             <div class="scenario-label-mini">売却補正</div>
             <div class="scenario-nudge">
                 <button type="button" class="scenario-nudge-btn" data-nudge="resale" data-dir="-1">−</button>
@@ -836,8 +841,6 @@ function mountScenarioLab() {
       </div>
       
       <div class="scenario-lab__footer">
-
-      <div class="scenario-lab__footer">
         <div id="scenario-active-label" class="scenario-active-label"></div>
         <div class="scenario-reset-container">
             <div class="scenario-reset-note">※ 居住年数・ローン年数は保持されます</div>
@@ -846,6 +849,19 @@ function mountScenarioLab() {
       </div>
     </div>
     `;
+
+    // タブ切り替えロジック
+    lab.querySelectorAll('.scenario-tab').forEach(tab => {
+        tab.onclick = () => {
+            lab.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            if (tab.dataset.mode === 'pro') {
+                lab.classList.add('is-pro-mode');
+            } else {
+                lab.classList.remove('is-pro-mode');
+            }
+        };
+    });
 
     // イベント付与
     lab.querySelectorAll('button[data-scn]').forEach(btn => {
