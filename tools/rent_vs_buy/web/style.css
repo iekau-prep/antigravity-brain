@@ -1219,8 +1219,6 @@ body {
     justify-content: space-between;
 }
 
-}
-
 /* --- Scenario Mode Tabs --- */
 .scenario-tabs {
     display: flex;
@@ -1688,4 +1686,97 @@ input[type="range"] {
         margin-left: -1.5rem;
         margin-right: -1.5rem;
     }
+}
+
+/* --- Safety Score UI --- */
+.safety-score-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.safety-score-badge {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.safety-score-info {
+    flex: 1;
+}
+
+.safety-score-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    margin-bottom: 2px;
+}
+
+.safety-score-desc {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.4;
+}
+
+/* Rank Colors */
+.rank-a {
+    background: #22c55e;
+}
+
+.rank-b {
+    background: #84cc16;
+}
+
+.rank-c {
+    background: #eab308;
+}
+
+.rank-d {
+    background: #f97316;
+}
+
+.rank-e {
+    background: #ef4444;
+}
+
+@media (max-width: 480px) {
+    .safety-score-content {
+        padding: 8px 10px;
+        gap: 10px;
+    }
+
+    .safety-score-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+    }
+
+    .safety-score-desc {
+        font-size: 0.8rem;
+    }
+}
+
+/* --- Result Keyword Highlights --- */
+.result-buy {
+    color: #e67a2e;
+    font-weight: 700;
+}
+
+.result-rent {
+    color: #2f7de1;
+    font-weight: 700;
 }

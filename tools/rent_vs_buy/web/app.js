@@ -417,7 +417,7 @@ function renderResults(res, inputs) {
         resultText.innerHTML = `${timelineText}プランの方が、<br>ずっと賃貸より<strong>${diffVal}</strong>安く済みそうです。`;
 
         if (diffDisplay) diffDisplay.textContent = `+${diffVal}`;
-        if (conclusionEl) conclusionEl.textContent = `結論：今は「購入」優位`;
+        if (conclusionEl) conclusionEl.innerHTML = `結論：今は<span class="result-buy">「購入」</span>優位`;
         if (reasonEl) reasonEl.textContent = `理由：${res.totalYears}年計で総コストが賃貸より低い`;
     } else {
         resultHeader.className = 'winner-rent';
@@ -429,7 +429,7 @@ function renderResults(res, inputs) {
         resultText.innerHTML = `無理に${timelineText}よりも、<br>ずっと賃貸の方が<strong>${diffVal}</strong>安く済みそうです。`;
 
         if (diffDisplay) diffDisplay.textContent = `+${diffVal}`;
-        if (conclusionEl) conclusionEl.textContent = `結論：今は「賃貸」継続が有利`;
+        if (conclusionEl) conclusionEl.innerHTML = `結論：今は<span class="result-rent">「賃貸」</span>継続が有利`;
         if (reasonEl) reasonEl.textContent = `理由：${res.totalYears}年計で総コストが購入より低い`;
     }
 
@@ -438,6 +438,18 @@ function renderResults(res, inputs) {
     const stickyBar = document.getElementById('diagnosis-conditions-sticky');
     if (ctaContainer) ctaContainer.style.display = 'block';
     if (stickyBar) stickyBar.style.display = 'block';
+
+    const safety = calculateSafetyScore(inputs, res);
+    const safetyContainer = document.getElementById('safety-score-container');
+    if (safetyContainer) {
+        safetyContainer.innerHTML = `
+            <div class="safety-score-badge rank-${safety.rank.toLowerCase()}">${safety.rank}</div>
+            <div class="safety-score-info">
+                <div class="safety-score-label">プランの安全度：ランク${safety.rank}</div>
+                <div class="safety-score-desc">${safety.message}</div>
+            </div>
+        `;
+    }
 
     updateScenarioStatus(); // Populate bar
 
@@ -1530,3 +1542,83 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+/**
+ * Calculates a safety score (A-E) based on risk factors in inputs and results.
+ * @param {Object} inputs 
+ * @param {Object} res 
+ * @returns {Object} { rank, message }
+ */
+function calculateSafetyScore(inputs, res) {
+    let score = 100;
+    const penalties = [];
+
+    // 1. Loan Term Risk
+    if (inputs.loanTerm > 40) {
+        score -= 30;
+        penalties.push("返済期間が非常に長いです");
+    } else if (inputs.loanTerm > 35) {
+        score -= 15;
+        penalties.push("返済期間が長めです");
+    }
+
+    // 2. Interest Rate Risk
+    if (inputs.interestRatePct > 2.5) {
+        score -= 25;
+        penalties.push("金利負担が大きいです");
+    } else if (inputs.interestRatePct > 1.2) {
+        score -= 10;
+        penalties.push("金利上昇リスクがあります");
+    }
+
+    // 3. Asset Value Risk (Resale)
+    if (inputs.resaleValuePct < 60) {
+        score -= 30;
+        penalties.push("資産価値が残りにくい想定です");
+    } else if (inputs.resaleValuePct < 80) {
+        score -= 15;
+        penalties.push("売却時の価格下落リスクがあります");
+    }
+
+    // 4. Fixed Cost Risk
+    const buyMgmt = inputs.monthlyMgmtBuy || 0;
+    if (buyMgmt > 35000) {
+        score -= 10;
+        penalties.push("毎月の維持費が高いです");
+    }
+
+    // 5. Margin Risk (Buy winner but small difference)
+    if (res.winner === 'buy') {
+        const marginPct = (res.diff / inputs.propertyPrice) * 100;
+        if (marginPct < 3) {
+            score -= 5;
+        }
+    }
+
+    // Results Mapping
+    let rank = 'A';
+    let message = '非常に安定した買い方です。';
+
+    if (score >= 90) {
+        rank = 'A';
+        message = '非常に安定した買い方です。将来のリスクも低く抑えられています。';
+    } else if (score >= 75) {
+        rank = 'B';
+        message = '堅実な買い方です。標準的なリスクの範囲内に収まっています。';
+    } else if (score >= 55) {
+        rank = 'C';
+        message = '調整次第でより安全になります。特に完済年齢や金利に注目してください。';
+    } else if (score >= 35) {
+        rank = 'D';
+        message = '注意が必要です。万が一の変動に弱いため、条件の再検討をお勧めします。';
+    } else {
+        rank = 'E';
+        message = '今は慎重になるべきです。無理な購入は将来の家計を圧迫する恐れがあります。';
+    }
+
+    if (penalties.length > 0 && score < 75) {
+        message = `注意点：${penalties.slice(0, 2).join('・')}${penalties.length > 2 ? 'など' : ''}。${message}`;
+    }
+
+    return { rank, message };
+}
