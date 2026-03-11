@@ -837,7 +837,10 @@ function mountScenarioLab() {
 
       <div class="scenario-lab__footer">
         <div id="scenario-active-label" class="scenario-active-label"></div>
-        <button id="scenario-reset" class="scenario-reset" type="button" style="display:none;">元に戻す</button>
+        <div class="scenario-reset-container">
+            <div class="scenario-reset-note">※ 居住年数・ローン年数は保持されます</div>
+            <button id="scenario-reset" class="scenario-reset" type="button" style="display:none;">詳細条件だけ初期値に戻す</button>
+        </div>
       </div>
     </div>
     `;

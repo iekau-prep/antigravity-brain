@@ -1229,9 +1229,51 @@ body {
     border: 1px solid #ccc;
     background: #f8fafc;
     border-radius: 8px;
-    padding: 4px 12px;
+    padding: 6px 14px;
     cursor: pointer;
     font-size: 0.85rem;
+    font-weight: 700;
+    color: #475569;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.scenario-reset:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+.scenario-reset-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.scenario-reset-note {
+    font-size: 0.75rem;
+    color: #92400e;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+    .scenario-lab__footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .scenario-reset-container {
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .scenario-reset {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
 }
 
 
