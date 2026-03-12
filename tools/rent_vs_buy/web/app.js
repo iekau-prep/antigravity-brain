@@ -462,6 +462,90 @@ function renderResults(res, inputs) {
         `;
     }
 
+    /**
+     * Helper to render Share Section
+     */
+    function renderShareSection() {
+        const shareContainer = document.getElementById('share-section-container');
+        if (!shareContainer) return;
+
+        shareContainer.innerHTML = `
+            <div class="share-section">
+                <button class="share-btn share-save" id="btn-save-img">
+                    📸 結果を画像保存
+                </button>
+                <button class="share-btn share-share" id="btn-share-result">
+                    📤 この診断をシェア
+                </button>
+            </div>
+        `;
+
+        document.getElementById('btn-save-img').addEventListener('click', saveResultAsImage);
+        document.getElementById('btn-share-result').addEventListener('click', shareResult);
+    }
+
+    /**
+     * Save result card as image using html2canvas
+     */
+    function saveResultAsImage() {
+        const target = document.querySelector('.result-card');
+        if (!target) return;
+
+        // Visual feedback
+        const btn = document.getElementById('btn-save-img');
+        const originalText = btn.textContent;
+        btn.textContent = '⌛ 生成中...';
+        btn.disabled = true;
+
+        html2canvas(target, {
+            scale: 2, // Better quality
+            backgroundColor: '#f8fafc',
+            logging: false,
+            useCORS: true
+        }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'my-home-diagnosis.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+
+            btn.textContent = originalText;
+            btn.disabled = false;
+        }).catch(err => {
+            console.error('Save failed:', err);
+            btn.textContent = originalText;
+            btn.disabled = false;
+            alert('保存に失敗しました。');
+        });
+    }
+
+    /**
+     * Share current page
+     */
+    function shareResult() {
+        const shareData = {
+            title: '賃貸 vs 持ち家 シミュレーション結果',
+            text: 'マイホーム購入と賃貸継続を比較しました。結果をチェックしてみてください！',
+            url: window.location.href
+        };
+
+        if (navigator.share) {
+            navigator.share(shareData).catch(err => {
+                if (err.name !== 'AbortError') console.error('Share failed:', err);
+            });
+        } else {
+            // Fallback: Copy to clipboard
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const btn = document.getElementById('btn-share-result');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ URLをコピーしました';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+    }
+
+    renderShareSection();
     updateScenarioStatus(); // Populate bar
 
     // Detail Grid Update
