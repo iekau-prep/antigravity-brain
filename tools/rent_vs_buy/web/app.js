@@ -451,6 +451,17 @@ function renderResults(res, inputs) {
         `;
     }
 
+    const comment = getGuideComment(res, safety);
+    const commentContainer = document.getElementById('guide-comment-container');
+    if (commentContainer) {
+        commentContainer.innerHTML = `
+            <div class="guide-comment-box">
+                <div class="guide-comment-title">アドバイス</div>
+                <div class="guide-comment-text">${comment}</div>
+            </div>
+        `;
+    }
+
     updateScenarioStatus(); // Populate bar
 
     // Detail Grid Update
@@ -1621,4 +1632,26 @@ function calculateSafetyScore(inputs, res) {
     }
 
     return { rank, message };
+}
+
+/**
+ * Returns a short guide comment based on results and safety rank.
+ * @param {Object} res 
+ * @param {Object} safety 
+ * @returns {string} content
+ */
+function getGuideComment(res, safety) {
+    if (safety.rank === 'D' || safety.rank === 'E') {
+        return "今はコスト差よりも、まずは安全に買える条件かを優先して確認しましょう。物件価格や返済期間の調整をお勧めします。";
+    }
+
+    if (res.winner === 'buy') {
+        if (safety.rank === 'A' || safety.rank === 'B') {
+            return "この条件なら購入を前向きに検討しやすいです。将来に備えて、金利が上がった場合のシミュレーションも一度試しておきましょう。";
+        } else {
+            return "購入優位の結果ですが、条件次第で負担感が変わります。特に毎月の維持費や修繕積立金が将来上がらないか、プロモードで細かく確認しましょう。";
+        }
+    } else {
+        return "今は無理に買わず、賃貸継続も合理的な選択です。もし購入を諦めたくない場合は、前提条件を変えてどこまでなら安全か探ってみましょう。";
+    }
 }
