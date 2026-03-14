@@ -546,6 +546,7 @@ function renderResults(res, inputs) {
     }
 
     renderShareSection();
+    renderLineSection();
     updateScenarioStatus(); // Populate bar
 
     // Detail Grid Update
@@ -1738,4 +1739,29 @@ function getGuideComment(res, safety) {
     } else {
         return "今は無理に買わず、賃貸継続も合理的な選択です。もし購入を諦めたくない場合は、前提条件を変えてどこまでなら安全か探ってみましょう。";
     }
+}
+
+/**
+ * Helper to render LINE Section
+ */
+function renderLineSection() {
+    const lineContainer = document.getElementById('line-section-container');
+    if (!lineContainer) return;
+
+    lineContainer.innerHTML = `
+        <div class="line-section">
+            <div class="line-section-header">🐰 住宅判断ノートを受け取る</div>
+            <div class="line-section-desc">
+                LINE登録で以下の特典を無料プレゼント中！
+            </div>
+            <ul class="line-rewards-list">
+                <li>住宅判断チェックリスト</li>
+                <li>金利上昇シミュレーター</li>
+                <li>住宅タイプ診断（戸建 vs マンション）</li>
+            </ul>
+            <a href="https://line.me/R/ti/p/@placeholder" target="_blank" class="line-cta-btn">
+                LINEで受け取る
+            </a>
+        </div>
+    `;
 }

@@ -1824,3 +1824,99 @@ input[type="range"] {
         font-size: 0.85rem;
     }
 }
+
+/* --- LINE Lead Gen Section UI --- */
+.line-section {
+    margin: 2.5rem 0 1.5rem 0;
+    padding: 1.5rem;
+    background: #fdfdfd;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.line-section-header {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #1a202c;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.line-section-desc {
+    font-size: 0.9rem;
+    color: #4a5568;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+}
+
+.line-rewards-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    display: inline-block;
+    text-align: left;
+}
+
+.line-rewards-list li {
+    font-size: 0.85rem;
+    color: #4a5568;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.line-rewards-list li::before {
+    content: "・";
+    color: #06c755;
+    font-weight: 800;
+}
+
+.line-cta-btn {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    background: #06c755;
+    color: white;
+    text-decoration: none;
+    padding: 14px 0;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.05rem;
+    box-shadow: 0 4px 12px rgba(6, 199, 85, 0.25);
+    transition: all 0.2s ease;
+}
+
+.line-cta-btn:hover {
+    background: #05b34c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(6, 199, 85, 0.35);
+}
+
+@media (max-width: 480px) {
+    .line-section {
+        padding: 1.25rem;
+        margin-top: 2rem;
+    }
+
+    .line-section-header {
+        font-size: 1rem;
+    }
+
+    .line-section-desc {
+        font-size: 0.85rem;
+    }
+
+    .line-cta-btn {
+        font-size: 1rem;
+        padding: 12px 0;
+    }
+}
