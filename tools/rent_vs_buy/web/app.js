@@ -545,6 +545,7 @@ function renderResults(res, inputs) {
         }
     }
 
+    renderPersonalityType(safety);
     renderShareSection();
     renderLineSection();
     updateScenarioStatus(); // Populate bar
@@ -1762,6 +1763,54 @@ function renderLineSection() {
             <a href="https://line.me/R/ti/p/@placeholder" target="_blank" class="line-cta-btn">
                 LINEで受け取る
             </a>
+        </div>
+    `;
+}
+
+/**
+ * Helper to render Personality Type Section
+ */
+function renderPersonalityType(safety) {
+    const container = document.getElementById('personality-type-container');
+    if (!container) return;
+
+    let typeName = '合理型';
+    let typeClass = 'type-rational';
+    let typeIcon = '⚖️';
+    let typeDesc = 'コストとリスクのバランスを重視する判断タイプです。';
+
+    if (safety.rank === 'A') {
+        typeName = '安全型';
+        typeClass = 'type-safe';
+        typeIcon = '🛡️';
+        typeDesc = '石橋を叩いて渡る、非常に手堅い判断タイプです。';
+    } else if (safety.rank === 'B') {
+        typeName = '合理型';
+        typeClass = 'type-rational';
+        typeIcon = '⚖️';
+        typeDesc = '根拠に基づき、最適な選択を導き出すバランス重視タイプです。';
+    } else if (safety.rank === 'C') {
+        typeName = '慎重型';
+        typeClass = 'type-cautious';
+        typeIcon = '🧐';
+        typeDesc = '検討を重ね、納得感を大切にするリスク回避タイプです。';
+    } else {
+        typeName = '挑戦型';
+        typeClass = 'type-challenger';
+        typeIcon = '🚀';
+        typeDesc = 'チャンスを逃さず、果敢にチャレンジするアクティブタイプです。';
+    }
+
+    container.innerHTML = `
+        <div class="personality-type-wrapper ${typeClass}">
+            <div class="personality-card">
+                <div class="personality-card-header">あなたの住宅判断タイプ</div>
+                <div class="personality-card-body">
+                    <div class="personality-icon-placeholder">${typeIcon}</div>
+                    <div class="personality-type-name">${typeName}</div>
+                    <div class="personality-type-desc">${typeDesc}</div>
+                </div>
+            </div>
         </div>
     `;
 }
