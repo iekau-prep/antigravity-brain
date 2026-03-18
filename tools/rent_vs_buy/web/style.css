@@ -222,11 +222,19 @@ input:focus {
 
 .result-summary-line {
     font-size: 1.15rem;
-    /* Standout Conclusion */
     font-weight: 800;
     color: #334155;
     padding: 2px 0;
     display: inline-block;
+}
+
+#result-conclusion-line {
+    font-size: 1.25rem;
+    padding: 4px 12px;
+    background-color: #FFF7ED;
+    border-radius: 8px;
+    color: #9a3412;
+    /* Deep amber */
 }
 
 /* Personality Type Section */
@@ -440,13 +448,48 @@ input:focus {
     color: white;
     font-weight: bold;
     border-radius: 6px;
+    background: #f1f5f9;
+    color: #475569;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
+    box-shadow: none;
+    cursor: pointer;
 }
 
 .cta-button:hover {
-    background: #a16207;
+    background: #e2e8f0;
+    transform: translateY(-1px);
+}
+
+.adjustment-guide-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #64748b;
+    margin: 0.5rem 0 1rem;
+    text-align: center;
+    padding: 4px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.adjustment-guide-label::before,
+.adjustment-guide-label::after {
+    content: "";
+    height: 1px;
+    background: #e2e8f0;
+    flex: 1;
+    max-width: 40px;
 }
 
 .primary-button {
