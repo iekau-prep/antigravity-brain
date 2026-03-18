@@ -43,6 +43,8 @@ body {
 
 .container.has-results {
     flex-direction: column;
+    align-items: center;
+    /* Center results vertically in column mode */
 }
 
 @media (max-width: 900px) {
@@ -63,8 +65,8 @@ body {
 
 h1 {
     text-align: center;
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    font-size: 1.4rem;
     color: #0f172a;
 }
 
@@ -92,7 +94,7 @@ h2 {
 }
 
 .input-group {
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
 }
 
 label {
@@ -239,7 +241,7 @@ input:focus {
 
 /* Personality Type Section */
 .personality-type-wrapper {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .personality-card {
@@ -1446,12 +1448,6 @@ body {
     accent-color: #2563eb;
 }
 
-.light-input-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
 @media (max-width: 480px) {
     .range-sync {
         margin-top: 8px;
@@ -1505,6 +1501,14 @@ body {
 
 
 /* ===== Comparison Table (Mockup Style) ===== */
+.explanation-section {
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    margin-top: 1rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
 .comparison-table-container {
     margin: 20px 0;
     background: #fff;
@@ -1713,26 +1717,26 @@ input[type="range"] {
 
 /* Result Action CTA */
 .cta-container {
-    margin: 2.5rem 0;
+    margin: 1rem 0;
     text-align: center;
 }
 
 #cta-to-details {
-    background: #2563eb;
-    color: #fff;
-    border: none !important;
-    padding: 1.25rem 2.5rem !important;
-    border-radius: 12px !important;
-    font-size: 1.15rem !important;
-    font-weight: 800 !important;
+    background: #fff;
+    color: var(--primary);
+    border: 1px solid var(--border) !important;
+    padding: 0.8rem 1.75rem !important;
+    border-radius: 50px !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
     cursor: pointer;
-    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3) !important;
+    box-shadow: none !important;
     transition: all 0.2s;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    min-width: 280px;
+    gap: 0.6rem;
+    min-width: 220px;
 }
 
 #cta-to-details:hover {
