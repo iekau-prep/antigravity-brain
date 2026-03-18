@@ -279,6 +279,7 @@ function runDiagnosis(options = {}) {
     document.querySelector('.container').classList.add('has-results');
 
     // 4. Calculate & Render
+    document.body.classList.add('has-results');
     const result = calculateRentVsBuy(inputs);
     renderResults(result, inputs);
     renderCautionBox(inputs);
@@ -1381,22 +1382,8 @@ function updateScenarioStatus() {
 function updateBreakevenAnalysis(baseInputs) {
     const resultsSection = document.querySelector('.results-section');
     const yearsOwnInp = document.getElementById('years-own');
-    if (!resultsSection || !yearsOwnInp) return;
-
-    // 1. Ensure Breakeven Badge
-    let badge = document.getElementById('breakeven-badge');
-    if (!badge) {
-        badge = document.createElement('div');
-        badge.id = 'breakeven-badge';
-        badge.className = 'breakeven-badge';
-        // Insert at the top of results content (after the header/text)
-        const resultText = document.getElementById('result-text');
-        if (resultText) {
-            resultText.parentNode.insertBefore(badge, resultText.nextSibling);
-        } else {
-            resultsSection.prepend(badge);
-        }
-    }
+    const badge = document.getElementById('breakeven-badge');
+    if (!resultsSection || !yearsOwnInp || !badge) return;
 
     // 2. Ensure Residency Slider & Marker
     let wrapper = yearsOwnInp.closest('.residency-slider-wrapper');
@@ -1624,17 +1611,12 @@ function closeBreakdown() {
 // Result CTA Scroll Interaction (Phase 3)
 document.addEventListener('DOMContentLoaded', () => {
     const ctaBtn = document.getElementById('cta-to-details');
-    const accordion = document.getElementById('detailed-settings-accordion');
+    const recalcPanel = document.getElementById('recalc-panel');
 
-    if (ctaBtn && accordion) {
+    if (ctaBtn && recalcPanel) {
         ctaBtn.addEventListener('click', () => {
-            // Open the accordion if it's closed
-            if (!accordion.open) {
-                accordion.open = true;
-            }
-            // Smooth scroll to the top of the accordion with some margin
-            const yOffset = -80; // Margin for mobile and sticky bar
-            const y = accordion.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            const yOffset = -80;
+            const y = recalcPanel.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: 'smooth' });
         });
     }
