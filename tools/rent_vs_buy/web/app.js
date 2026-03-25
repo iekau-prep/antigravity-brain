@@ -171,6 +171,7 @@ function getInputsFromUI() {
         yearsWait: getValInt('years-wait', 0),
         yearsOwn: getValInt('years-own', 35),
         loanTerm: getValInt('loan-term-input', 35),
+        yearlyIncome: getValInt('light-income', 500) * 10000,
         monthlyRent: getVal('rent-monthly', 0),
         mgmtFeeRent: getVal('rent-mgmt', 0),
         renewalFeeMonths: getVal('rent-renewal', 1.0),
@@ -203,16 +204,26 @@ function validateLoanTermImmediate() {
     if (!loanInput) return;
 
     const buyAge = currentAge + yearsWait;
-    const maxLoanAllowed = Math.max(0, 84 - buyAge);
+    // Standard limit is 79 (80-year rule minus 1 year safety)
+    const maxLoanAllowed = Math.max(0, 79 - buyAge);
 
     // Update .max attribute dynamically
     loanInput.setAttribute('max', maxLoanAllowed);
 
     // Strict Clamp immediately
-    let loanTerm = parseInt(loanInput.value) || 0;
-    if (loanTerm > maxLoanAllowed) {
+    let loanTerm = parseInt(loanInput.value, 10) || 0;
+    const isCapped = loanTerm > maxLoanAllowed;
+    if (isCapped) {
         loanTerm = maxLoanAllowed;
         loanInput.value = loanTerm;
+    }
+
+    // Light UI hint display: show if age forces a term shorter than 35 years
+    const lightHint = document.getElementById('light-loan-hint');
+    if (lightHint) {
+        // Only show hint if the limit is actually reducing the term from the standard 35 years
+        const isAutoAdjusted = maxLoanAllowed < 35 && buyAge > 0;
+        lightHint.style.display = isAutoAdjusted ? 'block' : 'none';
     }
 
     // Warnings
@@ -246,52 +257,79 @@ function runDiagnosis(options = {}) {
         // Here you could add logic to auto-calculate yearsOwn (e.g. 65 - age) if not touched
     }
 
-    const inputs = getInputsFromUI();
+    // 2. Commit State (Log what's actually USED for calc)
+    const isLightMode = document.getElementById('detailed-settings-accordion').open === false;
+    const hasResults = document.querySelector('.container').classList.contains('has-results');
 
-    // Comprehensive Debug Logs (Requirement Step 1)
-    console.log('--- Diagnosis Inputs ---');
-    console.log('propertyPrice:', inputs.propertyPrice);
-    console.log('interestRatePct:', inputs.interestRatePct);
-    console.log('loanTerm:', inputs.loanTerm);
-    console.log('resaleValuePct:', inputs.resaleValuePct);
-    console.log('yearsWait:', inputs.yearsWait);
-    console.log('yearsOwn:', inputs.yearsOwn);
+    let resInputs;
+    if (isLightMode && !hasResults) {
+        // Initial path: Auto-map Age/Income to Price/Term
+        resInputs = getSimpleInputs();
+
+        // Sync simple defaults back to detailed inputs so Scenario Lab/Detailed view are prepared
+        const buyPriceInp = document.getElementById('buy-price');
+        if (buyPriceInp) buyPriceInp.value = resInputs.propertyPrice / 10000;
+
+        const loanTermInp = document.getElementById('loan-term-input');
+        if (loanTermInp) loanTermInp.value = resInputs.loanTerm;
+
+    } else {
+        // Results are already shown OR in detailed mode: 
+        // Prioritize what is currently in the DOM (Detailed fields + Scenario Lab nudges)
+        resInputs = getInputsFromUI();
+    }
+
+    committedInputs = { ...resInputs };
+
+    // Comprehensive Debug Logs
+    console.log('--- Diagnosis Inputs (Active Mode) ---');
+    console.log('propertyPrice:', resInputs.propertyPrice);
+    console.log('loanTerm:', resInputs.loanTerm);
+    console.log('monthlyRent:', resInputs.monthlyRent);
+    console.log('yearsOwn:', resInputs.yearsOwn);
     console.log('------------------------');
 
-    // 2. Commit State
-    committedInputs = { ...inputs };
-
     // 3. UI Updates
-    document.getElementById('total-years-display').textContent = inputs.yearsWait + inputs.yearsOwn;
+
+    document.getElementById('total-years-display').textContent = resInputs.yearsWait + resInputs.yearsOwn;
     document.getElementById('update-hint').style.display = 'none';
-    document.getElementById('submit-button').textContent = '結果を更新する';
+    const submitBtn = document.getElementById('submit-button');
+    if (submitBtn) submitBtn.textContent = '結果を更新する';
 
-    // Show results section
-    document.querySelector('.results-section').style.display = 'block';
-    // Show accuracy card
-    const accCard = document.getElementById('accuracy-card');
-    if (accCard) accCard.style.display = 'block';
+    // Show results section ONLY if not in realtime mode or if already shown
+    const resultsSection = document.querySelector('.results-section');
+    const isAlreadyShown = resultsSection && resultsSection.style.display === 'block';
 
-    // Add class to container for reordering
-    document.querySelector('.container').classList.add('has-results');
+    if (!options.isRealtime || isAlreadyShown) {
+        if (resultsSection) resultsSection.style.display = 'block';
+        const accCard = document.getElementById('accuracy-card');
+        if (accCard) accCard.style.display = 'block';
+        document.querySelector('.container').classList.add('has-results');
+    }
 
-    // Add class to container for reordering
-    document.querySelector('.container').classList.add('has-results');
+    let result;
+    if (isLightMode && !options.forceLegacy) {
+        result = calculateSimpleResult(resInputs);
+    } else {
+        result = calculateRentVsBuy(resInputs);
+    }
 
-    // 4. Calculate & Render
-    document.body.classList.add('has-results');
-    const result = calculateRentVsBuy(inputs);
-    renderResults(result, inputs);
-    renderCautionBox(inputs);
+    renderResults(result, resInputs);
+    renderCautionBox(resInputs);
     updateAccuracy();
-    mountScenarioLab();
+
+    // Skip heavy Scenario Lab mounting in realtime mode to prevent jumps/flicker
+    if (!options.isRealtime) {
+        mountScenarioLab();
+    }
 
     // ✅ Breakeven Point Analysis
-    updateBreakevenAnalysis(inputs);
+    updateBreakevenAnalysis(resInputs);
 
-    // Phase 2: Auto-scroll to results
-    if (!options.skipScroll) {
-        document.querySelector('.results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Phase 2: Auto-scroll to results (Only on explicit click/event, never in realtime)
+    const shouldScroll = !options.skipScroll && !options.isRealtime && (options instanceof Event || !options.isRealtime);
+    if (shouldScroll && resultsSection) {
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -336,8 +374,8 @@ function renderCautionBox(inputs) {
     const container = document.getElementById('caution-box-container');
     const { currentAge, yearsWait, loanTerm } = inputs;
 
-    const buyAge = currentAge + yearsWait;
-    const payoffAge = buyAge + loanTerm;
+    const buyAge = Number(currentAge) + Number(yearsWait);
+    const payoffAge = buyAge + Number(loanTerm);
 
     let cautions = [];
 
@@ -742,9 +780,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const sellAgeEl = document.getElementById('sellAge');
         const totalDispEl = document.getElementById('total-years-display');
 
-        if (buyAgeEl) buyAgeEl.textContent = currentAge + yearsWait;
-        if (sellAgeEl) sellAgeEl.textContent = currentAge + yearsWait + yearsOwn;
-        if (totalDispEl) totalDispEl.textContent = yearsWait + yearsOwn;
+        if (buyAgeEl) buyAgeEl.textContent = Number(currentAge) + Number(yearsWait);
+        if (sellAgeEl) sellAgeEl.textContent = Number(currentAge) + Number(yearsWait) + Number(yearsOwn);
+        if (totalDispEl) totalDispEl.textContent = Number(yearsWait) + Number(yearsOwn);
     };
 
     const simInputs = ['current-age', 'years-wait', 'years-own'];
@@ -780,13 +818,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lightAge && baseAge) {
         lightAge.addEventListener('input', (e) => {
             baseAge.value = e.target.value;
-            // Removed runDiagnosis() for manual control (Phase 3)
+            validateLoanTermImmediate();
+            const isLightMode = document.getElementById('detailed-settings-accordion').open === false;
+            if (isLightMode) runDiagnosisRealtime();
         });
     }
 
     if (lightRent && baseRent) {
         lightRent.addEventListener('input', (e) => {
             baseRent.value = e.target.value;
+            validateLoanTermImmediate();
+            const isLightMode = document.getElementById('detailed-settings-accordion').open === false;
+            if (isLightMode) runDiagnosisRealtime();
+        });
+    }
+
+    if (lightIncome) {
+        lightIncome.addEventListener('input', (e) => {
+            const isLightMode = document.getElementById('detailed-settings-accordion').open === false;
+            const hasResults = document.querySelector('.container').classList.contains('has-results');
+
+            // If we are in "Initialization" phase, sync income to purchase price tier
+            if (isLightMode && !hasResults) {
+                const incomeMan = Number(e.target.value) || 0;
+                const price = getIncomeTierPrice(incomeMan);
+                const priceInp = document.getElementById('buy-price');
+                if (priceInp) priceInp.value = price / 10000;
+            }
+
+            if (isLightMode) runDiagnosisRealtime();
         });
     }
 
@@ -893,7 +953,7 @@ function mountScenarioLab() {
     <div class="scenario-lab__inner">
       <div class="scenario-tabs">
         <button type="button" class="scenario-tab active" data-mode="simple">かんたん</button>
-        <button type="button" class="scenario-tab" data-mode="pro">実務</button>
+        <button type="button" class="scenario-tab" data-mode="pro">詳細調整</button>
       </div>
 
       <div class="scenario-lab__grid">
@@ -945,9 +1005,8 @@ function mountScenarioLab() {
             <div class="scenario-nudge">
                 <button type="button" class="scenario-nudge-btn" data-nudge="resale" data-dir="-1">−</button>
                 <div class="scenario-nudge-val">${document.getElementById('buy-resale')?.value || 85}%</div>
-                <button type="button" class="scenario-nudge-btn" data-nudge="resale" data-dir="1">＋</button>
-            </div>
         </div>
+        <div id="simple-sale-assumption" class="scenario-item-full" style="font-size: 0.8rem; color: #64748b; margin-top: 10px; display: none;"></div>
       </div>
       
       <div class="scenario-lab__footer">
@@ -1349,22 +1408,38 @@ function updateScenarioStatus() {
 
         // range -> number
         rangeEl.addEventListener('input', () => {
+            if (numEl.__isSyncing) return;
             const step = Number(rangeEl.step || 1);
             const raw = Number(rangeEl.value || 0);
             const clamped = clamp(raw, min, max);
             const snapped = Math.round(clamped / step) * step;
+
+            numEl.__isSyncing = true;
             rangeEl.value = String(snapped);
             numEl.value = String(snapped);
+            numEl.dispatchEvent(new Event('input', { bubbles: true }));
+            numEl.__isSyncing = false;
         });
 
         // number -> range
         numEl.addEventListener('input', () => {
+            if (numEl.__isSyncing) return;
+            const val = Number(numEl.value || 0);
+            rangeEl.value = String(val);
+        });
+
+        numEl.addEventListener('change', () => {
+            if (numEl.__isSyncing) return;
             const step = Number(rangeEl.step || 1);
             const raw = Number(numEl.value || 0);
             const clamped = clamp(raw, min, max);
             const snapped = Math.round(clamped / step) * step;
+
+            numEl.__isSyncing = true;
             numEl.value = String(snapped);
             rangeEl.value = String(snapped);
+            numEl.dispatchEvent(new Event('input', { bubbles: true }));
+            numEl.__isSyncing = false;
         });
     }
 
@@ -1569,7 +1644,33 @@ function syncResultUI(res, inputs) {
     }
     */
 
-    // 4. Setup Breakdown Modal Triggers
+    // 4. Update Conditions Bar (Sticky header labels)
+    const stickyStatusText = document.getElementById('sticky-status-text');
+    const stickyBar = document.getElementById('diagnosis-conditions-sticky');
+
+    if (stickyStatusText) {
+        const age = inputs.currentAge;
+        const incomeMan = Math.round(inputs.yearlyIncome / 10000) || 0;
+
+        // Precise Rent display (e.g. 16.7万)
+        const rentBase = inputs.monthlyRent / 10000;
+        const rentMan = rentBase < 1 ? (inputs.monthlyRent / 1000).toLocaleString() + '円' : (Math.round(rentBase * 10) / 10).toString() + '万';
+
+        const hasResults = document.querySelector('.container').classList.contains('has-results');
+
+        let text = `${age}歳 / 年収${incomeMan}万円 / 家賃${rentMan}`;
+        if (hasResults) {
+            const priceMan = Math.round(inputs.propertyPrice / 10000);
+            text += ` → 物件価格${priceMan}万円`;
+        }
+        stickyStatusText.textContent = text;
+    }
+
+    if (stickyBar && document.querySelector('.container').classList.contains('has-results')) {
+        stickyBar.style.display = 'block';
+    }
+
+    // 5. Setup Breakdown Modal Triggers
     const rentLink = document.getElementById('rent-breakdown-link');
     const buyLink = document.getElementById('buy-breakdown-link');
 
@@ -1633,11 +1734,8 @@ function calculateSafetyScore(inputs, res) {
     const penalties = [];
 
     // 1. Loan Term Risk
-    if (inputs.loanTerm > 40) {
-        score -= 30;
-        penalties.push("返済期間が非常に長いです");
-    } else if (inputs.loanTerm > 35) {
-        score -= 15;
+    if (inputs.loanTerm > 35) {
+        score -= 20;
         penalties.push("返済期間が長めです");
     }
 
@@ -1648,6 +1746,24 @@ function calculateSafetyScore(inputs, res) {
     } else if (inputs.interestRatePct > 1.2) {
         score -= 10;
         penalties.push("金利上昇リスクがあります");
+    }
+
+    // 3. Debt-to-Income (DTI) check
+    if (inputs.income > 0) {
+        const monthlyMortgage = res.buyLater.breakdown.mortgage / (inputs.loanTerm * 12);
+        const monthlyIncome = inputs.income / 12;
+        const dti = (monthlyMortgage / monthlyIncome) * 100;
+
+        if (dti > 35) {
+            score -= 40;
+            penalties.push("年収に対する返済負担が非常に高いです");
+        } else if (dti > 30) {
+            score -= 20;
+            penalties.push("年収に対する返済負担が高めです");
+        } else if (dti > 25) {
+            score -= 10;
+            penalties.push("返済負担バランスを再確認しましょう");
+        }
     }
 
     // 3. Asset Value Risk (Resale)
@@ -1796,3 +1912,186 @@ function renderPersonalityType(safety) {
         </div>
     `;
 }
+
+// --- Simple Diagnosis MVP Engine (Phase 2) ---
+
+const INCOME_TIER_TABLE = [
+    { limit: 300, price: 1200 },
+    { limit: 350, price: 1500 },
+    { limit: 400, price: 2100 },
+    { limit: 450, price: 2300 },
+    { limit: 500, price: 2500 },
+    { limit: 550, price: 2800 },
+    { limit: 600, price: 3000 },
+    { limit: 650, price: 3300 },
+    { limit: 700, price: 3500 },
+    { limit: 750, price: 3800 },
+    { limit: 800, price: 4000 },
+    { limit: 850, price: 4300 },
+    { limit: 900, price: 4500 },
+    { limit: 950, price: 4800 },
+    { limit: 1000, price: 5000 },
+    { limit: 1250, price: 6000 },
+    { limit: 1500, price: 7000 },
+    { limit: 1750, price: 8000 },
+    { limit: 2000, price: 9000 },
+    { limit: Infinity, price: 10000 }
+];
+
+function getIncomeTierPrice(incomeMan) {
+    if (!incomeMan || incomeMan <= 0) return 0;
+    const tier = INCOME_TIER_TABLE.find(t => incomeMan <= t.limit);
+    return tier ? tier.price * 10000 : 10000 * 10000;
+}
+
+function getSimpleLoanYears(age) {
+    return Math.max(1, Math.min(35, 79 - age));
+}
+
+function calculateSimpleRentTotal(monthlyRent, years) {
+    return monthlyRent * 12 * years;
+}
+
+function calculateSimpleBuyTotal(propertyPrice, loanTerm, interestRatePct) {
+    // Mortgage only for MVP gross calculation
+    const principal = propertyPrice;
+    const r = (interestRatePct / 100) / 12;
+    const n = Math.max(1, loanTerm * 12);
+    let monthlyPmt = 0;
+    if (r > 0) {
+        monthlyPmt = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    } else {
+        monthlyPmt = principal / n;
+    }
+    return monthlyPmt * n;
+}
+
+function calculateSimpleSaleValue(propertyPrice) {
+    return propertyPrice * 0.85;
+}
+
+function getSimpleInputs() {
+    const getVal = (id) => Number(document.getElementById(id)?.value || 0);
+    const age = getVal('light-age');
+    const income = getVal('light-income'); // in 万円
+    const rent = getVal('light-rent');     // in 円
+
+    const price = getIncomeTierPrice(income);
+    const years = getSimpleLoanYears(age);
+
+    // Return full inputs object for compatibility
+    return {
+        currentAge: age,
+        yearlyIncome: income * 10000,
+        yearsWait: 0,
+        yearsOwn: years,
+        loanTerm: years,
+        monthlyRent: rent,
+        mgmtFeeRent: 15000, // standard default
+        renewalFeeMonths: 1.0,
+        detailsInitialRentMonths: 4.0,
+        propertyPrice: price,
+        interestRatePct: 0.5,
+        initialBuyCostPct: 7.0,
+        monthlyMgmtBuy: 25000, // standard default
+        yearlyPropertyTax: 150000, // standard default
+        resaleValuePct: 85 // standard default
+    };
+}
+
+function calculateSimpleResult(inputs) {
+    const rentTotal = calculateSimpleRentTotal(inputs.monthlyRent, inputs.yearsOwn);
+    const buyGross = calculateSimpleBuyTotal(inputs.propertyPrice, inputs.loanTerm, inputs.interestRatePct);
+    const saleValue = calculateSimpleSaleValue(inputs.propertyPrice);
+    const resValue = saleValue - (0); // No debt left at end of loan term in simple model
+    const buyNet = buyGross - resValue;
+
+    const diff = Math.abs(rentTotal - buyNet);
+    const winner = buyNet < rentTotal ? 'buy' : 'rent';
+
+    // Return full res object for compatibility with renderResults()
+    return {
+        winner,
+        diff,
+        yearsWait: 0,
+        yearsOwn: inputs.yearsOwn,
+        totalYears: inputs.yearsOwn,
+        rentForever: {
+            total: rentTotal,
+            breakdown: {
+                monthly: rentTotal,
+                renewal: 0,
+                initial: 0
+            }
+        },
+        buyLater: {
+            total: buyNet,
+            phase1Rent: 0,
+            phase2Cash: buyGross,
+            breakdown: {
+                resalePrice: saleValue,
+                debt: 0,
+                sellingCost: 0,
+                netAfterSale: resValue
+            }
+        }
+    };
+}
+
+
+function updateSimpleSaleText(inputs) {
+    const el = document.getElementById('simple-sale-assumption');
+    if (!el) return;
+
+    const isLightMode = document.getElementById('detailed-settings-accordion').open === false;
+    const isModeSimple = document.querySelector('.scenario-tab.active')?.dataset.mode === 'simple';
+
+    if (isLightMode && isModeSimple) {
+        el.style.display = 'block';
+    } else {
+        el.style.display = 'none';
+        return;
+    }
+
+    const saleValueMan = Math.round(calculateSimpleSaleValue(inputs.propertyPrice) / 10000);
+    el.textContent = `${inputs.loanTerm}年後に、購入価格の85%（初期値）で売却し、${saleValueMan.toLocaleString()}万円での売却を想定しています。`;
+}
+
+// Override mountScenarioLab to include text update
+if (typeof mountScenarioLab !== 'undefined') {
+    const originalMountScenarioLab = mountScenarioLab;
+    mountScenarioLab = function () {
+        originalMountScenarioLab();
+
+        const inputs = getSimpleInputs();
+        updateSimpleSaleText(inputs);
+
+        const lab = document.getElementById('scenario-lab');
+        if (lab) {
+            lab.querySelectorAll('.scenario-tab').forEach(tab => {
+                const originalClick = tab.onclick;
+                tab.onclick = () => {
+                    if (originalClick) originalClick();
+                    updateSimpleSaleText(getSimpleInputs());
+                };
+            });
+        }
+    };
+}
+
+// --- End Simple Diagnosis MVP Engine ---
+// ---------------------------------------------------------
+// Helper: Debounce (Phase 4)
+// ---------------------------------------------------------
+function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
+// Global realtime diagnosis handler
+const runDiagnosisRealtime = debounce(() => {
+    runDiagnosis({ skipScroll: true, isRealtime: true });
+}, 300);
