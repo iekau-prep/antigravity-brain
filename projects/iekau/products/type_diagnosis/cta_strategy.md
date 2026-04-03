@@ -10,7 +10,8 @@ Status: Active
 
 本モジュールは、
 
-👉 家買うタイプ診断におけるCTA（Call To Action）の設計方針と出し分けロジック
+👉 家買うタイプ診断におけるCTA（Call To Action）の設計方針と出し分けロジックを定義する。
+本モジュールは type_diagnosis 専用のCTA設計であり、全体共通ルールは brain/system/cta_strategy.md で定義する。
 
 を定義する。
 
