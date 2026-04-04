@@ -16,9 +16,10 @@ property_reader は単体ツールではなく、
 であり、
 
 - type_diagnosis（自己理解）
+- purchase_motivation（判断軸）
 - rent_vs_buy（前提理解）
 - loan_safety（現実ライン）
-- LINE（データ蓄積）
+- LINE（データ蓄積 / 統合）
 
 と連携することで、
 
@@ -45,10 +46,12 @@ property_reader は単体ツールではなく、
 ### ② 全データは「判断のために使う」
 
 - タイプ
+- 判断軸
 - 予算
 - 安全ライン
 - 条件
 - 過去履歴
+- 現在状態
 
 👉 **すべて「どう判断するか」に使う**
 
@@ -79,6 +82,27 @@ property_reader は単体ツールではなく、
 
 ---
 
+### ⑥ どこからでも使えるが、繋ぐほど精度が上がる
+
+property_reader は単体でも使える。
+
+ただし、
+
+- type_diagnosis
+- purchase_motivation
+- rent_vs_buy
+- loan_safety
+- LINE
+
+と接続されるほど、
+
+👉 **一般評価**  
+から  
+👉 **あなた仕様の判断**  
+へ進化する
+
+---
+
 ## データ構造（全体像）
 
 ---
@@ -88,12 +112,30 @@ property_reader は単体ツールではなく、
 user
 
 - id
-- type（タイプ診断結果）
-- budget（希望予算）
-- safe_budget（安全ライン）
-- max_budget（上限ライン）
-- preferences（条件）
-- history（過去物件履歴）
+- line_id
+- created_at
+- updated_at
+
+---
+
+### ■ 前提データ
+
+profile_context
+
+- user_id
+- user_type
+- decision_bias
+- purchase_motivation_summary
+- required_conditions
+- preferred_conditions
+- priority_order
+- buy_vs_rent_state
+- cost_gap
+- break_even
+- safe_budget
+- max_budget
+- loan_position
+- updated_at
 
 ---
 
@@ -110,6 +152,7 @@ property
 - station_distance
 - units
 - location
+- raw_input_reference
 
 ---
 
@@ -125,7 +168,30 @@ analysis
 
 ---
 
-👉 **この3層を統合して最終アウトプットを生成する**
+### ■ 判断データ
+
+decision
+
+- user_id
+- property_id
+- analysis_id
+- status（検討中 / 保留 / 見送り）
+- created_at
+- updated_at
+
+---
+
+### ■ 状態データ
+
+state
+
+- user_id
+- current_state
+- state_updated_at
+
+---
+
+👉 **これらを統合して最終アウトプットを生成する**
 
 ---
 
@@ -145,7 +211,8 @@ analysis
 
 ## 取得データ
 
-- type（例：ヒラメキうさぎ / 比べすぎうさぎ など）
+- user_type（例：ヒラメキうさぎ / 比べすぎうさぎ など）
+- decision_bias
 
 ---
 
@@ -190,7 +257,66 @@ user_type = ヒラメキうさぎ
 
 ---
 
-# ■ ② rent_vs_buy 連携
+# ■ ② purchase_motivation 連携
+
+---
+
+## 役割
+
+👉 **判断軸の補正（最重要）**
+
+---
+
+## 取得データ
+
+- purchase_motivation_summary
+- required_conditions
+- preferred_conditions
+- priority_order
+
+---
+
+## なぜ重要か
+
+👉 **良い物件でも「その人にとって重要か」は別問題**
+
+---
+
+## 接続方法
+
+AI入力：
+
+required_conditions = ["学区", "広さ", "生活圏"]  
+priority_order = ["学区", "広さ", "駅距離"]
+
+---
+
+## AI出力内容
+
+- 必要条件を満たしているか
+- 十分条件に引っ張られていないか
+- 判断軸の順番が崩れていないか
+
+---
+
+## 出力例
+
+- 駅距離は魅力ですが、あなたの最優先条件である広さとのバランス確認が必要です  
+- この物件は必要条件には合っていますが、十分条件に強く引っ張られやすい構成です  
+
+---
+
+## UXでの役割
+
+👉 **「判断軸で見ると」**
+
+---
+
+👉 **“良い物件”から“自分に合う物件”へ変える**
+
+---
+
+# ■ ③ rent_vs_buy 連携
 
 ---
 
@@ -202,7 +328,7 @@ user_type = ヒラメキうさぎ
 
 ## 取得データ
 
-- 購入優位 / 賃貸優位
+- buy_vs_rent_state
 - 損益分岐
 - コスト差
 
@@ -246,7 +372,7 @@ buy_vs_rent = やや賃貸優位
 
 ---
 
-# ■ ③ loan_safety 連携
+# ■ ④ loan_safety 連携
 
 ---
 
@@ -260,7 +386,7 @@ buy_vs_rent = やや賃貸優位
 
 - safe_budget（安全ライン）
 - max_budget（上限ライン）
-- 借入可能額
+- loan_position
 
 ---
 
@@ -305,24 +431,27 @@ property_price = 48000000
 
 ---
 
-# ■ ④ LINE連携（最重要）
+# ■ ⑤ LINE連携（最重要）
 
 ---
 
 ## 役割
 
-👉 **履歴蓄積 × パーソナライズ × 判断の進化**
+👉 **履歴蓄積 × パーソナライズ × 判断の進化 × 状態更新**
 
 ---
 
 ## 保存データ
 
-history
+history / decision / profile_context / state
 
 - property_id
 - score
 - timestamp
 - user_action（閲覧・保存・比較など）
+- status
+- profile_context更新結果
+- current_state
 
 ---
 
@@ -362,10 +491,27 @@ history
 
 ---
 
+### ■ ④ state更新
+
+- 今は比較フェーズか
+- 今は資金不安フェーズか
+- 今は迷走状態か
+
+---
+
+### ■ ⑤ CTA最適化
+
+- 次に property_reader を出すべきか
+- 先に loan_safety を出すべきか
+- purchase_motivation に戻すべきか
+
+---
+
 ## AI出力内容
 
 - 過去との比較
 - 今回の位置づけ
+- 次に見るべきこと
 
 ---
 
@@ -373,12 +519,14 @@ history
 
 - 過去の候補より管理面は安定しています  
 - これまで見た中では駅距離が弱めです  
+- 今は比較候補が増えているため、次は優先順位を固定した方が判断しやすいです  
 
 ---
 
 ## UXでの役割
 
-👉 **「これまでと比べると」**
+👉 **「これまでと比べると」**  
+👉 **「今の状態だと」**
 
 ---
 
@@ -429,15 +577,29 @@ property_readerは
 - rule_result（ルール）
 - score（スコア）
 - user_type（タイプ）
-- budget（予算）
+- decision_bias
+- required_conditions
+- priority_order
+- buy_vs_rent_state
+- safe_budget
 - history（履歴）
+- current_state
 
 ---
 
 ### STEP6  
 AI出力生成
 
-👉 **「物件 × 人 × 文脈」から最終判断補助を生成**
+👉 **「物件 × 人 × 文脈 × 状態」から最終判断補助を生成**
+
+---
+
+### STEP7  
+decision / state 更新
+
+- user_action を保存
+- status を更新
+- current_state を更新
 
 ---
 
@@ -464,8 +626,11 @@ AI出力生成
 ---
 
 - type連携（必須）  
+- purchase_motivation連携（必須）  
 - loan_safety連携（簡易）  
 - 単体物件分析  
+- decision保存  
+- 基本state更新  
 
 ---
 
@@ -476,6 +641,7 @@ AI出力生成
 - 高度な履歴分析  
 - 自動推薦  
 - 完全比較  
+- 高度な行動予測  
 
 ---
 
@@ -486,18 +652,21 @@ AI出力生成
 ### フェーズ2
 - 比較機能
 - 条件フィルター強化
+- state精度向上
 
 ---
 
 ### フェーズ3
 - 自動推薦
 - 行動予測
+- household連携
 
 ---
 
 ### フェーズ4
 - 完全パーソナライズ
 - 購入タイミング提案
+- BtoB共有
 
 ---
 
@@ -517,6 +686,13 @@ data_connectionで一番重要なのは、
 
 data_connectionとは、
 
-👉 **物件情報を「自分にとっての判断」に変換するための統合設計**
+👉 **物件情報を「自分にとっての判断」に変換するために、  
+👉 各プロダクトの結果・履歴・状態を統合する設計**
 
 である。
+
+---
+
+## 一言でいうと
+
+👉 **「物件を見る」から「自分の判断として読む」へ変える統合設計**
