@@ -133,6 +133,8 @@ antigravity-brain/
       ├─ CLAUDE.md
       └─ .env.example
 
+```
+
 =============================
 
 ■ 読み方ガイド
