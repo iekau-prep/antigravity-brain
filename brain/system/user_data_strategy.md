@@ -18,6 +18,7 @@
 家買う予備校は、単なる診断ツール群ではない。
 
 - type_diagnosis
+- purchase_motivation
 - rent_vs_buy
 - loan_safety
 - property_reader
@@ -126,9 +127,33 @@ MVPではLINEが最も現実的な識別基盤になる。
 
 ---
 
+### ⑤ どこからでも使えるが、繋ぐほど精度が上がる
+
+家買う予備校は、
+
+❌ すべての診断を先に終えないと使えない構造  
+ではない
+
+---
+
+⭕ どこからでも使えるが、接続されるほど精度が上がる構造  
+である
+
+---
+
+そのため、データ設計も
+
+- 単発利用を許容する
+- 後からLINEで統合できる
+- 後から他プロダクト結果を重ねられる
+
+ことを前提にする。
+
+---
+
 ## データ構造の全体像
 
-本プロダクトで持つべきデータは、大きく以下の4層に分かれる。
+本プロダクトで持つべきデータは、大きく以下の6層に分かれる。
 
 ---
 
@@ -137,18 +162,28 @@ MVPではLINEが最も現実的な識別基盤になる。
 
 ---
 
-### ② property
+### ② profile_context
+ユーザーの判断前提 / 診断結果
+
+---
+
+### ③ property
 物件そのもの
 
 ---
 
-### ③ analysis
+### ④ analysis
 物件に対する分析結果
 
 ---
 
-### ④ decision
+### ⑤ decision
 その物件に対して、ユーザーがどう判断したか
+
+---
+
+### ⑥ state
+今どの意思決定フェーズにいるか
 
 ---
 
@@ -157,6 +192,12 @@ MVPではLINEが最も現実的な識別基盤になる。
 👉 **decision**
 
 である。
+
+ただし、OSとして効かせるためには
+
+👉 **profile_context と state**
+
+も重要になる。
 
 ---
 
@@ -195,7 +236,79 @@ MVPではLINEが最も現実的な識別基盤になる。
 
 ---
 
-## ② property
+## ② profile_context
+
+### 役割
+ユーザーの判断前提を保持する
+
+---
+
+### MVPで持つもの
+
+- id
+- user_id
+- user_type
+- decision_bias
+- purchase_motivation_summary
+- required_conditions
+- preferred_conditions
+- priority_order
+- safe_budget
+- max_budget
+- loan_position
+- buy_vs_rent_state
+- cost_gap
+- break_even
+- updated_at
+
+---
+
+### 補足
+
+profile_context は、
+
+👉 **「このユーザーはどういう前提で判断する人か」**
+
+を保持する。
+
+---
+
+ここには、
+
+- type_diagnosis の結果
+- purchase_motivation の結果
+- rent_vs_buy の主要結果
+- loan_safety の主要結果
+
+を統合して持つ。
+
+---
+
+### 意味
+
+property_reader や CTA最適化は、  
+この profile_context があることで
+
+👉 一般出力  
+から  
+👉 あなた仕様の出力  
+へ進化できる。
+
+---
+
+### 将来拡張
+
+- household_context
+- preferred_area
+- family_constraints
+- school_constraints
+- pet_constraints
+- renovation_intent
+- purchase_deadline
+
+---
+
+## ③ property
 
 ### 役割
 物件そのものの共通情報
@@ -239,7 +352,7 @@ MVPではLINEが最も現実的な識別基盤になる。
 
 ---
 
-## ③ analysis
+## ④ analysis
 
 ### 役割
 物件に対する分析結果の記録
@@ -281,10 +394,11 @@ analysis は、
 - compared_context
 - missing_fields
 - external_data_snapshot
+- personalized_comments
 
 ---
 
-## ④ decision（最重要）
+## ⑤ decision（最重要）
 
 ### 役割
 ユーザーがその物件をどう扱ったか
@@ -338,6 +452,55 @@ decision は、
 - workspace_id
 - family_comment
 - agent_shared_flag
+- required_condition_match
+- safe_budget_fit
+
+---
+
+## ⑥ state
+
+### 役割
+ユーザーが今どの意思決定フェーズにいるかを保持する
+
+---
+
+### MVPで持つもの
+
+- user_id
+- current_state
+- state_updated_at
+
+---
+
+### current_state（MVP）
+
+- STATE1：初期
+- STATE2：検討初期
+- STATE3：物件検討中
+- STATE4：資金不安
+- STATE5：迷走
+- STATE6：比較フェーズ
+
+---
+
+### 補足
+
+state は、
+
+👉 **「今この人に次に何を出すべきか」**
+
+を決めるための基盤である。
+
+---
+
+これは単なる属性ではなく、
+
+- 行動ログ
+- 保存状況
+- 診断実施状況
+- 比較状況
+
+から都度更新される状態情報として扱う。
 
 ---
 
@@ -424,6 +587,7 @@ decision は、
 - 比較
 - 履歴蓄積
 - 継続的なパーソナライズ
+- state精度向上
 
 ---
 
@@ -443,6 +607,8 @@ decision は、
 - 履歴
 - プロダクト横断連携
 - パーソナライズ
+- state精度向上
+- CTA最適化
 
 ---
 
@@ -468,6 +634,21 @@ decision は、
 - 判断ミス補正
 - あなたの場合表示
 - 比較時の補正
+
+---
+
+### purchase_motivation
+
+#### 取得するもの
+- purchase_motivation_summary
+- required_conditions
+- preferred_conditions
+- priority_order
+
+#### 使い道
+- 判断軸補正
+- property_readerでの適合判定
+- decision理由の文脈化
 
 ---
 
@@ -522,6 +703,7 @@ decision は、
 #### 使い道
 - ユーザー識別
 - 継続利用
+- 統合
 - パーソナライズ
 
 ---
@@ -531,11 +713,13 @@ decision は、
 ### 基本フロー
 
 1. ユーザーがプロダクトを使う
-2. 物件 or 診断結果が生成される
-3. analysis が生成される
+2. 診断結果 or 物件結果が生成される
+3. 必要に応じて analysis が生成される
 4. LINE連携後、user に紐づく
-5. decision として保存される
-6. 比較や再利用に使われる
+5. profile_context が更新される
+6. property_reader利用時は decision として保存される
+7. state が更新される
+8. 比較や再利用、CTA最適化に使われる
 
 ---
 
@@ -547,6 +731,7 @@ decision は、
 4. userが status を付与
 5. decision保存
 6. history / comparison に反映
+7. state更新
 
 ---
 
@@ -571,6 +756,7 @@ decision は、
 - タイプに応じた見せ方
 - 保存物件に応じた比較補正
 - 安全ラインとの接続
+- 判断軸との整合補正
 
 が可能になる。
 
@@ -588,7 +774,19 @@ decision があることで、
 
 ---
 
-### ④ BtoB拡張の布石
+### ④ CTA最適化
+
+state があることで、
+
+- 今は purchase_motivation を出すべきか
+- 今は loan_safety を出すべきか
+- 今は property_reader を出すべきか
+
+を判断できる。
+
+---
+
+### ⑤ BtoB拡張の布石
 
 将来的に不動産会社へ共有する場合も、
 
@@ -600,7 +798,7 @@ decision があることで、
 
 ---
 
-### ⑤ ユーザー理解の蓄積
+### ⑥ ユーザー理解の蓄積
 
 長期的には、
 
@@ -667,9 +865,11 @@ decision
 ## MVPでやること
 
 - user（内部ID + LINE紐付け）
+- profile_context
 - property
 - analysis
 - decision
+- state
 - status（検討中 / 保留 / 見送り）
 
 ---
