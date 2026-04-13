@@ -1,5 +1,5 @@
 # state_to_cta_connection.md
-Updated: 2026-04-07
+Updated: 2026-04-13
 Status: Active
 
 =============================
@@ -10,15 +10,15 @@ Status: Active
 
 本モジュールは、
 
-👉 STATE判定結果をCTAに変換する実装仕様
+👉 STATE判定結果をCTA（意思決定トリガー）に変換する実装仕様
 
 を定義する。
 
 目的は、
 
 👉 state_detectionで取得したSTATEを  
-👉 UI上で適切なCTAに変換し  
-👉 次の判断・行動へ接続すること
+👉 次の意思決定へ変換し  
+👉 判断を前に進めること
 
 である。
 
@@ -46,7 +46,7 @@ Status: Active
 
 ---
 
-③ CTAは「次の判断」である
+③ CTAは「次の意思決定」である
 
 ---
 
@@ -55,8 +55,15 @@ Status: Active
 
 ---
 
-👉 CTAはプロダクト遷移ではなく  
-👉 判断を前に進める問いである
+👉 CTAは導線ではなく  
+👉 意思決定フェーズを進めるトリガーである  
+
+---
+
+👉 CTAは以下のいずれかを担う：
+
+・次のSTATEへ進める  
+・decision（意思決定の確定）を促す  
 
 ---
 
@@ -78,152 +85,121 @@ Status: Active
 
 =============================
 
-■ STATE定義（4STATE統一）
+■ STATE定義（参照）
 
 =============================
 
-本システムにおけるSTATEは以下の4つに統一する：
+STATEの定義は  
+`state_definition.md` に従う
 
 ---
 
-### STATE1：初期（前提不足）
-
-・まだ理解が浅い  
-・比較前の状態  
-
----
-
-### STATE2：検討中（方向性あり）
-
-・条件はある  
-・物件を見始めている  
-
----
-
-### STATE3：不安あり（現実課題）
-
-・資金 / 条件に不安  
-・現実とのズレがある  
-
----
-
-### STATE4：比較・停滞（迷い）
-
-・複数候補  
-・決めきれない  
-・判断軸が揺れている  
-
----
-
-※補足  
-迷走・比較・深さなどは  
-STATEではなく内部状態として扱う
+（ここでは再定義しない）
 
 ---
 
 =============================
 
-■ STATE → CTA（判断ベース）
+■ STATE → CTA（意思決定ベース）
 
 =============================
 
 ---
 
-### STATE1：初期
+### STATE1：自己理解STATE
 
 ---
 
 👉 CTA
 
-賃貸と購入の違いを整理する  
+自分の判断のクセを整理する  
 
 ---
 
 👉 意味
 
-・前提理解を作る  
-・判断の土台を作る  
+・意思決定の前提となる自己理解を作る  
 
 ---
 
-👉 接続先
+👉 意思決定タイプ
 
-rent_vs_buy
-
----
+自己理解decision
 
 ---
 
-### STATE2：検討中
+---
+
+### STATE2：意思形成STATE
 
 ---
 
 👉 CTA
 
-この条件で成立するかを判断する  
+何を優先して選ぶかを整理する  
 
 ---
 
 👉 意味
 
-・物件をただ見るのではなく  
-・成立判断に進める  
+・判断軸を明確にする  
+・条件の優先順位を決める  
 
 ---
 
-👉 接続先
+👉 意思決定タイプ
 
-property_reader
-
----
+条件決定decision
 
 ---
 
-### STATE3：不安あり
+---
+
+### STATE3：現実判断STATE
 
 ---
 
 👉 CTA
 
-この条件で無理がないか確認する  
+この条件で無理がないか判断する  
 
 ---
 
 👉 意味
 
-・不安の正体を明確化  
-・安全ラインを把握する  
+・成立ラインを明確にする  
+・不安を構造的に解消する  
 
 ---
 
-👉 接続先
+👉 意思決定タイプ
 
-loan_safety
-
----
+成立可否decision
 
 ---
 
-### STATE4：比較・停滞
+---
+
+### STATE4：実務判断STATE
 
 ---
 
 👉 CTA
 
-どれを残すか判断する  
+どれを残すか決める  
 
 ---
 
 👉 意味
 
 ・比較で止まらせない  
-・decisionに変換する  
+・最終判断へ進める  
 
 ---
 
-👉 接続先
+👉 意思決定タイプ
 
-comparison / purchase_motivation
+対象選択decision
 
 ---
 
@@ -256,7 +232,7 @@ NG：
 
 ---
 
-👉 行動ではなく判断を促す
+👉 行動ではなく意思決定を促す
 
 ---
 
@@ -271,22 +247,48 @@ state = detectState(userData)
 ---
 
 if state == STATE1:
-    cta = "rent_vs_buy"
+    decisionType = "self_understanding"
 
 elif state == STATE2:
-    cta = "property_reader"
+    decisionType = "priority_setting"
 
 elif state == STATE3:
-    cta = "loan_safety"
+    decisionType = "feasibility_check"
 
 elif state == STATE4:
-    cta = "comparison_or_motivation"
+    decisionType = "selection"
 
 ---
 
-ctaText = mapToDecisionText(cta)
+ctaText = mapDecisionToCTA(decisionType)
 
 renderCTA(ctaText)
+
+---
+
+=============================
+
+■ decisionとの関係（重要）
+
+=============================
+
+CTAは、
+
+👉 decisionを発生させるトリガーである
+
+---
+
+構造：
+
+STATE（迷い）  
+↓  
+CTA（問い）  
+↓  
+decision（確定）  
+
+---
+
+👉 STATE遷移はdecisionの結果として発生する
 
 ---
 
@@ -309,7 +311,7 @@ STATEとは別に、
 👉 これらは
 
 ・CTA文言の調整  
-・優先度調整  
+・強さの調整  
 
 にのみ使用する
 
@@ -328,8 +330,9 @@ STATEとは別に、
 各プロダクト結果画面で：
 
 ① STATE取得  
-② CTA決定  
-③ CTA表示（1つのみ）
+② 意思決定タイプ決定  
+③ CTA生成  
+④ CTA表示（1つのみ）
 
 ---
 
@@ -345,19 +348,19 @@ STATEとは別に、
 
 非LINE：
 
-👉 単発判断
+👉 単発の意思決定支援
 
 ---
 
 LINE接続後：
 
-👉 履歴を考慮した判断
+👉 decision履歴を踏まえた意思決定支援
 
 ---
 
 例：
 
-・比較済 → 決断CTA  
+・過去に比較済 → 決断CTA強化  
 ・安全確認済 → 物件判断CTA  
 
 ---
@@ -370,16 +373,13 @@ LINE接続後：
 
 ロック中：
 
-👉 判断を先に見せるCTA
-
-例：
-・この判断の続きを見る  
+👉 意思決定の内容を先に提示  
 
 ---
 
 解除後：
 
-👉 次の判断に進むCTA
+👉 decisionを促すCTAを表示  
 
 ---
 
@@ -392,7 +392,7 @@ LINE接続後：
 ・STATEは4つのみ  
 ・CTAは1つ  
 ・シンプルな分岐  
-・履歴考慮は後回し  
+・decisionベースで設計  
 
 ---
 
@@ -406,11 +406,10 @@ LINE接続後：
 
 =============================
 
-・STATEを増やす  
 ・複数CTA  
 ・行動ベースCTA  
-・文脈無視  
-・回遊導線  
+・プロダクト遷移目的のCTA  
+・STATE無視  
 
 ---
 
@@ -423,4 +422,5 @@ LINE接続後：
 state_to_cta_connectionとは、
 
 👉 STATEを  
-👉 次の判断に変換する最短ルートである
+👉 次の意思決定に変換し  
+👉 decisionを生み出すためのトリガー設計である
