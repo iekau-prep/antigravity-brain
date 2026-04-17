@@ -1,5 +1,5 @@
 # property_reader_connection.md
-Updated: 2026-04-17
+Updated: 2026-04-18
 Status: Core
 
 =============================
@@ -287,7 +287,7 @@ property_readerの出力に、
 
 =============================
 
-■ 行動への接続（decisionへの統合）
+■ 行動への接続（decision → OS）
 
 =============================
 
@@ -316,6 +316,47 @@ property_readerの出力に、
 ---
 
 👉 適合度はdecisionの判断基準として機能する
+
+---
+
+👉 このdecisionは
+
+👉 **decision_osへ蓄積され、比較・更新される**
+
+---
+
+=============================
+
+■ decision_osとの接続（最重要）
+
+=============================
+
+property_readerは、
+
+👉 decisionを生む場所  
+
+---
+
+decision_osは、
+
+👉 decisionを管理・更新する場所  
+
+---
+
+構造：
+
+property_reader  
+↓  
+decision（残す / 保留 / 見送り）  
+↓  
+decision_os（蓄積・比較・更新）  
+
+---
+
+👉 この接続により、
+
+👉 単発の判断  
+→ 判断の連続プロセスへ進化する  
 
 ---
 
@@ -387,6 +428,7 @@ property_reader_connectionとは、
 
 👉 判断軸と物件評価を接続し  
 👉 適合度を基準にdecisionを生み出し  
+👉 decision_osに蓄積しながら  
 👉 個人最適な意思決定を可能にする設計
 
 である。
