@@ -1,5 +1,5 @@
 # property_reader / history_structure.md
-Updated: 2026-04-13
+Updated: 2026-04-17
 Status: Active
 
 =============================
@@ -36,7 +36,7 @@ property_reader は単発ツールではなく、
 =============================
 
 historyのOS定義は  
-`brain/system/history.md` に従う。
+brain/system/history.md に従う。
 
 ---
 
@@ -91,6 +91,21 @@ history は単体で価値を出すのではなく、
 ---
 
 👉 **ストレスなく溜まり、自然に比較に進む**
+
+---
+
+### ④ 意思決定ループの中核である（追加・重要）
+
+history は単なる保存ではなく、
+
+👉 external → property_reader → decision → history → 次の判断
+
+のループを成立させる中心である
+
+---
+
+👉 decisionはここに蓄積され  
+👉 次の比較・判断の起点となる
 
 ---
 
@@ -243,7 +258,7 @@ decision_log
 
 ### ■ 変更タイミング
 
-・判定結果画面の最後  
+・判定結果画面の最後（property_reader）  
 ・comparison後  
 ・一覧画面  
 
@@ -272,7 +287,7 @@ decision_log
 
 =============================
 
-■ 一覧画面設計
+■ 一覧画面設計（＝判断OS）
 
 =============================
 
@@ -281,6 +296,12 @@ decision_log
 ・複数物件を一目で把握  
 ・比較対象を選ぶ  
 ・判断状態を整理  
+
+---
+
+👉 この画面は
+
+👉 **decision OSの中核UIである**
 
 ---
 
@@ -326,7 +347,7 @@ decision_log
 
 ・縦スクロール  
 ・カード形式  
-・タップで詳細へ  
+・タップで詳細へ（property_readerへ戻る）  
 
 ---
 
@@ -391,19 +412,19 @@ decision_log
 
 =============================
 
-### ■ 自動保存
+### ■ 自動保存（最重要）
 
-・判定実行時に保存  
+・property_readerでdecisionした瞬間に保存  
 
 ---
 
-### ■ 手動保存
+### ■ 手動保存（補助）
 
 ・「保存する」ボタン  
 
 ---
 
-👉 MVPでは自動保存推奨  
+👉 MVPでは自動保存を基本とする  
 
 ---
 
@@ -553,7 +574,8 @@ history_structureで一番重要なのは、
 history_structureとは、
 
 👉 物件の記録ではなく  
-👉 **decision（意思決定）を蓄積・更新するためのUI設計**
+👉 **decision（意思決定）を蓄積・更新し  
+👉 次の意思決定につなげるためのUI設計**
 
 である。
 
@@ -561,4 +583,4 @@ history_structureとは、
 
 ## 一言でいうと
 
-👉 「decisionを溜めて、更新し続ける場所」
+👉 「decisionを溜めて、更新し続けるOS」
