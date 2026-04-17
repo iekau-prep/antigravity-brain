@@ -1,5 +1,5 @@
 # product_connection_design.md
-Updated: 2026-04-17
+Updated: 2026-04-18
 Status: Active
 
 =============================
@@ -21,6 +21,7 @@ Status: Active
 - rent_vs_buy（選択肢を知る）
 - loan_safety（安全ラインを知る）
 - property_reader（物件を読む）
+- decision_os（判断を蓄積・更新する）
 - LINE（OSの基盤）
 
 ---
@@ -153,9 +154,9 @@ property_reader（読む）
 ↓  
 decision（保存 / 保留 / 見送り）  
 ↓  
-decision OS（蓄積 / 比較）  
+decision OS（蓄積 / 比較 / 更新）  
 ↓  
-必要に応じて補助プロダクトへ接続  
+次の判断へ  
 
 ---
 
@@ -167,6 +168,12 @@ decision OS（蓄積 / 比較）
 👉 decision OSは  
 👉 判断する場所ではなく  
 👉 判断を「管理・更新する場所」である  
+
+---
+
+👉 本構造において、
+
+👉 **decision_os が意思決定ループの中核となる**
 
 ---
 
@@ -255,7 +262,7 @@ decision：
 ### ④ decision OS → property_reader
 
 目的：
-👉 再判断・比較
+👉 再判断・更新
 
 ---
 
@@ -263,7 +270,26 @@ decision：
 
 ---
 
-### ⑤ property_reader → loan_safety
+### ⑤ decision OS → 次の行動（重要）
+
+目的：
+👉 判断を止めずに次へ進める
+
+---
+
+遷移：
+
+・比較する（comparison）  
+・再判断する（property_reader）  
+・次の候補を探す（external）  
+
+---
+
+👉 stateに応じて1つだけ提示する  
+
+---
+
+### ⑥ property_reader → loan_safety
 
 目的：
 👉 この物件は成立するか
@@ -273,7 +299,7 @@ CTA：
 
 ---
 
-### ⑥ property_reader → rent_vs_buy
+### ⑦ property_reader → rent_vs_buy
 
 目的：
 👉 そもそも買うべきか
@@ -283,7 +309,7 @@ CTA：
 
 ---
 
-### ⑦ external → property_reader（最重要）
+### ⑧ external → property_reader（最重要）
 
 目的：
 👉 外で見つけた物件を判断に戻す
@@ -365,6 +391,7 @@ OS
 ・不安 → loan_safety  
 ・迷い → rent_vs_buy  
 ・判断軸不足 → purchase_motivation  
+・判断後 → decision_osで次の行動へ  
 
 ---
 
@@ -400,6 +427,7 @@ OS
 →「ちゃんと読もう」  
 →「なるほど、こういう物件か」  
 →「じゃあ残すか？」  
+→「一覧で整理しよう」  
 →「ちょっと不安…」  
 →「安全確認しよう」  
 
@@ -437,7 +465,7 @@ product_connectionとは、
 
 👉 ユーザーの意思決定プロセスをそのままプロダクトとして再現し  
 👉 property_readerを起点にdecisionを生み  
-👉 OSに蓄積しながら  
+👉 decision_osに蓄積しながら  
 👉 必要に応じて補助プロダクトで精度を上げる設計
 
 ---
