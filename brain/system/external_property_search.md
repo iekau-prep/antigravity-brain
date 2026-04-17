@@ -1,5 +1,5 @@
 # external_property_search.md
-Updated: 2026-04-16
+Updated: 2026-04-17
 Status: Core
 
 =============================
@@ -61,7 +61,9 @@ Status: Core
 
 ---
 
-④ 戻り先はproperty_reader
+④ 戻り先はproperty_readerを基本とする
+
+※ 物件判断を伴う場合は必ずproperty_readerを経由する
 
 ---
 
@@ -90,6 +92,8 @@ OS
 ① OSでCTA表示
 
 👉 次の候補を探す  
+
+※ external遷移は、原則としてdecision完了後に発動する
 
 ---
 
@@ -220,4 +224,4 @@ external_property_searchとは、
 👉 decisionを生み  
 👉 OSへ蓄積する  
 
-👉 意思決定ループの入口である
+👉 意思決定ループにおける外部入口の1つである
