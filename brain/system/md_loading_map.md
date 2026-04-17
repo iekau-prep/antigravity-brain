@@ -1,5 +1,5 @@
 # md_loading_map.md
-Updated: 2026-04-04
+Updated: 2026-04-17
 Status: Active
 
 =============================
@@ -8,7 +8,7 @@ Status: Active
 
 =============================
 
-👉 作業内容ごとに「どのmdを読むか」を定義する
+👉 作業内容ごとに「どのmdを読むか」を定義する  
 
 👉 **最小読み込みで最大精度を出すための運用設計**
 
@@ -23,7 +23,7 @@ Status: Active
 ① 全部読ませない  
 ② 必須だけ読む  
 ③ systemを優先  
-④ decisionに関係するものを優先（追加・最重要）
+④ decisionに関係するものを優先（最重要）  
 
 ---
 
@@ -33,7 +33,7 @@ Status: Active
 
 =============================
 
-■ 読み込み優先順位（追加）
+■ 読み込み優先順位（重要）
 
 =============================
 
@@ -56,43 +56,61 @@ Status: Active
 
 👉 UI触る時
 
-- result_screen.md
-- ui_flow.md
-- cta_strategy.md
-- state_detection.md
+- result_screen.md  
+- ui_flow.md  
+- cta_strategy.md  
+- state_detection.md  
 
 ---
 
 👉 ロジック触る時
 
-- diagnosis_logic.md
-- output_logic.md
-- decision_framework.md
+- diagnosis_logic.md  
+- output_logic.md  
+- decision_framework.md  
 
 ---
 
 👉 接続触る時
 
-- product_connection_design.md
-- state_to_cta_connection.md
-- line_strategy.md
+- product_connection_design.md  
+- state_to_cta_connection.md  
+- line_strategy.md  
 
 ---
 
-👉 property_reader触る時（追加）
+👉 property_reader触る時
 
-- product_concept.md
-- ux_flow.md
-- scoring_logic.md
-- rules_definition.md
+- product_concept.md  
+- ux_flow.md  
+- scoring_logic.md  
+- rules_definition.md  
 
 ---
 
-👉 decision周り触る時（追加・最重要）
+👉 decision周り触る時（最重要）
 
-- user_data_strategy.md
-- history_structure.md
-- comparison_flow.md
+- user_data_strategy.md  
+- history_structure.md  
+- comparison_flow.md  
+
+---
+
+👉 decision_os触る時（追加・最重要）
+
+- decision_os/concept.md  
+- decision_os/ux_flow.md  
+- user_data_strategy.md  
+- state_detection.md  
+- state_to_cta_connection.md  
+
+---
+
+👉 external導線触る時（追加）
+
+- external_property_search.md  
+- property_reader/ux_flow.md  
+- product_connection_design.md  
 
 ---
 
@@ -105,82 +123,101 @@ Status: Active
 ## ① purchase_motivation UI
 
 必須：
-- result_screen.md
-- output_logic.md
-- ui_flow.md
-- cta_strategy.md
-- state_detection.md
+- result_screen.md  
+- output_logic.md  
+- ui_flow.md  
+- cta_strategy.md  
+- state_detection.md  
 
 ---
 
 ## ② type診断
 
 必須：
-- product_concept.md
-- diagnosis_logic.md
-- cta_strategy.md
+- product_concept.md  
+- diagnosis_logic.md  
+- cta_strategy.md  
 
 補助：
-- pairing_logic.md
-- ui_result_flow.md
+- pairing_logic.md  
+- ui_result_flow.md  
 
 ---
 
 ## ③ property_reader
 
 必須：
-- product_concept.md
-- ux_flow.md
-- scoring_logic.md
-- rules_definition.md
+- product_concept.md  
+- ux_flow.md  
+- scoring_logic.md  
+- rules_definition.md  
 
 補助：
-- data_connection.md
-- prompts_and_rules.md
-- screen_structure.md
+- data_connection.md  
+- prompts_and_rules.md  
+- screen_structure.md  
 
 ---
 
 ## ④ property_reader（比較 / 履歴）
 
 必須：
-- history_structure.md
-- comparison_flow.md
-- user_data_strategy.md
+- history_structure.md  
+- comparison_flow.md  
+- user_data_strategy.md  
 
 ---
 
-👉 **ここがOSの中核**
+👉 **ここがOSの中核（decision蓄積）**
 
 ---
 
-## ⑤ CTA改善
+## ⑤ decision_os（追加・最重要）
 
 必須：
-- cta_strategy.md
-- state_detection.md
-- state_to_cta_connection.md
-
----
-
-## ⑥ LINE設計
-
-必須：
-- line_strategy.md
-- funnel_and_line_strategy.md
-- cta_strategy.md
+- decision_os/concept.md  
+- decision_os/ux_flow.md  
+- user_data_strategy.md  
+- state_detection.md  
+- state_to_cta_connection.md  
 
 補助：
-- user_data_strategy.md
+- external_property_search.md  
+- product_connection_design.md  
 
 ---
 
-## ⑦ OS設計 / 横断改善（追加）
+👉 **判断の蓄積・更新ハブ**
+
+---
+
+## ⑥ CTA改善
 
 必須：
-- user_data_strategy.md
-- funnel_logic.md
-- decision_framework.md
+- cta_strategy.md  
+- state_detection.md  
+- state_to_cta_connection.md  
+
+---
+
+## ⑦ LINE設計
+
+必須：
+- line_strategy.md  
+- funnel_and_line_strategy.md  
+- cta_strategy.md  
+
+補助：
+- user_data_strategy.md  
+
+---
+
+## ⑧ OS設計 / 横断改善
+
+必須：
+- user_data_strategy.md  
+- funnel_logic.md  
+- decision_framework.md  
 
 ---
 
@@ -199,29 +236,33 @@ Status: Active
 ---
 
 ### 1. やること
-例：
-property_reader の比較UXを改善したい
+
+例：  
+property_reader の比較UXを改善したい  
 
 ---
 
 ### 2. 必須md
-loading mapから該当する必須ファイルのみ渡す
+
+loading mapから該当する必須ファイルのみ渡す  
 
 ---
 
 ### 3. 補助md
-必要最低限だけ追加する
+
+必要最低限だけ追加する  
 
 ---
 
 ### 4. 禁止事項
+
 例：
 
 - 構造変更しない  
 - 実装の話に行きすぎない  
 - 既存思想を壊さない  
 - 指定されていないファイルを勝手に編集しない  
-- decision構造を壊さない（追加・最重要）  
+- decision構造を壊さない（最重要）  
 
 ---
 
@@ -238,7 +279,7 @@ loading mapから該当する必須ファイルのみ渡す
 
 =============================
 
-■ NG（追加）
+■ NG
 
 =============================
 
@@ -246,6 +287,7 @@ loading mapから該当する必須ファイルのみ渡す
 - UIなのにロジックをいじる  
 - ロジックなのにUXを変える  
 - decisionを考慮しない変更  
+- decision_osを飛ばして判断フローを作る  
 
 ---
 
@@ -264,7 +306,7 @@ md_loading_mapとは、
 👉 作業目的に応じて  
 👉 必要なmdだけを読み分け  
 👉 decision構造を維持しながら  
-👉 新しい実行環境でも正確に作業を再開するための運用マップである
+👉 新しい実行環境でも正確に作業を再開するための運用マップである  
 
 ---
 
