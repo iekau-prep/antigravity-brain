@@ -301,6 +301,7 @@ decisionは以下で構成される：
 ・状態（検討中 / 保留 / 見送り）  
 ・理由（将来拡張）  
 ・文脈（過去履歴）  
+・reason（decisionの言語化 / decision_reason_design.md参照）
 
 ---
 
