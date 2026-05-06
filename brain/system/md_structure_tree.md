@@ -45,6 +45,7 @@ antigravity-brain/
 │     ├─ content_roles.md  
 │     ├─ cta_strategy.md  
 │     ├─ decision_framework.md  
+│     ├─ decision_reason_design.md  
 │     ├─ funnel_and_line_strategy.md  
 │     ├─ funnel_logic.md  
 │     ├─ kpi_metrics.md  
