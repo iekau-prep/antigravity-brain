@@ -1,5 +1,5 @@
 # property_reader / ux_flow.md
-Updated: 2026-05-21
+Updated: 2026-05-24
 Status: Core
 
 =============================
@@ -14,7 +14,10 @@ Status: Core
 👉 UX構造
 👉 decision生成導線
 👉 現実接触体験
+👉 future drift整理
 👉 本命形成フロー
+👉 comparison fatigue整理
+👉 decision continuity
 
 を定義する。
 
@@ -26,6 +29,7 @@ property_reader は、
 ❌ AI判定サービス
 ❌ スコア比較UI
 ❌ 物件レビュー画面
+❌ recommendation engine
 
 ではない。
 
@@ -33,6 +37,8 @@ property_reader は、
 
 ⭕ 「fixed_core と現実を接触させ、
 ⭕ reasonを生成し、
+⭕ future driftを想像し、
+⭕ 許容構造を形成し、
 ⭕ 本命形成decisionを生み出す
 現実接触UX」
 
@@ -48,6 +54,7 @@ property_reader は、
 ・drift_detection.md
 ・decision_os_role.md
 ・comparison_role.md
+・comparison_flow.md
 ・state_to_cta_connection.md
 
 を基盤として定義する。
@@ -69,6 +76,7 @@ property_reader の役割は、
 ❌ 「この物件は良い」
 ❌ 「買うべき」
 ❌ 「危険」
+❌ 「おすすめ」
 
 を判定することではない。
 
@@ -98,6 +106,8 @@ property_reader は：
 ・reasonを生成する
 ・fixed_coreと照合する
 ・現実と接触させる
+・future driftを想像させる
+・許容構造を形成する
 ・本命形成を支援する
 
 ために存在する。
@@ -124,10 +134,13 @@ LINE前ユーザーに対しては：
 
 ・fixed_core
 ・drift
+・future drift
 ・reason
+・relative reason
 ・現実接触
 ・本命形成
 ・decision progression
+・comparison fatigue
 
 を処理する。
 
@@ -197,7 +210,105 @@ property_reader は、
 
 ---
 
-④ 「本命形成」を支援する
+④ 「future drift」を扱う
+
+---
+
+property_reader は、
+
+❌ 「今どう感じるか」
+
+だけを扱うのではない。
+
+---
+
+⭕ 「未来でどうズレる可能性があるか」
+
+も扱う。
+
+---
+
+例：
+
+・管理費上昇
+・修繕積立金不足
+・子供成長
+・通勤変化
+・在宅勤務終了
+・住民変化
+・周辺環境変化
+・体力変化
+・売却難易度
+・老後移動負荷
+
+など。
+
+---
+
+重要：
+
+property_reader は：
+
+❌ 今の満足判定
+
+ではない。
+
+---
+
+⭕ 「未来まで含めて、
+どこを許容できるか」
+
+を整理する。
+
+---
+
+⑤ 「許容構造形成」を行う
+
+---
+
+住宅購入では、
+
+❌ 完璧一致
+
+はほぼ存在しない。
+
+---
+
+重要なのは：
+
+⭕ 「何を残し、
+何を許容するか」
+
+である。
+
+---
+
+つまり：
+
+本命形成とは、
+
+❌ 条件一致
+
+ではなく、
+
+⭕ 「許容構造形成」
+
+である。
+
+---
+
+property_reader は：
+
+・許容できる弱点
+・許容できない違和感
+・future drift許容性
+・fixed_core整合
+
+を整理する。
+
+---
+
+⑥ 「本命形成」を支援する
 
 ---
 
@@ -224,6 +335,8 @@ property_reader は：
 ・迷い
 ・違和感
 ・納得
+・future drift
+・relative reason
 
 を通じて、
 
@@ -233,7 +346,7 @@ property_reader は：
 
 ---
 
-⑤ 「decision更新」を前提にする
+⑦ 「decision更新」を前提にする
 
 ---
 
@@ -261,6 +374,7 @@ property_reader で生まれるdecisionは、
 
 comparison
 drift
+future drift
 現実接触
 新候補
 
@@ -283,10 +397,10 @@ state_labels を使用する。
 
 使用ラベル：
 
-・🟢 残す候補状態
+・🟢 本命形成可能状態
 ・🟡 要確認状態
-・🟠 条件付き候補状態
-・🔴 見送り候補状態
+・🟠 許容整理状態
+・🔴 future drift注意状態
 
 ---
 
@@ -325,6 +439,7 @@ state_labels を使用する。
 ・迷い可視化
 ・注意点把握
 ・現実接触
+・future drift理解
 ・reason生成
 
 を補助するために存在する。
@@ -345,13 +460,17 @@ state_labels を使用する。
 ↓
 ④ fixed_core照合
 ↓
-⑤ drift検知
+⑤ future drift想像
 ↓
-⑥ 本命形成decision
+⑥ 許容構造形成
 ↓
-⑦ decision更新
+⑦ drift検知
 ↓
-⑧ 次decisionへ接続
+⑧ 本命形成decision
+↓
+⑨ decision更新
+↓
+⑩ 次decisionへ接続
 
 ---
 
@@ -361,7 +480,7 @@ state_labels を使用する。
 
 ---
 
-⭕ 「接触 → 整理 → 本命形成」
+⭕ 「接触 → 許容 → 本命形成」
 
 を扱う。
 
@@ -402,6 +521,7 @@ property_reader の入口は以下。
 ・比較中
 ・本命形成中
 ・drift発生中
+・future drift整理中
 ・再判断中
 ・現実接触後
 
@@ -497,7 +617,7 @@ property_reader は、
 ① ラベル
 ② 一言要約
 ③ 代表注意点
-④ 現実接触ポイント
+④ future driftポイント
 ⑤ 読みどころ
 
 ---
@@ -621,7 +741,123 @@ reasonは、
 
 =============================
 
-■ STEP5 drift検知
+■ STEP5 future drift想像（超重要）
+
+=============================
+
+■ 目的
+
+👉 「未来でどこがズレる可能性があるか」
+
+を想像可能にする。
+
+---
+
+例：
+
+・子供成長後の狭さ
+・老後移動負荷
+・管理費上昇
+・修繕負担
+・在宅勤務変化
+・住民変化
+・売却難易度
+・騒音耐性変化
+
+など。
+
+---
+
+重要：
+
+future drift は：
+
+❌ 不安煽り
+
+ではない。
+
+---
+
+⭕ 「未来接触」
+
+として扱う。
+
+---
+
+property_reader は：
+
+❌ 今の満足度診断
+
+ではなく、
+
+⭕ 「未来でも向き合えるか」
+
+を整理する。
+
+---
+
+=============================
+
+■ STEP6 許容構造形成（最重要）
+
+=============================
+
+■ 目的
+
+👉 「何を許容し、
+何を残すか」
+
+を整理する。
+
+---
+
+住宅購入では、
+
+❌ 全条件一致
+
+はほぼ存在しない。
+
+---
+
+そのため重要なのは：
+
+⭕ 「この違和感は許容できるか」
+
+である。
+
+---
+
+ここで整理するもの：
+
+・許容可能な弱点
+・future drift許容性
+・fixed_coreとの優先順位
+・譲れない条件
+・本命感
+
+など。
+
+---
+
+重要：
+
+本命形成とは：
+
+❌ 点数勝負
+
+ではない。
+
+---
+
+⭕ 「許容構造形成」
+
+である。
+
+---
+
+=============================
+
+■ STEP7 drift検知
 
 =============================
 
@@ -640,6 +876,7 @@ reasonは、
 ・SNS評価に引っ張られている
 ・比較疲れ
 ・本命迷子
+・future不安過多
 
 など。
 
@@ -671,7 +908,7 @@ property_reader は：
 
 =============================
 
-■ STEP6 本命形成decision
+■ STEP8 本命形成decision
 
 =============================
 
@@ -711,19 +948,21 @@ property_reader は：
 
 ■ 保存
 
-👉 本命として向き合う
+👉 future drift込みで、
+本命として向き合える
 
 ---
 
 ■ 保留
 
-👉 まだfixed_core照合が終わっていない
+👉 許容構造形成がまだ終わっていない
 
 ---
 
 ■ 見送り
 
-👉 現時点では本命形成から外す
+👉 現時点では
+future drift許容が難しい
 
 ---
 
@@ -745,13 +984,14 @@ decisionは：
 
 =============================
 
-■ STEP7 decision更新
+■ STEP9 decision更新
 
 =============================
 
 ■ 目的
 
-👉 comparison / drift / 現実接触によって
+👉 comparison / drift / future drift /
+現実接触によって
 decisionを更新可能にする。
 
 ---
@@ -776,6 +1016,7 @@ property_reader は：
 ・再比較
 ・本命変更
 ・再保留
+・drift recovery
 
 を許容する。
 
@@ -783,7 +1024,7 @@ property_reader は：
 
 =============================
 
-■ STEP8 次decisionへ接続
+■ STEP10 次decisionへ接続
 
 =============================
 
@@ -812,7 +1053,8 @@ property_reader は：
 例：
 
 ・本命を比較整理する
-・現実条件を整理する
+・future driftを整理する
+・許容条件を整理する
 ・今の基準で読み直す
 ・次候補を探し直す
 ・比較理由を整理する
@@ -825,6 +1067,64 @@ property_reader は：
 「次に何を整理すべきか」
 
 を提示する。
+
+---
+
+=============================
+
+■ comparison fatigueとの関係（重要）
+
+=============================
+
+comparison fatigueとは、
+
+👉 比較を続けることで
+fixed_core が崩れ始める状態
+
+である。
+
+---
+
+例：
+
+・比較軸増殖
+・ランキング化
+・本命感消失
+・条件麻痺
+・価格比較依存
+・全部よく見える
+・全部不安に見える
+
+など。
+
+---
+
+property_reader は：
+
+❌ 無限比較促進
+
+ではない。
+
+---
+
+⭕ comparison fatigue整理UX
+
+でもある。
+
+---
+
+そのため：
+
+・本命候補数
+・比較理由
+・許容構造
+・future drift
+
+を整理しながら：
+
+👉 「どれを本命として深く考えるか」
+
+へ収束させる。
 
 ---
 
@@ -873,8 +1173,9 @@ vs
 comparisonは：
 
 ・迷い可視化
-・本命形成
-・drift整理
+・本命形成整理
+・future drift比較
+・許容構造整理
 ・decision更新
 
 を担う。
@@ -926,9 +1227,10 @@ CTAは：
 例：
 
 ・この物件を本命として考える
+・future driftを整理する
+・許容条件を整理する
 ・比較理由を整理する
 ・現実条件を整理する
-・今の基準で確認する
 
 など。
 
@@ -969,6 +1271,7 @@ CTAは：
 ・この条件で成立するか確認する
 ・もう一度比較する
 ・他候補を見る
+・過去候補と見比べる
 
 など。
 
@@ -1018,7 +1321,7 @@ decision_OS：
 
 =============================
 
-■ LINEとの関係
+■ LINEとの関係（超重要）
 
 =============================
 
@@ -1028,6 +1331,7 @@ LINE前：
 ・瞬間価値
 ・迷い可視化
 ・decision入口
+・SNS拡散性
 
 を重視する。
 
@@ -1037,8 +1341,11 @@ LINE後：
 
 ・fixed_core保持
 ・drift履歴
+・future drift履歴
 ・reason履歴
+・relative reason履歴
 ・本命形成履歴
+・許容履歴
 ・decision continuity
 
 を強化する。
@@ -1059,6 +1366,16 @@ LINE接続により、
 
 ---
 
+さらに：
+
+property_reader は：
+
+⭕ decision continuity engine
+
+として機能する。
+
+---
+
 =============================
 
 ■ NG
@@ -1074,6 +1391,8 @@ LINE接続により、
 ❌ dashboard化
 ❌ 正解提示
 ❌ SUUMO mini化
+❌ 不安煽り
+❌ comparison fatigue加速
 
 ---
 
@@ -1101,6 +1420,8 @@ property_readerとは、
 
 👉 fixed_core と現実を接触させ
 👉 reasonを生成し
+👉 future driftを想像し
+👉 許容構造を形成し
 👉 driftを可視化し
 👉 本命形成decisionを生み出す
 現実接触UXである。
@@ -1116,8 +1437,9 @@ property_readerとは、
 property_readerとは、
 
 👉 軽いUXで迷いの入口を作りながら
-👉 内部ではfixed_core・reason・driftを処理し
+👉 内部ではfixed_core・reason・drift・future driftを処理し
 👉 現実接触を通じて
+👉 許容構造を形成し
 👉 本命形成decisionを生み出し
 👉 decision progressionへ接続する
 中核decision生成UXである。
@@ -1127,4 +1449,8 @@ property_readerとは、
 ## 一言
 
 👉 「この物件はどうか？」ではなく、
-👉 「この物件と、どう向き合うか」を整理するUX
+
+👉 「この物件と、
+未来まで含めてどう向き合うか」
+
+を整理するUX
