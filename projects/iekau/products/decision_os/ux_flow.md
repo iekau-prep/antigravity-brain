@@ -1,5 +1,5 @@
 # decision_os / ux_flow.md
-Updated: 2026-05-21
+Updated: 2026-05-25
 Status: Core
 
 =============================
@@ -13,6 +13,8 @@ Status: Core
 
 👉 UX構造
 👉 decision progression flow
+👉 drift recovery flow
+👉 本命形成循環
 👉 判断継続体験
 
 を定義する。
@@ -25,6 +27,7 @@ decision_os は、
 ❌ お気に入り管理
 ❌ dashboard
 ❌ 比較管理画面
+❌ 完了管理UI
 
 ではない。
 
@@ -32,7 +35,8 @@ decision_os は、
 
 ⭕ 「現在のdecision状態」を可視化し、
 ⭕ decision更新を継続させ、
-⭕ 本命形成を支援し続けるための
+⭕ drift recoveryを支援し、
+⭕ 本命形成を循環させ続ける
 decision progression OS
 
 として扱う。
@@ -48,6 +52,8 @@ decision progression OS
 ・decision_reason_design.md
 ・drift_detection.md
 ・fixed_core_definition.md
+・comparison_role.md
+・decision_update_triggers.md
 
 を基盤として定義する。
 
@@ -84,6 +90,8 @@ decision_os が扱うのは、
 ・drift状態
 ・現実接触状態
 ・decision更新状態
+・current priority
+・fixed_coreとの接続状態
 
 である。
 
@@ -96,6 +104,20 @@ decision_os が扱うのは、
 ではなく、
 
 ⭕ decision状態可視化
+
+を扱う。
+
+---
+
+重要：
+
+decision_os は、
+
+❌ 「何を持っているか」
+
+ではなく、
+
+⭕ 「今どこでdecisionが揺れているか」
 
 を扱う。
 
@@ -142,8 +164,26 @@ decisionは：
 ・drift発生
 ・現実接触
 ・比較疲れ
+・priority変化
+・future不安
 
 などを自然な状態として扱う。
+
+---
+
+重要：
+
+揺れは、
+
+❌ decision失敗
+
+ではない。
+
+---
+
+⭕ decision progression の一部
+
+である。
 
 ---
 
@@ -174,8 +214,25 @@ decisionは：
 ・reason整理
 ・fixed_core再接続
 ・現実接触整理
+・priority整理
+・drift recovery
 
 を支援する。
+
+---
+
+重要：
+
+本命は、
+
+❌ 一瞬で見つかる
+
+ではない。
+
+---
+
+⭕ 「比較・迷い・現実接触・recovery」
+を通じて形成される。
 
 ---
 
@@ -188,6 +245,7 @@ decision_os が扱うのは：
 ❌ 過去履歴中心
 ❌ 保存履歴中心
 ❌ 管理履歴中心
+❌ future最適化
 
 ではない。
 
@@ -219,8 +277,25 @@ decision_state は、
 ・drift状態
 ・fixed_coreとのズレ
 ・現実接触状態
+・current priority
 
 から導出する。
+
+---
+
+重要：
+
+future視点は：
+
+❌ 主役
+
+ではない。
+
+---
+
+⭕ 「現在decision整理の補助視点」
+
+として扱う。
 
 ---
 
@@ -251,6 +326,7 @@ decision_state は、
 ・再比較
 ・現実不安
 ・本命揺れ
+・priority変化
 
 を許容する。
 
@@ -260,6 +336,26 @@ decision continuity
 （判断継続性）
 
 を最優先する。
+
+---
+
+重要：
+
+continuityとは、
+
+❌ UI継続
+
+ではない。
+
+---
+
+⭕ 「以前何を大事にしていたか」
+⭕ 「なぜ迷っていたか」
+⭕ 「何を失いたくなかったか」
+
+を、
+
+現在decisionへ接続し続けることである。
 
 ---
 
@@ -292,6 +388,28 @@ CTAは：
 ⭕ 「何を整理・更新すべきか」
 
 を扱う。
+
+---
+
+さらに：
+
+CTAは、
+
+⭕ decision recovery trigger
+
+でもある。
+
+---
+
+例：
+
+・本当に大事だった条件へ戻る
+・今の迷いを整理する
+・比較軸を減らす
+・本命感を確認する
+・現実条件を整理する
+
+など。
 
 ---
 
@@ -377,17 +495,35 @@ decision_os のUXは：
 ↓
 ② 迷い / drift を可視化する
 ↓
-③ 本命形成状態を整理する
+③ fixed_coreへ再接続する
 ↓
-④ decisionを更新する
+④ 本命形成状態を整理する
 ↓
-⑤ 次decisionへ接続する
+⑤ decisionを更新する
+↓
+⑥ 次decisionへ接続する
 
 ---
 
-👉 「整理 → 更新 → 継続」
+👉 「整理 → recovery → 更新 → 継続」
 
 を循環させる。
+
+---
+
+重要：
+
+decision progressionとは、
+
+❌ 最短で決めること
+
+ではない。
+
+---
+
+⭕ 「揺れながら前へ進むこと」
+
+である。
 
 ---
 
@@ -413,7 +549,8 @@ decision_os のUXは：
 ・drift状態
 ・現実接触状態
 ・主CTA
-・固定核とのズレ
+・fixed_coreとのズレ
+・current priority
 
 など。
 
@@ -440,6 +577,7 @@ decision_os のUXは：
 ・現実接触発生中
 ・fixed_core揺れ
 ・本命迷子状態
+・priority逆転状態
 
 など。
 
@@ -479,6 +617,8 @@ decision基準がズレ始めること。
 ・比較疲れ
 ・条件増殖
 ・本命喪失
+・future不安過多
+・priority逆転
 
 など。
 
@@ -503,6 +643,7 @@ decision_os は：
 ・本命消失
 ・比較停滞
 ・現実接触による揺れ
+・priority変化
 
 を可視化する。
 
@@ -526,7 +667,85 @@ drift は：
 
 =============================
 
-■ ③ 本命形成状態を整理する
+■ ③ drift recovery（最重要）
+
+=============================
+
+■ 目的
+
+👉 「本来大事だったもの」へ戻れるようにする。
+
+---
+
+decision_os は：
+
+❌ drift監視OS
+
+ではない。
+
+---
+
+⭕ 「fixed_coreへ戻れるOS」
+
+である。
+
+---
+
+recoveryとは：
+
+❌ 矯正
+
+ではない。
+
+---
+
+⭕ 「本当に大事だったものを
+再整理すること」
+
+である。
+
+---
+
+例：
+
+・価格ばかり見ていた
+↓
+・生活余白を思い出す
+
+---
+
+・比較疲れしていた
+↓
+・本命感を整理し直す
+
+---
+
+・条件が増殖していた
+↓
+・何を守りたいかへ戻る
+
+---
+
+重要：
+
+recoveryは：
+
+❌ 元に戻す
+
+ではない。
+
+---
+
+⭕ 「今の現実の中で、
+何を大事にしたいかを再整理する」
+
+である。
+
+---
+
+=============================
+
+■ ④ 本命形成状態を整理する
 
 =============================
 
@@ -606,9 +825,94 @@ decision_os は：
 
 ---
 
+また：
+
+本命形成とは、
+
+❌ 「1件に絞ること」
+
+ではない。
+
+---
+
+⭕ 「何を本命として
+現実接触していきたいか」
+
+を整理することである。
+
+---
+
 =============================
 
-■ ④ decisionを更新する
+■ current priority（重要）
+
+=============================
+
+decisionでは、
+
+👉 fixed_core
+
+と、
+
+👉 current priority
+
+を分離して扱う。
+
+---
+
+fixed_core は：
+
+⭕ 比較的長期で安定しやすい
+判断核。
+
+---
+
+一方：
+
+current priority は、
+
+👉 「今何を最優先にしているか」
+
+である。
+
+---
+
+例：
+
+・今は安全性を優先している
+・今は価格不安が強い
+・今は通勤負荷を減らしたい
+・今は将来不安を強く感じている
+
+など。
+
+---
+
+重要：
+
+current priority は：
+
+・comparison
+・現実接触
+・future不安
+・家族状況
+・市場状況
+
+などによって変動する。
+
+---
+
+decision_os は：
+
+👉 「今どこに引っ張られているか」
+
+を理解可能にする。
+
+---
+
+=============================
+
+■ ⑤ decisionを更新する
 
 =============================
 
@@ -626,6 +930,7 @@ decision更新とは：
 ・reason更新
 ・本命変更
 ・現実許容変更
+・priority更新
 
 など。
 
@@ -660,7 +965,7 @@ decisionとは、
 
 =============================
 
-■ ⑤ 次decisionへ接続する
+■ ⑥ 次decisionへ接続する
 
 =============================
 
@@ -705,6 +1010,68 @@ decision_os は：
 
 =============================
 
+■ future視点との関係（重要）
+
+=============================
+
+future視点は：
+
+❌ decision_OSの主役
+
+ではない。
+
+---
+
+⭕ 「現在decision整理に作用する補助視点」
+
+として扱う。
+
+---
+
+例えば：
+
+・rent_vs_buy における未来生活
+・loan_safety における返済未来
+・property_reader における維持未来
+
+など。
+
+---
+
+重要：
+
+futureは：
+
+❌ 「未来を当てるため」
+
+ではない。
+
+---
+
+⭕ 「現在decisionの違和感を補助的に理解する」
+
+ために存在する。
+
+---
+
+そのため：
+
+decision_OS は、
+
+❌ future最適化OS
+
+ではない。
+
+---
+
+⭕ 「現在decision整理OS」
+
+である。
+
+---
+
+=============================
+
 ■ comparisonとの関係（最重要）
 
 =============================
@@ -730,6 +1097,8 @@ comparison の目的：
 ・本命形成
 ・decision更新
 ・drift整理
+・fixed_core露出
+・recovery補助
 
 ---
 
@@ -757,6 +1126,8 @@ comparison後の自然状態は：
 ・保留維持
 ・reason更新
 ・fixed_core再接続
+・priority整理
+・drift recovery
 
 など。
 
@@ -796,6 +1167,23 @@ comparison は：
 
 ---
 
+重要：
+
+comparison後に起きるべきなのは：
+
+❌ 「比較完了」
+
+ではない。
+
+---
+
+⭕ 「今のdecision状態を
+再理解できること」
+
+である。
+
+---
+
 =============================
 
 ■ CTA設計（最重要）
@@ -813,6 +1201,14 @@ decision_os のCTAは：
 ⭕ decision update trigger
 
 である。
+
+---
+
+さらに：
+
+⭕ decision recovery trigger
+
+でもある。
 
 ---
 
@@ -837,6 +1233,7 @@ CTAは：
 ・比較理由を整理する
 ・今の基準を整理する
 ・もう一度本命を確認する
+・本当に大事だったものへ戻る
 
 など。
 
@@ -1022,6 +1419,8 @@ LINE接続後は：
 ・本命変化履歴
 ・reason変化履歴
 ・比較履歴
+・priority変化履歴
+・recovery履歴
 ・再訪再開
 
 が可能になる。
@@ -1059,6 +1458,7 @@ LINE は：
 ❌ AI正解提示
 ❌ 比較滞在化
 ❌ 回遊最適化
+❌ future最適化
 ❌ SUUMO mini化
 
 ---
@@ -1072,6 +1472,8 @@ decision_OS の強みは、
 ではなく、
 
 ⭕ decision progression
+⭕ drift recovery
+⭕ 本命形成循環
 
 だから。
 
@@ -1102,6 +1504,8 @@ decision_OS で最も重要なのは：
 decision_OS は、
 
 👉 「現在の迷いの構造」を扱い、
+👉 drift recoveryを支え、
+👉 fixed_coreへ戻れる状態を維持しながら、
 👉 decision更新を支え続けるOS
 
 として存在する。
@@ -1118,6 +1522,7 @@ decision_OS UXとは、
 
 👉 現在のdecision状態を可視化し
 👉 driftと本命形成を整理し
+👉 fixed_coreへのrecoveryを支援し
 👉 comparisonとreason更新を通じて
 👉 decisionを循環・更新し続けるための
 decision progression flowである。
@@ -1127,5 +1532,6 @@ decision progression flowである。
 ## 一言でいうと
 
 👉 「今どこで迷い、
-どうdecisionが変化しているかを整理しながら、
+どうdecisionが変化し、
+何を大事に戻したいのかを整理しながら、
 本命形成を支え続けるOS体験」
