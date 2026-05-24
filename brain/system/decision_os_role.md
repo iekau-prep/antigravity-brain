@@ -1,5 +1,5 @@
 # decision_os_role.md
-Updated: 2026-05-21
+Updated: 2026-05-24
 Status: Core
 
 =============================
@@ -23,14 +23,17 @@ decision_OS は、
 ❌ お気に入り管理  
 ❌ 保存管理UI  
 ❌ comparison管理画面  
+❌ recommendation engine  
+❌ future最適化システム  
 
 ではない。
 
 ---
 
 ⭕ 「現在のdecision現在地を反映し、
+fixed_coreへ再接続しながら、
 本命形成とdecision更新を循環させ続ける
-中核OS」
+中核decision OS」
 
 として扱う。
 
@@ -45,6 +48,8 @@ decision_OS は、
 ・comparison_role.md
 ・decision_update_triggers.md
 ・product_connection_design.md
+・fixed_core_definition.md
+・drift_detection.md
 
 を基盤として定義する。
 
@@ -66,6 +71,7 @@ decision_OS の本質は、
 
 👉 「今どこで迷い、
 どこで本命感が揺れ、
+どこでfixed_coreとの距離が変化し、
 何がdecision driftしているか」
 
 を扱うことである。
@@ -77,12 +83,14 @@ decision_OS の本質は、
 ❌ 情報管理UI  
 ❌ 完了管理UI  
 ❌ decision固定UI  
+❌ 未来予測UI  
 
 ではなく、
 
 ⭕ decision progression UI  
 ⭕ decision現在地OS  
 ⭕ 本命形成循環OS  
+⭕ fixed_core再接続OS  
 
 として扱う。
 
@@ -93,11 +101,59 @@ decision_OS は、
 ・現在のdecision状態を反映する  
 ・本命感の変化を扱う  
 ・decision driftを可視化する  
-・次decisionへ接続する  
+・fixed_coreへ再接続する  
 ・comparisonを内部循環させる  
 ・decision更新を止めない  
+・現在decisionを整理し続ける  
 
 ために存在する。
+
+---
+
+=============================
+
+■ decision_OS の本質（追加・最重要）
+
+=============================
+
+住宅購入では、
+
+人は：
+
+❌ 一度整理して終わる
+
+わけではない。
+
+---
+
+・比較
+・現実接触
+・市場
+・不安
+・家族相談
+・内見
+・時間経過
+・未来想像
+
+などによって、
+
+👉 decisionは揺れ続ける。
+
+---
+
+そのため decision_OS は、
+
+❌ 「正しいdecisionを固定する場所」
+
+ではない。
+
+---
+
+⭕ 「decisionが揺れ続ける前提で、
+現在の本命感とfixed_coreを
+再接続し続ける場所」
+
+として存在する。
 
 ---
 
@@ -129,6 +185,7 @@ decision_OS が扱うのは、
 ・何をまだ捨てきれていないか
 ・どこで迷っているか
 ・何がズレ始めているか
+・どこで違和感が増えているか
 
 を、
 
@@ -258,7 +315,166 @@ decision_OS は、
 
 ---
 
-② 本命形成を循環させる
+② fixed_coreへ再接続する（超重要）
+
+---
+
+decision_OS の最重要roleの1つは、
+
+👉 fixed_coreへ再接続すること
+
+である。
+
+---
+
+住宅購入では、
+
+比較・市場・情報過多によって、
+
+人は：
+
+・本来大事だったもの
+・失いたくなかったもの
+・本命感
+・生活感覚
+
+を見失い始める。
+
+---
+
+つまり：
+
+decision drift が発生する。
+
+---
+
+そのため decision_OS は、
+
+👉 「本来何を守りたかったか」
+
+を再接続する。
+
+---
+
+重要：
+
+decision_OS は、
+
+❌ drift監視OS
+
+ではない。
+
+---
+
+⭕ 「fixed_core再接続OS」
+
+である。
+
+---
+
+つまり：
+
+・何を失いたくないか
+・どこで違和感が出ているか
+・どこでcurrent_priorityが暴走しているか
+・どこでsurface_reasonに引っ張られているか
+
+を整理し、
+
+👉 fixed_coreへ戻る
+
+ことを支援する。
+
+---
+
+=============================
+
+■ fixed_core / current_priority / surface_reason（重要）
+
+=============================
+
+decision_OS では、
+
+以下を分離して扱う。
+
+---
+
+■ fixed_core
+
+長期的に一貫しやすい判断核。
+
+---
+
+例：
+
+・生活余白
+・安心感
+・家族時間
+・自由
+・前進感
+
+など。
+
+---
+
+■ current_priority
+
+現在強く引っ張られている優先軸。
+
+---
+
+例：
+
+・今は駅近重視
+・今は価格重視
+・今は築浅重視
+
+など。
+
+---
+
+■ surface_reason
+
+瞬間感情・短期反応。
+
+---
+
+例：
+
+・なんか好き
+・売れそうで怖い
+・テンション上がる
+・みんな欲しそう
+
+など。
+
+---
+
+重要：
+
+decision_OS は、
+
+❌ current_priority を
+fixed_core と同一視しない。
+
+---
+
+また：
+
+❌ surface_reason を
+decision核と同一視しない。
+
+---
+
+decision_OS が扱うのは、
+
+👉 「今どこが強く作用しているか」
+
+である。
+
+---
+
+③ 本命形成を循環させる
 
 ---
 
@@ -284,6 +500,8 @@ decision_OS は、
 ・時間経過
 ・家族相談
 ・市場変化
+・future視点
+・drift recovery
 
 などを通して、
 
@@ -337,7 +555,57 @@ decision_OS は、
 
 ---
 
-③ 次decisionを提示する
+=============================
+
+■ 本命感とは何か（重要）
+
+=============================
+
+本命感とは、
+
+❌ スペック一致
+
+ではない。
+
+---
+
+⭕ 「fixed_coreとの接続感」
+
+である。
+
+---
+
+つまり：
+
+・違和感が少ない
+・許容可能
+・現実接触後も向き合えそう
+・比較後も残したい
+・未来崩壊感が少ない
+・生活イメージが持てる
+
+など。
+
+---
+
+重要：
+
+本命感は、
+
+❌ 完璧条件
+
+ではない。
+
+---
+
+⭕ 「現実の中でも、
+向き合い続けられる感覚」
+
+である。
+
+---
+
+④ 次decisionを提示する
 
 ---
 
@@ -365,7 +633,7 @@ decision_OS は、
 
 例：
 
-・固定核へ戻る
+・fixed_coreへ戻る
 ・比較軸を整理する
 ・本命感を整理する
 ・現実ラインを整理する
@@ -392,7 +660,7 @@ CTAは、
 
 ---
 
-④ decision driftを可視化する
+⑤ decision driftを可視化する
 
 ---
 
@@ -408,8 +676,7 @@ decision_OS は、
 
 driftとは、
 
-👉 本来の固定核や判断軸から、
-decisionがズレ始めること
+👉 fixed_coreと現在decisionの距離変化
 
 である。
 
@@ -456,17 +723,98 @@ driftは、
 
 ---
 
-これは：
+重要：
 
-・comparison_role
-・discomfort_connection
-・decision_update_triggers
+decision_OS の目的は、
 
-と接続される。
+❌ drift除去
+
+ではない。
 
 ---
 
-⑤ comparisonを内部循環として扱う
+⭕ 「何がズレ始めているかを理解し、
+fixed_coreへ戻れるようにすること」
+
+である。
+
+---
+
+⑥ drift recoveryを支援する（追加・重要）
+
+---
+
+人は、
+
+・比較疲れ
+・条件増殖
+・価格暴走
+・理想暴走
+・future不安
+・情報過多
+
+などによって、
+
+fixed_coreから離れることがある。
+
+---
+
+しかし：
+
+人は戻ることもできる。
+
+---
+
+これを：
+
+👉 drift recovery
+
+として扱う。
+
+---
+
+decision_OS は、
+
+⭕ 「戻れる構造」
+
+を持つ。
+
+---
+
+例：
+
+・比較疲れ後に、
+最初の本命感を思い出す
+
+---
+
+・条件増殖後に、
+本当に欲しかった生活へ戻る
+
+---
+
+・future不安後に、
+今の生活価値へ戻る
+
+---
+
+重要：
+
+decision_OS は、
+
+❌ drift固定化
+
+ではない。
+
+---
+
+⭕ 「fixed_coreへ戻れる循環」
+
+を支援する。
+
+---
+
+⑦ comparisonを内部循環として扱う
 
 ---
 
@@ -514,6 +862,7 @@ comparisonの役割：
 ・迷い整理
 ・本命整理
 ・decision drift整理
+・fixed_core露出
 ・保存昇格
 ・decision更新
 
@@ -530,7 +879,8 @@ comparisonは、
 
 ---
 
-⭕ 「本命を整理するための一時装置」
+⭕ 「fixed_coreを露出し、
+本命感を整理するための一時装置」
 
 である。
 
@@ -567,7 +917,7 @@ comparison後は、
 
 ---
 
-⑥ decision更新を許容する
+⑧ decision更新を許容する
 
 ---
 
@@ -623,6 +973,7 @@ decision_OS が扱うのは、
 ❌ 過去履歴中心  
 ❌ 保存履歴中心  
 ❌ 完了状態中心  
+❌ future最適化中心  
 
 ではない。
 
@@ -647,6 +998,101 @@ decision_state は、
 ---
 
 現在のdecision状態のみから導出する。
+
+---
+
+重要：
+
+future視点は存在する。
+
+---
+
+ただし：
+
+future視点は、
+
+❌ 主役
+
+ではない。
+
+---
+
+⭕ 「現在decisionを整理するための補助線」
+
+として扱う。
+
+---
+
+=============================
+
+■ future視点との関係（重要）
+
+=============================
+
+future視点とは、
+
+❌ 単独未来予測
+
+ではない。
+
+---
+
+⭕ 各プロダクト由来の未来視点
+
+である。
+
+---
+
+例：
+
+■ rent_vs_buy
+・将来の生活コスト
+・所有感
+・選択自由度
+
+---
+
+■ loan_safety
+・将来支払い継続可能性
+
+---
+
+■ property_reader
+・将来違和感化しそうな点
+
+---
+
+■ purchase_motivation
+・将来守りたい生活
+
+---
+
+■ type_diagnosis
+・将来迷いやすい傾向
+
+---
+
+これらが：
+
+👉 「今のdecisionへどう影響しているか」
+
+を補助的に扱う。
+
+---
+
+重要：
+
+decision_OS は、
+
+❌ future不安OS
+
+ではない。
+
+---
+
+⭕ 「現在decision整理OS」
+
+である。
 
 ---
 
@@ -694,6 +1140,58 @@ decision_OS は、
 ⭕ 継続更新
 
 を扱う。
+
+---
+
+=============================
+
+■ decision continuity（重要）
+
+=============================
+
+decision_OS は、
+
+❌ decision memory
+
+だけではない。
+
+---
+
+⭕ decision continuity
+
+を扱う。
+
+---
+
+つまり：
+
+・前回何で迷ったか
+・何で本命感が揺れたか
+・何に戻ったか
+・どこでdriftしたか
+・どこでfixed_coreへ戻ったか
+
+を、
+
+👉 「現在decisionへ接続する」
+
+ために存在する。
+
+---
+
+重要：
+
+履歴は、
+
+❌ 保存記録
+
+ではない。
+
+---
+
+⭕ 「現在decision理解補助」
+
+として存在する。
 
 ---
 
@@ -828,7 +1326,8 @@ CTAは、
 ---
 
 ⭕ decision progression trigger  
-⭕ decision drift修正トリガー
+⭕ decision drift修正トリガー  
+⭕ fixed_core再接続トリガー
 
 である。
 
@@ -836,7 +1335,7 @@ CTAは、
 
 decision_OS におけるCTAは：
 
-・固定核へ戻る
+・fixed_coreへ戻る
 ・比較軸を整理する
 ・本命感を整理する
 ・現実条件を整理する
@@ -998,6 +1497,7 @@ comparisonは：
 ❌ SUUMO mini化  
 ❌ スコア主導化  
 ❌ 完了管理化  
+❌ future不安煽りOS化  
 
 ---
 
@@ -1011,6 +1511,7 @@ decision_OS の強みは、
 
 ⭕ decision progression  
 ⭕ 本命形成循環  
+⭕ fixed_core再接続  
 ⭕ decision現在地整理
 
 だから。
@@ -1061,10 +1562,11 @@ decision_OS のroleは変えない。
 decision_OSとは、
 
 👉 現在のdecision現在地を反映し  
+👉 fixed_coreへ再接続しながら  
 👉 本命形成とdecision driftを整理し  
-👉 次decisionへ接続しながら  
-👉 decisionを循環・更新し続けるための
-家買う予備校の中核OSである。
+👉 comparison・現実接触・future視点を内部循環させ  
+👉 decisionを継続的に更新し続ける  
+家買う予備校の中核decision OSである。
 
 ---
 
@@ -1072,5 +1574,6 @@ decision_OSとは、
 
 👉 「今どこで迷い、
 どこが本命化し、
-どこがズレ始めているかを整理しながら、
+どこがfixed_coreからズレ始め、
+どこへ戻ろうとしているかを整理しながら、
 decisionを更新し続けるOS」
