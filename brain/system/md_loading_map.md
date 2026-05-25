@@ -1,6 +1,6 @@
 # md_loading_map.md
-Updated: 2026-04-17
-Status: Active
+Updated: 2026-05-25
+Status: Core
 
 =============================
 
@@ -8,26 +8,163 @@ Status: Active
 
 =============================
 
-👉 作業内容ごとに「どのmdを読むか」を定義する  
+本ドキュメントは、
 
-👉 **最小読み込みで最大精度を出すための運用設計**
+👉 作業内容ごとに
+「どのmdを読むべきか」
+
+を定義する。
+
+目的は、
+
+・最小読み込み  
+・責務分離維持  
+・decision構造維持  
+・drift防止  
+・AI精度安定化  
+・引き継ぎ効率化  
+
+である。
+
+---
+
+重要：
+
+家買う予備校は、
+
+❌ 単発UI群  
+❌ 単発診断群  
+❌ 無秩序なmd集合  
+
+ではない。
+
+---
+
+⭕ 「decision loop OS」
+
+である。
+
+---
+
+そのため：
+
+❌ 関係ないmdを大量投入
+
+すると、
+
+・責務混線  
+・STATE崩壊  
+・CTA崩壊  
+・drift概念崩壊  
+・comparison役割崩壊  
+
+が発生する。
+
+---
+
+つまり：
+
+👉 「必要なものだけ読む」
+
+ことが、
+OS維持において最重要。
 
 ---
 
 =============================
 
-■ 最重要ルール
+■ 最重要ルール（超重要）
 
 =============================
 
 ① 全部読ませない  
-② 必須だけ読む  
-③ systemを優先  
-④ decisionに関係するものを優先（最重要）  
 
 ---
 
-👉 **読みすぎるほど精度は落ちる**
+② 必須だけ読む  
+
+---
+
+③ systemを優先する  
+
+---
+
+④ decisionに関係するものを優先する（最重要）
+
+---
+
+⑤ products側だけ読ませない
+
+---
+
+⑥ drift / STATE / CTA を
+products側で再定義させない
+
+---
+
+⑦ UI改善でも、
+decision構造を先に確認する
+
+---
+
+重要：
+
+❌ 読み込み量 = 精度
+
+ではない。
+
+---
+
+⭕ 「責務整合」
+
+が精度。
+
+---
+
+=============================
+
+■ 現在のOS中核（重要）
+
+=============================
+
+現在のOS中核は：
+
+・decision progression  
+・fixed_core  
+・current decision  
+・本命形成  
+・drift整理  
+・現実接触  
+・CTA = decision update trigger  
+
+である。
+
+---
+
+そのため、
+
+以下system群は現在の最重要コア。
+
+---
+
+■ 最重要system群（2026-05時点）
+
+- decision_framework.md  
+- state_definition.md  
+- state_to_cta_connection.md  
+- drift_detection.md  
+- discomfort_connection.md  
+- decision_update_triggers.md  
+- comparison_role.md  
+- decision_os_role.md  
+
+---
+
+重要：
+
+迷ったら：
+
+👉 まずここを読む。
 
 ---
 
@@ -37,14 +174,35 @@ Status: Active
 
 =============================
 
-① brain/system（共通ロジック）  
+① brain/system（共通OS構造）  
+
+---
+
 ② 対象プロダクト  
+
+---
+
 ③ 接続系  
+
+---
+
 ④ UI  
 
 ---
 
-👉 **迷ったら system を先に読む**
+重要：
+
+❌ UIから読む
+
+ではない。
+
+---
+
+⭕ 「decision構造」
+→ 「プロダクト翻訳」
+→ 「UI」
+
+の順。
 
 ---
 
@@ -54,244 +212,672 @@ Status: Active
 
 =============================
 
-👉 UI触る時
+=============================
 
-- result_screen.md  
-- ui_flow.md  
-- cta_strategy.md  
-- state_detection.md  
+■ UI触る時
+
+=============================
+
+必須：
+
+- decision_framework.md  
+- state_definition.md  
+- state_to_cta_connection.md  
+- 対象productのui系md  
 
 ---
 
-👉 ロジック触る時
+理由：
 
+UIでも：
+
+・STATE  
+・CTA  
+・decision progression  
+
+を壊す可能性があるため。
+
+---
+
+=============================
+
+■ ロジック触る時
+
+=============================
+
+必須：
+
+- decision_framework.md  
+- state_definition.md  
+- drift_detection.md  
 - diagnosis_logic.md  
 - output_logic.md  
+
+---
+
+補助：
+
+- discomfort_connection.md  
+- decision_update_triggers.md  
+
+---
+
+=============================
+
+■ drift関連触る時（超重要）
+
+=============================
+
+必須：
+
+- drift_detection.md  
+- discomfort_connection.md  
+- decision_framework.md  
+- comparison_role.md  
+
+---
+
+理由：
+
+現在：
+
+❌ future恐怖
+
+ではなく、
+
+⭕ current drift
+⭕ fixed_core drift
+⭕ decision progression drift
+
+を中心としているため。
+
+---
+
+=============================
+
+■ CTA触る時（超重要）
+
+=============================
+
+必須：
+
+- state_definition.md  
+- state_to_cta_connection.md  
+- decision_framework.md  
+- cta_role.md  
+
+---
+
+補助：
+
+- decision_update_triggers.md  
+- comparison_role.md  
+
+---
+
+重要：
+
+CTAは：
+
+❌ 導線
+
+ではない。
+
+---
+
+⭕ decision update trigger
+
+として扱う。
+
+---
+
+=============================
+
+■ STATE触る時（超重要）
+
+=============================
+
+必須：
+
+- state_definition.md  
+- state_detection.md  
+- state_to_cta_connection.md  
 - decision_framework.md  
 
 ---
 
-👉 接続触る時
+補助：
 
-- product_connection_design.md  
+- drift_detection.md  
+- decision_os_role.md  
+
+---
+
+重要：
+
+STATEは：
+
+❌ UI状態
+
+ではない。
+
+---
+
+⭕ 「未整理decision領域」
+
+である。
+
+---
+
+=============================
+
+■ comparison触る時（超重要）
+
+=============================
+
+必須：
+
+- comparison_role.md  
+- decision_framework.md  
+- drift_detection.md  
 - state_to_cta_connection.md  
-- line_strategy.md  
 
 ---
 
-👉 property_reader触る時
+補助：
 
-- product_concept.md  
-- ux_flow.md  
-- scoring_logic.md  
-- rules_definition.md  
+- discomfort_connection.md  
+- property_reader/comparison_flow.md  
 
 ---
 
-👉 decision周り触る時（最重要）
+重要：
 
-- user_data_strategy.md  
-- history_structure.md  
-- comparison_flow.md  
+comparisonは：
+
+❌ 勝敗決定
+
+ではない。
 
 ---
 
-👉 decision_os触る時（追加・最重要）
+⭕ 本命形成 + drift整理
+
+である。
+
+---
+
+=============================
+
+■ decision_OS触る時（最重要）
+
+=============================
+
+必須：
+
+- decision_os_role.md  
+- decision_framework.md  
+- state_definition.md  
+- state_to_cta_connection.md  
+- drift_detection.md  
+- decision_update_triggers.md  
+
+---
+
+補助：
 
 - decision_os/concept.md  
 - decision_os/ux_flow.md  
 - user_data_strategy.md  
-- state_detection.md  
-- state_to_cta_connection.md  
 
 ---
 
-👉 external導線触る時（追加）
+重要：
 
-- external_property_search.md  
+decision_OSは：
+
+❌ dashboard
+
+ではない。
+
+---
+
+⭕ 「decision現在地OS」
+
+である。
+
+---
+
+=============================
+
+■ property_reader触る時（超重要）
+
+=============================
+
+必須：
+
+- property_reader/product_concept.md  
 - property_reader/ux_flow.md  
-- product_connection_design.md  
+- property_reader/scoring_logic.md  
+- property_reader/rules_definition.md  
+- property_reader/prompts_and_rules.md  
+- property_reader/state_labels.md  
+
+---
+
+補助：
+
+- drift_detection.md  
+- discomfort_connection.md  
+- comparison_role.md  
+- property_reader/comparison_flow.md  
+
+---
+
+重要：
+
+property_readerは：
+
+❌ 物件採点機
+
+ではない。
+
+---
+
+⭕ 本命形成 + 現実接触decision module
+
+である。
 
 ---
 
 =============================
 
-■ 用途別
+■ loan_safety触る時
 
 =============================
 
-## ① purchase_motivation UI
-
 必須：
-- result_screen.md  
-- output_logic.md  
-- ui_flow.md  
-- cta_strategy.md  
-- state_detection.md  
+
+- loan_safety/diagnosis_logic.md  
+- loan_safety/state_labels.md  
+- decision_framework.md  
+- drift_detection.md  
 
 ---
-
-## ② type診断
-
-必須：
-- product_concept.md  
-- diagnosis_logic.md  
-- cta_strategy.md  
 
 補助：
-- pairing_logic.md  
-- ui_result_flow.md  
 
----
-
-## ③ property_reader
-
-必須：
-- product_concept.md  
-- ux_flow.md  
-- scoring_logic.md  
-- rules_definition.md  
-
-補助：
-- data_connection.md  
-- prompts_and_rules.md  
-- screen_structure.md  
-
----
-
-## ④ property_reader（比較 / 履歴）
-
-必須：
-- history_structure.md  
-- comparison_flow.md  
-- user_data_strategy.md  
-
----
-
-👉 **ここがOSの中核（decision蓄積）**
-
----
-
-## ⑤ decision_os（追加・最重要）
-
-必須：
-- decision_os/concept.md  
-- decision_os/ux_flow.md  
-- user_data_strategy.md  
-- state_detection.md  
+- discomfort_connection.md  
 - state_to_cta_connection.md  
 
+---
+
+重要：
+
+loan_safetyは：
+
+❌ 不安生成
+
+ではない。
+
+---
+
+⭕ 現実接触 + 許容整理
+
+である。
+
+---
+
+=============================
+
+■ purchase_motivation触る時
+
+=============================
+
+必須：
+
+- purchase_motivation/diagnosis_logic.md  
+- purchase_motivation/output_logic.md  
+- purchase_motivation/discomfort_connection.md  
+- decision_framework.md  
+- drift_detection.md  
+
+---
+
 補助：
+
+- property_reader_connection.md  
+- state_definition.md  
+
+---
+
+重要：
+
+purchase_motivationは：
+
+❌ 条件整理
+
+ではない。
+
+---
+
+⭕ fixed_core整理
+
+である。
+
+---
+
+=============================
+
+■ type_diagnosis触る時
+
+=============================
+
+必須：
+
+- type_diagnosis/product_concept.md  
+- diagnosis_logic.md  
+- state_definition.md  
+
+---
+
+補助：
+
+- pairing_logic.md  
+- rabbit_types.md  
+
+---
+
+重要：
+
+type_diagnosisは：
+
+❌ MBTI遊び
+
+ではない。
+
+---
+
+⭕ 「どうdriftしやすいか」
+
+を理解する入口。
+
+---
+
+=============================
+
+■ external導線触る時
+
+=============================
+
+必須：
+
 - external_property_search.md  
 - product_connection_design.md  
-
----
-
-👉 **判断の蓄積・更新ハブ**
-
----
-
-## ⑥ CTA改善
-
-必須：
-- cta_strategy.md  
-- state_detection.md  
 - state_to_cta_connection.md  
 
 ---
 
-## ⑦ LINE設計
+補助：
+
+- property_reader/ux_flow.md  
+- decision_framework.md  
+
+---
+
+重要：
+
+externalは：
+
+❌ 集客入口
+
+だけではない。
+
+---
+
+⭕ decision loop入口
+
+である。
+
+---
+
+=============================
+
+■ LINE設計触る時
+
+=============================
 
 必須：
+
 - line_strategy.md  
 - funnel_and_line_strategy.md  
-- cta_strategy.md  
-
-補助：
 - user_data_strategy.md  
-
----
-
-## ⑧ OS設計 / 横断改善
-
-必須：
-- user_data_strategy.md  
-- funnel_logic.md  
 - decision_framework.md  
 
 ---
 
-👉 **全体思想を壊さないためのセット**
+補助：
+
+- decision_os_role.md  
+- drift_detection.md  
+
+---
+
+重要：
+
+LINEは：
+
+❌ メルマガ
+
+ではない。
+
+---
+
+⭕ decision continuity layer
+
+である。
 
 ---
 
 =============================
 
-■ 引き継ぎ用テンプレ
+■ OS横断改善触る時（最重要）
 
 =============================
 
-新しい実行環境に作業を引き継ぐときは、以下の順で渡す。
+必須：
+
+- decision_framework.md  
+- state_definition.md  
+- state_to_cta_connection.md  
+- drift_detection.md  
+- discomfort_connection.md  
+- comparison_role.md  
+- decision_os_role.md  
+- decision_update_triggers.md  
 
 ---
 
-### 1. やること
+補助：
 
-例：  
-property_reader の比較UXを改善したい  
-
----
-
-### 2. 必須md
-
-loading mapから該当する必須ファイルのみ渡す  
+- funnel_logic.md  
+- product_connection_design.md  
+- user_data_strategy.md  
 
 ---
 
-### 3. 補助md
+重要：
 
-必要最低限だけ追加する  
+ここを読まずに：
+
+❌ UIだけ改善
+
+すると、
+
+decision loopが壊れる。
 
 ---
 
-### 4. 禁止事項
+=============================
+
+■ MVP実装時の優先順位（重要）
+
+=============================
+
+現在優先するもの：
+
+① decision progression  
+② STATE整合  
+③ CTA整合  
+④ drift整理  
+⑤ 本命形成自然化  
+⑥ fixed_core接続  
+
+---
+
+後回し：
+
+❌ animation polish  
+❌ copy polish  
+❌ visual polish  
+❌ gamification  
+❌ KPI最適化  
+
+---
+
+重要：
+
+現在は：
+
+❌ conversion optimization phase
+
+ではない。
+
+---
+
+⭕ 「decision loop stabilization phase」
+
+である。
+
+---
+
+=============================
+
+■ 引き継ぎテンプレ（超重要）
+
+=============================
+
+新しいAI環境へ引き継ぐ時：
+
+以下順で渡す。
+
+---
+
+① やること
 
 例：
 
-- 構造変更しない  
-- 実装の話に行きすぎない  
-- 既存思想を壊さない  
-- 指定されていないファイルを勝手に編集しない  
-- decision構造を壊さない（最重要）  
+comparison UXを改善したい
 
 ---
 
-### 5. 出力ルール
+② 必須md
+
+loading_mapから必要最低限だけ渡す。
+
+---
+
+③ 補助md
+
+必要なものだけ追加。
+
+---
+
+④ 今回触っていい責務
 
 例：
 
-- 1ブロックで出す  
-- ネストなしで出す  
-- 差し替え位置を明記する  
-- 既存を消さず追記する（原則）  
+・CTA補助文言のみ  
+・STATE変更禁止  
+・drift定義変更禁止  
+
+---
+
+⑤ 禁止事項
+
+例：
+
+- STATE増殖禁止  
+- recommendation禁止  
+- CTA複数禁止  
+- decision loop破壊禁止  
+- 本命形成を勝敗比較化しない  
+- future恐怖主役化禁止  
+
+---
+
+⑥ 出力ルール
+
+例：
+
+- 1ブロック  
+- 差し替え位置明記  
+- 簡略化禁止  
+- 既存思想削除禁止  
 
 ---
 
 =============================
 
-■ NG
+■ NG（超重要）
 
 =============================
 
-- 無関係なmdを読み込む  
-- UIなのにロジックをいじる  
-- ロジックなのにUXを変える  
-- decisionを考慮しない変更  
-- decision_osを飛ばして判断フローを作る  
+❌ 無関係md大量投入  
 
 ---
 
-👉 **精度が崩れる原因**
+❌ productsだけ読んでsystem無視  
+
+---
+
+❌ UIだけ見てdecision構造無視  
+
+---
+
+❌ driftを未来恐怖へ戻す  
+
+---
+
+❌ CTAをCV導線化する  
+
+---
+
+❌ comparisonを勝敗化する  
+
+---
+
+❌ STATEを進捗管理化する  
+
+---
+
+❌ decision_OSをdashboard化する  
+
+---
+
+❌ recommendation導入  
+
+---
+
+❌ 「買うべき」思想  
+
+---
+
+これらは：
+
+👉 decision OS崩壊原因
+
+になる。
 
 ---
 
@@ -304,12 +890,15 @@ loading mapから該当する必須ファイルのみ渡す
 md_loading_mapとは、
 
 👉 作業目的に応じて  
-👉 必要なmdだけを読み分け  
-👉 decision構造を維持しながら  
-👉 新しい実行環境でも正確に作業を再開するための運用マップである  
+👉 必要なmdだけを最小読み込みし  
+👉 STATE・CTA・drift・本命形成・decision progressionの整合性を維持しながら  
+👉 新しい実行環境でも
+decision loop OSを壊さず作業を継続するための
+読み込み運用設計である。
 
 ---
 
 ■ 一言でいうと
 
-👉 「読みすぎを防ぎ、精度を守るための設計」
+👉 「読みすぎを防ぎ、
+decision OSの整合性を守るための運用マップ」
