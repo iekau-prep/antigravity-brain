@@ -1,5 +1,5 @@
 # brain/system/state_detection.md
-Updated: 2026-05-20
+Updated: 2026-05-25
 Status: Core
 
 =============================
@@ -17,8 +17,8 @@ Status: Core
 
 目的は、
 
-👉 decision（意思決定）の現在地を解釈し  
-👉 今どのdecisionフェーズにいるかを判定し  
+👉 current decision（現在decision）を解釈し  
+👉 今どの未整理decision領域が優先かを判定し  
 👉 次に必要なdecision更新へ正しく接続すること
 
 である。
@@ -32,6 +32,7 @@ Status: Core
 ❌ 行動管理OS  
 ❌ タスク管理OS  
 ❌ 診断結果管理OS  
+❌ funnel進行管理OS  
 
 ではない。
 
@@ -51,7 +52,10 @@ Status: Core
 
 ---
 
-⭕ 「decisionが今どこで止まっているか」
+⭕ 「current decision が
+今どこで止まり、
+どこでdriftし、
+何が未整理か」
 
 である。
 
@@ -64,6 +68,8 @@ Status: Core
 ・decision_framework.md
 ・decision_update_triggers.md
 ・decision_os_role.md
+・drift_detection.md
+・comparison_role.md
 
 と接続される。
 
@@ -81,6 +87,7 @@ Status: Core
 ❌ 行動監視  
 ❌ 感情推定  
 ❌ リアルタイム最適化  
+❌ recommendation engine  
 
 を目的としない。
 
@@ -89,7 +96,9 @@ Status: Core
 目的は：
 
 👉 「今この人は、
-decisionのどこで止まっているか」
+decisionのどこで止まり、
+何が未整理で、
+どこでdriftし始めているか」
 
 を解釈し、
 
@@ -106,12 +115,14 @@ STATEとは、
 ❌ 属性  
 ❌ 性格  
 ❌ ステータス  
+❌ レベル  
 
 ではない。
 
 ---
 
-⭕ 「decisionフェーズ」
+⭕ 「今優先して整理すべき
+未整理decision領域」
 
 である。
 
@@ -122,6 +133,7 @@ STATEとは、
 ・変化する  
 ・戻る  
 ・揺れる  
+・循環する  
 ・再発する  
 
 ことを前提とする。
@@ -183,7 +195,8 @@ STATE判定で重要なのは、
 
 ---
 
-⭕ 「decisionが今どこで止まっているか」
+⭕ 「current decision が
+今どこで止まっているか」
 
 である。
 
@@ -192,7 +205,7 @@ STATE判定で重要なのは、
 例えば：
 
 ・物件を見ている
-→ 実務判断とは限らない
+→ 本命形成とは限らない
 
 ・比較している
 → decision更新しているとは限らない
@@ -204,11 +217,13 @@ STATE判定で重要なのは、
 
 重要なのは：
 
-・固定核が見えているか
+・fixed_coreが見えているか
 ・本命形成が進んでいるか
-・比較疲れしているか
-・現実不安で止まっているか
-・decisionが散っているか
+・comparison driftしているか
+・現実接触不足で止まっているか
+・decision progressionが止まっているか
+・条件増殖しているか
+・本命感が消えているか
 
 である。
 
@@ -226,7 +241,7 @@ STATEは、
 
 ---
 
-⭕ 「今何を解くべきか」
+⭕ 「今何を整理・更新するべきか」
 
 を判定する。
 
@@ -234,17 +249,17 @@ STATEは、
 
 例：
 
-・比較しすぎ
-→ comparison整理
+・comparison drift
+→ fixed_core再整理
 
-・現実不安
+・現実接触不足
 → loan_safety
 
-・判断軸未整理
+・固定核未整理
 → purchase_motivation
 
-・本命形成中
-→ property_reader
+・本命形成途中
+→ property_reader / comparison
 
 ---
 
@@ -258,59 +273,95 @@ STATEとは、
 
 ---
 
-④ LINE前とLINE後で役割が変わる
+④ current decision を最優先する
 
 ---
 
-ここが重要。
+STATE判定で最優先なのは：
 
----
+⭕ current decision
 
-LINE前：
-
-👉 判断整理フェーズ
-
----
-
-LINE後：
-
-👉 decision運用フェーズ
-
----
-
-そのため：
-
-LINE前は、
-
-・軽量判定
-・単発整理
-・入口接続
-
-を中心に扱う。
-
----
-
-一方LINE後は：
-
-・decision履歴
-・比較履歴
-・本命推移
-・drift検知
-・decision変化
-
-などを扱える。
+である。
 
 ---
 
 つまり：
 
-⭕ STATEはLINE接続後に進化する
+・今何を本命としているか
+・今どこで止まっているか
+・今どこでdriftしているか
+・今どこで違和感が増えているか
+・今何を整理したがっているか
 
-を前提とする。
+を優先する。
 
 ---
 
-⑤ シンプルを維持する
+重要：
+
+過去履歴やfuture視点は存在する。
+
+---
+
+ただし：
+
+❌ 主役
+
+ではない。
+
+---
+
+⭕ 「現在decision整理の補助情報」
+
+として扱う。
+
+---
+
+⑤ LINE前後は「連続性の差」である
+
+---
+
+LINE前：
+
+👉 単発decision整理
+
+---
+
+LINE後：
+
+👉 decision continuity
+
+---
+
+つまり：
+
+LINE接続後は、
+
+・decision履歴
+・比較履歴
+・本命推移
+・drift recovery
+・fixed_core推移
+
+などを扱える。
+
+---
+
+ただし重要：
+
+STATEの本質は変わらない。
+
+---
+
+重要なのは常に：
+
+⭕ 「今どこでdecisionが止まっているか」
+
+である。
+
+---
+
+⑥ シンプルを維持する
 
 ---
 
@@ -357,7 +408,7 @@ STATE1：
 ---
 
 STATE2：
-意思形成STATE
+固定核整理STATE
 
 ---
 
@@ -367,7 +418,7 @@ STATE3：
 ---
 
 STATE4：
-実務判断STATE
+本命形成STATE
 
 ---
 
@@ -381,7 +432,9 @@ STATEは：
 
 ---
 
-⭕ 現実接触によって往復する。
+⭕ decision循環構造
+
+として往復する。
 
 ---
 
@@ -389,7 +442,7 @@ STATEは：
 
 STATE4
 ↓
-ローン不安発生
+現実接触不足
 ↓
 STATE3
 
@@ -397,9 +450,17 @@ STATE3
 
 STATE4
 ↓
-comparison迷走
+comparison drift
 ↓
 STATE2再整理
+
+---
+
+STATE2
+↓
+本命形成開始
+↓
+STATE4
 
 ---
 
@@ -415,6 +476,8 @@ STATE2再整理
 
 ■ STATE1：自己理解STATE
 
+=============================
+
 役割：
 
 👉 「自分がどう迷うか」を理解する段階
@@ -427,6 +490,7 @@ STATE2再整理
 ・何を優先するか分からない
 ・判断基準がない
 ・入口段階
+・decision温度感が低い
 
 ---
 
@@ -435,6 +499,7 @@ STATE2再整理
 ・type_diagnosis
 ・入口理解
 ・感情整理
+・decision特性理解
 
 ---
 
@@ -456,7 +521,7 @@ STATE2再整理
 
 =============================
 
-■ STATE2：意思形成STATE
+■ STATE2：固定核整理STATE
 
 =============================
 
@@ -468,19 +533,22 @@ STATE2再整理
 
 状態例：
 
-・条件はある
-・でも優先順位が曖昧
-・比較するとブレる
-・decisionが散る
-・固定核が未整理
+・条件が散っている
+・優先順位が曖昧
+・comparisonするとブレる
+・decision driftが強い
+・fixed_coreが未整理
+・条件増殖している
+・本命感が安定しない
 
 ---
 
 必要なもの：
 
 ・purchase_motivation
+・fixed_core整理
 ・comparison整理
-・固定核理解
+・priority整理
 
 ---
 
@@ -506,7 +574,8 @@ STATE2再整理
 
 役割：
 
-👉 「そのdecisionが現実的に成立するか」
+👉 「そのdecisionが
+現実の中で成立しそうか」
 
 を整理する段階
 
@@ -514,11 +583,12 @@ STATE2再整理
 
 状態例：
 
-・ローン不安
-・支払い不安
-・生活維持不安
 ・現実感不足
-・decision停止
+・許容ライン未整理
+・生活成立感不足
+・支払い現実感不足
+・future不安で停止
+・現実接触不足によるdecision停止
 
 ---
 
@@ -532,7 +602,8 @@ STATE3は、
 
 ---
 
-⭕ 「不安によってdecisionが止まっている」
+⭕ 「現実接触不足によって、
+decision更新が止まっている」
 
 時に発火する。
 
@@ -542,7 +613,8 @@ STATE3は、
 
 ・loan_safety
 ・生活現実化
-・支払い現実化
+・許容ライン整理
+・現実接触
 
 ---
 
@@ -554,7 +626,7 @@ STATE3は、
 
 ---
 
-⭕ 「住み続けられそう感」
+⭕ 「現実の中で続けられそう感」
 
 である。
 
@@ -562,24 +634,27 @@ STATE3は、
 
 =============================
 
-■ STATE4：実務判断STATE
+■ STATE4：本命形成STATE
 
 =============================
 
 役割：
 
-👉 「具体物件との接触によって、
-本命形成を進める段階」
+👉 「どこを本命として、
+現実接触していくか」
+
+を整理する段階
 
 ---
 
 状態例：
 
-・物件比較中
-・内見進行
-・property_reader利用
-・本命候補あり
+・本命形成進行中
+・current decision が動いている
 ・保存 / 保留運用中
+・comparison整理中
+・本命感更新中
+・現実接触進行中
 
 ---
 
@@ -589,11 +664,11 @@ STATE4は、
 
 ❌ 「物件を見ている状態」
 
-だけではない。
+ではない。
 
 ---
 
-⭕ 「本命形成が動いている状態」
+⭕ 「本命形成が進行している状態」
 
 である。
 
@@ -605,6 +680,7 @@ STATE4は、
 ・comparison
 ・decision更新
 ・現実接触
+・本命感整理
 
 ---
 
@@ -614,7 +690,7 @@ STATE4は、
 
 =============================
 
-① decision状態（最重要）
+① current decision状態（最重要）
 
 ---
 
@@ -623,9 +699,10 @@ STATE4は、
 ・保存
 ・保留
 ・見送り
-・decision更新履歴
-・比較停滞
-・本命有無
+・decision更新状態
+・本命感状態
+・comparison停滞
+・decision progression停止
 
 ---
 
@@ -633,69 +710,114 @@ STATE4は、
 
 最優先信号は：
 
-⭕ 「decision状態」
+⭕ 「current decision状態」
 
 である。
 
 ---
 
-② purchase_motivation実施有無
+② fixed_core状態
 
 ---
 
 目的：
 
-👉 判断軸整理状態を把握する
+👉 「何を守りたいか」が
+整理されているか確認する
 
 ---
 
-③ type_diagnosis実施有無
+使用：
+
+・priority安定性
+・条件増殖
+・comparison drift
+・fixed_core埋没
 
 ---
 
-目的：
-
-👉 自己理解段階か把握する
-
----
-
-④ property_reader利用有無
-
----
-
-目的：
-
-👉 本命形成段階へ入っているか
-
----
-
-⑤ comparison到達有無
+③ 本命形成状態
 
 ---
 
 目的：
 
-👉 decision整理フェーズ発生を把握する
+👉 本命形成が進行しているか確認する
 
 ---
 
-⑥ loan_safety不安状態
+使用：
+
+・保存状態
+・保留状態
+・comparison状態
+・現実接触進行
+
+---
+
+④ 現実接触状態
 
 ---
 
 目的：
 
-👉 現実不安による停止を検知する
+👉 現実接触不足による停止を検知する
 
 ---
 
-⑦ LINE接続有無
+使用：
+
+・loan_safety停止
+・許容ライン未整理
+・生活成立感不足
+・future不安停止
+
+---
+
+⑤ drift状態
 
 ---
 
 目的：
 
-👉 使用可能decisionデータ範囲を切り替える
+👉 decision drift を検知する
+
+---
+
+使用：
+
+・comparison drift
+・本命感喪失
+・条件増殖
+・fixed_core埋没
+・decision散乱
+
+---
+
+⑥ type理解状態
+
+---
+
+目的：
+
+👉 自己理解段階か確認する
+
+---
+
+使用：
+
+・type_diagnosis未整理
+・decision温度感不足
+
+---
+
+⑦ LINE接続状態
+
+---
+
+目的：
+
+👉 利用可能なdecision continuity範囲を確認する
 
 ---
 
@@ -715,7 +837,8 @@ STATEは、
 
 ---
 
-⭕ 「今decisionがどこで止まっているか」
+⭕ 「今decisionがどこで止まり、
+何が未整理か」
 
 を優先する。
 
@@ -729,10 +852,11 @@ STATEは、
 
 条件：
 
-・現実不安あり
-・loan_safety不安あり
-・支払い不安あり
-・decision停止あり
+・現実接触不足
+・許容ライン未整理
+・生活成立感不足
+・現実不安によるdecision停止
+・future不安停止
 
 ---
 
@@ -740,24 +864,32 @@ STATEは、
 
 単なる不安ではなく、
 
-👉 「現実不安によるdecision停止」
+👉 「現実成立感不足によるdecision停止」
 
 を扱う。
 
 ---
 
+理由：
+
+止まっているものを
+先に解く必要があるため。
+
+---
+
 =============================
 
-■ STATE4：実務判断STATE
+■ STATE4：本命形成STATE
 
 =============================
 
 条件：
 
-・本命候補あり
-・property_reader利用あり
-・comparison進行あり
+・本命形成進行中
 ・保存 / 保留運用中
+・comparison進行中
+・current decision更新中
+・現実接触進行中
 
 ---
 
@@ -765,7 +897,7 @@ STATEは、
 
 ここでは：
 
-⭕ 「本命形成進行」
+⭕ 「本命形成更新」
 
 を扱う。
 
@@ -773,17 +905,18 @@ STATEは、
 
 =============================
 
-■ STATE2：意思形成STATE
+■ STATE2：固定核整理STATE
 
 =============================
 
 条件：
 
-・固定核未整理
-・優先順位曖昧
-・比較するとブレる
+・fixed_core未整理
+・priority散乱
+・comparison drift
 ・条件増殖
-・purchase_motivation未整理
+・本命感不安定
+・decision drift増加
 
 ---
 
@@ -791,7 +924,7 @@ STATEは、
 
 ここでは：
 
-⭕ 「判断軸整理不足」
+⭕ 「fixed_core整理不足」
 
 を扱う。
 
@@ -807,7 +940,7 @@ STATEは、
 
 ・入口段階
 ・type未整理
-・家購入温度感低め
+・decision温度感低め
 ・他STATE非該当
 
 ---
@@ -830,7 +963,7 @@ STATEは、
 
 1. STATE3（現実停止）
 2. STATE4（本命形成）
-3. STATE2（判断軸整理）
+3. STATE2（fixed_core整理）
 4. STATE1（入口理解）
 
 ---
@@ -838,8 +971,8 @@ STATEは、
 理由：
 
 ・止まっているものを先に解く
-・本命形成中はそこを優先
-・その後に判断軸整理
+・current decisionが動いているならそこを優先
+・その後にfixed_core整理
 ・最後に入口理解
 
 ---
@@ -852,13 +985,13 @@ STATEは、
 
 state = null
 
-if 現実不安によってdecision停止:
+if 現実接触不足によってdecision停止:
     state = STATE3
 
-elif 本命候補あり or property_reader進行 or comparison進行:
+elif 本命形成進行中 or current_decision更新中:
     state = STATE4
 
-elif 固定核未整理 or comparison迷走 or purchase_motivation未整理:
+elif fixed_core未整理 or comparison_drift or 条件増殖:
     state = STATE2
 
 else:
@@ -878,7 +1011,7 @@ STATEとdecision_stateは別物。
 
 STATE：
 
-👉 「今どのdecisionフェーズか」
+👉 「今どの未整理decision領域が優先か」
 
 ---
 
@@ -891,7 +1024,7 @@ decision_state：
 例：
 
 STATE4
-（実務判断）
+（本命形成）
 
 の中に：
 
@@ -910,21 +1043,21 @@ STATE4
 
 =============================
 
-■ decision_osとの関係（最重要）
+■ decision_OSとの関係（最重要）
 
 =============================
 
-decision_osでは：
+decision_OSでは：
 
-① decision一覧表示  
+① current decision表示  
 ② STATE算出  
-③ CTA1つ表示  
+③ 主CTA1つ表示  
 
 ---
 
 つまり：
 
-👉 「整理 → 次のdecision更新」
+👉 「現在整理 → 次decision更新」
 
 を扱う。
 
@@ -935,6 +1068,23 @@ STATEは：
 👉 decision_OSの中核ロジック
 
 である。
+
+---
+
+重要：
+
+decision_OSは、
+
+❌ dashboard
+
+ではない。
+
+---
+
+⭕ 「今どこでdecisionが止まり、
+何を更新する必要があるか」
+
+を扱うOSである。
 
 ---
 
@@ -976,7 +1126,7 @@ result_screenは、
 
 制約：
 
-・decision履歴不足
+・decision continuity不足
 ・比較履歴不足
 ・本命推移不足
 
@@ -992,7 +1142,7 @@ result_screenは、
 
 LINE前は：
 
-👉 「判断整理」
+👉 単発decision整理
 
 を主目的にする。
 
@@ -1007,18 +1157,32 @@ LINE前は：
 利用可能：
 
 ・decision履歴
-・比較推移
+・comparison推移
 ・本命変化
-・drift検知
-・現実接触履歴
+・drift recovery
+・fixed_core推移
 
 ---
 
 つまり：
 
-⭕ 「decision運用STATE」
+⭕ 「decision continuity」
 
-へ進化する。
+が強化される。
+
+---
+
+ただし重要：
+
+STATE判定の本質は変わらない。
+
+---
+
+重要なのは：
+
+⭕ 「今どこでdecisionが止まっているか」
+
+である。
 
 ---
 
@@ -1033,6 +1197,7 @@ LINE前は：
 ❌ 滞在時間分析  
 ❌ リアルタイム最適化  
 ❌ recommendation最適化  
+❌ 行動追跡最適化  
 
 ---
 
@@ -1078,9 +1243,10 @@ STATEで最も重要なのは、
 
 state_detectionとは、
 
-👉 decision状態を中心に  
+👉 current decision状態を中心に  
 👉 ユーザーのdecision現在地を解釈し  
-👉 今どのdecisionフェーズにいるかを判定し  
+👉 今どの未整理decision領域が優先かを判定し  
+👉 fixed_core・drift・本命形成・現実接触を整理しながら  
 👉 次のdecision更新へ正しく接続するための
 中核ロジックである。
 
@@ -1089,4 +1255,5 @@ state_detectionとは、
 ## 一言
 
 👉 「何をしたか」ではなく  
-👉 「decisionが今どこで止まっているか」でSTATEを決める
+👉 「current decision が今どこで止まり、
+何が未整理か」でSTATEを決める
