@@ -1,5 +1,5 @@
 # comparison_role.md
-Updated: 2026-05-24
+Updated: 2026-05-25
 Status: Core
 
 =============================
@@ -24,24 +24,27 @@ comparison は、
 ❌ ランキングUI  
 ❌ dashboard型比較画面  
 ❌ 「どっちが得か」を決める機能  
+❌ 最適物件探索機能  
+❌ comparison滞在型UI  
 
 ではない。
 
 ---
 
-⭕ 「comparison を通して、
-relative reason（相対reason）を生成しながら、
+⭕ 「current decision を整理しながら、
 
+・relative reason
 ・fixed_core
 ・本命感
 ・許容ライン
 ・decision drift
-・future drift
+・current drift
 
-を整理し、
+を露出・整理し、
 
-👉 decision を更新・収束させていく
-decision progression engine」
+👉 本命形成と
+decision progression を前へ進める
+一時的decision整理エンジン」
 
 として扱う。
 
@@ -59,8 +62,9 @@ comparison の目的は、
 
 ⭕ 「どちらを失いたくないか」
 ⭕ 「どちらの違和感が強いか」
-⭕ 「何を崩すと後悔しそうか」
-⭕ 「未来の自分がどこでdriftしそうか」
+⭕ 「どこで迷いが発生しているか」
+⭕ 「何を崩すとfixed_coreから離れそうか」
+⭕ 「どちらを現実の中で向き合えそうか」
 
 を整理することである。
 
@@ -74,8 +78,9 @@ comparison は：
 
 ---
 
-⭕ 「decision drift を露出させながら、
-本命感を育てていく現実接触装置」
+⭕ 「decision drift を露出しながら、
+本命形成を更新する
+decision progression support」
 
 として扱う。
 
@@ -85,12 +90,12 @@ comparison は：
 
 ・decision_framework.md
 ・drift_detection.md
-・future_drift.md
 ・decision_update_triggers.md
 ・fixed_core_definition.md
 ・property_reader / comparison_flow.md
 ・decision_os_role.md
 ・state_to_cta_connection.md
+・discomfort_connection.md
 
 を基盤として定義する。
 
@@ -111,9 +116,16 @@ comparison の本質は、
 ---
 
 ⭕ 「comparison を通して、
-fixed_core・relative reason・future drift を理解しながら、
 
-👉 本命形成decisionを更新していくこと」
+・relative reason
+・fixed_core
+・current drift
+・本命感
+・許容感
+
+を理解しながら、
+
+👉 current decision を整理・更新していくこと」
 
 である。
 
@@ -123,7 +135,7 @@ fixed_core・relative reason・future drift を理解しながら、
 
 comparison の主役は、
 
-❌ 物件
+❌ 物件比較
 
 ではない。
 
@@ -137,21 +149,21 @@ comparison の主役は、
 
 comparison によって：
 
+・何を失いたくないか
 ・何に安心するか
-・何を失うと嫌か
 ・どこで違和感が出るか
-・どこでdriftするか
-・どこまで許容できるか
-・未来の自分がどこで後悔しそうか
+・どこでdriftし始めているか
+・何を許容できるか
+・どこでfixed_coreが埋もれているか
 
-が見え始める。
+が露出し始める。
 
 ---
 
 comparison は：
 
-⭕ 「fixed_core を発見・圧縮・再接続しながら、
-本命感を形成していく
+⭕ 「fixed_core を再接続しながら、
+本命形成を更新していく
 decision progression process」
 
 として扱う。
@@ -185,7 +197,7 @@ property_reader 単体では：
 ⭕ absolute reason
 （単独で気になる理由）
 
-しか見えない。
+しか見えにくい。
 
 ---
 
@@ -195,9 +207,9 @@ comparison によって初めて：
 ・なぜBを失いたくないか
 ・何を許容できないか
 ・どちらの違和感が強いか
-・どちらが未来の自分に近いか
+・どちらがfixed_coreに近いか
 
-が見える。
+が露出する。
 
 ---
 
@@ -241,13 +253,13 @@ comparison が扱うのは、
 comparison は：
 
 ⭕ 「なぜ迷っているか」
-を生成する装置として存在する。
+を露出する装置として存在する。
 
 ---
 
 =============================
 
-② decision drift を露出する
+② current drift を露出する
 
 =============================
 
@@ -267,9 +279,9 @@ comparison は：
 ・比較疲れ
 ・理想暴走
 ・SNS影響
-・安全ライン逸脱
+・安全執着
 ・本命迷子
-・future anxiety
+・他人基準化
 
 などが、
 
@@ -320,7 +332,7 @@ comparison は：
 
 =============================
 
-③ fixed_core を発見する
+③ fixed_core を再接続する
 
 =============================
 
@@ -328,7 +340,7 @@ comparison は、
 
 👉 「本当に崩したくないもの」
 
-を発見する。
+を再接続する。
 
 ---
 
@@ -339,7 +351,7 @@ comparison は、
 ・失いたくないもの
 ・許容できないもの
 ・住みたい感覚
-・未来不安
+・違和感
 ・後悔しそうなライン
 
 を理解し始める。
@@ -371,7 +383,7 @@ comparison は：
 
 ---
 
-⭕ 「fixed_core 発見装置」
+⭕ 「fixed_core 再接続装置」
 
 として扱う。
 
@@ -422,9 +434,10 @@ comparison は：
 
 ---
 
-⭕ 「何を残すかを決める過程」
+⭕ 「何を残し、
+何を許容するか」
 
-である。
+を整理する過程である。
 
 ---
 
@@ -436,22 +449,22 @@ comparison は：
 
 ---
 
-⭕ 「何を守り、
-何を許容するか」
+⭕ 「fixed_coreを残しながら、
+現実の中で向き合える状態」
 
-を整理することである。
+を形成することである。
 
 ---
 
 =============================
 
-⑤ 本命感を生成する
+⑤ 本命感を更新する
 
 =============================
 
 本命感は：
 
-❌ 最初から存在する
+❌ 最初から完成している
 
 とは限らない。
 
@@ -470,15 +483,15 @@ comparison を通して、
 が整理され、
 
 👉 「この物件を、
-現実の中で考えたい」
+現実の中で向き合えそう」
 
-という感覚が生まれる。
+という感覚が形成される。
 
 ---
 
 comparison は：
 
-⭕ 「本命感生成装置」
+⭕ 「本命感更新装置」
 
 として扱う。
 
@@ -494,7 +507,7 @@ comparison後に重要なのは：
 
 ---
 
-⭕ 「本命感が少し育った」
+⭕ 「本命感が少し整理された」
 
 ことである。
 
@@ -532,7 +545,7 @@ comparison が更新するのは、
 
 ---
 
-⭕ 「decision状態」
+⭕ 「current decision」
 
 である。
 
@@ -542,9 +555,9 @@ comparison が更新するのは、
 
 ・本命感が増した
 ・違和感が増えた
-・future drift が見えた
-・比較疲れした
+・比較疲れが露出した
 ・fixed_core が整理された
+・許容ラインが見えた
 
 など。
 
@@ -561,7 +574,7 @@ comparison が更新するのは、
 ---
 
 ⭕ 「現時点では、
-fixed_coreとの適合感が弱い」
+fixed_coreとの接続感が弱い」
 
 という：
 
@@ -571,39 +584,46 @@ decision update 結果である。
 
 =============================
 
-⑦ future drift を扱う
+⑦ future視点を補助線として扱う
 
 =============================
 
 comparison は：
 
-❌ 「今どっちが良いか」
+❌ 「未来予測」
 
-だけを扱わない。
+を行わない。
 
 ---
 
-⭕ 「未来の自分が、
-どこでdriftしそうか」
+また：
 
-も扱う。
+❌ future drift を主役にしない。
+
+---
+
+future視点は、
+
+⭕ 「現在decisionを整理するための補助線」
+
+としてのみ扱う。
 
 ---
 
 例：
 
 ・今は価格安心感が強い
-→ 将来、生活導線を後悔しそう
+→ 将来、生活導線ストレスが増える可能性
 
 ---
 
 ・今は広さ重視
-→ 将来、通勤負荷が苦しくなりそう
+→ 将来、通勤負荷が苦しくなる可能性
 
 ---
 
 ・今は理想優先
-→ 将来、維持費不安が強くなりそう
+→ 将来、維持費不安が増える可能性
 
 ---
 
@@ -611,23 +631,15 @@ comparison は：
 
 これは：
 
-❌ 未来予測
+❌ 不安訴求
 
 ではない。
 
 ---
 
-⭕ 「future drift possibility」
+⭕ 「現在decisionの許容感整理」
 
 として扱う。
-
----
-
-comparison は：
-
-⭕ 「未来のdecision drift」
-
-を理解する場所でもある。
 
 ---
 
@@ -671,12 +683,11 @@ comparison は：
 そのため：
 
 ・保存枠制限
-・新候補追加
 ・現実接触
-・市場時間
 ・比較疲れ
-・future drift
 ・家族相談
+・市場時間
+・違和感露出
 
 などを通して、
 
@@ -773,8 +784,8 @@ comparison は：
 ・価格麻痺
 ・SNS影響
 ・理想暴走
-・安全ライン逸脱
-・future不安
+・安全執着
+・他人基準化
 
 など。
 
@@ -790,7 +801,7 @@ comparison は：
 
 =============================
 
-■ Phase3：本命形成
+■ Phase3：本命形成更新
 
 =============================
 
@@ -828,8 +839,8 @@ comparison は：
 
 ・許容できる
 ・fixed_coreに近い
-・未来後悔が少なそう
 ・住むイメージが持てる
+・現実接触後も向き合えそう
 
 という状態。
 
@@ -845,7 +856,7 @@ comparison は：
 
 =============================
 
-■ Phase4：収束
+■ Phase4：decision更新
 
 =============================
 
@@ -855,8 +866,8 @@ comparison は：
 ・内見
 ・現実接触
 ・新候補
-・future drift
 ・家族相談
+・drift recovery
 
 などを通して、
 
@@ -882,7 +893,7 @@ comparison は：
 
 ---
 
-⭕ 「今のfixed_coreとの適合感が、
+⭕ 「今のfixed_coreとの接続感が、
 相対的に弱かった」
 
 である。
@@ -918,11 +929,11 @@ comparisonでは：
 ・比較疲れ
 ・条件増殖
 ・理想暴走
-・future anxiety
 ・本命不在
 ・decision停止
+・安全執着
 
-が発生しやすい。
+などが発生しやすい。
 
 ---
 
@@ -950,15 +961,16 @@ decision更新
 
 comparison の役割は、
 
-❌ 比較精度向上
+❌ 不安増幅
 
 ではない。
 
 ---
 
-⭕ decision recovery
+⭕ decision progression friction
+（decision progressionを止めている摩擦）
 
-である。
+を露出することである。
 
 ---
 
@@ -1041,7 +1053,6 @@ fixed_core が衝突する場所
 ・年齢
 ・ライフステージ
 ・維持費
-・将来負担
 ・家族
 ・生活変化
 
@@ -1095,7 +1106,7 @@ comparison が行うのは：
 👉 「どこで迷っているか」
 👉 「どこでdriftし始めているか」
 👉 「何を失いたくないか」
-👉 「未来どこで後悔しそうか」
+👉 「どこに違和感があるか」
 
 を整理すること。
 
@@ -1139,8 +1150,8 @@ comparison は：
 
 主役は：
 
-⭕ 「何を本命として、
-現実接触していくか」
+⭕ 「どの本命感を、
+現実の中で向き合っていけるか」
 
 である。
 
@@ -1189,57 +1200,13 @@ comparison は：
 
 =============================
 
-■ LINE後comparison（重要）
-
-=============================
-
-LINE後では：
-
-・比較履歴
-・reason履歴
-・本命変遷
-・future drift履歴
-・比較疲れ
-・許容変化
-・fixed_core圧縮履歴
-
-などが蓄積される。
-
----
-
-comparison は：
-
-⭕ 「decision history visualization」
-
-へ進化する。
-
----
-
-重要：
-
-comparison は：
-
-❌ 単発session
-
-ではない。
-
----
-
-⭕ 「decision continuity」
-
-へ接続される。
-
----
-
-=============================
-
-■ comparison と decision_OS の関係
+■ comparison と decision_OS の関係（最重要）
 
 =============================
 
 decision_OS：
 
-👉 現在decisionを扱う
+👉 current decision を扱う
 
 ---
 
@@ -1248,7 +1215,7 @@ comparison：
 👉 relative reason
 👉 drift露出
 👉 fixed_core整理
-👉 本命形成
+👉 本命形成更新
 
 を扱う。
 
@@ -1260,9 +1227,26 @@ decision_OS が母体であり、
 
 comparison は：
 
-⭕ 一時的decision engine
+⭕ decision_OS内部で発生する
+一時的decision整理工程
 
 として存在する。
+
+---
+
+構造：
+
+decision_OS
+↓
+迷い増加
+↓
+comparison
+↓
+本命整理
+↓
+decision更新
+↓
+decision_OSへ戻る
 
 ---
 
@@ -1285,6 +1269,7 @@ comparison単独で
 ❌ 比較エンタメ化  
 ❌ 「最適物件提示」  
 ❌ SUUMO化  
+❌ 比較精度競争  
 
 ---
 
@@ -1292,11 +1277,14 @@ comparison単独で
 
 comparison の強みは、
 
-❌ 比較精度
+❌ 比較性能
 
 ではなく、
 
 ⭕ decision progression
+⭕ drift露出
+⭕ fixed_core再接続
+⭕ 本命形成更新
 
 だから。
 
@@ -1320,14 +1308,14 @@ comparison は：
 
 ・relative reason
 ・fixed_core
-・future drift
 ・違和感
 ・許容ライン
 ・本命感
+・decision drift
 
 を理解しながら、
 
-👉 decisionを更新・収束させていく場所
+👉 current decision を更新・収束させていく場所
 
 である。
 
@@ -1343,10 +1331,10 @@ comparisonとは、
 
 👉 relative reason を生成し  
 👉 decision drift を露出し  
-👉 fixed_core を発見・圧縮し  
-👉 future drift を理解しながら  
-👉 本命感を形成し  
-👉 段階的に decision を収束させていく  
+👉 fixed_core を再接続・圧縮し  
+👉 本命感を更新しながら  
+👉 current decision を整理し  
+👉 段階的に decision progression を前へ進めていく  
 decision progression engineである。
 
 ---
@@ -1355,4 +1343,5 @@ decision progression engineである。
 
 👉 「どちらが良いかではなく、
 どちらを失いたくないかを整理しながら、
-fixed_coreと本命感へ近づいていく装置」
+fixed_coreと本命感へ近づいていく
+decision progression装置」
