@@ -121,13 +121,13 @@ loan_safety
 ↓
 現実接触
 ↓
-decision更新
+decision準備
 ↓
-本命再形成
+decision
 
 ---
 
-👉 「現実によるdecision更新」
+👉 「現実によるdecision準備」
 
 を扱う。
 
@@ -202,7 +202,7 @@ loan_safety は、
 ① 現実ライン理解  
 ② 現実接触  
 ③ decision更新  
-④ 本命形成更新  
+④ 本命再整理  
 
 ---
 
@@ -930,17 +930,6 @@ CTA は：
 ⭕ 「現実条件込みのdecision状態」
 
 である。
-
----
-
-保存対象：
-
-・現実ライン
-・decision状態
-・fixed_coreとの関係
-・成立条件
-・risk理解
-・decision更新履歴
 
 ---
 
