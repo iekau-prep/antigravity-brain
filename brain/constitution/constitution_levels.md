@@ -50,6 +50,8 @@ Builder単独変更不可。
 
 例
 
+・家買う予備校の目的
+
 ・decision定義
 
 ・STATE定義
@@ -60,15 +62,13 @@ Builder単独変更不可。
 
 ・recommendation境界
 
-・time horizon
-
 ・fixed_core思想
-
-・家買う予備校の目的
 
 ・現実との接触思想
 
-・現実との接触フィードバック（仮）
+・time horizon
+
+・property_reader責務
 
 ⸻
 
