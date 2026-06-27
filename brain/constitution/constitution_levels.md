@@ -4,83 +4,73 @@ Updated: 2026-06-26
 
 Status: Active
 
-横断不変条件｜変更レベル定義
-
-目的
-
-家買う予備校全体において、
-
-横断要素がどこまで変更可能かを統一基準として定義する。
-
-重要：
-
-変更レベル定義
-≠
-横断思想定義
+Purpose
 
 本書は、
 
-「何をどのレベルで扱うか」
+家買う予備校 Constitution Library 全体の
+変更レベルを定義する。
 
-のみ定義する。
+本書は思想を定義しない。
+
+思想をどのレベルで管理するかのみ定義する。
 
 ⸻
 
+Constitution Library
+
+本ライブラリは、
+
+以下の文書で構成される。
+
+* constitution_preamble.md
+* constitution_judgement.md
+* constitution_experience.md
+* constitution_transfer.md
+* constitution_channel.md
+
+これらは、
+
+Constitution本文を整理・参照するためのライブラリである。
+
+Constitution本文そのものを置き換えるものではない。
+
+⸻
+
+Change Levels
+
 Level A｜憲法
 
-定義
-
-変更すると、
-
-家買う予備校そのものが変わる思想。
-
-運用
+家買う予備校そのものを規定する思想。
 
 変更には、
 
-・思想監査室レビュー
+* 思想監査室レビュー
+* Product Owner承認
 
-・Product Owner承認
+を必要とする。
 
-が必要。
-
-Builder単独変更不可。
-
-技術都合変更不可。
-
-例
+対象例
 
 ・家買う予備校の目的
-
 ・decision定義
-
 ・STATE定義
-
-・loop思想
-
+・判断形成思想
 ・continuity思想
-
-・recommendation境界
-
+・loop思想
 ・fixed_core思想
-
 ・現実との接触思想
-
-・time horizon
-
-・property_reader責務
+・受渡思想
+・チャネル思想
+・recommendation境界
 
 ⸻
 
 Level B｜準憲法
 
-定義
-
-思想は維持したまま、
+思想を維持したまま、
 
 構造改善可能なもの。
-
-運用
 
 Builder提案可。
 
@@ -88,159 +78,81 @@ Builder提案可。
 
 Product Owner採用判断。
 
-例
+対象例
 
-・type_diagnosis受渡
-
-・purchase_motivation受渡
-
-・comparison受渡
-
-・loan_safety受渡
-
-・property_reader受渡
-
-・module入力出力
-
-・CTA責務
+* module責務
+* module受渡
+* CTA責務
+* Builder Flow
+* Reading Guide
 
 ⸻
 
 Level C｜設計
 
-定義
-
 思想へ影響しない実現方法。
 
-運用
+対象例
 
-Builder提案可。
-
-技術監査判断可。
-
-必要時のみProduct Owner確認。
-
-例
-
-・URL
-
-・schema
-
-・API
-
-・Supabase
-
-・uuid
-
-・user_id
-
-・LINE同期
-
-・画面構成
-
-・UI表現
-
-・実装方式
+* API
+* Schema
+* URL
+* UI
+* Database
+* 実装方式
 
 ⸻
 
 Level D｜運用
 
-定義
+完成後も継続改善される運用。
 
-完成後も継続的に改善される運用。
+対象例
 
-運用
-
-番人主体。
-
-必要時のみProduct Owner確認。
-
-例
-
-・Phase
-
-・公開
-
-・KPI
-
-・観察
-
-・運用フロー
-
-・通知タイミング
+* KPI
+* 観察
+* Phase
+* 公開
+* 通知タイミング
+* 運用フロー
 
 ⸻
 
-AI運用原則
+AI Governance
 
 Builder
 
-Level Aは変更しない。
-
-Level Bを提案する。
-
-Level Cを設計する。
-
-Level Dは番人と連携する。
-
-⸻
+* Level Aを変更しない
+* Level Bを提案する
+* Level Cを設計する
+* Level Dは番人と連携する
 
 思想監査室
 
-Level Aを監査する。
-
-Level Bを確認する。
-
-Level Cへ介入しない。
-
-Level Dへ介入しない。
-
-⸻
+* Level Aを監査する
+* Level Bを確認する
 
 技術監査
 
-Level Cのみ主体。
-
-思想変更しない。
-
-⸻
+* Level Cのみ担当する
 
 番人
 
-Level Dのみ主体。
-
-思想判断しない。
-
-設計判断しない。
-
-⸻
+* Level Dのみ担当する
 
 Product Owner
 
-全Levelについて、
-
-最終採用判断を行う。
-
-重要：
-
-Product Ownerは監査主体ではない。
-
-最終決定者である。
+* 全Levelの最終採用判断を行う。
 
 ⸻
 
-基本原則
+Basic Principle
 
-重要：
+重要。
 
-「変更禁止」
+変更禁止ではない。
 
-ではない。
-
-「変更ハードルが異なる」
-
-という考え方で運用する。
+変更ハードルが異なる。
 
 Levelが高いほど、
 
