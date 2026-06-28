@@ -8,18 +8,52 @@ Status: Core
 
 =============================
 
-本モジュールは、
+Purpose
 
-👉 external_property_search（外部物件探索）から  
-👉 property_reader → decision OSへ戻すための導線設計
+本書は、
+
+external_property_searchが、
+
+外部物件探索から
+property_readerへ判断材料を受け渡し、
+
+decision loopへ復帰するための構造を定義する。
+
+扱う対象は、
+
+* 外部探索
+* 戻り導線
+* property_reader接続
+* decision loop復帰
+
+である。
+
+本書は、
+
+物件探索ではなく、
+
+「判断可能状態へ戻す構造」
 
 を定義する。
 
 ---
 
-目的は、
+Scope
 
-👉 「外に出ても戻ってくる構造」を作ること
+本書が扱うもの
+
+* 外部探索入口
+* 戻り導線
+* property_reader接続
+* decision loop復帰
+
+本書が扱わないもの
+
+* property評価
+* recommendation
+* comparison
+* decision判定
+* module責務
 
 ---
 
@@ -210,6 +244,21 @@ externalはプロダクトではない
 👉 プロダクト構造には含めない  
 
 ---
+
+=============================
+
+■ Related Documents
+
+=============================
+
+Core
+
+* decision_update_triggers.md
+* decision_os_role.md
+
+Concept
+
+* decision_framework.md
 
 =============================
 
