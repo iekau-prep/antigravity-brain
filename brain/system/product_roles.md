@@ -8,58 +8,44 @@ Status: Core
 
 =============================
 
-本ドキュメントは、
+Purpose
 
-👉 家買う予備校における
-各プロダクトのrole（役割）
+本書は、
 
-を定義する。
+家買う予備校を構成する
+各Productの役割（Role）を定義する。
 
----
+各Productは、
 
-重要：
+decision updateを支える
+専門moduleとして存在する。
 
-本OSにおいて、
+本書は、
 
-各プロダクトは、
+各Productが、
 
-❌ 単体診断ツール
-❌ 機能群
-❌ 回遊導線
-❌ funnel部品
+decision構造のどこを担当するか
 
-ではない。
+のみを定義する。
 
 ---
 
-⭕ 「decision更新を支える
-decision update module」
+Scope
 
-として存在する。
+本書が扱うもの
 
----
+* Product Role
+* Product責務
+* decision update上の担当範囲
+* Product間の役割分離
 
-本ドキュメントの目的は、
+本書が扱わないもの
 
-👉 各プロダクトが
-「decision更新構造のどこを担当するか」
-
-を固定することである。
-
----
-
-本ドキュメントは：
-
-・decision_framework.md
-・state_definition.md
-・decision_update_triggers.md
-・product_connection_design.md
-・state_to_cta_connection.md
-・decision_os_role.md
-
-を基盤として定義する。
-
----
+* Routing
+* STATE判定
+* CTA生成
+* 実装仕様
+* recommendation
 
 =============================
 
@@ -1193,3 +1179,36 @@ decision update module設計である。
 
 👉 「各プロダクトは、
 機能ではなくdecision更新役割を持つmodule群である」
+
+---
+
+Related Documents
+
+Constitution
+
+* constitution_judgement.md
+
+System
+
+* product_connection_design.md
+* decision_framework.md
+* decision_update_triggers.md
+* state_definition.md
+* state_detection.md
+* state_to_cta_connection.md
+* decision_os_role.md
+* comparison_role.md
+
+---
+
+Change Policy
+
+product_rolesは、
+
+CoreレイヤーのRole定義書である。
+
+各Productの役割は変更しない。
+
+接続方法や実装方法は、
+
+別Systemで改善対象とする。
