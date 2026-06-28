@@ -17,21 +17,51 @@ drift（判断軸ズレ / decision drift）の検知構造
 
 ---
 
-目的は、
+Purpose
 
-👉 ユーザーのdecision更新過程において、
+本書は、
 
-・何が変化し始めているか  
-・どこでfixed_coreが埋もれ始めているか  
-・どのreasonが暴走し始めているか  
-・なぜ本命形成が止まり始めているか  
-・どこでdecision progressionが停滞しているか  
+decision更新過程において発生する
+drift（判断軸のズレ）を
+解釈するための構造を定義する。
 
-を可視化し、
+扱う対象は、
 
-👉 「無意識のdecision drift」
+* fixed_coreとの距離変化
+* reason変化
+* comparisonによる揺れ
+* decision progression停滞
+* drift recovery
 
-を理解可能にすることである。
+である。
+
+本書は、
+
+driftそのものではなく、
+
+「なぜ現在のdecisionが変化しているのか」
+
+を理解可能にすることを目的とする。
+
+---
+
+Scope
+
+本書が扱うもの
+
+* drift定義
+* drift分類
+* drift原因
+* drift recovery
+* drift解釈
+
+本書が扱わないもの
+
+* STATE判定
+* CTA決定
+* Routing
+* recommendation
+* module責務
 
 ---
 
@@ -1251,16 +1281,20 @@ drift_detection の目的は、
 
 =============================
 
-MVPでは：
+MVPでは、
 
-・fixed_core drift  
-・current reason drift  
-・comparison drift  
-・decision progression drift  
-・保存 / 保留変化  
-・future driftの一部  
+以下のdriftを対象とする。
 
-を中心に扱う。
+* fixed_core drift
+* reason drift
+* comparison drift
+* decision progression drift
+
+future driftは、
+
+current decisionへ影響する補助要因としてのみ扱う。
+
+高度な推測やAI分析は行わない。
 
 ---
 
@@ -1276,6 +1310,31 @@ MVPでは：
 👉 「理解可能なdrift」
 
 を優先する。
+
+=============================
+
+■ Related Documents
+
+=============================
+
+Constitution
+
+* constitution_judgement.md
+
+Core
+
+* decision_update_triggers.md
+* comparison_role.md
+* decision_os_role.md
+* state_definition.md
+* state_detection.md
+* state_to_cta_connection.md
+
+Concept
+
+* fixed_core_definition.md
+* discomfort_connection.md
+* decision_framework.md
 
 ---
 
