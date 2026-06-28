@@ -1152,7 +1152,7 @@ Core
 
 Module Constitution
 
-* property_reader責務憲法 v1.0
+* property_reader.md
 
 ---
 
