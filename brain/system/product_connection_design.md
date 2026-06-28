@@ -1,5 +1,5 @@
 # product_connection_design.md
-Updated: 2026-05-21
+Updated: 2026-06-29
 Status: Core
 
 =============================
