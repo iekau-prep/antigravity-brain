@@ -1,247 +1,156 @@
-# state_to_action_routing.md
-Updated: 2026-04-18
-Status: Core
+state_to_action_routing.md
 
-=============================
+Updated: 2026-06-28
 
-■ 概要
+Status: Active
 
-=============================
+Purpose
 
-本ドキュメントは、
+本書は、
 
-👉 state（ユーザー状態）から  
-👉 次の行動（遷移先）を定義する
+STATEに基づいて生成されたCTAを、
 
-「意思決定OSの導線設計」を定義する。
+具体的なmodule接続へ変換するルールを定義する。
 
----
+STATE定義はstate_definition、
 
-=============================
+STATE判定はstate_detection、
 
-■ 基本思想
+CTA生成はstate_to_cta_connectionが扱う。
 
-=============================
+本書は、
 
-・CTAは「機能リンク」ではない  
-・CTAは「意思決定の続きをさせる導線」
+CTAからmoduleへの接続のみを扱う。
 
----
+⸻
 
-❌ NG  
-・ページ遷移のためのボタン  
-・機能一覧ナビゲーション  
+Scope
 
----
+本書が扱うもの
 
-✅ 正解  
-👉 「今の思考の続き」に自然に繋げる  
+* CTA → module routing
+* module接続
+* routing rules
+* context受渡
 
----
+本書が扱わないもの
 
-=============================
+* STATE定義
+* STATE判定
+* CTA思想
+* decision思想
+* module責務
 
-■ state定義（前提）
+これらは各設計書を参照する。
 
-=============================
+⸻
 
-stateは以下の4つ：
+Design Principle
 
-・未判断  
-・検討中  
-・迷い中  
-・整理済み  
+routingは、
 
----
+画面遷移ではない。
 
-=============================
+現在判断を、
 
-■ decision_osとの関係（重要）
+次のdecision更新moduleへ接続する構造である。
 
-=============================
+⸻
 
-本ルーティングは、
+Routing Map
 
-👉 主に decision_os 上で  
-👉 「今この人に次に何をさせるか」を決めるために使う
+STATE	主CTA	接続module
+自己理解STATE	自分の迷い方を整理する	type_diagnosis
+判断軸整理STATE	何を優先したいか整理する	purchase_motivation
+現実判断STATE	どこまで許容できるか整理する	loan_safety
+本命形成STATE	どの本命と向き合うか整理する	property_reader / comparison
 
----
+⸻
 
-decision_osは、
+Routing Rules
 
-👉 判断を蓄積・整理する場所であり  
-👉 この routing によって次の1手を提示する
+System設計では、
 
----
+以下を満たす。
 
-したがって本設計は、
+* 主CTAは1つのみ
+* routingはrecommendationしない
+* module責務を越境しない
+* current decisionを維持する
+* 必要なcontextのみ受け渡す
 
-❌ 機能一覧を出すためのものではない  
-⭕ decision_os を起点に次の判断へ進めるためのもの  
+⸻
 
----
+Context
 
-※ 本設計で定義するのは、decision_osにおける「主CTA」の遷移先である  
-※ サブ導線は補助UIとして別扱いとし、本ルーティングには含めない
+routing時には、
 
----
+必要に応じて以下を受け渡す。
 
-=============================
+* property_id
+* reason
+* current decision
+* fixed_core
+* source module
 
-■ 遷移設計（最重要）
+contextは、
 
-=============================
+判断材料として受け渡す。
 
-stateごとに「遷移先」と「役割」を1対1で定義する
+判断として受け渡してはならない。
 
----
+⸻
 
-### ■ 未判断
+Relationship
 
-遷移先：  
-👉 property_reader  
+Constitution
 
-役割：  
-👉 まず物件を読み、この物件をどう判断するかの土台をつくる  
+↓
 
-意図：  
-・まだ判断していない状態  
-・まずは物件情報を構造化して読む  
-・判断の入口として機能する  
+decision_framework
 
----
+↓
 
-### ■ 検討中
+state_definition
 
-遷移先：  
-👉 loan_safety  
+↓
 
-役割：  
-👉 この条件で安全に買えるラインを知る  
+state_to_cta_connection
 
-意図：  
-・保存している = 前向き検討  
-・リスクを可視化して判断精度を上げる  
+↓
 
----
+state_to_action_routing
 
-### ■ 迷い中
+↓
 
-遷移先：  
-👉 rent_vs_buy  
+module
 
-役割：  
-👉 この条件で賃貸と比較する  
+↓
 
-意図：  
-・保留状態 = 判断できていない  
-・比較により意思決定を進める  
+Implementation
 
----
+⸻
 
-### ■ 整理済み
+Related Documents
 
-遷移先：  
-👉 external_property_search  
+System
 
-役割：  
-👉 今の判断を踏まえて次の候補を探す  
+* state_definition.md
+* state_detection.md
+* state_to_cta_connection.md
+* cta_role.md
+* product_connection_design.md
 
-意図：  
-・見送り or 判断済み  
-・次の意思決定へ進ませる  
-・前の判断を無駄にせず再選定につなげる  
+⸻
 
----
+Change Policy
 
-=============================
+state_to_action_routingは、
 
-■ 実装ルール（重要）
+Systemレイヤーの接続設計書である。
 
-=============================
+思想変更は行わない。
 
-① CTAは必ず1つだけ表示する  
-② stateとCTAは1対1で固定する  
-③ 遷移先の詳細実装は後回しでOK  
-④ router.pushで遷移すれば成立  
-⑤ URLにcontextを持たせる（推奨）  
+Constitutionとの整合性を維持した上で、
 
----
-
-=============================
-
-■ context設計（推奨）
-
-=============================
-
-遷移時に必要に応じて以下を渡す：
-
-・property_id  
-・latest_reason または reasons  
-・state  
-
----
-
-※ 遷移先によって不要な値は省略してよい  
-
----
-
-例：
-
-/loan_safety?propertyId=1&reasons=price_high,unsure&state=検討中
-
----
-
-=============================
-
-■ 目的
-
-=============================
-
-この設計により：
-
-・ユーザーは迷わない  
-・次の行動が明確になる  
-・意思決定が一筆書きで進む  
-
----
-
-decision_os 上では特に、
-
-👉 一覧で整理したあと  
-👉 次にどこへ進むかが明確になる
-
----
-
-=============================
-
-■ 一言
-
-=============================
-
-CTAとは
-
-👉 「次にやるべきこと」ではなく  
-👉 「今の思考の続き」である  
-
----
-
-=============================
-
-■ 補足
-
-=============================
-
-本設計は
-
-・state設計  
-・CTA設計  
-・LINE導線  
-・各プロダクト機能  
-・decision_os上の次アクション設計  
-
-すべての基盤となる  
-
----
-
-👉 変更は慎重に行うこと
+CTAからmoduleへの接続ルールのみ改善する。
