@@ -57,19 +57,45 @@ module利用履歴を見ない。
 
 Detection Inputs
 
-STATE判定で利用する入力例
+STATE判定では、
+
+以下の判断構造（Logical Inputs）を利用する。
+
+### Logical Inputs
 
 * current decision
-* decision_result
 * reason
 * fixed_core
 * comparison状況
 * 現実との接触状況
 * decision更新状況
 
-必要に応じて、
+これらは、
 
-decision continuity情報を利用できる。
+STATE判定に利用する論理的入力であり、
+
+実装方法には依存しない。
+
+---
+
+### Implementation Inputs
+
+実装では、
+
+必要に応じて以下の情報から
+Logical Inputsを導出する。
+
+例：
+
+* decision_result
+* 保存 / 保留 / 見送り
+* current reasons
+* decision continuity
+* comparison結果
+
+Implementation Inputsは、
+
+Logical Inputsを導出するための実装情報として扱う。
 
 ⸻
 
@@ -158,6 +184,10 @@ state_detection
 ↓
 
 state_to_cta_connection
+
+↓
+
+state_to_action_routing
 
 ↓
 
