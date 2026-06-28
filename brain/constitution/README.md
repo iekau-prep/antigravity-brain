@@ -33,12 +33,49 @@ Constitutionが定義するのは、
 
 Constitution Structure
 
-* constitution_preamble.md
-* constitution_judgement.md
-* constitution_experience.md
-* constitution_transfer.md
-* constitution_channel.md
-* constitution_levels.md
+Constitution.md
+
+Constitution本文（原典）。
+
+前文および第1編〜第4編を収録する。
+
+最上位思想を通して読むための唯一の文書である。
+
+⸻
+
+constitution_preamble.md
+
+前文の役割と位置付けを整理する。
+
+⸻
+
+constitution_judgement.md
+
+第1編｜判断憲法
+
+⸻
+
+constitution_experience.md
+
+第2編｜体験憲法
+
+⸻
+
+constitution_transfer.md
+
+第3編｜受渡憲法
+
+⸻
+
+constitution_channel.md
+
+第4編｜チャネル憲法
+
+⸻
+
+constitution_levels.md
+
+変更レベルおよび運用ルールを定義する。
 
 ⸻
 
