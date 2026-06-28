@@ -1,5 +1,5 @@
 # external_property_search.md
-Updated: 2026-04-17
+Updated: 2026-06-29
 Status: Core
 
 =============================
@@ -255,6 +255,10 @@ Core
 
 * decision_update_triggers.md
 * decision_os_role.md
+
+Module Constitution
+
+* property_reader責務憲法 v1.0
 
 Concept
 
