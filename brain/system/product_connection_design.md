@@ -8,36 +8,54 @@ Status: Core
 
 =============================
 
-本ドキュメントは、
+Purpose
 
-👉 家買う予備校における各プロダクトの接続設計（product connection）
+本書は、
 
-を定義する。
+家買う予備校における各product / module間の接続設計を定義する。
 
-対象プロダクト：
+目的は、
 
-- type_diagnosis（自己理解）
-- purchase_motivation（固定核整理）
-- rent_vs_buy（選択肢整理）
-- loan_safety（現実成立性整理）
-- property_reader（物件読解 / 実務判断）
-- comparison（本命整理）
-- decision_os（decision現在地OS）
-- LINE（decision continuity基盤）
+機能を順番に接続することではなく、
+
+decision更新が必要なタイミングで、
+
+適切なmoduleへ接続する構造を作ることである。
+
+扱う対象は、
+
+* type_diagnosis
+* purchase_motivation
+* rent_vs_buy
+* loan_safety
+* external_property_search
+* property_reader
+* comparison
+* decision_OS
+* LINE
+
+である。
 
 ---
 
-本設計の目的は、
+Scope
 
-❌ 機能をつなぐこと  
-❌ 回遊を増やすこと  
-❌ 順番に消化させること  
+本書が扱うもの
 
-ではない。
+* product / module間接続
+* decision loop
+* module呼び出し条件
+* decision_OS起点の接続
+* LINEとの接続
 
----
+本書が扱わないもの
 
-👉 「decision更新」を自然に循環させること
+* 各moduleの思想
+* 各moduleの内部責務
+* STATE判定
+* CTA生成
+* recommendation
+* UI実装
 
 ---
 
@@ -118,13 +136,13 @@ Status: Core
 
 つまり：
 
-external  
+external_property_search  
 ↓  
 property_reader  
 ↓  
 decision  
 ↓  
-decision_os  
+decision_OS  
 ↓  
 comparison / drift補正 / 再整理  
 ↓  
@@ -299,13 +317,13 @@ property
 
 現在構造：
 
-external（SUUMO等）
+external_property_search（SUUMO等）
 ↓
 property_reader
 ↓
 decision（保存 / 保留 / 見送り）
 ↓
-decision_os
+decision_OS
 ↓
 comparison / drift補正 / 現実整理
 ↓
@@ -339,7 +357,7 @@ property_readerは、
 
 また：
 
-decision_osは、
+decision_OSは、
 
 ❌ 管理画面
 
@@ -383,13 +401,13 @@ comparisonは、
 
 構造：
 
-external
+external_property_search
 ↓
 property_reader
 ↓
 decision発生
 ↓
-decision_os
+decision_OS
 ↓
 comparison / 現実整理 / drift補正
 ↓
@@ -560,7 +578,7 @@ decision更新
 
 =============================
 
-### ① external → property_reader（最重要）
+### ① external_property_search → property_reader（最重要）
 
 目的：
 
@@ -572,7 +590,7 @@ decision更新
 
 構造：
 
-external
+external_property_search
 ↓
 property_reader
 ↓
@@ -636,7 +654,7 @@ decision：
 
 ---
 
-### ③ decision → decision_os
+### ③ decision → decision_OS
 
 目的：
 
@@ -644,7 +662,7 @@ decision：
 
 ---
 
-decision_osでは：
+decision_OSでは：
 
 ・現在の迷い
 ・本命状態
@@ -658,7 +676,7 @@ decision_osでは：
 
 重要：
 
-decision_osは：
+decision_OSは：
 
 ❌ 保存一覧
 
@@ -672,7 +690,7 @@ decision_osは：
 
 ---
 
-### ④ decision_os → comparison
+### ④ decision_OS → comparison
 
 目的：
 
@@ -721,7 +739,7 @@ comparison後：
 
 ---
 
-### ⑤ comparison → decision_os
+### ⑤ comparison → decision_OS
 
 目的：
 
@@ -746,11 +764,11 @@ comparisonは：
 そのため：
 
 comparison後は、
-必ずdecision_osへ戻る。
+必ずdecision_OSへ戻る。
 
 ---
 
-### ⑥ decision_os → property_reader
+### ⑥ decision_OS → property_reader
 
 目的：
 
@@ -772,7 +790,7 @@ comparison後は、
 
 ---
 
-### ⑦ decision_os → purchase_motivation
+### ⑦ decision_OS → purchase_motivation
 
 目的：
 
@@ -797,7 +815,7 @@ CTA例：
 
 ---
 
-### ⑧ decision_os → loan_safety
+### ⑧ decision_OS → loan_safety
 
 目的：
 
@@ -822,7 +840,7 @@ CTA例：
 
 ---
 
-### ⑨ decision_os → rent_vs_buy
+### ⑨ decision_OS → rent_vs_buy
 
 目的：
 
@@ -846,7 +864,7 @@ CTA例：
 
 ---
 
-### ⑩ decision_os → external
+### ⑩ decision_OS → external_property_search
 
 目的：
 
@@ -1107,6 +1125,76 @@ fixed_core drift
 ⭕ decision更新OS
 
 だから。
+
+---
+
+=============================
+
+■ Related Documents
+
+=============================
+
+Constitution
+
+* constitution_judgement.md
+* constitution_transfer.md
+
+Core
+
+* decision_framework.md
+* decision_update_triggers.md
+* decision_os_role.md
+* comparison_role.md
+* state_definition.md
+* state_detection.md
+* state_to_cta_connection.md
+* state_to_action_routing.md
+
+Module Constitution
+
+* property_reader責務憲法 v1.0
+
+---
+
+=============================
+
+■ Relationship
+
+=============================
+
+Constitution
+
+↓
+
+decision_framework
+
+↓
+
+state_definition
+
+↓
+
+state_detection
+
+↓
+
+state_to_cta_connection
+
+↓
+
+state_to_action_routing
+
+↓
+
+product_connection_design
+
+↓
+
+module
+
+↓
+
+Implementation
 
 ---
 
