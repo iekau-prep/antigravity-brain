@@ -1,6 +1,6 @@
 # cta_strategy.md
-Updated: 2026-06-10
-Status: Core
+Updated: 2026-06-29
+Status: Active
 
 =============================
 
@@ -8,46 +8,119 @@ Status: Core
 
 =============================
 
-本モジュールは、
+⸻
 
-👉 CTA（decision update trigger）を、
-どの思想で設計・出し分けるか
+Purpose
+
+本書は、
+
+Constitutionで定義された
+CTA思想を、
+
+System設計へ適用するための
+CTA戦略を定義する。
+
+CTAとは何かは、
+
+Constitutionおよび
+cta_role.mdが扱う。
+
+本書は、
+
+CTAを
+
+どのような原則で設計し、
+
+どのような順序で生成し、
+
+どのようにdecision更新へ接続するか
 
 を定義する。
 
-目的は、
+⸻
 
-👉 current decision を止めず、
-次のdecision更新へ自然接続すること。
+Scope
 
----
+本書が扱うもの
 
-重要：
+* CTA設計原則
+* CTA生成戦略
+* current decisionとの関係
+* STATEとの関係
+* driftとの関係
+* decision continuityとの関係
 
-本モジュールは、
+本書が扱わないもの
 
-❌ 導線設計  
-❌ 遷移最適化  
-❌ CV最適化  
-❌ recommendation設計  
-❌ 行動管理  
+* CTA思想
+* CTA文言定義
+* Module実装
+* UI詳細
 
-ではない。
+これらは
+Constitution、
+cta_role.md、
+各Module設計を参照する。
 
----
+⸻
 
-⭕ 「今どのdecision整理が必要か」
+Relationship
 
-を提示する戦略として扱う。
+Constitution
+↓
+cta_role
+↓
+cta_strategy
+↓
+state_to_cta_connection
+↓
+decision_OS
+↓
+Implementation
 
----
+⸻
 
-参照：
+Design Principle
 
-・decision_framework.md  
-・state_to_cta_connection.md  
-・decision_os_role.md  
-・decision_os/ux_flow.md  
+CTA Strategyは、
+
+「何を表示するか」
+
+ではなく、
+
+「どのdecision整理を優先して提示するか」
+
+を定義する。
+
+CTAは、
+
+常に
+
+current decision
+
+↓
+
+STATE
+
+↓
+
+drift
+
+↓
+
+fixed_core
+
+↓
+
+次のdecision整理
+
+という順序で設計する。
+
+recommendation、
+
+CV最適化、
+
+導線最適化は行わない。
 
 ---
 
@@ -456,6 +529,37 @@ CTA責務終了：
 ❌ 強制決断
 ❌ 完了誘導
 ❌ CTA複数化
+
+⸻
+
+Related Documents
+
+Constitution
+
+* constitution_experience.md
+
+System
+
+* cta_role.md
+* decision_framework.md
+* state_to_cta_connection.md
+* decision_os_role.md
+* decision_update_triggers.md
+
+⸻
+
+Change Policy
+
+cta_strategyは、
+
+Systemレイヤーの設計書である。
+
+CTA思想は変更しない。
+
+Constitutionおよび
+cta_role.mdとの整合性を維持した上で、
+
+CTA戦略のみ改善対象とする。
 
 ---
 
