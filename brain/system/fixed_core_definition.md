@@ -145,11 +145,13 @@ fixed_core_definition
 
 ↓
 
-comparison
-
-property_reader
-
 decision_framework
+
+↓
+
+comparison
+property_reader
+drift_detection
 
 ↓
 
@@ -167,6 +169,8 @@ System
 
 * decision_framework.md
 * decision_reason_design.md
+* state_detection.md
+* state_to_cta_connection.md
 * drift_detection.md
 * comparison_role.md
 * property_reader.md
