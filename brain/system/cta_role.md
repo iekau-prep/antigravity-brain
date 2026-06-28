@@ -8,82 +8,44 @@ Status: Core
 
 =============================
 
-本ドキュメントは、
+Purpose
 
-👉 家買う予備校における CTA の role（役割）
+本書は、
 
-を定義する。
+CTA（Call To Action）の役割を定義する。
 
----
+CTAは、
 
-CTA は、
+現在のdecision状態から、
 
-❌ ボタン  
-❌ ナビゲーション  
-❌ CV誘導  
-❌ recommendation  
-❌ funnel導線  
-❌ 回遊設計  
-❌ 次ページ誘導  
-❌ 「押させるためのUI」  
+次に必要なdecision updateを自然に発生させる
+triggerとして扱う。
 
-ではない。
+本書は、
+
+CTA文言ではなく、
+
+CTAが果たす役割を定義する。
 
 ---
 
-⭕ 「現在のdecision状態を整理し、
-次のdecision更新を自然発生させるための
-decision update trigger」
+Scope
 
-として扱う。
+本書が扱うもの
 
----
+* CTAの役割
+* decision update trigger
+* decision progression
+* drift recoveryとの関係
+* fixed_coreとの関係
 
-さらに重要：
+本書が扱わないもの
 
-CTA が扱うのは、
-
-❌ 「どこへ行くか」
-
-ではない。
-
----
-
-⭕ 「今どこでdecisionが止まり、
-何を整理し、
-どこでdriftし、
-何を更新する必要があるか」
-
-である。
-
----
-
-つまり CTA は：
-
-⭕ current decision 更新装置  
-⭕ decision progression trigger  
-⭕ drift整理トリガー  
-⭕ fixed_core再接続補助  
-⭕ 本命形成補助  
-
-として存在する。
-
----
-
-本ドキュメントは、
-
-・decision_framework.md
-・state_definition.md
-・state_to_cta_connection.md
-・decision_os_role.md
-・comparison_role.md
-・discomfort_connection.md
-・drift_detection.md
-・product_connection_design.md
-
-を基盤として定義する。
-
----
+* STATE判定
+* CTA生成ロジック
+* Routing
+* UI配置
+* recommendation
 
 =============================
 
@@ -1299,3 +1261,38 @@ decision update triggerである。
 どこへ戻り、
 次に何を更新するべきかを、
 自然に提示するdecision更新装置」
+
+---
+
+Related Documents
+
+Constitution
+
+* constitution_judgement.md
+
+System
+
+* state_definition.md
+* state_detection.md
+* state_to_cta_connection.md
+* decision_update_triggers.md
+* decision_os_role.md
+* comparison_role.md
+* drift_detection.md
+* product_connection_design.md
+
+---
+
+Change Policy
+
+cta_roleは、
+
+CoreレイヤーのRole定義書である。
+
+CTAの役割は変更しない。
+
+生成方法や接続方法は、
+
+別Systemで改善対象とする。
+
+
