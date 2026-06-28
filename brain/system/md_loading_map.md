@@ -1,904 +1,666 @@
-# md_loading_map.md
-Updated: 2026-05-25
-Status: Core
+md_loading_map.md
+Updated: 2026-06-29
+Status: Active
 
-=============================
+⸻
 
-■ 概要
-
-=============================
-
-本ドキュメントは、
-
-👉 作業内容ごとに
-「どのmdを読むべきか」
-
+Purpose
+本書は、
+antigravity-brainにおける 設計書の読み込みルールを定義する。
+目的は、
+Constitution、
+System、
+Module、
+Implementation
+の責務を維持しながら、
+必要最小限の設計書だけを読み込み、
+設計・実装・レビュー・AI利用時の 責務混線を防ぐことである。
+本書は、
+「どの設計書を読むべきか」
+ではなく、
+「どの責務から理解するべきか」
 を定義する。
 
-目的は、
-
-・最小読み込み  
-・責務分離維持  
-・decision構造維持  
-・drift防止  
-・AI精度安定化  
-・引き継ぎ効率化  
-
-である。
-
----
-
-重要：
-
-家買う予備校は、
-
-❌ 単発UI群  
-❌ 単発診断群  
-❌ 無秩序なmd集合  
-
-ではない。
-
----
-
-⭕ 「decision loop OS」
-
-である。
-
----
-
-そのため：
-
-❌ 関係ないmdを大量投入
-
-すると、
-
-・責務混線  
-・STATE崩壊  
-・CTA崩壊  
-・drift概念崩壊  
-・comparison役割崩壊  
-
-が発生する。
-
----
-
-つまり：
-
-👉 「必要なものだけ読む」
-
-ことが、
-OS維持において最重要。
-
----
-
-=============================
-
-■ 最重要ルール（超重要）
-
-=============================
-
-① 全部読ませない  
-
----
-
-② 必須だけ読む  
-
----
-
-③ systemを優先する  
-
----
-
-④ decisionに関係するものを優先する（最重要）
-
----
-
-⑤ products側だけ読ませない
-
----
-
-⑥ drift / STATE / CTA を
-products側で再定義させない
-
----
-
-⑦ UI改善でも、
-decision構造を先に確認する
-
----
-
-重要：
-
-❌ 読み込み量 = 精度
-
-ではない。
-
----
-
-⭕ 「責務整合」
-
-が精度。
-
----
-
-=============================
-
-■ 現在のOS中核（重要）
-
-=============================
-
-現在のOS中核は：
-
-・decision progression  
-・fixed_core  
-・current decision  
-・本命形成  
-・drift整理  
-・現実接触  
-・CTA = decision update trigger  
-
-である。
-
----
-
-そのため、
-
-以下system群は現在の最重要コア。
-
----
-
-■ 最重要system群（2026-05時点）
-
-- decision_framework.md  
-- state_definition.md  
-- state_to_cta_connection.md  
-- drift_detection.md  
-- discomfort_connection.md  
-- decision_update_triggers.md  
-- comparison_role.md  
-- decision_os_role.md  
-
----
-
-重要：
-
-迷ったら：
-
-👉 まずここを読む。
-
----
-
-=============================
-
-■ 読み込み優先順位（重要）
-
-=============================
-
-① brain/system（共通OS構造）  
-
----
-
-② 対象プロダクト  
-
----
-
-③ 接続系  
-
----
-
-④ UI  
-
----
-
-重要：
-
-❌ UIから読む
-
-ではない。
-
----
-
-⭕ 「decision構造」
-→ 「プロダクト翻訳」
-→ 「UI」
-
-の順。
-
----
-
-=============================
-
-■ 最重要テンプレ（これだけ覚えればOK）
-
-=============================
-
-=============================
-
-■ UI触る時
-
-=============================
-
-必須：
-
-- decision_framework.md  
-- state_definition.md  
-- state_to_cta_connection.md  
-- 対象productのui系md  
-
----
-
-理由：
-
-UIでも：
-
-・STATE  
-・CTA  
-・decision progression  
-
-を壊す可能性があるため。
-
----
-
-=============================
-
-■ ロジック触る時
-
-=============================
-
-必須：
-
-- decision_framework.md  
-- state_definition.md  
-- drift_detection.md  
-- diagnosis_logic.md  
-- output_logic.md  
-
----
-
-補助：
-
-- discomfort_connection.md  
-- decision_update_triggers.md  
-
----
-
-=============================
-
-■ drift関連触る時（超重要）
-
-=============================
-
-必須：
-
-- drift_detection.md  
-- discomfort_connection.md  
-- decision_framework.md  
-- comparison_role.md  
-
----
-
-理由：
-
-現在：
-
-❌ future恐怖
-
+⸻
+
+Scope
+本書が扱うもの
+* 読み込み順序
+* レイヤー別読み込みルール
+* 作業別読み込み方針
+* AI利用時の読み込み基準
+* 最小読み込み原則
+本書が扱わないもの
+* 各設計書の内容
+* UI仕様
+* 実装方法
+* Product仕様
+* Constitution思想
+各設計書の内容は、
+それぞれの設計書を参照する。
+
+⸻
+
+Relationship
+本書は、
+md_structure_tree.mdで定義された レイヤー構造を前提とする。
+読み込み順は、
+以下の責務階層に従う。
+Constitution
+
+↓
+
+System
+
+↓
+
+Module
+
+↓
+
+Implementation
+読み込みは、
+常に上位責務から開始する。
+下位レイヤーのみを読んで 設計・実装を開始してはならない。
+本書は、
+「何を読むか」
 ではなく、
+「どの責務を理解してから次へ進むか」
+を定義する。
 
-⭕ current drift
-⭕ fixed_core drift
-⭕ decision progression drift
+⸻
 
-を中心としているため。
+Loading Principle
+設計書は、
+多く読めば良いわけではない。
+重要なのは、
+現在の作業に必要な責務だけを 正しい順番で読むことである。
+読み込みは、
+以下の原則を維持する。
 
----
+⸻
 
-=============================
+1. 上位責務を優先する
+まず思想を理解し、
+その後に設計、
+Module、
+実装へ進む。
 
-■ CTA触る時（超重要）
+⸻
 
-=============================
+2. 必要最小限とする
+今回の作業範囲に必要な設計書のみを読む。
+関連しない設計書は読み込まない。
 
-必須：
+⸻
 
-- state_definition.md  
-- state_to_cta_connection.md  
-- decision_framework.md  
-- cta_role.md  
+3. 同一責務を重複して読まない
+同じ責務を複数の設計書で 探し始めない。
+責務の正本を参照する。
 
----
+⸻
 
-補助：
+4. Layerを飛ばさない
+Moduleだけ、
+Implementationだけ、
+という読み込みを行わない。
+必ず
+Constitution
+↓
+System
+↓
+Module
+↓
+Implementation
+の順を維持する。
 
-- decision_update_triggers.md  
-- comparison_role.md  
+⸻
 
----
+5. 作業目的を優先する
+読み込み対象は、
+ファイル名ではなく、
+作業目的から決定する。
+例
+* 思想整理
+* System設計
+* Product設計
+* UI設計
+* 実装
+* レビュー
+など、
+目的ごとに必要な責務のみを読む。
 
-重要：
+⸻
 
-CTAは：
+読み込み優先順位
+標準的な読み込み順は、
+以下を基本とする。
+① Constitution
 
-❌ 導線
+↓
 
-ではない。
+② System
 
----
+↓
 
-⭕ decision update trigger
+③ Module
 
-として扱う。
+↓
 
----
+④ Implementation
+さらに、
+Systemでは、
+以下を基本順とする。
+decision
 
-=============================
+↓
 
-■ STATE触る時（超重要）
+state
 
-=============================
+↓
 
-必須：
+module role
 
-- state_definition.md  
-- state_detection.md  
-- state_to_cta_connection.md  
-- decision_framework.md  
+↓
 
----
+connection
 
-補助：
+↓
 
-- drift_detection.md  
-- decision_os_role.md  
+CTA
 
----
+↓
 
-重要：
+monitoring
 
-STATEは：
+↓
 
-❌ UI状態
+future
+Moduleでは、
+以下の順で参照する。
+product_concept
 
-ではない。
+↓
 
----
+ux_flow
 
-⭕ 「未整理decision領域」
+↓
 
-である。
+screen_structure
 
----
+↓
 
-=============================
+data_connection
 
-■ comparison触る時（超重要）
+↓
 
-=============================
+implementation
+読み込み対象は、
+常に今回の責務に限定する。
+設計書全体を読み込むことを前提とせず、
+必要な責務だけを参照することで、
+brain全体の保守性とAI利用時の一貫性を維持する。
 
-必須：
 
-- comparison_role.md  
-- decision_framework.md  
-- drift_detection.md  
-- state_to_cta_connection.md  
+⸻
 
----
+作業別 Loading Map
+読み込み対象は、
+ファイル名ではなく、
+現在の作業責務から決定する。
+以下を標準ルールとする。
 
-補助：
+⸻
 
-- discomfort_connection.md  
-- property_reader/comparison_flow.md  
+Constitution変更
+目的
+思想を追加・修正・整理する。
+必須
+constitution/
 
----
+README
 
-重要：
+対象Constitution
+補助
+md_structure_tree.md
+重要
+System、
+Module、
+Implementation
+を直接修正してはならない。
+まずConstitutionを更新し、
+その後に下位レイヤーへ反映する。
 
-comparisonは：
+⸻
 
-❌ 勝敗決定
+System設計
+目的
+思想を設計責務へ翻訳する。
+必須
+Constitution
 
-ではない。
+↓
 
----
+対象System
+例
+* decision_framework
+* state_definition
+* comparison_role
+* drift_detection
+* product_connection_design
+補助
+md_structure_tree.md
 
-⭕ 本命形成 + drift整理
+md_loading_map.md
+重要
+Moduleを直接変更する前に、
+System責務を整理する。
 
-である。
+⸻
 
----
+Module設計
+目的
+System責務を、
+各プロダクトへ適用する。
+必須
+Constitution
 
-=============================
+↓
 
-■ decision_OS触る時（最重要）
+対象System
 
-=============================
+↓
 
-必須：
+対象Module
+例
+property_reader/
 
-- decision_os_role.md  
-- decision_framework.md  
-- state_definition.md  
-- state_to_cta_connection.md  
-- drift_detection.md  
-- decision_update_triggers.md  
+comparison/
 
----
+decision_os/
+補助
+README
+product_concept
+ux_flow
+重要
+Moduleは、
+System責務を再定義しない。
 
-補助：
+⸻
 
-- decision_os/concept.md  
-- decision_os/ux_flow.md  
-- user_data_strategy.md  
+Implementation
+目的
+Module責務をコードへ反映する。
+必須
+Constitution
 
----
+↓
 
-重要：
+対象System
 
-decision_OSは：
+↓
 
-❌ dashboard
+対象Module
 
-ではない。
+↓
 
----
+Implementation
+重要
+実装のみで
+思想、
+責務、
+接続を変更しない。
+判断が必要になった場合は、
+ModuleまたはSystemへ戻る。
 
-⭕ 「decision現在地OS」
+⸻
 
-である。
+UI設計
+目的
+Module責務を
+画面へ翻訳する。
+必須
+対象Module
 
----
+↓
 
-=============================
+対象UX
 
-■ property_reader触る時（超重要）
+↓
 
-=============================
+screen_structure
+補助
+cta_role
 
-必須：
+product_roles
+重要
+UIだけを変更しない。
+必ずModule責務を確認してから設計する。
 
-- property_reader/product_concept.md  
-- property_reader/ux_flow.md  
-- property_reader/scoring_logic.md  
-- property_reader/rules_definition.md  
-- property_reader/prompts_and_rules.md  
-- property_reader/state_labels.md  
+⸻
 
----
+Logic設計
+目的
+判断ロジックを設計する。
+必須
+decision_framework
 
-補助：
+↓
 
-- drift_detection.md  
-- discomfort_connection.md  
-- comparison_role.md  
-- property_reader/comparison_flow.md  
+state_definition
 
----
+↓
 
-重要：
+対象System
+補助
+decision_reason_design
 
-property_readerは：
+decision_update_triggers
 
-❌ 物件採点機
+drift_detection
+重要
+ロジックは、
+Constitution思想と
+System責務を維持する。
 
-ではない。
+⸻
 
----
+Monitoring
+目的
+設計品質、
+責務整合、
+運用状態を確認する。
+必須
+drift_detection
 
-⭕ 本命形成 + 現実接触decision module
+release_checklist
 
-である。
+event_tracking
+補助
+kpi_metrics
 
----
+history
+重要
+Monitoringは、
+設計を変更しない。
+状態を確認する責務のみを持つ。
 
-=============================
+⸻
 
-■ loan_safety触る時
+Documentation
+目的
+設計資産を整理・更新する。
+必須
+md_structure_tree
 
-=============================
+md_loading_map
 
-必須：
+README
+補助
+対象設計書
+重要
+Documentationでは、
+思想変更を行わない。
+構造整理、
+参照整理、
+責務整理のみを行う。
 
-- loan_safety/diagnosis_logic.md  
-- loan_safety/state_labels.md  
-- decision_framework.md  
-- drift_detection.md  
+⸻
 
----
+Loading Rule
+すべての作業は、
+以下の順序を維持する。
+作業目的
 
-補助：
+↓
 
-- discomfort_connection.md  
-- state_to_cta_connection.md  
+責務の特定
 
----
+↓
 
-重要：
+対象レイヤーの決定
 
-loan_safetyは：
+↓
 
-❌ 不安生成
+必要最小限の設計書を読み込む
 
-ではない。
+↓
 
----
+設計・実装・レビューを行う
+大量の設計書を一括で読み込むことは推奨しない。
+責務単位で読み込み、
+責務単位で設計することを、
+brain全体の標準運用とする。
 
-⭕ 現実接触 + 許容整理
 
-である。
+⸻
 
----
+AI引き継ぎルール
+新しいAI環境、
+または新しい開発担当者へ引き継ぐ場合は、
+設計書全体を一括で渡さない。
+作業目的を明確にし、
+必要な責務のみを読み込む。
+引き継ぎは、
+以下の順序を標準とする。
+① 作業目的
 
-=============================
+↓
 
-■ purchase_motivation触る時
+② 対象レイヤー
 
-=============================
+↓
 
-必須：
+③ 必要最小限の設計書
 
-- purchase_motivation/diagnosis_logic.md  
-- purchase_motivation/output_logic.md  
-- purchase_motivation/discomfort_connection.md  
-- decision_framework.md  
-- drift_detection.md  
+↓
 
----
+④ 今回変更してよい責務
 
-補助：
+↓
 
-- property_reader_connection.md  
-- state_definition.md  
+⑤ 変更してはいけない責務
 
----
+↓
 
-重要：
+⑥ 出力条件
+引き継ぎ時は、
+必ず責務境界を明示する。
+思想変更が含まれる場合は、
+Constitutionから開始する。
 
-purchase_motivationは：
+⸻
 
-❌ 条件整理
+Loading Examples
+以下を標準例とする。
 
-ではない。
+⸻
 
----
+Constitutionを修正したい
+Constitution
 
-⭕ fixed_core整理
+↓
 
-である。
+対象Constitution
 
----
+↓
 
-=============================
+必要に応じてSystemへ反映
 
-■ type_diagnosis触る時
+⸻
 
-=============================
+Systemを修正したい
+Constitution
 
-必須：
+↓
 
-- type_diagnosis/product_concept.md  
-- diagnosis_logic.md  
-- state_definition.md  
+対象System
 
----
+↓
 
-補助：
+必要に応じてModuleへ反映
 
-- pairing_logic.md  
-- rabbit_types.md  
+⸻
 
----
+Productを設計したい
+Constitution
 
-重要：
+↓
 
-type_diagnosisは：
+対象System
 
-❌ MBTI遊び
+↓
 
-ではない。
+対象Module
 
----
+⸻
 
-⭕ 「どうdriftしやすいか」
+UIを改善したい
+Constitution
 
-を理解する入口。
+↓
 
----
+対象System
 
-=============================
+↓
 
-■ external導線触る時
+対象Module
 
-=============================
+↓
 
-必須：
+UI設計
 
-- external_property_search.md  
-- product_connection_design.md  
-- state_to_cta_connection.md  
+⸻
 
----
+コードを修正したい
+Constitution
 
-補助：
+↓
 
-- property_reader/ux_flow.md  
-- decision_framework.md  
+対象System
 
----
+↓
 
-重要：
+対象Module
 
-externalは：
+↓
 
-❌ 集客入口
+Implementation
 
-だけではない。
+⸻
 
----
+READMEや設計書を更新したい
+md_structure_tree
 
-⭕ decision loop入口
+↓
 
-である。
+md_loading_map
 
----
+↓
 
-=============================
+README
 
-■ LINE設計触る時
+↓
 
-=============================
+対象Document
 
-必須：
+⸻
 
-- line_strategy.md  
-- funnel_and_line_strategy.md  
-- user_data_strategy.md  
-- decision_framework.md  
+すべての作業は、
+責務階層を維持したまま進める。
 
----
+⸻
 
-補助：
+Rule
+本書では、
+以下を共通ルールとする。
+1. 作業目的から読み込みを決定する
+ファイル名から探し始めない。
+まず、
+「今回何を行うか」
+を定義する。
 
-- decision_os_role.md  
-- drift_detection.md  
+⸻
 
----
+2. 必要最小限を維持する
+関連する設計書だけを読む。
+読み込み量ではなく、
+責務整合を優先する。
 
-重要：
+⸻
 
-LINEは：
+3. レイヤーを飛ばさない
+Moduleだけ、
+Implementationだけ、
+という読み込みは行わない。
+必ず
+Constitution
+↓
+System
+↓
+Module
+↓
+Implementation
+の順を維持する。
 
-❌ メルマガ
+⸻
 
-ではない。
+4. 責務境界を維持する
+思想はConstitution、
+設計はSystem、
+個別仕様はModule、
+コードはImplementationで管理する。
+責務を跨いで変更してはならない。
 
----
+⸻
 
-⭕ decision continuity layer
+5. Documentationは構造を維持する
+README、
+md_structure_tree、
+md_loading_mapは、
+構造を管理する。
+思想や仕様を追加する場所ではない。
 
-である。
+⸻
 
----
+Change Policy
+本書は、
+brain全体の読み込み運用を定義する。
+そのため、
+以下の場合のみ更新対象とする。
+* レイヤー構造変更
+* 読み込み順変更
+* 運用ルール変更
+* Constitutionとの接続変更
+* Documentation運用変更
+個別Module追加や、
+Systemファイル追加のみでは、
+本書を更新しない。
+本書は、
+長期運用のための読み込み基準書として維持する。
 
-=============================
+⸻
 
-■ OS横断改善触る時（最重要）
-
-=============================
-
-必須：
-
-- decision_framework.md  
-- state_definition.md  
-- state_to_cta_connection.md  
-- drift_detection.md  
-- discomfort_connection.md  
-- comparison_role.md  
-- decision_os_role.md  
-- decision_update_triggers.md  
-
----
-
-補助：
-
-- funnel_logic.md  
-- product_connection_design.md  
-- user_data_strategy.md  
-
----
-
-重要：
-
-ここを読まずに：
-
-❌ UIだけ改善
-
-すると、
-
-decision loopが壊れる。
-
----
-
-=============================
-
-■ MVP実装時の優先順位（重要）
-
-=============================
-
-現在優先するもの：
-
-① decision progression  
-② STATE整合  
-③ CTA整合  
-④ drift整理  
-⑤ 本命形成自然化  
-⑥ fixed_core接続  
-
----
-
-後回し：
-
-❌ animation polish  
-❌ copy polish  
-❌ visual polish  
-❌ gamification  
-❌ KPI最適化  
-
----
-
-重要：
-
-現在は：
-
-❌ conversion optimization phase
-
-ではない。
-
----
-
-⭕ 「decision loop stabilization phase」
-
-である。
-
----
-
-=============================
-
-■ 引き継ぎテンプレ（超重要）
-
-=============================
-
-新しいAI環境へ引き継ぐ時：
-
-以下順で渡す。
-
----
-
-① やること
-
-例：
-
-comparison UXを改善したい
-
----
-
-② 必須md
-
-loading_mapから必要最低限だけ渡す。
-
----
-
-③ 補助md
-
-必要なものだけ追加。
-
----
-
-④ 今回触っていい責務
-
-例：
-
-・CTA補助文言のみ  
-・STATE変更禁止  
-・drift定義変更禁止  
-
----
-
-⑤ 禁止事項
-
-例：
-
-- STATE増殖禁止  
-- recommendation禁止  
-- CTA複数禁止  
-- decision loop破壊禁止  
-- 本命形成を勝敗比較化しない  
-- future恐怖主役化禁止  
-
----
-
-⑥ 出力ルール
-
-例：
-
-- 1ブロック  
-- 差し替え位置明記  
-- 簡略化禁止  
-- 既存思想削除禁止  
-
----
-
-=============================
-
-■ NG（超重要）
-
-=============================
-
-❌ 無関係md大量投入  
-
----
-
-❌ productsだけ読んでsystem無視  
-
----
-
-❌ UIだけ見てdecision構造無視  
-
----
-
-❌ driftを未来恐怖へ戻す  
-
----
-
-❌ CTAをCV導線化する  
-
----
-
-❌ comparisonを勝敗化する  
-
----
-
-❌ STATEを進捗管理化する  
-
----
-
-❌ decision_OSをdashboard化する  
-
----
-
-❌ recommendation導入  
-
----
-
-❌ 「買うべき」思想  
-
----
-
-これらは：
-
-👉 decision OS崩壊原因
-
-になる。
-
----
-
-=============================
-
-■ 最終定義
-
-=============================
-
+最終定義
 md_loading_mapとは、
+Constitution、
+System、
+Module、
+Implementation
+の責務階層を維持しながら、
+作業目的に応じて、
+必要最小限の設計書だけを読み込むための
+運用設計書である。
+本書は、
+設計資産を効率よく参照するためだけではなく、
+責務混線を防ぎ、
+思想から実装までを一方向に継承するための
+読み込み基準として機能する。
+これにより、
+AI、
+開発者、
+将来の保守担当者が、
+共通の責務構造を維持したまま設計・実装・レビューを継続できる状態を支える。
 
-👉 作業目的に応じて  
-👉 必要なmdだけを最小読み込みし  
-👉 STATE・CTA・drift・本命形成・decision progressionの整合性を維持しながら  
-👉 新しい実行環境でも
-decision loop OSを壊さず作業を継続するための
-読み込み運用設計である。
 
----
 
-■ 一言でいうと
-
-👉 「読みすぎを防ぎ、
-decision OSの整合性を守るための運用マップ」
