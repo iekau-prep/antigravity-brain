@@ -4,25 +4,59 @@ Status: Active
 
 ---
 
-## ■ 目的
+Purpose
 
-SNS・LINE・プロダクトを分断せず、
+本書は、
 
-👉 **「感情 → 構造 → 判断 → 行動 → 蓄積」**
+家買う予備校における
+Content Layerの役割を定義する。
 
-を一貫して設計する
+Contentは、
+
+ユーザーの状態を
+
+感情
+↓
+
+理解
+↓
+
+decision
+
+↓
+
+継続
+
+へ変化させる役割を持つ。
+
+本書は、
+
+各Content Layerが、
+
+decision構造のどこを担当するか
+
+のみを定義する。
 
 ---
 
-👉 目的はこれだけ：
+Scope
 
-👉 **ユーザーを“判断できる状態”にすること**
+本書が扱うもの
+
+* Content Role
+* Layerごとの役割
+* 状態変化設計
+* decision更新との関係
+
+本書が扱わないもの
+
+* CTA設計
+* Routing
+* recommendation
+* UI設計
+* 実装仕様
 
 ---
-
----
-
-## ■ このドキュメントの役割（最重要）
 
 content_roles は
 
@@ -454,3 +488,34 @@ content_rolesとは
 ---
 
 👉 「流入設計」ではなく「意思決定の流れの設計」
+
+---
+
+Related Documents
+
+Constitution
+
+* constitution_judgement.md
+
+System
+
+* product_roles.md
+* product_connection_design.md
+* decision_framework.md
+* decision_update_triggers.md
+* decision_os_role.md
+* cta_role.md
+
+---
+
+Change Policy
+
+content_rolesは、
+
+Content LayerのRole定義書である。
+
+各Layerの役割は変更しない。
+
+運用方法やContent設計は、
+
+別Documentで改善対象とする。
