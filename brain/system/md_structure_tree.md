@@ -1,737 +1,573 @@
-# md_structure_tree.md
-Updated: 2026-05-25
-Status: Core
+md_structure_tree.md
+Updated: 2026-06-29
+Status: Active
 
-=============================
+⸻
 
-■ 概要
-
-=============================
-
-本ドキュメントは、
-
-👉 家買う予備校における md 設計構造の全体マップ
-
-を定義する。
-
+Purpose
+本書は、
+antigravity-brain 全体の構造を定義する 最上位の構造マップである。
+本書は、
+Constitutionで定義された思想を、
+System、
+Module、
+Implementation
+へ正しく接続するための ディレクトリ構造と責務を定義する。
 目的は、
-
-・構造の把握  
-・責務分離の固定  
-・引き継ぎの容易化  
-・読み込み判断の効率化  
-・decision OSとしての整合性維持  
-
+* ディレクトリ構造の統一
+* 責務境界の固定
+* 読み込み順序の統一
+* 保守性の維持
+* AI・開発者双方が同じ構造を参照できる状態を維持すること
 である。
+本書は、
+個別思想や実装内容ではなく、
+brain全体の構造そのものを定義する。
 
----
+⸻
 
-重要：
+Scope
+本書が扱うもの
+* ディレクトリ構造
+* レイヤー構造
+* Constitution / System / Module / Implementation の責務
+* 配置ルール
+* 読み込み順
+* 設計資産の位置付け
+本書が扱わないもの
+* 判断思想
+* UX設計
+* UI仕様
+* module個別責務
+* 実装方法
+これらは各レイヤーの設計書で定義する。
 
-家買う予備校は、
+⸻
 
-❌ 単発診断群  
-❌ 比較ツール群  
-❌ 不動産情報整理群  
+Relationship
+本書は、
+brain全体を以下の階層で整理する。
+Constitution
+        │
+        ▼
+System
+        │
+        ▼
+Module
+        │
+        ▼
+Implementation
+各レイヤーの責務は以下とする。
+Constitution
+思想を定義する。
+「何を目指すか」
+「何を扱うか」
+「何を扱わないか」
+を固定する。
 
+⸻
+
+System
+Constitutionを設計へ翻訳する。
+責務、
+接続、
+構造、
+ルールを定義する。
+
+⸻
+
+Module
+各プロダクト・各機能へ Systemを適用する。
+UI・UX・画面責務・データ責務などを定義する。
+
+⸻
+
+Implementation
+Module設計をコードへ反映する。
+実装はModule責務を超えてはならない。
+
+⸻
+
+Design Principle
+本ディレクトリは、
+「ファイルを管理する場所」
 ではない。
+設計思想を 責務単位で管理する場所である。
+そのため、
+構造は常に
+Constitution
+↓
+System
+↓
+Module
+↓
+Implementation
+の流れを維持する。
+下位レイヤーは、
+上位レイヤーを変更しない。
+Constitutionは思想を定義する。
+Systemは思想を設計へ翻訳する。
+ModuleはSystemを個別プロダクトへ適用する。
+ImplementationはModule責務のみを実装する。
+責務が混在した場合は、
+必ず上位レイヤーへ戻って整理する。
 
----
+⸻
 
-⭕ 「decision loop OS」
-
-である。
-
----
-
-そのため本treeは：
-
-❌ 機能単位
-
-ではなく、
-
-⭕ 「decision更新構造」
-
-として整理する。
-
----
-
-=============================
-
-## ■ 全体構造
-
-=============================
-
+ディレクトリ全体構造
 antigravity-brain/
 
-├─ brain/  
-│  
-│  ├─ core/  
-│  │  ├─ output_format.md  
-│  │  ├─ persona.md  
-│  │  ├─ principles.md  
-│  │  ├─ product.md  
-│  │  └─ task_contract.md  
-│  │  
-│  └─ system/  
-│  
-│     ├─ character_usage.md  
-│     ├─ content_roles.md  
-│     ├─ cta_role.md  
-│     ├─ cta_strategy.md  
-│     ├─ decision_framework.md  
-│     ├─ decision_loop_core_summary.md  
-│     ├─ decision_os_role.md  
-│     ├─ decision_reason_design.md  
-│     ├─ decision_update_triggers.md  
-│     ├─ discomfort_connection.md  
-│     ├─ drift_detection.md  
-│     ├─ funnel_and_line_strategy.md  
-│     ├─ funnel_logic.md  
-│     ├─ kpi_metrics.md  
-│     ├─ line_strategy.md  
-│     ├─ md_loading_map.md  
-│     ├─ md_structure_tree.md  
-│     ├─ monetization.md  
-│     ├─ product_connection_design.md  
-│     ├─ comparison_role.md  
-│     ├─ state_definition.md  
-│     ├─ state_detection.md  
-│     ├─ state_to_cta_connection.md  
-│     ├─ state_to_action_routing.md  
-│     ├─ user_data_strategy.md  
-│     ├─ external_property_search.md  
-│     │  
-│     └─ research_database/  
-│        ├─ composite_logic.md  
-│        ├─ ground.md  
-│        ├─ repair_fund.md  
-│        └─ unit_count.md  
+├── constitution/
+│
+│   ├── README.md
+│   ├── constitution_experience.md
+│   ├── constitution_decision.md
+│   ├── constitution_module.md
+│   ├── constitution_implementation.md
+│   └── ...
+│
+├── brain/
+│
+│   ├── core/
+│   │
+│   ├── system/
+│   │
+│   └── research_database/
+│
+├── projects/
+│
+│   └── iekau/
+│       └── products/
+│
+├── tools/
+│
+├── resources/
+│
+└── strategy/
 
-├─ content/  
+⸻
 
-├─ projects/  
-│  └─ iekau/  
-│     └─ products/  
-
-│        ├─ decision_os/  
-│        │  ├─ concept.md  
-│        │  ├─ product_concept.md  
-│        │  ├─ ux_flow.md  
-│        │  ├─ state_integration.md（任意）  
-│        │  ├─ cta_design.md（任意）  
-│        │  └─ data_connection.md（任意）  
-
-│        ├─ property_reader/  
-│        │  ├─ comparison_flow.md  
-│        │  ├─ data_connection.md  
-│        │  ├─ feature_scope_mvp.md  
-│        │  ├─ future_expansion.md  
-│        │  ├─ history_structure.md  
-│        │  ├─ input_strategy.md  
-│        │  ├─ loan_safety_connection.md  
-│        │  ├─ product_concept.md  
-│        │  ├─ prompts_and_rules.md  
-│        │  ├─ rules_definition.md  
-│        │  ├─ scoring_logic.md  
-│        │  ├─ screen_structure.md  
-│        │  ├─ state_labels.md  
-│        │  └─ ux_flow.md  
-
-│        ├─ purchase_motivation/  
-│        │  ├─ README.md  
-│        │  ├─ diagnosis_logic.md  
-│        │  ├─ discomfort_connection.md  
-│        │  ├─ output_logic.md  
-│        │  ├─ product_concept.md  
-│        │  ├─ property_reader_connection.md  
-│        │  ├─ question_design.md  
-│        │  ├─ result_screen.md  
-│        │  └─ ui_flow.md  
-
-│        ├─ rent_vs_buy/  
-│        │  ├─ character_templates.md  
-│        │  ├─ diagnosis_logic.md  
-│        │  ├─ rabbit_types.md  
-│        │  ├─ state_labels.md  
-│        │  └─ ui_result_flow.md  
-
-│        ├─ loan_safety/  
-│        │  ├─ character_templates.md  
-│        │  ├─ diagnosis_logic.md  
-│        │  ├─ state_labels.md  
-│        │  └─ ui_result_flow.md  
-
-│        └─ type_diagnosis/  
-│           ├─ cta_strategy.md  
-│           ├─ diagnosis_logic.md  
-│           ├─ pairing_logic.md  
-│           ├─ product_concept.md  
-│           ├─ rabbit_types.md  
-│           ├─ state_labels.md  
-│           └─ ui_result_flow.md  
-
-├─ resources/  
-
-├─ strategy/  
-
-└─ tools/  
-   ├─ rent_vs_buy/  
-   │  ├─ legacy/  
-   │  ├─ README.md  
-   │  └─ simple_calc.py  
-   │  
-   └─ rent_vs_buy_v2/  
-      ├─ README.md  
-      ├─ rent_vs_buy_design.md  
-      ├─ index.html  
-      ├─ CLAUDE.md  
-      └─ .env.example  
-
----
-
-=============================
-
-■ system配下の責務（超重要）
-
-=============================
-
-brain/system は：
-
-👉 家買う予備校の
-「decision OS構造」
-
-を定義する場所である。
-
----
-
-ここでは：
-
-・decisionとは何か  
-・STATEとは何か  
-・driftとは何か  
-・CTAとは何か  
-・comparisonとは何か  
-・本命形成とは何か  
-
-など、
-
-👉 全プロダクト共通の思想責務
-
-を扱う。
-
----
-
-重要：
-
-❌ UI実装詳細
-
-は置かない。
-
----
-
-⭕ 「OS側の構造」
-
-を置く。
-
----
-
-=============================
-
-■ products配下の責務（超重要）
-
-=============================
-
-projects/iekau/products は：
-
-👉 各decision moduleの
-UI・UX・入力出力設計
-
-を定義する場所である。
-
----
-
-ここでは：
-
-・result_screen  
-・ux_flow  
-・state_labels  
-・diagnosis_logic  
-・screen_structure  
-
-など、
-
-👉 実際にユーザーへどう体験させるか
-
-を扱う。
-
----
-
-重要：
-
-❌ 共通OS思想
-
-はここで再定義しない。
-
----
-
-⭕ systemを前提として、
-各プロダクトへ翻訳する。
-
----
-
-=============================
-
-■ tools配下の責務
-
-=============================
-
-tools は：
-
-👉 実装・試作・検証
-
-を扱う。
-
----
-
+各レイヤーの役割
+Constitution
+思想を定義する。
 例：
-
-・試作計算機  
-・簡易UI  
-・prototype  
-・実験ロジック  
-
-など。
-
----
-
-重要：
-
-❌ OS定義
-
-は置かない。
-
----
-
-⭕ 「動作確認領域」
-
-として扱う。
-
----
-
-=============================
-
-■ 現在のOS中核構造（重要）
-
-=============================
-
-現在の家買う予備校は、
-
-以下構造を中核としている。
-
----
-
-感情  
-↓  
-構造理解  
-↓  
-現実接触  
-↓  
-本命形成  
-↓  
-decision更新  
-↓  
-drift  
-↓  
-再整理  
-↓  
-再decision  
-
----
-
-重要：
-
-❌ 一発決断OS
-
-ではない。
-
----
-
-⭕ 「decision progression OS」
-
-として扱う。
-
----
-
-=============================
-
-■ 現在重要な責務分離（超重要）
-
-=============================
-
-今回の更新で、
-
-以下責務を明確分離した。
-
----
-
-■ STATE
-
-👉 「今どのdecision整理が必要か」
-
----
-
-■ state_label
-
-👉 「現在地をどう表現するか」
-
----
-
-■ decision_state
-
-👉 「現在どのように迷っているか」
-
----
-
-■ CTA
-
-👉 「次のdecision update trigger」
-
----
-
-■ drift
-
-👉 「fixed_coreとcurrent decisionのズレ」
-
----
-
-■ comparison
-
-👉 「本命形成とdrift整理」
-
----
-
-■ decision_OS
-
-👉 「現在decision整理と
-decision progression継続」
-
----
-
-重要：
-
-これらを：
-
-❌ 混線させない。
-
----
-
-=============================
-
-■ LINE前後の構造（重要）
-
-=============================
-
-=============================
-
-■ LINE未接続
-
-=============================
-
-扱うもの：
-
-・単発整理  
-・軽い現実接触  
-・暫定decision  
-・気づき生成  
-
----
-
-目的：
-
-👉 「decision整理を始める」
-
----
-
-重要：
-
-❌ 完全tracking
-
-は行わない。
-
----
-
-=============================
-
-■ LINE接続後
-
-=============================
-
-扱うもの：
-
-・decision履歴  
-・comparison履歴  
-・drift推移  
-・fixed_core変化  
-・本命形成  
-・decision progression  
-
----
-
-目的：
-
-👉 「decision loop」
-
-を成立させる。
-
----
-
-重要：
-
-LINEは：
-
-❌ 保存
-
-ではない。
-
----
-
-⭕ 「decision continuity」
-
-である。
-
----
-
-=============================
-
-■ 現在の重要モジュール（2026-05時点）
-
-=============================
-
-特に中核なのは以下。
-
----
-
-■ decision_framework.md
-
-👉 decisionとは何か  
-👉 driftとは何か  
-👉 本命形成とは何か  
-👉 decision progressionとは何か  
-
+* 判断思想
+* decision思想
+* fixed_core思想
+* 体験思想
+* module思想
+
+⸻
+
+System
+思想を設計へ翻訳する。
+例：
+* decision_framework
+* state_definition
+* comparison_role
+* drift_detection
+* cta_role
+* product_connection_design
+
+⸻
+
+Module
+各プロダクト固有の責務を定義する。
+例：
+* property_reader
+* comparison
+* decision_OS
+* purchase_motivation
+* rent_vs_buy
+* loan_safety
+* type_diagnosis
+
+⸻
+
+Implementation
+Module責務をコードへ反映する。
+例：
+* Next.js
+* API
+* Database
+* UI
+* Component
+* Routing
+* State Management
+Implementationは、
+Constitutionを直接参照しない。
+必ず
+Constitution
+↓
+System
+↓
+Module
+↓
+Implementation
+の順で責務を継承する。
+
+
+
+⸻
+
+System配下の責務
+Systemは、
+Constitutionで定義された思想を、
+設計可能な責務へ変換するレイヤーである。
+Systemは、
+「何を実装するか」
+ではなく、
+「どの責務として構造化するか」
 を定義する。
+Systemで扱うもの
+* decision構造
+* STATE構造
+* reason構造
+* current decision
+* fixed_core接続
+* module責務
+* module間接続
+* CTA責務
+* UI責務
+* decision flow
+* drift構造
+* recovery構造
+* 監査ルール
+Systemで扱わないもの
+* Constitution思想
+* Product固有仕様
+* UI詳細
+* API設計
+* Database設計
+* 実装ロジック
+Systemは、
+Module全体の共通基盤として機能する。
+
+⸻
+
+Module配下の責務
+Moduleは、
+Systemで定義された責務を、
+各プロダクトへ適用するレイヤーである。
+Moduleでは、
+各プロダクト固有の
+* UX
+* UI
+* Screen構造
+* Flow
+* Input
+* Output
+* Product Rule
+を定義する。
+Moduleで扱うもの
+* product_concept
+* ux_flow
+* screen_structure
+* state_labels
+* data_connection
+* diagnosis_logic
+* feature_scope
+* prompts
+* module README
+Moduleで扱わないもの
+* Constitution思想
+* System思想
+* 他Module責務
+* 共通decision構造
+Moduleは、
+Systemを再定義してはならない。
+Systemを前提として、
+各プロダクトへ翻訳する責務のみを持つ。
+
+⸻
+
+Implementationの責務
+Implementationは、
+Module設計をコードへ反映するレイヤーである。
+Implementationで扱うもの
+* Frontend
+* Backend
+* API
+* Routing
+* Database
+* Component
+* Styling
+* State Management
+Implementationでは、
+Module責務のみを実装する。
+Implementationは、
+独自に思想を追加しない。
+Systemを書き換えない。
+Module責務を変更しない。
+実装判断は、
+必ずModuleまで戻って整理する。
+
+⸻
+
+Constitutionとの関係
+本構造は、
+Constitutionを最上位とする。
+責務の流れは、
+Constitution
+        ↓
+System
+        ↓
+Module
+        ↓
+Implementation
+となる。
+各レイヤーは、
+上位レイヤーを参照する。
+下位レイヤーから、
+上位レイヤーを書き換えてはならない。
+判断思想は、
+Constitutionのみが保持する。
+Systemは、
+その思想を設計へ翻訳する。
+Moduleは、
+設計を各プロダクトへ適用する。
+Implementationは、
+Module設計のみを実装する。
+この責務分離を維持することを、
+brain全体の最重要ルールとする。
 
----
+⸻
 
-■ state_definition.md
+読み込み順
+新規設計、
+レビュー、
+実装、
+AIへの読み込みを行う場合は、
+以下の順番を維持する。
+① Constitution
 
-👉 STATEの責務定義。
+↓
 
----
+② System
 
-■ state_to_cta_connection.md
+↓
 
-👉 STATEを
-decision triggerへ接続する。
-
----
-
-■ drift_detection.md
-
-👉 current drift
-👉 fixed_core drift
-👉 decision progression drift
-
-を扱う。
-
----
-
-■ discomfort_connection.md
-
-👉 discomfortを
-「decision drift signal」
-として扱う。
-
----
-
-■ decision_loop_core_summary.md
-
-👉 decision loop全体要約。
-
----
-
-=============================
-
-■ decision_OS構造（重要）
-
-=============================
-
-現在の正しい構造：
-
-external_property_search  
-↓  
-property_reader  
-↓  
-decision更新  
-↓  
-decision_OS  
-↓  
-comparison / drift整理  
-↓  
-再decision  
-
----
-
-重要：
-
-decision_OSは、
-
-❌ dashboard
-
-ではない。
-
----
-
-⭕ 「decision現在地OS」
-
-である。
-
----
-
-=============================
-
-■ 読み方ガイド
-
-=============================
-
-① 全体構造理解したい  
-→ md_structure_tree.md（このファイル）
-
----
-
-② OS思想を理解したい  
-→ brain/system 配下
-
----
-
-③ drift / STATE / CTA を理解したい  
-→ decision_framework.md
-→ state_definition.md
-→ drift_detection.md
-→ state_to_cta_connection.md
-
----
-
-④ 実装ロジックを理解したい  
-→ md_loading_map.md
-
----
-
-⑤ UI/UXを設計したい  
-→ projects/iekau/products 配下
-
----
-
-⑥ decision_OSを理解したい  
-→ decision_os_role.md
-→ projects/iekau/products/decision_os/
-
----
-
-⑦ property_readerを理解したい  
-→ property_reader 配下
-
----
-
-⑧ 実装・試作を触りたい  
-→ tools 配下
-
----
-
-=============================
-
-■ 最重要ルール
-
-=============================
-
-迷ったら：
-
-👉 共通OS思想 → brain/system  
-👉 個別UX → products  
-👉 実装 → tools  
-
----
-
-さらに：
-
-👉 drift  
-👉 STATE  
-👉 CTA  
-👉 decision  
-👉 comparison  
-
-は、
-
-❌ products側で再定義しない。
-
----
-
-⭕ system側を唯一の基準とする。
-
----
-
-=============================
-
-■ 現在のフェーズ理解（重要）
-
-=============================
-
-現在は、
-
-❌ visual polish phase
-
-ではない。
-
----
-
-⭕ 「decision loop自然循環確認フェーズ」
-
-である。
-
----
-
-そのため現在重要なのは：
-
-・drift整理  
-・本命形成  
-・CTA整合  
-・STATE整合  
-・decision progression  
-・fixed_core接続  
-・comparison自然化  
-
-など。
-
----
-
-❌ microcopy polish  
-❌ animation polish  
-❌ hierarchy polish  
-
-は後段。
-
----
-
-=============================
-
-■ 最終定義
-
-=============================
-
+③ Module
+
+↓
+
+④ Implementation
+さらに、
+System内では、
+以下を基本順序とする。
+decision_framework
+
+↓
+
+state_definition
+
+↓
+
+module role
+
+↓
+
+connection design
+
+↓
+
+CTA
+
+↓
+
+monitoring
+
+↓
+
+future
+Moduleでは、
+以下の順で参照する。
+product_concept
+
+↓
+
+ux_flow
+
+↓
+
+screen_structure
+
+↓
+
+data_connection
+
+↓
+
+implementation
+読み込み対象は、
+常に必要最小限とする。
+大量の設計書を一括で読み込むのではなく、
+今回の作業範囲に必要な責務だけを読み込むことを原則とする。
+本書は、
+その読み込み順の基準書としても機能する。
+
+
+⸻
+
+ディレクトリ一覧（最新版）
+現在の antigravity-brain は、
+以下のレイヤー構造で管理する。
+antigravity-brain/
+
+├── constitution/
+│
+│   ├── README.md
+│   ├── constitution_experience.md
+│   ├── constitution_decision.md
+│   ├── constitution_module.md
+│   ├── constitution_implementation.md
+│   └── ...
+│
+├── brain/
+│
+│   ├── core/
+│   │
+│   ├── system/
+│   │   ├── README.md
+│   │   ├── decision_framework.md
+│   │   ├── decision_reason_design.md
+│   │   ├── decision_update_triggers.md
+│   │   ├── state_definition.md
+│   │   ├── state_detection.md
+│   │   ├── state_to_cta_connection.md
+│   │   ├── state_to_action_routing.md
+│   │   ├── comparison_role.md
+│   │   ├── decision_os_role.md
+│   │   ├── product_connection_design.md
+│   │   ├── product_roles.md
+│   │   ├── cta_role.md
+│   │   ├── content_roles.md
+│   │   ├── drift_detection.md
+│   │   ├── fixed_core_definition.md
+│   │   ├── external_property_search.md
+│   │   └── ...
+│   │
+│   └── research_database/
+│
+├── projects/
+│   └── iekau/
+│       └── products/
+│           ├── property_reader/
+│           ├── comparison/
+│           ├── decision_os/
+│           ├── purchase_motivation/
+│           ├── rent_vs_buy/
+│           ├── loan_safety/
+│           └── type_diagnosis/
+│
+├── resources/
+│
+├── strategy/
+│
+└── tools/
+各ディレクトリは、
+責務ごとに分離され、
+同一責務を複数レイヤーで重複定義しない。
+
+⸻
+
+Rule
+brain全体では、
+以下を共通ルールとする。
+1. 上位責務を変更しない
+Implementationは、
+Moduleを書き換えない。
+Moduleは、
+Systemを書き換えない。
+Systemは、
+Constitutionを書き換えない。
+
+⸻
+
+2. 責務を重複させない
+同じ概念を、
+複数ファイルで定義しない。
+思想はConstitution、
+設計はSystem、
+個別仕様はModule、
+コードはImplementationで管理する。
+
+⸻
+
+3. 下位で思想を追加しない
+ImplementationやModuleは、
+独自思想を生成しない。
+思想追加が必要な場合は、
+Constitutionから見直す。
+
+⸻
+
+4. Systemを唯一の設計基準とする
+Moduleは、
+Systemを前提として設計する。
+同一責務を、
+Module側で再定義してはならない。
+
+⸻
+
+5. 読み込みは必要最小限とする
+大量の設計書を読むことを前提にしない。
+作業対象に必要な責務のみを読み込む。
+本書と md_loading_map.md を基準とする。
+
+⸻
+
+6. 命名を統一する
+brain全体では、
+正式名称を統一する。
+例
+* property_reader.md
+* comparison_role.md
+* decision_framework.md
+旧名称、
+仮名称、
+責務名違いは使用しない。
+
+⸻
+
+Change Policy
+本書は、
+brain全体の構造定義書である。
+そのため、
+個別Module追加や、
+ファイル追加のみでは、
+本書を変更しない。
+以下の場合のみ更新対象とする。
+* レイヤー構造変更
+* ディレクトリ構成変更
+* 責務階層変更
+* 読み込み順変更
+* Constitutionとの接続変更
+それ以外の変更は、
+各設計書で管理する。
+本書は、
+brain全体の構造を示す基準書として維持する。
+
+⸻
+
+最終定義
 md_structure_treeとは、
+Constitutionで定義された思想を、
+System、
+Module、
+Implementationへ一貫して接続するための、
+antigravity-brain全体の構造定義書である。
+本書は、
+各設計書の内容ではなく、
+設計資産全体の配置、
+責務、
+階層、
+接続関係を管理する。
+これにより、
+思想、
+設計、
+Module、
+実装が一方向に継承され、
+責務の重複や矛盾を防ぎながら、
+長期的に保守可能なbrain構造を維持する。
 
-👉 設計資産の配置図であり  
-👉 decision loop OSの責務分離図であり  
-👉 drift・STATE・CTA・本命形成・decision progressionを
-破綻させずに接続するための
-家買う予備校の構造マップである。
