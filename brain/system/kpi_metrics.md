@@ -1,533 +1,628 @@
-# brain/system/kpi_metrics.md
-Updated: 2026-04-13
+# kpi_metrics.md
+
+Updated: 2026-06-29
+
 Status: Active
 
-=============================
-
-■ 概要
-
-=============================
-
-本ドキュメントは、  
-家買う予備校における
-
-👉 KPI設計（kpi_metrics）
-
-を定義する。
-
-本設計の目的は、
-
-👉 プロダクト改善  
-👉 意思決定OSとしての成長可視化  
-
-を同時に実現することである。
-
----
-
-=============================
-
-■ 基本思想
-
-=============================
-
-① KPIは「改善」のために使う  
-
----
-
-② 最初は絞る  
-
----
-
-③ KPIは2レイヤーで設計する（最重要）
-
----
-
-👉 行動KPI（一般プロダクト指標）  
-👉 OS KPI（意思決定指標）  
-
----
-
-👉 両方を同時に見ることで初めて意味を持つ
-
----
-
-=============================
-
-■ decisionの定義（最重要）
-
-=============================
-
-decisionとは、
-
-👉 **明確な意思選択を行ったものに限定する**
-
----
-
-例：
-
-・物件を残す  
-・保留する  
-・見送る  
-・条件を決定する  
-・優先順位を決める  
-
----
-
-❌ 次の判断に進む（クリック）  
-❌ 画面遷移  
-
----
-
-👉 **行動ではなく意思決定のみをカウントする**
-
----
-
-👉 この定義がKPI全体の前提となる
-
----
-
-=============================
-
-■ North Star KPI（最重要）
-
-=============================
-
-## ■ decision発生率
-
----
-
-### 定義
-
-👉 ユーザーが「意思決定（decision）」を行った割合
-
----
-
-### 計算式
-
-decision数 ÷ 結果表示数
-
----
-
-### なぜこれが最重要か
-
----
-
-👉 OSの価値は「意思決定を生むこと」だから
-
----
-
-=============================
-
-■ OS KPI（意思決定レイヤー）
-
-=============================
-
----
-
-## ■ ① decision発生率（最重要）
-
----
-
-## ■ ② STATE遷移率
-
----
-
-### 定義
-
-👉 次のSTATEに進んだ割合
-
----
-
-### 厳密定義（重要）
-
-👉 **STATE遷移は「decisionによって次の意思決定フェーズへ移動した場合のみカウントする」**
-
----
-
-❌ CTAクリック  
-❌ 画面遷移  
-
----
-
-👉 **decisionベースでのみ遷移を判定する**
-
----
-
----
-
-## ■ ③ decision更新率
-
----
-
-### 定義
-
-👉 一度したdecisionを更新した割合
-
----
-
-例：
-
-・保留 → 検討中  
-・検討中 → 見送り  
-
----
-
-### 意味
-
-👉 思考が動いているか  
-
----
-
-👉 **比較・理解が進んだ証拠として最重要の深度KPIとする**
-
----
-
----
-
-## ■ ④ 比較到達率
-
----
-
-### 定義
-
-👉 comparisonまで到達した割合
-
----
-
-### 意味
-
-👉 実務判断フェーズに入ったか
-
----
-
----
-
-## ■ ⑤ 継続decision率（LINE）
-
----
-
-### 定義
-
-👉 複数回decisionを行ったユーザー割合
-
----
-
-### 意味
-
-👉 OSとして使われているか
-
----
-
----
-
-=============================
-
-■ 行動KPI（従来KPI）
-
-=============================
-
 ---
 
-## ■ ① LINE登録率
+# Purpose
 
----
-
-👉 OSへの接続率
-
----
-
----
-
-## ■ ② 完了率
+本書は、
 
----
-
-👉 UX成立確認
-
----
-
----
+Constitutionで定義された
+判断形成思想を、
 
-## ■ ③ LINE遷移率
+Systemにおける
+Monitoring設計へ適用するための定義書である。
 
----
+KPIとは何かは、
+Constitutionでは扱わない。
 
-👉 訴求力
+本書は、
 
----
+判断形成を観察・改善するために、
+Systemとして何を計測するかを定義する。
 
 ---
 
-## ■ ④ 登録完了率
-
----
+# Scope
 
-👉 技術・導線問題
+## 本書が扱うもの
 
----
+- KPI設計
+- Monitoring設計
+- current decision観察
+- decision continuity観察
+- Module横断指標
+- MVP計測方針
+- 将来拡張方針
 
 ---
 
-## ■ ⑤ 保存率
-
----
+## 本書が扱わないもの
 
-### 定義
+- 判断思想
+- fixed_core思想
+- decision生成
+- recommendation
+- UI改善
+- KPI運用ルール
 
-👉 保存が行われた割合
+これらは、
+Constitutionまたは
+各System設計書で扱う。
 
 ---
 
-### 位置づけ（重要）
+# Relationship
 
-👉 保存はdecisionではない  
+Constitution
 
----
-
-👉 **decisionを後から再開・更新するためのトリガー**
-
----
+↓
 
-👉 historyとの接続ポイント
+System
 
----
+↓
 
----
+Monitoring
 
-## ■ ⑥ 有料転換率（参考）
+↓
 
----
+Module
 
-👉 Phase2以降
+↓
 
----
+Implementation
 
 ---
 
-=============================
+Constitutionは、
+判断形成思想を定義する。
 
-■ KPIの構造（重要）
+Systemは、
+何を観察するかを定義する。
 
-=============================
+Monitoringは、
+Systemで定義した構造を計測する。
 
----
+Moduleは、
+Monitoring対象となる行動・判断を生成する。
 
-## LINE登録率
+Implementationは、
+Monitoring設計を実装する。
 
 ---
 
-LINE登録率 =
+# Design Principle
 
-完了率  
-×  
-LINE遷移率  
-×  
-登録完了率  
+KPIは、
 
----
+成果を評価するためではなく、
 
----
+判断形成が
+System設計どおりに機能しているかを
+観察するために存在する。
 
-## decision発生率
+そのため、
 
----
+KPIは、
 
-decision発生率 =
+クリック数、
 
-理解  
-×  
-納得  
-×  
-判断しやすさ  
+PV、
 
----
+滞在時間よりも、
 
-👉 UXの質そのもの
+current decision、
 
----
+decision continuity、
 
----
+Module接続、
 
-=============================
+decision更新可能状態
 
-■ KPIの優先順位
+を優先して扱う。
 
-=============================
+Monitoringは、
 
----
+ユーザーを評価しない。
 
-① decision発生率  
+System構造を評価する。
 
 ---
-
-② STATE遷移率  
 
----
+# KPIとは何か（Systemとしての役割）
 
-③ LINE登録率  
+SystemにおけるKPIとは、
 
----
+プロダクト成果を測るための数字ではない。
 
-④ 完了率 / 保存率  
+判断形成構造が、
 
----
+期待どおり循環しているかを
+継続的に観察するための
+Monitoring指標である。
 
-⑤ 有料転換率  
+KPIは、
 
----
+current decisionが更新されたか、
 
----
+decision continuityが維持されたか、
 
-=============================
+Module間接続が成立しているか、
 
-■ 改善の見方
+判断形成が停止していないか、
 
-=============================
+を観察する。
 
----
+KPI自身は、
 
-### ケース①
+decisionを生成しない。
 
-完了率高い × decision低い
+recommendationを行わない。
 
-👉 理解はされてるが判断できてない  
-→ decision設計改善
+UIを変更しない。
 
----
+改善案を提示しない。
 
----
+Monitoring対象としてのみ機能する。
 
-### ケース②
+# KPI Structure
 
-decision高い × LINE低い
+Systemは、
 
-👉 OS価値はあるが接続弱い  
-→ LINE導線改善
+KPIを、
 
----
+成果指標ではなく、
 
----
+判断形成構造を観察するための
+Monitoring構造として扱う。
 
-### ケース③
+そのため、
 
-LINE高い × 継続decision低い
+KPIは、
 
-👉 入ってるが使われてない  
-→ history / comparison改善
+以下の5つの観察対象で構成される。
 
 ---
 
----
+## current decision Monitoring
 
-### ケース④
+観察対象：
 
-STATE遷移が止まる
+- current decision更新
+- 判断停止有無
+- 判断継続可能状態
 
-👉 decision設計ミス or CTAミス  
+目的：
 
----
+現在の判断形成が、
+自然に進行しているかを確認する。
 
 ---
-
-=============================
 
-■ 計測設計
+## decision continuity Monitoring
 
-=============================
+観察対象：
 
----
-
-イベント：
-
-- input_start
-- input_complete
-- result_view
-- decision_made（最重要）
-- decision_updated
-- state_transition（decision起点のみ）
-- line_click
-- line_registered
-- comparison_enter
-- save_clicked
-
----
+- 判断継続
+- 判断再開
+- Module間接続
+- 文脈維持
 
-👉 decisionベースで設計する
+目的：
 
----
+判断形成が、
+単発で終了せず、
+継続しているかを確認する。
 
 ---
-
-=============================
-
-■ フェーズ別KPI
 
-=============================
+## Module Monitoring
 
----
+観察対象：
 
-### Phase1
+- Module利用状況
+- Module接続
+- Module責務成立
+- Module停止
 
-👉 decision発生率  
-👉 LINE登録率  
+目的：
 
----
+各Moduleが、
+System設計どおりに
+機能しているかを確認する。
 
 ---
-
-### Phase2
-
-👉 有料転換率  
-👉 ARPU  
 
----
+## Flow Monitoring
 
----
+観察対象：
 
-### Phase3
+- decision flow
+- Module接続順
+- 接続停止
+- 循環状態
 
-👉 LTV  
-👉 継続decision率  
+目的：
 
----
+System全体の
+判断形成構造が
+維持されているかを確認する。
 
 ---
 
-=============================
+## System Monitoring
 
-■ 最重要ポイント
+観察対象：
 
-=============================
+- System全体
+- Constitution整合
+- Monitoring整合
+- 将来拡張可能性
 
----
-
-👉 KPIは行動ではなく  
-👉 意思決定を測る
+目的：
 
----
+個別Moduleではなく、
 
-👉 数字ではなく  
-👉 思考の動きを見る
+System全体が
+一貫して機能しているかを確認する。
 
 ---
 
----
+# current decisionとの関係
 
-=============================
+KPIは、
 
-■ 最終定義
+current decisionを
+評価しない。
 
-=============================
+観察する。
 
-kpi_metricsとは、
+観察対象は、
 
-👉 ユーザーの意思決定の発生・進行・更新を可視化し  
-👉 意思決定OSを成長させるための指標設計
+- 判断更新
+- 判断停止
+- 判断継続
+- 判断再開
 
 である。
 
+current decisionそのものを
+変更しない。
+
 ---
 
-## 一言でいうと
+# decision continuityとの関係
 
-👉 「意思決定の質と進行を測る設計」
+KPIは、
+
+decision continuityが
+維持されているかを観察する。
+
+観察対象は、
+
+- Module接続
+- 文脈継続
+- 判断継続
+- 判断再開
+
+である。
+
+continuityを生成しない。
+
+改善しない。
+
+Monitoringのみ行う。
+
+---
+
+# Monitoringとの関係
+
+Monitoringは、
+
+KPIを利用して
+System状態を観察する。
+
+KPIは、
+
+Monitoringが利用する
+評価指標として機能する。
+
+Monitoring自身は、
+
+改善判断を行わない。
+
+観察のみ担当する。
+
+---
+
+# Moduleとの関係
+
+各Moduleは、
+
+KPI生成主体ではない。
+
+Moduleは、
+
+判断形成を行う。
+
+KPIは、
+
+その結果として発生した
+判断形成を観察する。
+
+そのため、
+
+Moduleは、
+
+KPIのために
+設計されない。
+
+KPIは、
+
+Module責務が
+設計どおり機能しているかを
+確認するために利用される。
+
+# System Connections
+
+kpi_metricsは、
+
+以下のSystem設計と接続する。
+
+Decision
+
+- decision_framework.md
+- decision_update_triggers.md
+
+Monitoring
+
+- event_tracking.md
+- history.md
+- drift_detection.md
+
+State
+
+- state_definition.md
+
+Module
+
+- comparison_role.md
+- decision_os_role.md
+- product_connection_design.md
+
+これらを通して、
+
+判断形成構造が
+期待どおり循環しているかを
+観察する。
+
+---
+
+# Module Responsibilities
+
+各Moduleは、
+
+判断形成を担当する。
+
+Monitoringは、
+
+その結果を観察する。
+
+役割は混在しない。
+
+---
+
+decision_framework
+
+- 判断形成
+
+---
+
+comparison
+
+- 判断整理
+
+---
+
+decision_OS
+
+- current decision維持
+
+---
+
+property_reader
+
+- 判断材料形成
+
+---
+
+event_tracking
+
+- イベント取得
+
+---
+
+history
+
+- 判断履歴保持
+
+---
+
+kpi_metrics
+
+- 判断形成構造の観察
+
+---
+
+# Boundary
+
+kpi_metricsは、
+
+以下を行わない。
+
+- decision生成
+- recommendation
+- current decision変更
+- fixed_core変更
+- Module制御
+- UI変更
+- CTA生成
+- Monitoring結果による自動最適化
+
+KPIは、
+
+System観察のみ担当する。
+
+---
+
+# MVP Policy
+
+MVPでは、
+
+最小限のMonitoringを対象とする。
+
+観察対象は、
+
+- current decision更新
+- decision continuity
+- Module接続
+- 判断停止有無
+- 判断継続可能状態
+
+数値最適化や、
+
+高度な分析は行わない。
+
+まずは、
+
+System構造が
+設計どおり循環することを
+優先する。
+
+---
+
+# Future Policy
+
+将来的には、
+
+Monitoring対象を拡張できる。
+
+例：
+
+- Module品質
+- decision品質
+- drift傾向
+- fixed_core再接続状況
+- Module横断分析
+- 長期判断形成分析
+
+ただし、
+
+将来拡張においても、
+
+Constitutionで定義された
+判断形成思想を変更しない。
+
+Systemは、
+
+Monitoring構造のみを
+改善対象とする。
+
+# Related Documents
+
+## Constitution
+
+- constitution_experience.md
+
+---
+
+## System
+
+Decision
+
+- decision_framework.md
+- decision_update_triggers.md
+
+State
+
+- state_definition.md
+
+Monitoring
+
+- event_tracking.md
+- history.md
+- drift_detection.md
+
+Module
+
+- comparison_role.md
+- decision_os_role.md
+- product_connection_design.md
+
+---
+
+# Rule
+
+kpi_metricsは、
+
+Monitoring設計書である。
+
+そのため、
+
+以下を維持する。
+
+- current decisionを評価しない
+- decision continuityを維持する
+- Module責務を変更しない
+- recommendationへ利用しない
+- UI改善判断を行わない
+- Constitutionを変更しない
+
+Monitoringは、
+
+判断形成構造のみを観察する。
+
+---
+
+# Change Policy
+
+kpi_metricsは、
+
+Systemレイヤーの設計書である。
+
+思想変更は行わない。
+
+Constitutionとの整合性を維持した上で、
+
+Monitoring構造のみを改善対象とする。
+
+新しいKPIを追加する場合も、
+
+Module責務や
+
+判断形成思想を変更してはならない。
+
+---
+
+# 最終定義
+
+kpi_metricsとは、
+
+System全体の判断形成構造を、
+
+current decision、
+
+decision continuity、
+
+Module接続、
+
+Monitoring構造の観点から継続的に観察し、
+
+Constitutionで定義された判断形成思想が、
+
+設計どおり機能しているかを確認するための、
+
+System Monitoring設計書である。
