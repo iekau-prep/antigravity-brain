@@ -11,15 +11,18 @@ Purpose
 本書は、
 
 Constitutionで定義された
-家買う予備校の思想を、
+家買う予備校の思想を前提として、
 
-System全体から見た
-decision loopの中核構造として要約する。
+System全体を横断する
+decision loopの概要を整理する。
 
 本書は、
 
 思想を追加するものではない。
 
+個別System設計へ入る前に、
+
+decision loop全体の構造と
 各System設計の位置付けを俯瞰し、
 
 全体像を短時間で理解できるようにすることを目的とする。
@@ -53,20 +56,24 @@ Scope
 Relationship
 
 Constitution
-↓
+        ↓
+System README
+        ↓
 decision_loop_core_summary
-↓
-System Documents
-↓
+        ↓
+Individual System Documents
+        ↓
 Module
-↓
+        ↓
 Implementation
 
 本書は、
 
-ConstitutionとSystem全体を接続する
+READMEで示したSystem全体構造を前提として、
 
-概要設計書として位置付ける。
+decision loop全体を俯瞰する
+
+Overviewとして機能する。
 
 ⸻
 
@@ -226,9 +233,15 @@ decision loopを理解する場合は、
 
 Constitution
 ↓
+README
+↓
+md_structure_tree
+↓
+md_loading_map
+↓
 decision_loop_core_summary
 ↓
-decision_framework
+対象System
 ↓
 state_definition
 ↓
