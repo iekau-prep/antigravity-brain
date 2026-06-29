@@ -1,44 +1,66 @@
 # brain/system/future_expansion.md
-Updated: 2026-05-12
+Updated: 2026-06-29
 Status: Active
 
-=============================
+⸻
 
-■ 概要
+Purpose
 
-=============================
+本書は、
 
-本ドキュメントは、
+ConstitutionおよびSystem設計を前提として、
 
-👉 「今は採用しないが、
-MVP検証後に再評価すべき構造論点」
+MVP終了後に再評価すべき
+System設計課題を管理する。
 
-を管理する。
+本書は、
 
----
+機能追加候補ではなく、
 
-重要：
+System構造として再検討が必要な論点のみを扱う。
 
-❌ 機能アイデア集
-❌ 要望メモ
-❌ 便利機能TODO
+⸻
 
-ではない。
+Scope
 
----
+本書が扱うもの
 
-⭕ OS構造
-⭕ state構造
-⭕ decision構造
-⭕ 導線構造
-⭕ 比較構造
+* System構造の拡張候補
+* decision構造の発展候補
+* module接続課題
+* decision continuity課題
+* MVP保留事項
 
-など、
+本書が扱わないもの
 
-👉 MVP段階では複雑化リスクが高いため
-一旦保留した重要論点
+* 機能要望
+* UI改善案
+* Implementation改善
+* 思いつきアイデア
 
-のみを扱う。
+⸻
+
+Relationship
+
+Constitution
+↓
+System
+↓
+future_expansion
+↓
+Next Generation Design
+
+⸻
+
+Design Principle
+
+future_expansionは、
+
+現在のSystemを変更するための文書ではない。
+
+MVP検証後に、
+
+System構造として再評価する論点のみを保持する。
 
 ---
 
@@ -457,3 +479,35 @@ decision前進理由
 ⭕ decision動機構造問題
 
 として扱う。
+
+⸻
+
+Related Documents
+
+Constitution
+
+* constitution_experience.md
+
+System
+
+* decision_framework.md
+* product_connection_design.md
+* decision_os_role.md
+* comparison_role.md
+* state_definition.md
+
+⸻
+
+Change Policy
+
+future_expansionは、
+
+Systemレイヤーの保留管理書である。
+
+現在のSystemへ直接変更を加えない。
+
+MVP終了後、
+
+Constitutionとの整合性を確認した上で、
+
+次世代System設計へ反映する。
