@@ -1,56 +1,66 @@
 # brain/system/future_phase_findings.md
-Updated: 2026-05-19
+Updated: 2026-06-29
 Status: Active
 
-=============================
+Purpose
 
-■ 概要
+本書は、
 
-=============================
+MVPおよびDecision Loop検証を通じて発見された、
 
-本ドキュメントは、
+将来フェーズで再評価すべき設計論点を管理する。
 
-Decision Loop接続検証フェーズで発見された、
+現在採用しない事項と、
 
-👉 「後続フェーズで扱うべき課題」
+将来検討事項を分離し、
 
-を記録する。
+System改善時の判断材料を保持することを目的とする。
 
----
+⸻
 
-現在は、
+Scope
 
-❌ UI完成フェーズ
+本書が扱うもの
 
-ではなく、
+* 将来検討事項
+* MVP保留事項
+* Decision Loop検証結果
+* 後続フェーズ課題
 
-⭕ role検証 + decision loop接続検証フェーズ
+本書が扱わないもの
 
-である。
+* 現在実装
+* 現在System定義
+* Constitution変更
+* Module責務変更
 
----
+⸻
 
-そのため現段階では：
+Relationship
 
-❌ 完成を急がない
+Constitution
+↓
 
----
+System
+↓
 
-⭕ 「違和感の発見」
-⭕ 「roleズレの検出」
-⭕ 「decision循環の確認」
+future_phase_findings
 
-を優先する。
+↓
 
----
+Future Revision
 
-本ドキュメントは、
+⸻
 
-👉 「今は扱わないが、
-後続フェーズで重要になる事項」
+Design Principle
 
-を保持するために存在する。
+本書は、
 
+現在採用する設計ではなく、
+
+将来検討対象のみを管理する。
+
+現在のSystem定義へ影響を与えない。
 ---
 
 =============================
@@ -393,3 +403,35 @@ roleが自然循環するか」
 
 👉 「今直すべきこと」と
 「後で磨くべきこと」を分離するための記録」
+
+⸻
+
+Related Documents
+
+Constitution
+
+* constitution_experience.md
+
+System
+
+* decision_framework.md
+* decision_os_role.md
+* comparison_role.md
+* drift_detection.md
+* future_expansion.md
+
+⸻
+
+Change Policy
+
+future_phase_findingsは、
+
+将来フェーズの検討事項を保持する管理文書である。
+
+現在のSystem定義を変更するために使用しない。
+
+採用する場合は、
+
+ConstitutionおよびSystemとの整合性を確認した上で、
+
+正式な設計書へ反映する。
