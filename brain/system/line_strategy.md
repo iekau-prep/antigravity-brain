@@ -1,5 +1,5 @@
 # brain/system/line_strategy.md
-Updated: 2026-04-13
+Updated: 2026-06-29
 Status: Active
 
 =============================
@@ -8,18 +8,91 @@ Status: Active
 
 =============================
 
-本ドキュメントは、  
-家買う予備校における
+Purpose
 
-👉 LINE設計（line_strategy）
+本書は、
+
+Constitutionで定義された
+decision continuity思想を、
+
+LINEを通じたSystem設計へ適用するための設計書である。
+
+LINEとは何かは、
+
+Constitutionが扱う。
+
+本書は、
+
+LINEを
+
+decision continuity基盤として
+
+どのように設計し、
+
+どのようにSystemへ接続するか
 
 を定義する。
 
-LINEは単なる集客チャネルではなく、
+⸻
 
-👉 **意思決定OSにおける永続化レイヤー（Persistence Layer）**
+Scope
 
-として設計する。
+本書が扱うもの
+
+* LINEの役割
+* decision continuity
+* 保存対象
+* 再訪構造
+* System接続
+* 永続化方針
+
+本書が扱わないもの
+
+* LINEマーケティング思想
+* 配信戦略
+* UI仕様
+* Module実装
+
+これらはConstitutionおよび各Module設計を参照する。
+
+⸻
+
+Relationship
+
+Constitution
+↓
+line_strategy
+↓
+decision_OS
+↓
+Implementation
+
+⸻
+
+Design Principle
+
+LINEは、
+
+「集客チャネル」
+
+ではなく、
+
+decision continuityを支える
+永続化レイヤーとして扱う。
+
+decisionはWebで形成し、
+
+LINEはその判断を継続可能にする。
+
+LINEは、
+
+recommendation、
+
+CV最適化、
+
+通知主体ではなく、
+
+decision continuityを支える構造として設計する。
 
 ---
 
@@ -539,6 +612,37 @@ LINEは
 👉 **意思決定を継続させる基盤**
 
 ---
+
+⸻
+
+Related Documents
+
+Constitution
+
+* constitution_experience.md
+
+System
+
+* decision_framework.md
+* decision_os_role.md
+* product_connection_design.md
+* user_data_strategy.md
+* history.md
+
+⸻
+
+Change Policy
+
+line_strategyは、
+
+Systemレイヤーの設計書である。
+
+LINE思想は変更しない。
+
+Constitutionとの整合性を維持した上で、
+
+decision continuityに関する
+System設計のみ改善対象とする。
 
 ---
 
