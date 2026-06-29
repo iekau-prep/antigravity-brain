@@ -1,59 +1,74 @@
 # funnel_logic.md
-Updated: 2026-05-21
-Status: Core
+Updated: 2026-06-29
+Status: Active
 
-=============================
+⸻
 
-■ 概要
+Purpose
 
-=============================
+本書は、
 
-本モジュールは、
+Constitutionで定義された
+decision loop思想を、
 
-👉 家買う予備校における
-decision loop（意思決定循環構造）
+Systemレイヤーにおける
+循環構造として定義する設計書である。
 
-を定義する。
+本書は、
 
-目的は、
+ユーザー体験そのものではなく、
 
-👉 ユーザーの興味・違和感・迷い・比較・現実判断・本命形成を  
-👉 分断せず接続し続け  
-👉 「自分で判断できる状態」へ導くこと
+decision更新が
+どのように循環するかを扱う。
 
-である。
+⸻
 
----
+Scope
 
-重要：
+本書が扱うもの
 
-本構造は、
+* decision loop構造
+* module接続順
+* decision更新循環
+* current decisionの流れ
+* decision continuityとの接続
 
-❌ 単純ファネル  
-❌ 一本道導線  
-❌ 順番攻略フロー  
+本書が扱わないもの
 
-ではない。
+* Constitution思想
+* UX詳細
+* CTA設計
+* Module責務
 
----
+これらは各設計書を参照する。
 
-⭕ 「decision更新が循環し続ける構造」
+⸻
 
-として扱う。
+Relationship
 
----
+Constitution
+↓
+funnel_logic
+↓
+decision_framework
+product_connection_design
+decision_os_role
+↓
+Implementation
 
-本ドキュメントは：
+⸻
 
-・decision_framework.md
-・decision_update_triggers.md
-・product_connection_design.md
-・state_definition.md
-・state_to_cta_connection.md
-・comparison_role.md
-・decision_os_role.md
+Design Principle
 
-と接続される。
+decision loopは、
+
+ユーザーを順番に進ませる構造ではない。
+
+current decisionを起点として、
+
+必要なmoduleを経由しながら、
+
+decisionが更新され続ける循環構造として扱う。
 
 ---
 
@@ -1034,6 +1049,36 @@ drift検知
 ・自分でdecision更新できる
 
 状態になること。
+
+⸻
+
+Related Documents
+
+Constitution
+
+* constitution_experience.md
+
+System
+
+* decision_framework.md
+* product_connection_design.md
+* decision_os_role.md
+* comparison_role.md
+* line_strategy.md
+
+⸻
+
+Change Policy
+
+funnel_logicは、
+
+Systemレイヤーの設計書である。
+
+decision loop思想は変更しない。
+
+Constitutionとの整合性を維持した上で、
+
+循環構造および接続構造のみ改善対象とする。
 
 ---
 
