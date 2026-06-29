@@ -1,26 +1,76 @@
 # brain/system/funnel_and_line_strategy.md
+Updated: 2026-06-29
+Status: Active
 
-## 概要
+⸻
 
-本ドキュメントは、  
-家買う予備校における
+Purpose
 
-👉 顧客導線設計（funnel）とLINEの役割
+本書は、
 
-を定義する。
+Constitutionで定義された
 
-本プロダクトは、
+ユーザー体験と
+decision continuity思想を、
 
-- 集客
-- 教育
-- 判断
-- 行動
+Systemレイヤーにおける導線設計へ適用するための設計書である。
 
-を一貫して設計し、
+本書は、
 
-👉 「住宅購入を自分で判断できる状態」
+マーケティングファネルを定義しない。
 
-へユーザーを導くことを目的とする。
+decision更新へ自然接続する
+導線構造のみを扱う。
+
+⸻
+
+Scope
+
+本書が扱うもの
+
+* 導線構造
+* プロダクト接続
+* LINE接続位置
+* decision continuityへの接続
+* 継続利用構造
+
+本書が扱わないもの
+
+* Constitution思想
+* チャネル思想
+* LINE思想
+* Module実装
+
+これらは各対応ドキュメントを参照する。
+
+⸻
+
+Relationship
+
+Constitution
+↓
+funnel_and_line_strategy
+↓
+line_strategy
+product_connection_design
+↓
+Implementation
+
+⸻
+
+Design Principle
+
+導線とは、
+
+ユーザーを回遊させる構造ではない。
+
+decision更新が自然に継続する構造として扱う。
+
+LINEは、
+
+導線の終点ではなく、
+
+decision continuityへ接続する基盤として配置する。
 
 ---
 
@@ -626,6 +676,36 @@ LINEは自然に接続
 すべてが繋がる
 
 ---
+
+⸻
+
+Related Documents
+
+Constitution
+
+* constitution_experience.md
+
+System
+
+* line_strategy.md
+* product_connection_design.md
+* content_roles.md
+* decision_framework.md
+* decision_os_role.md
+
+⸻
+
+Change Policy
+
+funnel_and_line_strategyは、
+
+Systemレイヤーの設計書である。
+
+導線思想は変更しない。
+
+Constitutionとの整合性を維持した上で、
+
+decision continuityへ接続する導線設計のみ改善対象とする。
 
 ---
 
