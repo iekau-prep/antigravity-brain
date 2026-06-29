@@ -163,11 +163,19 @@ System
 思想を設計へ翻訳する。
 例：
 * decision_framework
-* state_definition
-* comparison_role
-* drift_detection
-* cta_role
+* decision_loop_core_summary
+* history
+* event_tracking
+* kpi_metrics
+* user_data_strategy
 * product_connection_design
+* cta_strategy
+* line_strategy
+* monetization
+* onboarding_design
+* release_checklist
+* security_policy
+* ui_event_mapping
 
 ⸻
 
@@ -220,27 +228,47 @@ Systemは、
 「どの責務として構造化するか」
 を定義する。
 Systemで扱うもの
+
+Systemは、Constitutionで定義された思想を、
+
+設計可能な責務へ変換するレイヤーである。
+
+Systemは、
+
+「何を実装するか」
+
+ではなく、
+
+「どの責務として構造化するか」
+
+を定義する。
+
+Systemで扱うもの
+
 * decision構造
-* STATE構造
-* reason構造
 * current decision
-* fixed_core接続
-* module責務
-* module間接続
-* CTA責務
-* UI責務
-* decision flow
+* decision continuity
+* STATE構造
+* history
+* fixed_core
+* reason構造
 * drift構造
-* recovery構造
-* 監査ルール
+* module connection
+* CTA構造
+* Monitoring構造
+* Governance構造
+
 Systemで扱わないもの
+
 * Constitution思想
 * Product固有仕様
 * UI詳細
 * API設計
 * Database設計
 * 実装ロジック
+
 Systemは、
+
 Module全体の共通基盤として機能する。
 
 ⸻
@@ -359,27 +387,41 @@ decision_framework
 
 ↓
 
-state_definition
+Core Decision Systems
+(current decision / fixed_core / history)
 
 ↓
 
-module role
+State Systems
+(state_definition / state_detection)
 
 ↓
 
-connection design
+Connection Systems
+(product_connection_design /
+decision_loop_core_summary)
 
 ↓
 
-CTA
+Interaction Systems
+(cta /
+line /
+onboarding /
+ui_event_mapping)
 
 ↓
 
-monitoring
+Monitoring Systems
+(event_tracking /
+kpi_metrics)
 
 ↓
 
-future
+Governance Systems
+(release /
+security /
+future)
+
 Moduleでは、
 以下の順で参照する。
 product_concept
