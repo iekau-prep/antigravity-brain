@@ -20,13 +20,23 @@ Systemは、
 
 Constitutionを、
 
-設計、
-
 責務、
+
+構造、
 
 接続、
 
 ルールへ変換することを目的とする。
+
+Systemは単なる設計書一覧ではない。
+
+各Systemは責務ごとに独立し、
+
+Constitutionで定義された思想を、
+
+ModuleとImplementationへ一貫して接続するための
+
+共通設計基盤として管理する。
 
 ⸻
 
@@ -35,15 +45,17 @@ Scope
 Systemが扱うもの
 
 * decision構造
+* current decision
+* decision continuity
 * STATE構造
+* history
+* fixed_core
 * reason構造
-* fixed_core接続
-* module責務
-* module間接続
-* decision flow
-* CTA責務
-* UI責務
-* Monitoring
+* drift構造
+* Module接続
+* Interaction構造
+* Monitoring構造
+* Governance構造
 * 設計ルール
 
 Systemが扱わないもの
@@ -70,11 +82,17 @@ Systemは、
 以下の責務階層に従う。
 
 Constitution
+
 ↓
+
 System
+
 ↓
+
 Module
+
 ↓
+
 Implementation
 
 Constitutionは、
@@ -103,7 +121,9 @@ Implementationは、
 
 Systemは、
 
-ConstitutionとModuleを接続する中間レイヤーとして機能する。
+ConstitutionとModuleを接続する
+
+中間レイヤーとして機能する。
 
 ⸻
 
@@ -115,19 +135,21 @@ System配下では、
 
 ⸻
 
-Decision
+Core Decision Systems
 
-decision構造を定義する。
+判断形成の共通構造を定義する。
 
 例
 
 * decision_framework.md
 * decision_reason_design.md
 * decision_update_triggers.md
+* history.md
+* drift_detection.md
 
 ⸻
 
-State
+State Systems
 
 現在状態と判断状態を定義する。
 
@@ -140,7 +162,19 @@ State
 
 ⸻
 
-Module Roles
+Connection Systems
+
+Module間の接続構造を定義する。
+
+例
+
+* product_connection_design.md
+* fixed_core_definition.md
+* decision_loop_core_summary.md
+
+⸻
+
+Module Role Systems
 
 各Moduleの責務を定義する。
 
@@ -153,51 +187,53 @@ Module Roles
 
 ⸻
 
-Connection
+Interaction Systems
 
-Module間の接続構造を定義する。
-
-例
-
-* product_connection_design.md
-* fixed_core_definition.md
-
-⸻
-
-UX / CTA
-
-判断体験を支える設計を定義する。
+判断体験を支えるInteractionを定義する。
 
 例
 
 * cta_role.md
 * cta_strategy.md
+* line_strategy.md
+* onboarding_design.md
 * content_roles.md
+* ui_event_mapping.md
 
 ⸻
 
-Monitoring
+Monitoring Systems
 
-判断状態の観察・監査を定義する。
+判断形成状態の観察・計測・公開確認を定義する。
 
 例
 
-* drift_detection.md
 * event_tracking.md
 * kpi_metrics.md
 * release_checklist.md
 
 ⸻
 
-Future
+Governance Systems
 
-将来拡張や履歴管理を扱う。
+運用・管理・全体方針を定義する。
+
+例
+
+* security_policy.md
+* user_data_strategy.md
+* monetization.md
+
+⸻
+
+Future Systems
+
+将来検討事項を管理する。
 
 例
 
 * future_expansion.md
 * future_phase_findings.md
-* history.md
 
 ⸻
 
@@ -208,17 +244,29 @@ Systemを利用する場合は、
 必ず以下の順序を維持する。
 
 Constitution
+
 ↓
+
 README（本書）
+
 ↓
+
 md_structure_tree.md
+
 ↓
+
 md_loading_map.md
+
 ↓
+
 対象System
+
 ↓
+
 対象Module
+
 ↓
+
 Implementation
 
 詳細な構造は、
