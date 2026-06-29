@@ -151,31 +151,35 @@ Implementation
 さらに、
 Systemでは、
 以下を基本順とする。
-decision
+decision_framework
 
 ↓
 
-state
+Core Decision Systems
+(current decision / fixed_core / history)
 
 ↓
 
-module role
+State Systems
 
 ↓
 
-connection
+Connection Systems
 
 ↓
 
-CTA
+Interaction Systems
+(cta / onboarding / line / ui_event_mapping)
 
 ↓
 
-monitoring
+Monitoring Systems
+(event_tracking / kpi_metrics)
 
 ↓
 
-future
+Governance Systems
+(release / security / future)
 Moduleでは、
 以下の順で参照する。
 product_concept
@@ -244,10 +248,15 @@ Constitution
 対象System
 例
 * decision_framework
-* state_definition
-* comparison_role
-* drift_detection
+* history
+* event_tracking
+* kpi_metrics
+* user_data_strategy
 * product_connection_design
+* cta_strategy
+* line_strategy
+* monetization
+* onboarding_design
 補助
 md_structure_tree.md
 
@@ -371,11 +380,19 @@ Monitoring
 責務整合、
 運用状態を確認する。
 必須
-drift_detection
+event_tracking
+
+↓
+
+kpi_metrics
+
+↓
+
+history
+
+↓
 
 release_checklist
-
-event_tracking
 補助
 kpi_metrics
 
