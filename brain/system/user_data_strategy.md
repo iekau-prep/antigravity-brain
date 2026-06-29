@@ -1,42 +1,77 @@
 # brain/system/user_data_strategy.md
-Updated: 2026-04-18
-Status: Core
+Updated: 2026-06-29
+Status: Active
 
-=============================
+⸻
 
-■ 概要
+Purpose
 
-=============================
+本書は、
 
-本ドキュメントは、  
-家買う予備校における
+Constitutionで定義された
+decision思想を、
 
-👉 ユーザーデータ設計（user_data_strategy）
+Systemにおける
+データ責務へ変換するための設計書である。
 
-を定義する。
+本書は、
 
-本設計の目的は、
+ユーザーデータそのものではなく、
 
-👉 「ユーザーの判断を蓄積し、再利用し、精度を上げること」
+decisionを中心とした
+データ構造と責務を定義する。
 
-である。
+⸻
 
-家買う予備校は、
+Scope
 
-・type_diagnosis  
-・purchase_motivation  
-・rent_vs_buy  
-・loan_safety  
-・property_reader  
-・decision_os  
-・LINE  
+本書が扱うもの
 
-を通じて、
+* decisionデータ構造
+* user責務
+* property責務
+* profile_context責務
+* state算出方針
+* decision continuityとの接続
 
-👉 「住宅購入における意思決定OS」
+本書が扱わないもの
 
-を実現する。
+* Constitution思想
+* Database実装
+* API設計
+* Schema実装
 
+これらはImplementationで扱う。
+
+⸻
+
+Relationship
+
+Constitution
+↓
+user_data_strategy
+↓
+decision_framework
+state_definition
+decision_os_role
+↓
+Implementation
+
+⸻
+
+Design Principle
+
+Systemは、
+
+データを保存することではなく、
+
+decisionが継続的に更新されるための
+責務構造を定義する。
+
+decisionを唯一の判断事実として扱い、
+
+その他の状態は
+必要に応じて導出する。
 ---
 
 =============================
@@ -566,6 +601,38 @@ LINE：
 👉 decisionがすべての起点  
 
 ---
+
+⸻
+
+Related Documents
+
+Constitution
+
+* constitution_experience.md
+
+System
+
+* decision_framework.md
+* state_definition.md
+* decision_os_role.md
+* line_strategy.md
+* product_connection_design.md
+
+⸻
+
+Change Policy
+
+user_data_strategyは、
+
+Systemレイヤーの設計書である。
+
+データ構造思想は
+Constitutionに従う。
+
+Systemでは、
+
+decision continuityを維持するための
+責務構造のみ改善対象とする。
 
 =============================
 
