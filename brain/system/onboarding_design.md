@@ -1,485 +1,473 @@
-# brain/system/onboarding_design.md
-Updated: 2026-05-12
-Status: Core
+# onboarding_design.md
 
-=============================
+Updated: 2026-06-29
 
-■ 概要
+Status: Active
 
-=============================
+# Purpose
 
-本ドキュメントは、  
+本書は、
+
+Constitutionで定義された
+判断形成思想を前提として、
+
 家買う予備校における
+Onboarding構造を
+System設計として定義する。
 
-👉 onboarding の役割
+Onboardingは、
 
-を定義する。
+サービスを説明することを
+目的としない。
 
----
+ユーザーが、
 
-onboardingは、
-
-❌ LP
-❌ サービス説明
-❌ AI紹介
-❌ 教育導線
-
-ではない。
+判断形成Systemへ
+自然に参加できる状態を形成することを
+目的とする。
 
 ---
 
-⭕ decision_OSへの導入
+# Scope
 
-である。
+本書が扱うもの
 
----
+- Onboarding構造
+- 初回判断形成
+- current decisionへの接続
+- decision continuityへの接続
+- 初回体験の設計原則
+- Moduleとの接続方針
 
-=============================
+本書が扱わないもの
 
-■ onboardingの正体（最重要）
+- LP構成
+- コピーライティング
+- UIデザイン
+- チュートリアル画面
+- LINE登録施策
+- マーケティング施策
 
-=============================
-
-onboardingとは、
-
-👉 「単発プロダクト」から
-👉 「判断OS」へ移行する入口
-
-である。
-
----
-
-つまり、
-
-・type_diagnosis
-・purchase_motivation
-・rent_vs_buy
-・loan_safety
-・property_reader
-
-などを、
-
-👉 単発利用
-ではなく
-
-👉 “繋がった判断”
-
-へ変換する導線。
+これらは、
+ImplementationまたはBusinessで扱う。
 
 ---
 
-=============================
+# Relationship
 
-■ 正しい導線
+Constitution
 
-=============================
-
-単発プロダクト
 ↓
-もっと整理したい
+
+System
+
+（onboarding_design.md）
+
 ↓
-他プロダクトも繋げたい
+
+Module
+
 ↓
-LINE登録
-↓
-decision_OS開始
-↓
-onboarding
-↓
-判断OS利用開始
+
+Implementation
+
+Onboardingは、
+
+Constitutionで定義された
+判断形成思想を、
+
+初回参加構造へ変換する
+Systemとして位置付ける。
 
 ---
 
-👉 LINEは
+# Design Principle
 
-❌ メルマガ登録
-ではなく
+Onboardingは、
 
-⭕ OS開始トリガー
+機能説明を目的としない。
 
-として扱う。
+教育を目的としない。
 
----
+ユーザーが、
 
-=============================
+現在の判断形成へ
+自然に参加できる状態を
+形成することを目的とする。
 
-■ onboarding開始時のユーザー心理（重要）
+そのため、
 
-=============================
+Onboardingは、
 
-LINE登録直後のユーザーは、
+current decisionを開始する。
 
-・迷っている
-・不安が強い
-・何を信じればいいか分からない
-・比較疲れしている
-・家探しを1人で抱えている
+decision continuityへ接続する。
 
-状態である可能性が高い。
+Recommendationを行わない。
 
----
+判断を代行しない。
 
-そのため onboardingでは、
+サービス理解よりも、
 
-❌ 不安を煽らない
-❌ 知識を詰め込まない
-❌ AIを誇示しない
+「自分で判断を始められる」
 
----
+という感覚の形成を
+最優先とする。
 
-重要なのは、
+# Onboardingとは何か
 
-👉 「整理しながら進められそう」
+Onboardingとは、
 
-という安心感を作ること。
+サービス説明ではない。
 
----
+チュートリアルでもない。
 
-=============================
+判断形成Systemへ、
 
-■ onboardingで作るべき感情
+ユーザーが自然に参加できる状態を
+形成するためのSystemである。
 
-=============================
+Onboardingが扱うのは、
 
-onboardingで重要なのは、
+操作方法ではない。
 
-👉 「もう1人で抱えなくていい」
+現在の判断形成へ
+安心して参加できる入口である。
 
-感覚である。
+そのため、
 
----
+Onboardingは、
 
-ただし重要：
+「理解させること」
 
-❌ 依存させない
-❌ 判断を代行しない
-❌ 正解を提示しない
+よりも、
 
----
-
-家買う予備校の本質は、
-
-👉 「正解を教えること」
-
-ではなく、
-
-👉 「自分でdecisionできる状態を作ること」
-
-だから。
-
----
-
-そのため onboardingでは、
-
-❌ 「AIが教えてくれる」
-
-ではなく、
-
-⭕ 「整理しながら自分で判断できそう」
-
-を作る。
-
----
-
-=============================
-
-■ onboardingの役割
-
-=============================
-
-onboardingで重要なのは、
-
-❌ サービス理解
-❌ 家購入知識
-❌ AI理解
-
-ではない。
-
----
-
-⭕ 「このOSでは、
-判断を残しながら整理していく」
-
-という、
-
-👉 decision行動感覚
-
-を作ること。
-
----
-
-=============================
-
-■ onboardingで作るべき感覚
-
-=============================
-
-・ちょっと整理してみるか
-・気になる物件を残してみるか
-・比較しながら進めてみるか
-・自分仕様にしてみるか
-
----
-
-👉 「学ぶ」
-ではなく
-
-👉 「触ってみる」
+「判断を始められること」
 
 を優先する。
 
 ---
 
-=============================
+# current decisionとの関係
 
-■ onboardingでやってはいけないこと
+Onboardingは、
 
-=============================
+current decisionを
+生成しない。
 
-❌ 教育UI化
-❌ 住宅講座化
-❌ AI案内UI化
-❌ MBTI診断化
-❌ 機能説明大会
-❌ スライド化
-❌ 情報過多
-❌ ステップ地獄
-❌ OS思想説明大会
+代行しない。
+
+強制しない。
+
+現在の判断形成へ、
+
+自然に参加できる状態を
+支援する。
+
+current decisionは、
+
+ユーザー自身が形成する。
+
+Onboardingは、
+
+その最初の一歩を
+支える役割を持つ。
+
+Recommendationや、
+
+判断誘導は行わない。
 
 ---
 
-👉 onboardingは
+# decision continuityとの関係
 
-❌ 授業
-ではなく
+Onboardingは、
 
-⭕ 入口
+decision continuityの
+開始地点となる。
+
+初回利用でも、
+
+再訪でも、
+
+ユーザーが
+
+「どこから判断を続ければよいか」
+
+を理解できる状態を形成する。
+
+Onboardingは、
+
+一度きりの導線ではない。
+
+判断形成へ戻る入口として、
+
+decision continuity全体を支える。
+
+---
+
+# First Experience
+
+First Experienceでは、
+
+機能説明を行わない。
+
+知識教育を行わない。
+
+最初に形成するべきものは、
+
+安心感である。
+
+ユーザーが、
+
+「ここなら整理しながら考えられそう」
+
+「自分で判断を進められそう」
+
+と感じられる状態を形成する。
+
+初回体験では、
+
+現在位置を理解できること、
+
+次に何を整理すればよいかを
+自然に受け入れられることを重視する。
+
+そのため、
+
+First Experienceは、
+
+判断形成への参加を支援する体験として設計する。
+
+# System Connections
+
+Onboardingは、
+
+判断形成System全体と接続して機能する。
+
+接続対象は、
+
+- Constitution
+- decision_framework
+- current decision
+- decision continuity
+- product_connection_design
+- Module
+- history
+- event_tracking
 
 である。
 
----
+構造は、
 
-=============================
+Constitution
 
-■ onboardingとdecision_OSの関係
-
-=============================
-
-onboardingは、
-
-❌ 独立画面
-ではない。
-
----
-
-⭕ decision_OS導入
-
-として存在する。
-
----
-
-つまり onboarding は、
-
-👉 「ここは何をする場所か」
-
-を、
-
-超軽量に伝えるためのもの。
-
----
-
-=============================
-
-■ onboardingで扱うべきもの
-
-=============================
-
-・接続済みプロダクト
-・未接続プロダクト
-・現在の判断状況
-・保存物件
-・安全ライン
-・判断軸
-・迷い状態
-
-など。
-
----
-
-重要：
-
-👉 onboardingは
-「あなたの判断を統合する場所」
-
-として扱う。
-
----
-
-=============================
-
-■ external_property_searchとの関係
-
-=============================
-
-external_property_searchは、
-
-❌ onboarding入口
-ではない。
-
----
-
-⭕ decision_OSから外へ出る行動
-
-である。
-
----
-
-正しい流れ：
-
-decision_OS
 ↓
-次の候補を探す
+
+System
+
+（onboarding_design.md）
+
 ↓
-external_property_search
+
+Module
+
 ↓
-property_reader
-↓
-decision
-↓
-decision_OSへ戻る
+
+Implementation
+
+となる。
+
+Onboardingは、
+
+判断形成Systemへ参加する入口として、
+
+各Moduleとの接続を自然に開始する役割を持つ。
 
 ---
 
-👉 decision_OSが中心。
+# Boundary
+
+Onboardingは、
+
+以下を扱う。
+
+- 初回参加構造
+- 判断形成への参加設計
+- current decisionへの接続
+- decision continuity開始
+- Moduleとの接続方針
+
+以下は扱わない。
+
+- UIデザイン
+- LP設計
+- チュートリアル実装
+- LINE登録施策
+- コピーライティング
+- 広告導線
+- Recommendation
+- 判断代行
+
+これらは、
+
+ImplementationまたはBusinessで扱う。
 
 ---
 
-=============================
+# MVP Policy
 
-■ 初回状態（重要）
+MVPでは、
 
-=============================
+Onboardingを
 
-初回は、
+「判断形成へ参加できること」
 
-👉 物件0件状態
+だけに集中する。
 
-が存在する。
+機能説明よりも、
 
----
+安心して判断を始められることを優先する。
 
-この時、
+初回利用でも、
 
-❌ 空管理ツール感
-❌ Notion空ページ感
+現在位置を理解し、
 
-を出さない。
+最初のcurrent decisionへ
 
----
+自然に参加できることを
 
-重要なのは、
-
-👉 「まだ整理前」
-
-感。
+MVP成立条件とする。
 
 ---
 
-例：
+# Future Policy
 
-「まだ物件は残されていません」
+将来的には、
 
-「気になる物件を見つけたら、
-残しながら整理できます」
+Onboardingを、
 
-など。
+ユーザーごとの判断形成状況に応じて
 
----
+柔軟に適応できる構造へ拡張する。
 
-👉 管理感ではなく、
+対象には、
 
-👉 “判断開始前”
+- 利用状況に応じた導入
+- Module接続状況の反映
+- current decision理解支援
+- decision continuity再開支援
 
-を表現する。
+などが含まれる。
 
----
+ただし、
 
-=============================
+いずれの場合も、
 
-■ onboardingの本質
+Constitutionで定義された
 
-=============================
+「自分で判断できる状態を支援する」
 
-onboardingで重要なのは、
+という思想を逸脱してはならない。
 
-❌ 理解させること
-ではない。
+Onboardingは、
 
----
+判断を説明するものではなく、
 
-⭕ 「まずdecisionしてみる」
+判断形成へ自然に参加できる入口であり続ける。
 
-を自然発生させること。
+# Related Documents
 
----
+Constitution
 
-つまり onboarding は、
+- constitution_experience.md
 
-👉 “理解導線”
+System
 
-ではなく
-
-👉 “decision開始導線”
-
-である。
-
----
-
-=============================
-
-■ 実装方針
-
-=============================
-
-onboardingも、
-
-・小実装
-・一周確認
-・違和感確認
-・OS破綻確認
-
-を高速で回す。
+- decision_framework.md
+- decision_os_role.md
+- decision_update_triggers.md
+- product_connection_design.md
+- history.md
+- event_tracking.md
+- line_strategy.md
+- user_data_strategy.md
 
 ---
 
-重要：
+# Rule
 
-❌ 最初から完成させない。
+Onboardingでは、
 
----
+以下を遵守する。
 
-⭕ 「decision開始感」が成立するか
+- Constitutionを変更しない
+- 判断形成を教育へ置き換えない
+- Recommendationを導入しない
+- current decisionを誘導しない
+- decision continuityを阻害しない
+- 判断を代行しない
+- 機能説明を目的化しない
+- Implementation責務をSystemへ持ち込まない
 
-を優先する。
+Onboardingは、
 
----
-
-=============================
-
-■ 最終定義
-
-=============================
-
-onboardingとは、
-
-👉 単発プロダクト利用を、
-👉 decision_OSへ接続し、
+判断形成への参加構造のみを扱う。
 
 ---
 
-👉 「判断を残しながら整理する」
+# Change Policy
 
-という、
+Onboardingは、
 
-家買う予備校の
-decision行動へ移行させる入口である。
+Constitutionに従って更新する。
+
+思想変更は、
+
+Constitutionで管理する。
+
+Systemでは、
+
+判断形成への参加構造のみ改善対象とする。
+
+UI、
+
+コピー、
+
+画面構成、
+
+導線実装、
+
+チュートリアル表現などは、
+
+Implementationで管理する。
+
+Onboardingは、
+
+判断形成への入口としての役割を維持しながら更新されなければならない。
+
+---
+
+# 最終定義
+
+Onboardingとは、
+
+Constitutionで定義された判断形成思想を前提として、
+
+ユーザーが判断形成Systemへ自然に参加し、
+
+current decisionを開始し、
+
+decision continuityへ接続できる状態を形成するための
+
+System設計である。
+
+Onboardingの目的は、
+
+サービスを理解させることではなく、
+
+ユーザーが安心して
+
+「自分で判断を始められる状態」
+
+を形成することである。
