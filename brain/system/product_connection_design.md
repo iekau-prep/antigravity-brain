@@ -2,12 +2,6 @@
 Updated: 2026-06-29
 Status: Core
 
-=============================
-
-■ 概要
-
-=============================
-
 Purpose
 
 本書は、
@@ -42,20 +36,18 @@ Scope
 
 本書が扱うもの
 
-* product / module間接続
-* decision loop
-* module呼び出し条件
-* decision_OS起点の接続
-* LINEとの接続
+・Module Connection
+・decision continuity
+・current decision を中心とした接続
+・Module間責務
+・decision update routing
 
-本書が扱わないもの
+扱わないもの
 
-* 各moduleの思想
-* 各moduleの内部責務
-* STATE判定
-* CTA生成
-* recommendation
-* UI実装
+・Module内部責務
+・UI
+・Implementation
+・recommendation
 
 ---
 
@@ -405,17 +397,18 @@ external_property_search
 ↓
 property_reader
 ↓
-decision発生
+current decision
 ↓
 decision_OS
 ↓
-comparison / 現実整理 / drift補正
+必要なsupport module
+（comparison / loan_safety / purchase_motivation / rent_vs_buy）
 ↓
-decision更新
+current decision更新
 ↓
 再読 / 再比較 / 次候補
 ↓
-decision更新
+current decision更新
 
 ---
 
@@ -894,11 +887,13 @@ CTA例：
 
 =============================
 
-LINEの役割：
+continuity layer の役割：
 
-👉 decision continuity
+👉 decision continuity を維持すること
 
-である。
+LINEは、
+
+その実現手段の一例である。
 
 ---
 
@@ -915,13 +910,13 @@ LINEの役割：
 
 ---
 
-LINEにより：
+continuity layer により：
 
-単発判断
-↓
-継続decision更新
-↓
-decision OS
+current decision を継続し、
+
+過去の判断・変化・履歴を保持できる。
+
+LINEはその実装候補の一つである。
 
 へ進化する。
 
@@ -949,8 +944,9 @@ LINEの本質は：
 
 =============================
 
-使用ロジック：
+使用するSystem：
 
+- current decision
 - state_detection
 - state_to_cta_connection
 - cta_role
@@ -960,9 +956,11 @@ LINEの本質は：
 
 目的：
 
-👉 「今必要なdecision更新」
+current decision を起点として、
 
-を出すこと。
+今必要なdecision更新を補助する
+
+Moduleへ接続すること。
 
 ---
 
@@ -1136,24 +1134,28 @@ fixed_core drift
 
 Constitution
 
-* constitution_judgement.md
-* constitution_transfer.md
+* Constitution Documents
 
-Core
+System
 
+* decision_loop_core_summary.md
 * decision_framework.md
-* decision_update_triggers.md
-* decision_os_role.md
-* comparison_role.md
+* current_decision.md
 * state_definition.md
 * state_detection.md
 * state_to_cta_connection.md
-* state_to_action_routing.md
+* decision_update_triggers.md
+* comparison_role.md
+* decision_os_role.md
 
-Module Constitution
+Module
 
-* property_reader.md
-
+* property_reader
+* comparison
+* decision_OS
+* loan_safety
+* purchase_motivation
+* rent_vs_buy
 ---
 
 =============================
@@ -1166,23 +1168,7 @@ Constitution
 
 ↓
 
-decision_framework
-
-↓
-
-state_definition
-
-↓
-
-state_detection
-
-↓
-
-state_to_cta_connection
-
-↓
-
-state_to_action_routing
+decision_loop_core_summary
 
 ↓
 
@@ -1190,7 +1176,7 @@ product_connection_design
 
 ↓
 
-module
+Module
 
 ↓
 
@@ -1215,9 +1201,8 @@ product_connectionとは、
 
 を循環させながら、
 
-👉 必要に応じて各プロダクトを呼び出し、
-decisionを更新し続けるための接続構造である。
-
+👉 current decision を中心に、必要なModuleへ接続し、
+decision continuity を維持するためのSystem設計書
 ---
 
 ## ■ 一言
