@@ -1,458 +1,577 @@
 # brain/system/event_tracking.md
-Updated: 2026-04-13
+Updated: 2026-06-29
+
 Status: Active
 
-=============================
+Purpose
 
-■ 概要
+本書は、
 
-=============================
+Constitutionで定義された
+decision continuity思想を、
 
-本ドキュメントは、
+SystemにおけるMonitoring設計へ適用するための定義書である。
 
-👉 家買う予備校におけるイベント設計（event_tracking）
+Constitutionは、
+
+「何を判断として扱うか」
 
 を定義する。
 
-目的は、
+本書は、
 
-👉 KPI（decision / STATE）を正しく計測し  
-👉 意思決定OSとしての挙動を再現可能にすること
+その判断更新を、
 
----
+Systemとしてどのように観測・記録するか
 
-=============================
+を定義する。
 
-■ 基本思想（最重要）
+⸻
 
-=============================
+Scope
 
-① 行動ではなく「意思決定」を計測する  
+本書が扱うもの
 
----
+* Event Trackingの役割
+* Monitoring対象
+* decision更新の観測
+* Moduleとの接続
+* Monitoring境界
+* Monitoring設計
 
-② すべてのイベントはSTATEと紐づく  
+本書が扱わないもの
 
----
+* 判断思想
+* KPI設計
+* Analytics運用
+* Business指標
+* マーケティング分析
 
-③ decisionを中心に設計する  
+これらはConstitutionまたは関連Systemで扱う。
 
----
+⸻
 
-④ STATEはイベントから再構築する  
+Relationship
 
----
+Constitution
 
-=============================
+↓
 
-■ decisionの定義（最重要）
+System
 
-=============================
+↓
 
-decisionとは、
+Monitoring
 
-👉 **明確な意思選択を行ったものに限定する**
+↓
 
----
+Implementation
 
-例：
+Constitutionは、
 
-・残す / 保留 / 見送り  
-・条件を決める  
-・優先順位を決める  
-・購入検討するか決める  
+判断更新思想を定義する。
 
----
+Systemは、
 
-❌ CTAクリック  
-❌ ページ遷移  
+その判断更新をどのように観測するかを定義する。
 
----
+Monitoringは、
 
-👉 行動ではなく意思決定のみを対象とする
+Systemで定義された観測対象を扱う。
 
----
+Implementationは、
 
-=============================
+実際のイベント送信・保存・分析を担当する。
 
-■ イベント一覧（コア）
+⸻
 
-=============================
+Design Principle
 
-① input_start  
-② input_complete  
-③ result_view  
+Event Trackingは、
 
----
+「何を計測するか」
 
-④ decision_made（最重要）  
-⑤ decision_updated  
+ではなく、
 
----
+「どの判断更新を観測対象とするか」
 
-⑥ state_transition  
+を定義する。
 
----
+Systemは、
 
-⑦ save_clicked  
+イベント数を増やすことを目的としない。
 
----
+Monitoringによって、
 
-⑧ comparison_enter  
+decision continuity、
 
----
+Module接続、
 
-⑨ line_click  
-⑩ line_registered  
+current decision更新を
 
----
+再現可能にすることを目的とする。
 
-=============================
+⸻
 
-■ decision_type（STATE統一）
+Event Trackingとは何か
 
-=============================
+Event Trackingは、
 
-👉 STATEと完全対応させる
+ユーザー行動を記録する仕組みではない。
 
----
+判断更新が、
 
-・自己理解decision  
-・意思形成decision  
-・現実判断decision  
-・実務判断decision  
+どこで、
 
----
+どのModuleによって、
 
-👉 すべてのSTATEでdecisionを取得する
+どのように発生したかを
 
----
+Systemとして観測するための構造である。
 
-=============================
+そのためEvent Trackingは、
 
-■ decision_result（汎用設計）
+クリック数、
 
-=============================
+ページ遷移、
 
-👉 STATEごとに意味が変わる前提とする
+滞在時間を主体として扱わない。
 
----
+扱う対象は、
 
-■ 実務判断STATE
+* current decision更新
+* Module間接続
+* decision continuity
+* fixed_coreとの再接続
+* driftとの接触
+* decision update trigger
 
-・残す  
-・保留  
-・見送り  
+など、
 
----
+判断更新を支えるSystemイベントである。
 
-■ 現実判断STATE
+Monitoringは、
 
-・この条件で進める  
-・条件調整する  
-・見直す  
+評価や推薦を目的としない。
 
----
+ユーザーが判断を更新し続けられる構造が、
 
-■ 意思形成STATE
+System上で維持されているかを確認するために存在する。
 
-・購入検討する  
-・保留する  
-・見送る  
+⸻
 
----
+Event Structure
 
-■ 自己理解STATE
+Event Trackingは、
 
-・タイプ理解した  
-・診断結果を受け入れる  
-・再診断する  
+イベント一覧を定義するものではない。
 
----
+Systemが、
 
-👉 decisionは「物件専用」ではない  
-👉 全STATEで発生する
+どの判断更新を観測対象として扱うかを定義する。
 
----
+観測対象は、
 
-=============================
+以下の5つに分類される。
 
-■ decision_made
+* current decision更新
+* Module間接続
+* decision continuity
+* fixed_coreとの再接続
+* driftとの接触
 
-=============================
+Implementationは、
 
-■ 発火条件
+これらを必要なイベントへ変換して扱う。
 
----
+Systemは、
 
-① property_reader
+イベント名や送信方式を規定しない。
 
-・残す / 保留 / 見送り  
+⸻
 
----
+current decisionとの関係
 
-② comparison
+Event Trackingは、
 
-・各物件の扱いを決定  
+current decisionそのものを保存しない。
 
----
+観測対象は、
 
-③ loan_safety
+current decisionが、
 
-・この条件で検討を進めるか判断  
+どのModuleによって、
 
----
+どのように更新されたかである。
 
-④ purchase_motivation
+つまり、
 
-・条件 / 優先順位を決定  
+「現在どの判断を持っているか」
 
----
+ではなく、
 
-⑤ type_diagnosis
+「判断がどのように更新されたか」
 
-・タイプを受け入れる / 再診断  
+をMonitoring対象として扱う。
 
----
+そのため、
 
-■ 送信データ
+クリック、
 
-- user_id  
-- state  
-- decision_type  
-- decision_result  
-- product_name  
-- timestamp  
+画面表示、
 
----
+滞在時間ではなく、
 
-=============================
+判断更新を中心に観測する。
 
-■ decision_updated
+⸻
 
-=============================
+decision continuityとの関係
 
-■ 定義
+Event Trackingは、
 
-👉 既存decisionの変更
+decision continuityを生成しない。
 
----
+decision continuityが、
 
-■ 意味
+継続しているかを観測する。
 
-👉 思考が進んだ証拠  
+例えば、
 
----
+* 前回判断との再接続
+* comparison後の判断更新
+* fixed_core再確認
+* decision_OSへの復帰
+* current decision更新
 
-👉 **比較・理解が進んだ深度KPI**
+など、
 
----
+判断が自然に継続できているかを確認対象とする。
 
-■ 発火例
+Monitoringは、
 
-・保留 → 残す  
-・見送り → 再検討  
-・条件変更  
+継続率ではなく、
 
----
+判断継続構造を観測する。
 
-■ データ
+⸻
 
-- user_id  
-- previous_decision  
-- new_decision  
-- timestamp  
+Moduleとの関係
 
----
+各Moduleは、
 
-=============================
+判断更新を担当する。
 
-■ state_transition
+Event Trackingは、
 
-=============================
+Moduleそのものを監視するのではない。
 
-■ 定義
+Moduleによって発生した
 
-👉 decisionによってSTATEが変化した瞬間
+判断更新を観測する。
 
----
+対象例
 
-■ 厳密ルール（最重要）
+* property_reader
+* comparison
+* decision_OS
+* purchase_motivation
+* rent_vs_buy
+* loan_safety
+* external_property_search
 
-👉 **STATEはdecision_typeで判定する**
+Monitoring対象は、
 
----
+Moduleの利用回数ではなく、
 
-例：
+Module責務が正常に機能した結果として発生した
 
-if decision_type == 自己理解decision:
-    STATE1
+decision updateである。
 
-elif decision_type == 意思形成decision:
-    STATE2
+⸻
 
-elif decision_type == 現実判断decision:
-    STATE3
+Monitoringとの関係
 
-elif decision_type == 実務判断decision:
-    STATE4
+Monitoringは、
 
----
+System構造が維持されているかを確認するために存在する。
 
-❌ 不安 / 行動 / クリックで判定しない  
+そのため、
 
----
+KPIだけを目的としない。
 
-👉 STATEは「意思決定フェーズ」
+Monitoringでは、
 
----
+以下を継続的に確認する。
 
-■ データ
+* decision continuityが維持されているか
+* Module接続が成立しているか
+* current decision更新が発生しているか
+* fixed_coreとの再接続が行われているか
+* driftとの接触が自然に発生しているか
 
-- user_id  
-- from_state  
-- to_state  
-- decision_type  
-- timestamp  
+Monitoringは、
 
----
+評価ではなく、
 
-=============================
+System構造の健全性確認を目的とする。
 
-■ comparison_enter
+⸻
 
-=============================
+System Connections
 
-■ 定義
+Event Trackingは、
 
-👉 comparison画面に入った
+以下のSystemと接続する。
 
----
+Decision
 
-■ 位置づけ
+* decision_framework.md
+* decision_update_triggers.md
+* decision_reason_design.md
 
-👉 **実務判断STATE内の深度到達**
+State
 
----
+* state_definition.md
+* state_detection.md
 
-❌ STATE遷移ではない  
+Monitoring
 
----
+* drift_detection.md
+* history.md
 
-👉 STATE内の進行として扱う
+Module
 
----
+* comparison_role.md
+* decision_os_role.md
+* product_connection_design.md
 
-=============================
+これらは、
 
-■ save_clicked
+Monitoring対象を定義する。
 
-=============================
+Event Trackingは、
 
-■ 定義
+Monitoring構造を提供する。
 
-👉 保存操作
+⸻
 
----
+Module Responsibilities
 
-■ 位置づけ
+各Moduleは、
 
-👉 decisionではない  
+それぞれの責務に応じた
 
----
+decision updateを発生させる。
 
-👉 **decisionの「保留状態の外部保存」**
+Event Trackingは、
 
----
+各Moduleが正常に責務を果たした結果として
 
-👉 historyとの接続ポイント
+発生する判断更新を観測する。
 
----
+Module自身の内部状態、
 
-=============================
+UI操作、
 
-■ STATE再構築ロジック
+画面遷移は、
 
-=============================
+Monitoring対象としない。
 
-STATEはdecision履歴から決める
+Monitoring対象は、
 
----
+Module責務によって発生した
 
-最新decision_typeを優先：
+System上の判断更新のみである。
 
----
+⸻
 
-if latest_decision_type == 実務判断decision:
-    STATE4
+Boundary
 
-elif latest_decision_type == 現実判断decision:
-    STATE3
+Event Trackingは、
 
-elif latest_decision_type == 意思形成decision:
-    STATE2
+以下を行わない。
 
-else:
-    STATE1
+* recommendation生成
+* KPI分析
+* Business分析
+* AI評価
+* Module制御
+* CTA生成
+* decision生成
+* fixed_core生成
+* current decision更新
 
----
+Event Trackingは、
 
-👉 STATEは「最後の意思決定フェーズ」
+判断更新を記録・観測する。
 
----
+判断そのものを生成・変更しない。
 
-=============================
+⸻
 
-■ 実装順
+MVP Policy
 
-=============================
+MVPでは、
 
-STEP1  
-👉 decision_made  
+最小限のMonitoring構造のみを扱う。
 
----
+対象は、
 
-STEP2  
-👉 decision_updated  
+* current decision更新
+* Module接続
+* decision continuity
+* fixed_core再接続
+* drift接触
 
----
+のみとする。
 
-STEP3  
-👉 state_transition  
+イベント数を増やすことは目的としない。
 
----
+Monitoring構造が
 
-STEP4  
-👉 KPI連携  
+decision loopを再現できることを優先する。
 
----
+⸻
 
-=============================
+Future Policy
 
-■ 最重要ポイント
+将来的には、
 
-=============================
+Monitoring対象を拡張可能とする。
 
-👉 decisionが正しく取れればOSは成立する  
+例えば、
 
----
+* household
+* team decision
+* long-term continuity
+* Module横断分析
+* decision evolution
 
-👉 STATEはdecisionからしか決めない  
+などを追加可能とする。
 
----
+ただし、
 
-👉 行動ログに引っ張られない  
+これらはMonitoring対象の拡張であり、
 
----
+System思想を変更しない。
 
-=============================
+Constitutionで定義された
 
-■ 最終定義
+decision continuity思想を維持したまま、
 
-=============================
+Monitoring構造のみ拡張対象とする。
 
-event_trackingとは、
+⸻
 
-👉 ユーザーの意思決定を中心に記録し  
-👉 STATE・KPI・LINEを接続するための  
-👉 意思決定OSの実装基盤である
+Related Documents
+
+Constitution
+
+* constitution_experience.md
+
+System
+
+* decision_framework.md
+* decision_update_triggers.md
+* decision_reason_design.md
+* state_definition.md
+* state_detection.md
+* drift_detection.md
+* history.md
+* comparison_role.md
+* decision_os_role.md
+* product_connection_design.md
+
+Module
+
+* property_reader
+* comparison
+* decision_OS
+
+⸻
+
+Rule
+
+Event Trackingは、
+
+以下の原則を維持する。
+
+* current decisionを中心に観測する
+* decision continuityを監視対象とする
+* Module責務を観測する
+* fixed_coreを生成しない
+* driftを修正しない
+* recommendationへ利用しない
+* KPIを主体化しない
+* Constitutionと矛盾しない
+
+Monitoringは、
+
+ユーザー評価ではなく、
+
+System構造の健全性確認を目的として利用する。
+
+⸻
+
+Change Policy
+
+Event Trackingは、
+
+Systemレイヤーの設計書である。
+
+イベント追加を目的として更新しない。
+
+更新対象は、
+
+* Monitoring構造
+* Module接続
+* decision continuity
+* current decision観測
+* drift観測
+
+のみとする。
+
+思想変更が必要な場合は、
+
+Constitutionを優先して見直す。
+
+Systemでは、
+
+Constitutionとの整合性を維持した範囲で、
+
+Monitoring設計のみ改善対象とする。
+
+⸻
+
+最終定義
+
+Event Trackingとは、
+
+ユーザー行動を収集する仕組みではない。
+
+current decision、
+
+Module、
+
+fixed_core、
+
+drift、
+
+decision continuityによって発生する
+
+判断更新を、
+
+Systemとして継続的に観測するための
+
+Monitoring設計である。
+
+Event Trackingは、
+
+分析を目的とするのではなく、
+
+decision loopが本来の構造を維持したまま
+
+循環していることを確認するための、
+
+Systemレイヤーの観測基盤である。
