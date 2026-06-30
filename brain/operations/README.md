@@ -1,6 +1,6 @@
 # README.md
 
-Updated: 2026-06-30
+Updated: 2026-07-01
 Status: Core
 
 ---
@@ -66,7 +66,7 @@ operations
 
 ↓
 
-Implementation
+Design / Validation / Implementation
 
 本書は、
 
@@ -102,6 +102,14 @@ AI全体の役割と責務を定義する。
 
 ---
 
+## Builder Interpretation
+
+- builder_interpretation_guide.md
+
+Builderが家買う予備校の意味空間を共有するためのInterpretation Guide。
+
+---
+
 ## Builder
 
 - builder_operation.md
@@ -122,7 +130,7 @@ Design Validation運用ルール。
 
 - implementation_operation.md
 
-Codex実装運用ルール。
+Implementation運用ルール。
 
 ---
 
@@ -168,11 +176,16 @@ AI Loading Map
 
 ↓
 
+Builder Interpretation Guide
+（Builderのみ）
+
+↓
+
 対象Operation
 
 ↓
 
-実行
+Design / Validation / Implementation
 
 ↓
 
@@ -194,6 +207,7 @@ operationsでは、
 - Stage責務を越権しない
 - 必要最小限のStageで運用する
 - Loading Mapを維持する
+- Interpretationを共有する
 - Return Pathを維持する
 - AIは成果物を次Stageへ引き渡す
 
@@ -208,6 +222,7 @@ operations配下では、
 - ADLSを最上位基準とする
 - Stageを飛ばさない
 - Loading Mapを無視しない
+- Interpretation Guideを書き換えない
 - 他Stageの責務を代行しない
 - 必要最小限の設計書のみ読む
 - Return Pathを維持する
@@ -233,6 +248,18 @@ operationsとは、
 AI Development Lifecycle Standardを実際の運用へ適用するための
 
 AI Operation Documents群である。
+
+本ディレクトリは、
+
+Lifecycle、
+
+Role、
+
+Loading、
+
+Interpretation、
+
+Operationを一貫した運用基盤として管理する。
 
 本書は、
 
