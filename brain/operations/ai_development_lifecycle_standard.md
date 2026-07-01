@@ -191,15 +191,40 @@ Purpose
 
 ⸻
 
-# Stage Contract（共通仕様）
+Stage Contract（共通仕様）
+
 すべてのStageは以下を持つ。
+
+■ Stage Information
+
+* Stage
+* Owner
 * Purpose
+
+■ Contract
+
 * Input
 * Output
 * Allowed
 * Forbidden
 * Return To
 * Exit Criteria
+
+■ Transfer Information
+
+* From
+* To
+* Next Stage
+* Transfer Purpose
+
+成果物を他Stageへ渡す場合は、
+
+Transfer Informationを必ず付与する。
+
+Transfer Informationは、
+
+成果物の受け渡し経路を明確にするための共通仕様である。
+
 これをLifecycle全体の共通仕様とする。
 
 ⸻
