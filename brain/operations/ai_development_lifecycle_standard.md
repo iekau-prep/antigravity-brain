@@ -265,20 +265,41 @@ Stage Contract（共通仕様）
 
 ■ Transfer Information
 
+成果物を他Stageへ受け渡す場合は、
+
+以下を共通フォーマットとする。
+
 * From
 * To
 * Next Stage
 * Transfer Purpose
-
-成果物を他Stageへ渡す場合は、
-
-Transfer Informationを必ず付与する。
+* Transfer Target
+* Transfer Status
+* Transfer Remarks（任意）
 
 Transfer Informationは、
 
-成果物の受け渡し経路を明確にするための共通仕様である。
+成果物の受け渡し経路および受け渡し対象を明確にするための共通仕様である。
+
+Transfer Statusは、
+
+受け渡し時点における成果物の状態を表す。
+
+Statusの表現は、
+
+各Stageの責務に従う。
+
+Transfer Informationの目的は、
+
+各Stageが成果物のみを受け渡し、
+
+責務を次Stageへ正しく引き継ぐことである。
 
 これをLifecycle全体の共通仕様とする。
+
+Transfer Informationは、
+
+成果物を受け渡すすべてのStageで同一フォーマットを使用する。
 
 ⸻
 
