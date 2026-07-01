@@ -89,7 +89,7 @@ AI Loading Map
 
 ↓
 
-AI Decision Flow
+AI Development Lifecycle Standard
 
 ↓
 
@@ -181,19 +181,31 @@ README
 
 ↓
 
-md_loading_map
+AI Development Lifecycle Standard
 
 ↓
 
-decision_loop_core_summary
+AI Role Architecture
 
 ↓
 
-対象System
+AI Loading Map
 
 ↓
 
-対象Module
+Builder Interpretation Guide
+
+↓
+
+Builder Operation
+
+↓
+
+Loading Mapで指定されたSystem
+
+↓
+
+Loading Mapで指定されたModule
 
 Builderは、
 
@@ -313,6 +325,52 @@ operation
 
 ⸻
 
+Design Validation Loading
+
+Design Validationは、
+
+Builder成果物が、
+
+既存設計書と責務上整合するかを確認する。
+
+標準読み込み順は、
+
+README
+
+↓
+
+AI Development Lifecycle Standard
+
+↓
+
+AI Role Architecture
+
+↓
+
+AI Loading Map
+
+↓
+
+Design Validation Operation
+
+↓
+
+Loading Mapで指定されたSystem
+
+↓
+
+Loading Mapで指定されたModule
+
+Design Validationは、
+
+設計を変更しない。
+
+改善案を作らない。
+
+成立／不成立のみを返却する。
+
+⸻
+
 Codex Loading
 
 Codexは、
@@ -325,11 +383,27 @@ README
 
 ↓
 
-対象System
+AI Development Lifecycle Standard
 
 ↓
 
-対象Module
+AI Role Architecture
+
+↓
+
+AI Loading Map
+
+↓
+
+Implementation Operation
+
+↓
+
+Loading Mapで指定されたSystem
+
+↓
+
+Loading Mapで指定されたModule
 
 ↓
 
@@ -497,9 +571,16 @@ System
 
 Operation
 
+Operation
+
+* ai_development_lifecycle_standard.md
 * ai_role_architecture.md
-* ai_decision_flow.md
-* ai_rules.md
+* builder_interpretation_guide.md
+* builder_operation.md
+* design_validation.md
+* implementation_operation.md
+* observation_operation.md
+* record_operation.md
 
 Roleごとの責務は、
 
