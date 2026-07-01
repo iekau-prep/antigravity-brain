@@ -211,6 +211,22 @@ AI組織は、
 
 Role Assignment
 
+各Stageには、
+
+ADLSで定義されたOwnerが存在する。
+
+Ownerは、
+
+当該Stageの成果物に責任を持つ。
+
+本章では、
+
+各Roleが担当するStageのみを定義する。
+
+Ownerの定義は、
+
+AI Development Lifecycle Standard（ADLS）に従う。
+
 各Roleは、
 
 AI Development Lifecycle Standard（ADLS）で定義された
