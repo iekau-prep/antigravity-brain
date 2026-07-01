@@ -163,6 +163,10 @@ Roleごとに、
 
 読み込み範囲は異なる。
 
+一つのRoleが複数Stageを担当する場合は、
+
+Role配下でStageごとのLoadingを定義する。
+
 担当外の設計書は、
 
 原則として読み込まない。
@@ -325,15 +329,35 @@ operation
 
 ⸻
 
-Design Validation Loading
+Codex Loading
 
-Design Validationは、
+Codexは、
+
+AI Role Architectureで定義されたRoleとして、
+
+複数のStageを担当する。
+
+LoadingはRole単位で管理し、
+
+担当Stageごとに必要な設計書を切り替える。
+
+担当Stage
+
+・Design Validation
+・Implementation
+・Implementation Validation
+
+---
+
+Design Validation Stage
+
+目的
 
 Builder成果物が、
 
-既存設計書と責務上整合するかを確認する。
+既存設計書と責務上整合するか確認する。
 
-標準読み込み順は、
+標準読み込み順
 
 README
 
@@ -361,23 +385,25 @@ Loading Mapで指定されたSystem
 
 Loading Mapで指定されたModule
 
-Design Validationは、
+Design Validationでは、
 
 設計を変更しない。
 
 改善案を作らない。
 
-成立／不成立のみを返却する。
+成立／不成立のみ返却する。
 
-⸻
+---
 
-Codex Loading
+Implementation Stage
 
-Codexは、
+目的
 
-Implementationを担当する。
+設計成果物を
 
-標準読み込み順は、
+実装へ変換する。
+
+標準読み込み順
 
 README
 
@@ -409,12 +435,63 @@ Loading Mapで指定されたModule
 
 Implementation
 
-Codexは、
+Implementationでは、
 
 SystemやConstitutionを書き換えない。
 
 実装対象となるModule責務のみをコードへ反映する。
 
+---
+
+Implementation Validation Stage
+
+目的
+
+実装成果物を確認する。
+
+標準読み込み順
+
+README
+
+↓
+
+AI Development Lifecycle Standard
+
+↓
+
+AI Role Architecture
+
+↓
+
+AI Loading Map
+
+↓
+
+Implementation Operation
+
+↓
+
+Loading Mapで指定されたSystem
+
+↓
+
+Loading Mapで指定されたModule
+
+↓
+
+Implementation
+
+↓
+
+変更差分
+
+Implementation Validationでは、
+
+実装を追加しない。
+
+設計を変更しない。
+
+実装内容・影響範囲・副作用のみ返却する。
 ⸻
 
 Product Owner Loading
@@ -653,6 +730,12 @@ Implementation
 設計書単位ではなく、
 
 Role単位で読み込み方法を管理する。
+
+一つのRoleが複数Stageを担当する場合は、
+
+Roleを親、
+
+Stageを子としてLoadingを管理する。
 
 ⸻
 
