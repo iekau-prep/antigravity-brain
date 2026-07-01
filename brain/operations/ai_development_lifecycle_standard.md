@@ -1,6 +1,6 @@
 # ai_development_lifecycle_standard.md
 
-Updated: 2026-06-30
+Updated: 2026-07-02
 Status: Core
 
 ---
