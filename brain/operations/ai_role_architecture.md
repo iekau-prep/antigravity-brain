@@ -209,6 +209,76 @@ AI組織は、
 
 ⸻
 
+Role Assignment
+
+各Roleは、
+
+AI Development Lifecycle Standard（ADLS）で定義された
+Stageを担当する。
+
+Roleは、
+
+AIが担う責務を表す。
+
+Stageは、
+
+Lifecycle上の工程を表す。
+
+RoleとStageは異なる概念である。
+
+担当関係は以下とする。
+
+Product Owner
+
+担当Stage
+
+- Governance
+- Decision
+
+成果物では、
+
+Stage名をRole名として使用しない。
+
+Role名をStage名として使用しない。
+
+両者はADLSで定義された担当関係に従う。
+
+---
+
+Builder
+
+担当Stage
+
+- Design
+
+---
+
+思想監査
+
+担当Stage
+
+- Review
+
+---
+
+Codex
+
+担当Stage
+
+- Design Validation
+- Implementation
+- Implementation Validation
+
+---
+
+番人
+
+担当Stage
+
+- Record
+
+⸻
+
 Product Ownerとの関係
 
 Product Ownerは、
