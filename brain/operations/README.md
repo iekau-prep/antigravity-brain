@@ -126,6 +126,14 @@ Design Validation運用ルール。
 
 ---
 
+## Review
+
+- review_operation.md
+
+Review（思想監査）運用ルール。
+
+---
+
 ## Implementation
 
 - implementation_operation.md
@@ -185,7 +193,27 @@ Builder Interpretation Guide
 
 ↓
 
-Design / Validation / Implementation
+Design
+
+↓
+
+Design Validation
+
+↓
+
+Review
+
+↓
+
+Decision
+
+↓
+
+Implementation
+
+↓
+
+Implementation Validation
 
 ↓
 
