@@ -227,33 +227,57 @@ Builderは、
 
 Thought Audit Loading
 
-思想監査は、
+思想監査（Review Role）は、
 
-Constitution整合性を監査する。
+Review Stageを担当する。
 
 標準読み込み順は、
 
-Constitution
+README
 
 ↓
 
-decision_loop_core_summary
+AI Development Lifecycle Standard
 
 ↓
 
-対象System
+AI Role Architecture
+
+↓
+
+AI Loading Map
+
+↓
+
+Review Operation
+
+↓
+
+Loading Mapで指定されたSystem
+
+↓
+
+Loading Mapで指定されたModule
 
 思想監査は、
 
-Module実装やUI提案を目的として
+Builder成果物について、
 
-設計書を読み込まない。
-
-思想との整合性、
+Constitution整合性、
 
 責務境界、
 
 decision continuityのみを確認する。
+
+設計変更、
+
+改善提案、
+
+Product判断、
+
+Module実装、
+
+UI提案は行わない。
 
 ⸻
 
@@ -648,13 +672,12 @@ System
 
 Operation
 
-Operation
-
 * ai_development_lifecycle_standard.md
 * ai_role_architecture.md
 * builder_interpretation_guide.md
 * builder_operation.md
 * design_validation.md
+* review_operation.md
 * implementation_operation.md
 * observation_operation.md
 * record_operation.md
