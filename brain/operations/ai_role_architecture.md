@@ -1,6 +1,6 @@
 ai_role_architecture.md
 
-Updated: 2026-07-02
+Updated: 2026-07-06
 
 Status: Active
 
@@ -189,11 +189,12 @@ AI組織は、
 以下の役割で構成する。
 
 * Product Owner
-* 思想監査
 * Builder
+* 思想監査
 * 技術監査
 * 番人
 * Codex
+* Observation
 
 各Roleは、
 
@@ -293,6 +294,14 @@ Codex
 
 - Record
 
+---
+
+Observation
+
+担当Stage
+
+- Observation
+
 ⸻
 
 Product Ownerとの関係
@@ -355,43 +364,64 @@ AI Roleは、
 
 標準的な流れは、
 
-Builder
+Governance
+(Product Owner)
 
 ↓
 
-思想監査
+Design
+(Builder)
 
 ↓
 
-技術監査
+Design Validation
+(Codex)
 
 ↓
 
-Product Owner
+Review
+(思想監査)
 
 ↓
 
-Codex
+Decision
+(Product Owner)
 
 ↓
 
-観察
+Implementation
+(Codex)
 
 ↓
 
-必要時のみ思想監査
+Implementation Validation
+(Codex)
+
+↓
+
+Observation（必要時）
+
+↓
+
+Record（必要時）
 
 とする。
 
 各Roleは、
 
-前工程の成果物のみを入力として扱い、
+担当Stageの成果物のみを入力として扱う。
 
-独自に工程を飛ばしてはならない。
+Lifecycleの工程順序は、
 
-受け渡しは、
+AI Development Lifecycle Standard（ADLS）に従う。
+
+Role間の受け渡しは、
 
 AI Decision Flowで定義する運用に従う。
+
+Roleは、
+
+担当Stageを飛ばして判断してはならない。
 
 ⸻
 
