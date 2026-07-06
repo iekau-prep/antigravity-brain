@@ -278,6 +278,26 @@ Builder
 
 ---
 
+技術監査
+
+担当Stage
+
+- なし（MVP対象外）
+
+現行のADLS v1.0では、
+
+Design ValidationおよびImplementation Validationで責務を吸収する。
+
+独立したTechnical Audit Stageは設けない。
+
+将来、
+
+既存Stageで責務を吸収できないことが確認された場合のみ、
+
+Technical Audit Stageの追加を検討する。
+
+---
+
 Codex
 
 担当Stage
