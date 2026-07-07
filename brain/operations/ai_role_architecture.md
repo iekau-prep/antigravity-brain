@@ -230,8 +230,25 @@ AI Development Lifecycle Standard（ADLS）に従う。
 
 各Roleは、
 
-AI Development Lifecycle Standard（ADLS）で定義された
-Stageを担当する。
+AI Development Lifecycle Standard（ADLS）に従い、
+
+担当Stageを持つ。
+
+ただし、
+
+MVP対象外のRoleについては、
+
+担当Stageを持たないことがある。
+
+その場合は、
+
+既存Stageで責務を吸収することを前提とする。
+
+将来、
+
+既存Stageで責務を吸収できないことが確認された場合のみ、
+
+担当Stageを割り当てる。
 
 Roleは、
 
