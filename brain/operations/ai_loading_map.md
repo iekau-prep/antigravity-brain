@@ -289,7 +289,13 @@ Technical Audit Loading
 
 技術監査は、
 
-Implementation境界を監査する。
+MVPでは担当Stageを持たない。
+
+既存Stageで責務を吸収することを前提とし、
+
+将来、独立したStageが必要となった場合のみ、
+
+専用Loadingを定義する。
 
 標準読み込み順は、
 
@@ -327,7 +333,7 @@ Gatekeeper Loading
 
 番人は、
 
-工程運用を担当する。
+Record Stageを担当する。
 
 標準読み込み順は、
 
