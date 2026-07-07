@@ -1,6 +1,6 @@
 # design_validation.md
 
-Updated: 2026-06-30
+Updated: 2026-07-08
 Status: Core
 
 ---
@@ -66,6 +66,10 @@ Design Validation
 ↓
 
 Review
+
+↓
+
+Decision
 
 ↓
 
