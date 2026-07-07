@@ -81,15 +81,15 @@ System
 
 ↓
 
+AI Development Lifecycle Standard
+
+↓
+
 AI Role Architecture
 
 ↓
 
 AI Loading Map
-
-↓
-
-AI Development Lifecycle Standard
 
 ↓
 
