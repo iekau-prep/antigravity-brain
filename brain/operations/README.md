@@ -62,7 +62,15 @@ AI Development Lifecycle Standard
 
 ↓
 
-operations
+AI Role Architecture
+
+↓
+
+AI Loading Map
+
+↓
+
+Operation
 
 ↓
 
