@@ -1,6 +1,6 @@
 # observation_operation.md
 
-Updated: 2026-06-30
+Updated: 2026-07-08
 Status: Core
 
 ---
@@ -52,6 +52,8 @@ Observationは、
 
 # Relationship
 
+
+
 AI Development Lifecycle Standard
 
 ↓
@@ -66,13 +68,15 @@ Observation
 
 Builder（必要時）
 
+または
+
 ↓
 
 Record（必要時）
 
 Observationは、
 
-実装後の状態を整理する観察Stageとして位置付ける。
+実装後の状態を整理するObservation Stageとして位置付ける。
 
 ---
 
