@@ -263,6 +263,54 @@ Stage Contract（共通仕様）
 * Return To
 * Exit Criteria
 
+■ Request Contract
+
+すべてのStageへの依頼は、
+
+以下の共通フォーマットを持つ。
+
+* Design Scope
+
+* Allowed Change
+
+* Forbidden Change
+
+* Out of Scope
+
+Design Scopeは、
+
+今回形成・確認・実装・観察の対象を定義する。
+
+Allowed Changeは、
+
+変更を許可する範囲を定義する。
+
+Forbidden Changeは、
+
+変更してはならない範囲を定義する。
+
+Out of Scopeは、
+
+今回の案件対象外を定義する。
+
+Request Contractは、
+
+成果物ではなく、
+
+案件依頼の境界を明確にするための共通仕様である。
+
+すべてのStageは、
+
+Request Contractの範囲内でのみ責務を遂行する。
+
+Request Contractは、
+
+AIが変更可能範囲を推測しないための共通仕様である。
+
+Transfer Informationと同様に、
+
+Lifecycle全体で共通フォーマットとして運用する。
+
 ■ Transfer Information
 
 成果物を他Stageへ受け渡す場合は、
