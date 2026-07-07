@@ -1,6 +1,6 @@
 # builder_operation.md
 
-Updated: 2026-06-30
+Updated: 2026-07-08
 Status: Core
 
 ---
@@ -195,7 +195,7 @@ Decision NO GO
 
 Builder
 
-Observation改善要求
+Observation返却
 
 ↓
 
