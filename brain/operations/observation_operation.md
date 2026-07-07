@@ -151,6 +151,10 @@ Observationは、
 - 停止要因整理完了
 - BuilderまたはRecordへ返却可能
 
+または
+
+- 終了可能
+
 ---
 
 # Return Path
