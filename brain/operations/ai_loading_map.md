@@ -1,6 +1,6 @@
 ai_loading_map.md
 
-Updated: 2026-07-01
+Updated: 2026-07-08
 
 Status: Active
 
@@ -363,6 +363,54 @@ operation
 
 ⸻
 
+Observation Loading
+
+Observationは、
+
+Observation Stageを担当する。
+
+標準読み込み順は、
+
+README
+
+↓
+
+AI Development Lifecycle Standard
+
+↓
+
+AI Role Architecture
+
+↓
+
+AI Loading Map
+
+↓
+
+Observation Operation
+
+↓
+
+Loading Mapで指定されたSystem
+
+↓
+
+Loading Mapで指定されたModule
+
+Observationは、
+
+成果物を観察する。
+
+設計変更、
+
+改善提案、
+
+Implementation追加、
+
+Product判断は行わない。
+
+⸻
+
 Codex Loading
 
 Codexは、
@@ -532,7 +580,48 @@ Product Owner Loading
 
 Product Ownerは、
 
-必要に応じて
+AI Role Architectureで定義されたRoleとして、
+
+複数のStageを担当する。
+
+LoadingはRole単位で管理し、
+
+担当Stageごとに必要な設計書を切り替える。
+
+担当Stage
+
+・Governance
+・Decision
+
+---
+
+Governance Stage
+
+目的
+
+開発テーマ、
+
+優先順位、
+
+採用対象を決定する。
+
+必要に応じて、
+
+Constitution、
+
+System、
+
+監査結果を参照する。
+
+---
+
+Decision Stage
+
+目的
+
+成果物の採用可否を決定する。
+
+必要に応じて、
 
 Constitution、
 
@@ -542,8 +631,6 @@ Module、
 
 監査結果を参照する。
 
-ただし、
-
 Product Ownerは、
 
 設計書を大量に読むことを前提としない。
@@ -551,25 +638,6 @@ Product Ownerは、
 各Roleから提出された成果物を確認し、
 
 最終判断のみを担当する。
-
-Loading Boundary
-
-AIは、
-
-担当Roleに必要な設計書のみを読み込む。
-
-以下を原則とする。
-
-* 担当外の設計書は原則読み込まない
-* Layerを飛ばして読み込まない
-* 必要最小限の設計書のみを扱う
-* 読み込み範囲を越えて判断しない
-
-設計途中で担当外の責務が必要になった場合は、
-
-不足する設計書を追加で読み込むのではなく、
-
-担当Roleへ受け渡すことを原則とする。
 
 ⸻
 
