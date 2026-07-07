@@ -93,6 +93,10 @@ AI Loading Map
 
 ↓
 
+Operation
+
+↓
+
 Implementation
 
 とする。
