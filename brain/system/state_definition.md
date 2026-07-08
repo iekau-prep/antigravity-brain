@@ -69,7 +69,7 @@ STATE Principles
 
 Systemでは以下を満たす。
 
-* STATEは1つのみ
+* 同時点で導出するSTATEは1つのみ
 * STATEは保存しない
 * decisionから導出する
 * recommendationへ利用しない
@@ -228,7 +228,7 @@ Decision Relationship
 
 decisionは、
 
-STATE上で更新される。
+STATEが示す対象領域において更新される。
 
 STATEは、
 
