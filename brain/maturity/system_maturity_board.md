@@ -48,4 +48,4 @@ State Definition整合
 
 状態
 
-未開始
+閉鎖
