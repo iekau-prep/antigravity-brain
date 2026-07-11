@@ -89,3 +89,13 @@ STATE支援moduleとRouting接続moduleの責務境界整理
 状態
 
 閉鎖
+
+---
+
+案件I
+
+decision生成とdecision形成支援の責務境界整理
+
+状態
+
+閉鎖
