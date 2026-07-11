@@ -181,7 +181,7 @@ decision_OS
 
 役割は常に：
 
-⭕ decision更新補助
+⭕ ユーザー本人によるdecision形成・decision更新の支援
 
 である。
 
@@ -736,7 +736,7 @@ property_readerは、
 
 ---
 
-⭕ 「decision生成」
+⭕ 「ユーザー本人によるdecision形成の起点」
 
 を扱う。
 
@@ -750,9 +750,9 @@ property_readerは、
 
 property_readerは：
 
-👉 本命形成
+👉 ユーザー本人による本命形成
 
-を発生させる。
+を支援する。
 
 ---
 
@@ -771,7 +771,7 @@ property_readerは：
 
 つまり：
 
-⭕ 「decision更新の起点module」
+⭕ 「ユーザー本人によるdecision更新の起点を支援するmodule」
 
 である。
 
