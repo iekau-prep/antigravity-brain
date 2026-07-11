@@ -59,3 +59,13 @@ State Detection整合
 状態
 
 閉鎖
+
+---
+
+案件F
+
+decision_OS と CTA生成主体の責務境界整理
+
+状態
+
+閉鎖
