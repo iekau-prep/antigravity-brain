@@ -99,3 +99,13 @@ decision生成とdecision形成支援の責務境界整理
 状態
 
 閉鎖
+
+---
+
+案件J
+
+history / LINE / decision continuity の責務境界整理
+
+状態
+
+閉鎖
