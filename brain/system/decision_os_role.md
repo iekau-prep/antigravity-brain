@@ -26,7 +26,7 @@ Scope
 * current decision
 * decision continuity
 * state interpretation
-* CTA generation
+* CTA application
 * module boundary
 
 本書が扱わないもの
@@ -54,7 +54,7 @@ decision_OSは、
 * current decisionを反映する
 * STATEを解釈する
 * decision continuityを維持する
-* 次のCTAを生成する
+* 次のCTAを現在判断へ適用する
 * comparison結果を現在判断へ接続する
 * decision更新を支援する
 
@@ -110,9 +110,9 @@ CTA
 
 decision_OSは、
 
-現在判断から、
+現在判断に対して、
 
-次のdecision更新を支援するCTAを生成する。
+次のdecision更新を支援するCTAを適用する。
 
 CTAは、
 

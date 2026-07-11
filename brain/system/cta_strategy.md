@@ -429,11 +429,11 @@ fixed_core再接続
 
 =============================
 
-■ decision_OSでの扱い
+■ decision_OSでの扱い（CTA適用）
 
 =============================
 
-decision_OSでは：
+decision_OSでは、CTA生成結果を以下の順で適用する：
 
 現在decision
 
