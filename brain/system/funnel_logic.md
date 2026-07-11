@@ -863,7 +863,7 @@ STATEと接続される。
 → 自己理解STATE
 
 ・purchase_motivation
-→ 固定核整理STATE
+→ 判断軸整理STATE
 
 ・loan_safety
 → 現実判断STATE
