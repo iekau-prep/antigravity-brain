@@ -893,7 +893,7 @@ continuity layer の役割：
 
 LINEは、
 
-その実現手段の一例である。
+continuity layerを実現する接続手段の一例である。
 
 ---
 
@@ -916,9 +916,7 @@ current decision を継続し、
 
 過去の判断・変化・履歴を保持できる。
 
-LINEはその実装候補の一つである。
-
-へ進化する。
+LINEはcontinuity layerを実現する接続手段の一つである。
 
 ---
 

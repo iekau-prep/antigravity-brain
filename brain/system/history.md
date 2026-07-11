@@ -66,7 +66,10 @@ historyは、
 Constitutionで定義された
 decision continuityを、
 
-System全体へ接続する役割を持つ。
+System全体へ接続するSystem構造である。
+
+historyはLINEそのものではなく、
+LINEはhistoryと接続してdecision continuityを時間軸で維持する。
 
 各Moduleは、
 

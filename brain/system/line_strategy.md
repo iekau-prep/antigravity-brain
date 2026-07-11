@@ -25,7 +25,7 @@ Constitutionが扱う。
 
 LINEを
 
-decision continuity基盤として
+decision continuityを時間軸で維持する接続レイヤーとして
 
 どのように設計し、
 
@@ -77,7 +77,8 @@ LINEは、
 
 ではなく、
 
-decision continuityを支える
+historyと接続し、
+decision continuityを時間軸で維持する
 永続化レイヤーとして扱う。
 
 decisionはWebで形成し、
@@ -650,5 +651,6 @@ System設計のみ改善対象とする。
 
 line_strategyとは、
 
-👉 decision（意思決定）を保存・接続・進化させる  
-👉 家買う予備校の永続化レイヤーである
+👉 decision continuityを時間軸で維持するために、
+decisionを保存・接続・再開可能にする  
+👉 家買う予備校のLINE側永続化レイヤーである
