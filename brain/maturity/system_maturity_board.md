@@ -79,3 +79,13 @@ STATE名称の読解一意性整理
 状態
 
 閉鎖
+
+---
+
+案件H
+
+STATE支援moduleとRouting接続moduleの責務境界整理
+
+状態
+
+閉鎖
