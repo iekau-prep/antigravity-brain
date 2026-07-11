@@ -49,3 +49,13 @@ State Definition整合
 状態
 
 閉鎖
+
+---
+
+案件E
+
+State Detection整合
+
+状態
+
+閉鎖
