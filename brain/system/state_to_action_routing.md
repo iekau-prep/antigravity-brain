@@ -59,7 +59,10 @@ routingは、
 
 Routing Map
 
-STATE	主CTA	接続module
+この表のmoduleはRouting接続moduleであり、
+STATE支援module全体を定義するものではない。
+
+STATE	主CTA	Routing接続module
 自己理解STATE	自分の迷い方を整理する	type_diagnosis
 判断軸整理STATE	何を優先したいか整理する	purchase_motivation
 現実判断STATE	どこまで許容できるか整理する	loan_safety

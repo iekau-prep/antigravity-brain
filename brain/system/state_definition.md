@@ -118,12 +118,12 @@ fixed_core、
 
 現実との接触へ照合する状態。
 
-主に
+主に以下のmoduleがSTATE支援moduleとして支援する。
 
 * rent_vs_buy
 * loan_safety
 
-が支援する。
+これはRouting接続moduleを定義するものではない。
 
 ⸻
 
@@ -131,13 +131,13 @@ fixed_core、
 
 現在向き合う対象を整理する状態。
 
-主に
+主に以下のmoduleがSTATE支援moduleとして支援する。
 
 * property_reader
 * comparison
 * decision_OS
 
-が支援する。
+これはRouting接続moduleを定義するものではない。
 
 ⸻
 
