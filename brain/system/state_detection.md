@@ -18,7 +18,7 @@ STATE構造はstate_definition.mdが扱う。
 
 本書は、
 
-STATE Detectionのみを扱う。
+STATE Detectionの判定ロジックのみを扱う。
 
 ⸻
 
@@ -78,12 +78,12 @@ STATE判定に利用する論理的入力であり、
 
 ---
 
-### Implementation Inputs
+### Implementation Inputs（Logical Inputsの導出元）
 
-実装では、
+Implementation Inputsは実装情報そのものを定義せず、
 
 必要に応じて以下の情報から
-Logical Inputsを導出する。
+Logical Inputsを導出するための参照元として扱う。
 
 例：
 
@@ -218,4 +218,6 @@ Systemレイヤーの判定設計書である。
 
 STATE思想は変更しない。
 
-判定ロジックのみ改善対象とする。
+変更対象は、
+
+STATE Detectionの判定ロジックに限る。
