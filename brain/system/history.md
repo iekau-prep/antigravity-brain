@@ -213,7 +213,7 @@ Relationship with current decision
 
 current decisionは、
 
-Systemの判断主体である。
+System上で現在判断を参照するための中心対象である。
 
 historyは、
 
@@ -233,7 +233,7 @@ historyは、
 
 常に、
 
-current decisionを最優先とする。
+System上の参照対象としてcurrent decisionを最優先とする。
 
 ⸻
 
@@ -527,7 +527,7 @@ historyは、
 以下の原則を維持する。
 
 * decisionを唯一の判断事実として扱う
-* current decisionを主体とする
+* current decisionをSystem上の参照中心とする
 * fixed_coreを保存対象としない
 * driftを履歴ではなく変化として扱う
 * recommendationへ利用しない
