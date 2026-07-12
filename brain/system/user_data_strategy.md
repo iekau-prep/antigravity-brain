@@ -529,7 +529,7 @@ loan_safety：
 
 property_reader：
 
-👉 判断生成  
+👉 ユーザー本人による判断形成の起点  
 
 ---
 

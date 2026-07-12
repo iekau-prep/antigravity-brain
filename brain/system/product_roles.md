@@ -89,7 +89,7 @@ Scope
 
 ではなく、
 
-👉 「decisionのどこを更新するか」
+👉 「ユーザー本人によるdecision更新のどこを支援するか」
 
 が最重要となる。
 
@@ -861,9 +861,9 @@ comparisonは、
 
 comparisonは：
 
-👉 本命更新
+👉 ユーザー本人による本命更新
 
-を行う。
+を支援する。
 
 ---
 
@@ -1167,8 +1167,8 @@ product_rolesとは、
 👉 家買う予備校における
 各プロダクトが、
 
-decision更新構造のどこを担当し、
-どのようにdecisionを更新・補助・継続させるか
+ユーザー本人によるdecision更新構造のどこを支援し、
+どのようにdecision形成・decision更新・decision continuityを支えるか
 
 を定義する、
 decision update module設計である。

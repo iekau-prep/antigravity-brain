@@ -341,7 +341,7 @@ property_readerは、
 
 ---
 
-⭕ decision生成ハブ
+⭕ ユーザー本人によるdecision形成の起点接続ハブ
 
 である。
 
@@ -619,7 +619,7 @@ SUUMO等を見て：
 
 目的：
 
-👉 decisionを発生させる
+👉 ユーザー本人によるdecision形成を発生可能にする
 
 ---
 
@@ -1190,10 +1190,10 @@ Implementation
 
 product_connectionとは、
 
-👉 decision生成  
-👉 decision更新  
+👉 ユーザー本人によるdecision形成  
+👉 decision更新支援  
 👉 drift補正  
-👉 本命形成  
+👉 本命形成支援  
 👉 現実接触  
 👉 comparison整理  
 
