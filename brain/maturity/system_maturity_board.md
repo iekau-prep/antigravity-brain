@@ -119,3 +119,13 @@ decision生成とdecision形成支援の横断整合
 状態
 
 閉鎖
+
+---
+
+案件L
+
+decision主体 と current decision主体表現 の読解境界整理
+
+状態
+
+閉鎖
