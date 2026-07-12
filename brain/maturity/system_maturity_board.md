@@ -8,7 +8,7 @@ Active
 
 Phase
 
-System成熟 Phase1
+System成熟 Phase2
 
 ---
 
@@ -105,6 +105,16 @@ decision生成とdecision形成支援の責務境界整理
 案件J
 
 history / LINE / decision continuity の責務境界整理
+
+状態
+
+閉鎖
+
+---
+
+案件K
+
+decision生成とdecision形成支援の横断整合
 
 状態
 
