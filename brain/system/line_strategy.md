@@ -279,8 +279,9 @@ LINEの本質は：
 
 ---
 
-- LINE user_id を主キーとして扱う
-- Webと紐づける
+- System上の主キーは内部IDとする
+- LINE user_id は内部IDへ接続する外部紐付けIDとして扱う
+- WebとLINEを内部IDを介して紐づける
 
 ---
 
@@ -569,7 +570,8 @@ LINEは：
 ---
 
 user  
-- id（LINE）  
+- id（内部ID）
+- line_id（LINE user_id / 外部紐付けID）
 
 ---
 
