@@ -93,7 +93,7 @@ decisionを唯一の判断事実として扱い、
 
 家買う予備校：
 
-👉 「どう判断したか」を保存する  
+👉 「どう判断したか」をdecision continuity上で保持する  
 
 ---
 
@@ -373,7 +373,7 @@ status：
 
 本質：
 
-👉 物件保存ではなく判断保存  
+👉 物件保存ではなくdecision continuity上の判断保持  
 
 ---
 
@@ -441,8 +441,8 @@ status：
 ① externalで物件を見る  
 ② property_readerで分析  
 ③ decisionを行う  
-④ decisionを保存  
-⑤ decision_osで蓄積・整理  
+④ decisionをdecision continuity上で保持  
+⑤ decision_osで判断文脈を蓄積・整理  
 ⑥ state算出  
 ⑦ CTA生成  
 ⑧ 次の判断へ  
@@ -590,11 +590,11 @@ LINE：
 
 =============================
 
-👉 保存するのは物件ではない  
+👉 保持するのは物件ではない  
 
 ---
 
-👉 判断である  
+👉 decision continuity上の判断文脈である  
 
 ---
 

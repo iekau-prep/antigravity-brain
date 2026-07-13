@@ -152,7 +152,7 @@ decision continuityを支える構造として設計する。
 
 ---
 
-👉 **意思決定はWebで行い、LINEに蓄積する**
+👉 **意思決定はWebで行い、LINEは判断文脈を時間軸で維持する**
 
 ---
 
@@ -189,8 +189,8 @@ decision continuityを支える構造として設計する。
 
 理由：
 
-- decisionの保存
-- 履歴の再利用
+- decision continuity上のdecision保持
+- 判断文脈の再接続
 - 比較機能
 - 継続判断
 
@@ -291,13 +291,13 @@ LINEの本質は：
 
 ---
 
-### ■ ② decisionの保存（最重要）
+### ■ ② decision continuity上のdecision保持（最重要）
 
 ---
 
-保存対象：
+保持対象：
 
-👉 **decision（意思決定）**
+👉 **decision continuity上のdecision（意思決定）**
 
 ---
 
@@ -307,11 +307,11 @@ LINEの本質は：
 
 ---
 
-👉 **history.mdと完全連動**
+👉 **history.mdが定義するdecision continuity構造と接続**
 
 ---
 
-👉 保存単位：
+👉 判断文脈の記録単位：
 
 decision_log
 
@@ -502,8 +502,8 @@ LINEは：
 
 ---
 
-👉 「この判断を保存する」  
-👉 「あとで見返す」  
+👉 「この判断を保持する」  
+👉 「あとで判断文脈へ戻る」  
 👉 「比較できるようにする」
 
 ---
@@ -654,5 +654,5 @@ System設計のみ改善対象とする。
 line_strategyとは、
 
 👉 decision continuityを時間軸で維持するために、
-decisionを保存・接続・再開可能にする  
+decisionを保持・接続・再開可能にする  
 👉 家買う予備校のLINE側永続化レイヤーである
