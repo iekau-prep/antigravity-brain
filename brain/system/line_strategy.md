@@ -117,10 +117,10 @@ decision continuityを支える構造として設計する。
 
 役割は
 
-- decisionの保存
-- decisionの蓄積
-- decisionの更新
-- decisionの再利用
+- decision continuity上のdecision保持
+- 判断文脈の蓄積
+- ユーザー本人によるdecision更新の継続支援
+- 判断文脈の再接続
 - プロダクト横断接続
 
 ---
@@ -144,10 +144,10 @@ decision continuityを支える構造として設計する。
 
 #### LINE（バックボーン）
 
-- decision保存
+- decision continuity上のdecision保持
 - ユーザー識別
-- STATE判定精度向上
-- 再訪導線
+- STATE判定に必要な判断文脈の接続
+- 再訪時の判断再開
 - プロダクト接続
 
 ---
@@ -381,7 +381,7 @@ LINE接続後は：
 
 ---
 
-👉 出力を最適化
+👉 判断文脈に応じて出力を整理する
 
 ---
 
@@ -445,7 +445,7 @@ LINE接続後：
 
 ### ■ できないこと
 
-- decision保存
+- decision continuity上のdecision保持
 - 比較
 - 継続判断
 

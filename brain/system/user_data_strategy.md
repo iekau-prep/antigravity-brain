@@ -269,9 +269,9 @@ MVP：
 
 使用：
 
-・property_readerの適合判定  
-・CTA最適化  
-・出力の個別化  
+・property_readerの判断材料補助  
+・decision continuity上で必要なCTA提示  
+・判断文脈に応じた出力整理  
 
 ---
 
@@ -551,12 +551,12 @@ LINE：
 
 =============================
 
-① UX最適化  
-② パーソナライズ  
+① 判断継続UXの支援  
+② 判断文脈に応じた出力整理  
 ③ 比較OS化  
-④ CTA最適化  
+④ decision continuity上で必要なCTA提示  
 ⑤ BtoB展開  
-⑥ データ資産化  
+⑥ decision continuity資産化  
 
 ---
 

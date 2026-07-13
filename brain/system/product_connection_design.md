@@ -897,7 +897,7 @@ continuity layerを実現する接続手段の一例である。
 
 ---
 
-保存対象：
+decision continuity上の接続対象：
 
 ・decision履歴
 ・比較履歴
@@ -914,7 +914,7 @@ continuity layer により：
 
 current decision を継続し、
 
-過去の判断・変化・履歴を保持できる。
+過去の判断・変化・履歴を判断文脈として接続できる。
 
 LINEはcontinuity layerを実現する接続手段の一つである。
 
