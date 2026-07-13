@@ -317,7 +317,7 @@ decision_log
 
 ---
 
-👉 保存タイミング：
+👉 保持タイミング：
 
 👉 **decisionが発生した瞬間**
 
@@ -338,9 +338,9 @@ decision_log
 
 LINE接続後は：
 
-- decision履歴
-- 比較履歴
-- プロダクト利用履歴
+- decision continuity上のdecision履歴
+- 比較文脈
+- プロダクト利用文脈
 
 ---
 
@@ -358,9 +358,9 @@ LINE接続後は：
 
 ---
 
-- decision履歴の再表示
+- decision履歴への再接続
 - 比較再開
-- 次の意思決定提示
+- 次のdecision整理提示
 
 ---
 
@@ -377,7 +377,7 @@ LINE接続後は：
 - タイプ
 - 判断軸
 - 予算
-- decision履歴
+- decision continuity上のdecision履歴
 
 ---
 
@@ -553,7 +553,7 @@ LINEは：
 
 実体はWeb：
 
-- decision履歴
+- decision continuity上のdecision履歴
 - 比較
 - 状態
 
@@ -583,7 +583,7 @@ decision_log
 
 ---
 
-👉 **history.mdと一致**
+👉 **history.mdが定義するdecision continuity構造と接続**
 
 ---
 
