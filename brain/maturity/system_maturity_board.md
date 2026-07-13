@@ -144,6 +144,8 @@ LINE主キー・内部ID・紐付け責務整合
 
 案件N
 
+Monitoring責務境界整理
+
 状態
 
 閉鎖
@@ -151,6 +153,8 @@ LINE主キー・内部ID・紐付け責務整合
 ---
 
 案件O
+
+decision形成支援責務境界整理
 
 状態
 
@@ -160,6 +164,8 @@ LINE主キー・内部ID・紐付け責務整合
 
 案件P
 
+decision update支援責務境界整理
+
 状態
 
 閉鎖
@@ -168,6 +174,8 @@ LINE主キー・内部ID・紐付け責務整合
 
 案件Q
 
+LINE continuity data責務境界整理
+
 状態
 
 閉鎖
@@ -175,6 +183,24 @@ LINE主キー・内部ID・紐付け責務整合
 ---
 
 案件R
+
+LINE / history continuity責務境界整理
+
+状態
+
+閉鎖
+
+---
+
+案件S
+
+decision_log・保存・履歴表現における責務境界整理
+
+対象System文書
+
+- brain/system/line_strategy.md
+- brain/system/user_data_strategy.md
+- brain/system/history.md
 
 状態
 
