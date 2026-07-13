@@ -973,9 +973,9 @@ decision_OSは、
 
 decision_OSは：
 
-👉 次decision更新
+👉 ユーザー本人による次decision更新
 
-を発生させる。
+を支援する。
 
 ---
 

@@ -389,7 +389,7 @@ loan_safety
 
 property_reader
 
-・current decision形成を支える
+・ユーザー本人によるcurrent decision形成を支える
 
 comparison
 

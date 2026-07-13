@@ -97,7 +97,7 @@ MVPは、
 
 MVPでは、
 
-current decisionを成立させる。
+ユーザー本人によるcurrent decision形成が可能なSystem条件を成立させる。
 
 decision continuityを成立させる。
 
@@ -173,7 +173,7 @@ Module利用
 
 ↓
 
-current decision形成
+ユーザー本人によるcurrent decision形成
 
 ↓
 
@@ -205,7 +205,7 @@ System全体として
 
 MVPでは、
 
-current decisionが
+ユーザー本人によるcurrent decisionが
 
 自然に形成されることを
 
@@ -358,7 +358,7 @@ Module単体の完成ではなく、
 
 System全体として
 
-current decisionが形成され、
+ユーザー本人によるcurrent decision形成が可能となり、
 
 decision continuityが維持されることを
 
@@ -487,7 +487,7 @@ Constitutionで定義された判断形成思想を前提として、
 
 最小構成でも
 
-current decisionを形成し、
+ユーザー本人によるcurrent decision形成を可能にし、
 
 decision continuityを維持し、
 
