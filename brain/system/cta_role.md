@@ -91,7 +91,7 @@ CTA は：
 ・driftを整理する  
 ・fixed_coreへ戻る補助をする  
 ・本命形成を補助する  
-・current decisionを更新する  
+・ユーザー本人によるcurrent decision更新を支援する  
 
 ために存在する。
 
@@ -248,7 +248,7 @@ CTA は、
 
 =============================
 
-② current decision を更新する
+② current decision 更新を支援する
 
 =============================
 
@@ -919,7 +919,7 @@ CTA種類を無限増殖させない。
 
 CTAの本質は常に：
 
-👉 decision更新
+👉 ユーザー本人によるdecision更新の支援
 
 である。
 

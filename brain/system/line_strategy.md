@@ -409,18 +409,18 @@ LINEは：
 
 ---
 
-### ■ ⑦ CTA最適化
+### ■ ⑦ decision continuity上のCTA提示
 
 ---
 
 LINE接続後：
 
 👉 state_detection（STATE判定）とdecision履歴を元に  
-👉 最適なCTAを1つだけ出せるようになる  
+👉 decision continuity上で必要なCTAを1つだけ提示できるようになる  
 
 ---
 
-👉 「今この人がやるべき意思決定」を正しく提示できる  
+👉 「今この人が整理すべきdecision」を提示できる  
 
 ---
 

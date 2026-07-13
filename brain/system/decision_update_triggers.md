@@ -105,7 +105,7 @@ System設計では、
 
 以下を満たす。
 
-* triggerはdecisionを更新する
+* triggerはユーザー本人によるdecision更新の契機として扱う
 * recommendationしない
 * 判断主体を変更しない
 * current decisionを更新可能にする
@@ -137,7 +137,7 @@ decision_update_triggersは、
 
 decision_frameworkで定義された構造に対し、
 
-どの出来事がdecision更新を発生させるかを定義する。
+どの出来事がユーザー本人によるdecision更新の契機となるかを定義する。
 
 ⸻
 

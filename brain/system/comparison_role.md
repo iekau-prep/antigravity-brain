@@ -51,7 +51,7 @@ comparisonは、
 責務
 
 * relative reasonを整理する
-* current decisionを更新する
+* ユーザー本人によるcurrent decision更新を支援する
 * fixed_core再確認を支援する
 * decision driftを可視化する
 * 本命形成を支援する
@@ -115,7 +115,7 @@ comparison
 
 ↓
 
-current decision更新
+ユーザー本人によるcurrent decision更新
 
 ↓
 
