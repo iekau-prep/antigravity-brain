@@ -87,7 +87,8 @@ Monitoringは、
 Systemで定義した構造を計測する。
 
 Moduleは、
-Monitoring対象となる行動・判断を生成する。
+ユーザー本人による判断形成を支援し、
+Monitoring対象となる行動・判断更新の結果を発生させる。
 
 Implementationは、
 Monitoring設計を実装する。
@@ -346,7 +347,7 @@ KPI生成主体ではない。
 
 Moduleは、
 
-判断形成を行う。
+ユーザー本人による判断形成を支援する。
 
 KPIは、
 
@@ -405,7 +406,7 @@ Module
 
 各Moduleは、
 
-判断形成を担当する。
+ユーザー本人による判断形成を支援する。
 
 Monitoringは、
 

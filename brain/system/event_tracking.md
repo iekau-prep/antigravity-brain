@@ -260,7 +260,7 @@ Moduleとの関係
 
 各Moduleは、
 
-判断更新を担当する。
+ユーザー本人による判断更新を支援する。
 
 Event Trackingは、
 
@@ -360,9 +360,10 @@ Module Responsibilities
 
 各Moduleは、
 
-それぞれの責務に応じた
+それぞれの責務に応じて、
 
-decision updateを発生させる。
+ユーザー本人によるdecision updateを支援し、
+Monitoring対象となる判断更新の結果を発生させる。
 
 Event Trackingは、
 
@@ -380,9 +381,9 @@ Monitoring対象としない。
 
 Monitoring対象は、
 
-Module責務によって発生した
+Module責務による支援を通じて発生した
 
-System上の判断更新のみである。
+System上の判断更新結果のみである。
 
 ⸻
 
