@@ -97,6 +97,37 @@ Loading Mapで指定された設計書のみとする。
 
 ---
 
+# Design前工程における構造設計レビュー
+
+構造設計レビューは、Design Validationの「責務上成立するか確認する」責務内に位置付ける。
+
+Design Validationは本文作成前の構造設計を確認する責務を持つ。
+
+Design Validationは構造の成立可否を確認するが、設計変更や改善提案は行わない。
+
+Design前工程は、新Stage / 新Roleではなく、既存Stage責務の内訳として扱う。
+
+構造設計レビューは以下を扱わない。
+
+- 新しい運用追加
+- 新Stage追加
+- 新Role追加
+- Product Owner Decision
+- Implementation
+- Implementation Validation
+- Maturity
+- Git
+- Role Input Contract変更
+- Loading Rule詳細変更
+- Record運用
+- Operation Constitution本文作成
+- Operation Constitution構造設計そのもの
+- Request Contract外の工程形成
+- Builder以外によるDesign Formation代行
+- Design Validationによる設計変更
+
+---
+
 # Input
 
 Design Validationが受け取るもの

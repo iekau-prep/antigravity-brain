@@ -102,6 +102,43 @@ Builderは、
 
 ---
 
+# Design前工程
+
+Design前工程は、Operation Constitution案件で実運用された以下2工程を、Builder責務内に位置付ける。
+
+- SoT読解
+- 設計方針形成
+
+目的は、新しいStageやRoleを追加することではなく、既存のDesign Stage内で実証された本文作成前の運用事実を、Operation SoTへ戻せる形で責務化することである。
+
+Builderは本文作成前にSoTを読解する責務を持つ。
+
+Builderは本文作成前に設計方針を形成する責務を持つ。
+
+Design前工程はBuilderのDesign形成前段であり、Implementationや品質判定は含まない。
+
+Design前工程は、新Stage / 新Roleではなく、既存Stage責務の内訳として扱う。
+
+Design前工程は以下を扱わない。
+
+- 新しい運用追加
+- 新Stage追加
+- 新Role追加
+- Product Owner Decision
+- Implementation
+- Implementation Validation
+- Maturity
+- Git
+- Role Input Contract変更
+- Loading Rule詳細変更
+- Record運用
+- Operation Constitution本文作成
+- Operation Constitution構造設計そのもの
+- Request Contract外の工程形成
+- Builder以外によるDesign Formation代行
+
+---
+
 # Input
 
 Builderが受け取るもの

@@ -99,6 +99,56 @@ Exit Criteria
 
 ⸻
 
+Design前工程は、Stage 1 — Design内の前工程として扱う。
+
+Design前工程は、新Stageではない。
+
+Design前工程は、新Roleではない。
+
+Design前工程は、既存Design Stageの責務内訳として整理する。
+
+Design前工程は、Operation Constitution案件で実運用された以下3工程を、Design Stage内の本文作成前責務として位置付ける。
+
+* SoT読解
+* 設計方針形成
+* 構造設計レビュー
+
+目的は、新しいStageやRoleを追加することではなく、既存のDesign Stage内で実証された本文作成前の運用事実を、Operation SoTへ戻せる形で責務化することである。
+
+Design前工程は以下を保持する。
+
+* Builderが本文作成前にSoTを読解する責務
+* Builderが本文作成前に設計方針を形成する責務
+* Design Validationが本文作成前の構造設計を確認する責務
+* Reviewが必要時にConstitution / 上位思想との整合を確認する責務
+* Design本文作成前に、対象・方針・構造の成立状態を明確にする責務
+* Design Stage内で完結する前工程として扱う責務
+* 新Stage / 新Roleではなく、既存Stage責務の内訳として扱う責務
+
+Design前工程は以下を扱わない。
+
+* 新しい運用追加
+* 新Stage追加
+* 新Role追加
+* Product Owner Decision
+* Implementation
+* Implementation Validation
+* Maturity
+* Git
+* Role Input Contract変更
+* Loading Rule詳細変更
+* Record運用
+* Operation Constitution本文作成
+* Operation Constitution構造設計そのもの
+* Request Contract外の工程形成
+* Builder以外によるDesign Formation代行
+* Design Validationによる設計変更
+* Reviewによる改善案作成
+
+Design前工程は、ADLSの「各Stageは自身の責務のみを完了し、成果物を次Stageへ引き渡す」原則に従う。
+
+⸻
+
 # Stage 2 — Design Validation
 Owner
 Codex

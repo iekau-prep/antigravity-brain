@@ -116,6 +116,34 @@ Constitution上の進行可否のみを返却する。
 
 ---
 
+# Design前工程におけるReview
+
+Reviewは、必要時にConstitution / 上位設計思想との整合確認を行う。
+
+ReviewはDesign前工程を改善せず、Constitution上の進行可否のみを確認する。
+
+Design前工程は、新Stage / 新Roleではなく、既存Stage責務の内訳として扱う。
+
+Reviewは以下を扱わない。
+
+- 新しい運用追加
+- 新Stage追加
+- 新Role追加
+- Product Owner Decision
+- Implementation
+- Implementation Validation
+- Maturity
+- Git
+- Role Input Contract変更
+- Loading Rule詳細変更
+- Record運用
+- Operation Constitution本文作成
+- Operation Constitution構造設計そのもの
+- Request Contract外の工程形成
+- Reviewによる改善案作成
+
+---
+
 # Input
 
 Reviewが受け取るもの
