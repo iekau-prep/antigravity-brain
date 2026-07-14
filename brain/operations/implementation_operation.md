@@ -103,6 +103,57 @@ Loading Mapで指定された設計書のみとする。
 
 ---
 
+# Implementation成熟
+
+Implementation成熟は、Operation Constitution案件およびOperation成熟案件Aで実運用されたImplementation運用事実を、既存Operation SoTへ戻すために定義する。
+
+目的は、新しいImplementation運用を追加することではなく、ImplementationがBuilder成果物を変更せず、承認済み成果物をRepositoryへ正確に反映し、Implementation ValidationがBuilder成果物とRepository反映結果を照合する責務境界を明確にすることである。
+
+Implementation成熟は以下を保持する。
+
+- ImplementationはBuilder成果物を変更しない
+- Implementationは承認済みBuilder成果物をRepositoryへ反映する
+- Implementationは改善案を作成しない
+- Implementationは設計変更を行わない
+- Implementationは責務変更を行わない
+- Implementationは反映結果をImplementation Validationへ引き渡す
+- Implementation ValidationはBuilder成果物とRepository反映結果を照合する
+- ImplementationとImplementation Validationの責務を分離する
+- Implementationは停止が必要な場合、設計変更せず停止理由のみ整理する
+
+Implementation成熟は以下を扱わない。
+
+- 新しい運用追加
+- 改善案
+- Constitution変更
+- System変更
+- Module変更
+- Product変更
+- Builder変更
+- Design Validation変更
+- Review変更
+- Git操作
+- Repository変更
+- 新Stage追加
+- 新Role追加
+- Product Owner Decision
+- Maturity
+- Role Input Contract
+- Loading Rule
+- Record
+- Operation Constitution
+- Builder成果物の再形成
+- Implementation Validationによる追加実装
+- Implementation Validationによる設計変更
+
+Implementation成熟は、Implementationを「承認済み設計成果物をコードへ正確に反映するStage」とする既存責務内に位置付ける。
+
+`Implementationは、設計を変更しない。思想を追加しない。改善案を作成しない。` という既存原則を、Repository反映責務として具体化する。
+
+ImplementationはBuilder成果物を変更せず、反映結果をImplementation Validationへ渡す。
+
+---
+
 # Input
 
 Implementationが受け取るもの

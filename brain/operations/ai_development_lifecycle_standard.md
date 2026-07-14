@@ -235,6 +235,57 @@ Exit Criteria
 
 ⸻
 
+Implementation成熟は、Stage 5 — ImplementationとStage 6 — Implementation Validationの責務分離として扱う。
+
+Implementation成熟は、新Stageではない。
+
+Implementation成熟は、新Roleではない。
+
+Implementation成熟は、ADLSの「各Stageは自身の責務のみを完了し、成果物を次Stageへ引き渡す」原則に従う。
+
+Implementation成熟は以下を保持する。
+
+* ImplementationはBuilder成果物を変更しない
+* Implementationは承認済みBuilder成果物をRepositoryへ反映する
+* Implementationは改善案を作成しない
+* Implementationは設計変更を行わない
+* Implementationは責務変更を行わない
+* Implementationは反映結果をImplementation Validationへ引き渡す
+* Implementation ValidationはBuilder成果物とRepository反映結果を照合する
+* ImplementationとImplementation Validationの責務を分離する
+* Implementationは停止が必要な場合、設計変更せず停止理由のみ整理する
+
+Implementation成熟は以下を扱わない。
+
+* 新しい運用追加
+* 改善案
+* Constitution変更
+* System変更
+* Module変更
+* Product変更
+* Builder変更
+* Design Validation変更
+* Review変更
+* Git操作
+* Repository変更
+* 新Stage追加
+* 新Role追加
+* Product Owner Decision
+* Maturity
+* Role Input Contract
+* Loading Rule
+* Record
+* Operation Constitution
+* Builder成果物の再形成
+* Implementation Validationによる追加実装
+* Implementation Validationによる設計変更
+
+Stage 5は設計成果物をRepositoryへ反映する責務を持つ。
+
+Stage 6は実装成果物の確認を行う責務を持つ。
+
+⸻
+
 # Stage 6 — Implementation Validation
 Owner
 Codex
