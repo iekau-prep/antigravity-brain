@@ -207,6 +207,22 @@ Observationでは、
 
 ---
 
+# Prototype Test / Prototype Validation Observation
+
+Prototype Testは、GPTを完成させることではなく、今後Observation・Decision・Module知識を追加しても、判断構造が崩れない初期土台を形成できるか確認する運用として実施する。
+
+Prototype Testは確認対象を発生させる運用として扱う。
+
+Prototype Validationはその確認対象をAI Design OS Specificationと照合し、初期土台成立性と不足分類を確認する運用として扱う。
+
+Prototype Validationでは、Prototype GPTそのものではなく、A〜Dで形成された判断土台を評価対象として扱う。
+
+Prototype Validationでは、Prototype時点で不足が存在しても、後天学習可能な不足と初期土台不足を分離して確認する。
+
+Prototype Validationでは、Prototype GPTを評価するのではなく、AI Design OS Specificationとの仕様照合として運用する。
+
+---
+
 # Rule
 
 Observationでは、

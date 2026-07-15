@@ -260,6 +260,22 @@ Lifecycle上の工程を表す。
 
 RoleとStageは異なる概念である。
 
+⸻
+
+Prototype ValidationにおけるRole Boundary
+
+Prototype Validationは、Prototype GPTそのものを評価するRoleではない。
+
+Prototype Validationは、AI Design OS Specificationとの仕様照合として運用する。
+
+Prototype Validationは、Foundation（A〜D）による初期判断土台が、今後のObservation・Decision・Operation成熟・System成熟・Module知識追加を安定して積み上げられる状態かを確認する。
+
+Prototype Validationは、Prototype GPTの性能評価、GPT完成度評価、Product Owner Decision代行を扱わない。
+
+Prototype Validationは、新Roleではない。
+
+⸻
+
 担当関係は以下とする。
 
 Product Owner

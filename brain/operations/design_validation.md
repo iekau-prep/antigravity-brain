@@ -234,6 +234,34 @@ Design Validationでは、
 
 ---
 
+# Prototype Validation
+
+Prototype Validationは、Prototype GPTそのものではなく、Foundation（A〜D）による初期判断土台を評価対象として扱う。
+
+Prototype Validationは、AI Design OS Specificationとの仕様照合として運用する。
+
+Prototype Validationでは、Prototype時点で不足が存在しても、後天学習可能な不足と初期土台不足を分離して確認する。
+
+Prototype Validationは、Foundation（A〜D）による初期判断土台が、今後のObservation・Decision・Operation成熟・System成熟・Module知識追加を安定して積み上げられる状態かを確認する。
+
+Prototype Validationは以下を扱わない。
+
+- Prototype GPTの性能評価
+- GPT完成度評価
+- 改善案形成
+- Operation文書修正
+- Builder成果物本文作成
+- Implementation
+- Git操作
+- 新Role追加
+- 新Stage追加
+- 新Operation文書追加
+- Prototype Test 2の作成・実施
+- Prototype Validation実施手順作成
+- Product Owner Decision代行
+
+---
+
 # Rule
 
 Design Validationでは、

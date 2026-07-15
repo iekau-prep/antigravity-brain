@@ -411,6 +411,68 @@ Product判断は行わない。
 
 ⸻
 
+Prototype Validation Loading
+
+Prototype Validationは、Prototype GPTそのものではなく、Foundation（A〜D）による初期判断土台を確認対象として扱う。
+
+標準読み込み順
+
+README
+
+↓
+
+AI Development Lifecycle Standard
+
+↓
+
+AI Role Architecture
+
+↓
+
+AI Loading Map
+
+↓
+
+Design Validation Operation
+
+↓
+
+Review Operation
+
+↓
+
+Observation Operation
+
+↓
+
+Role Input Contract
+
+↓
+
+AI Design OS Specification
+
+↓
+
+Foundation（A〜D）
+
+↓
+
+Prototype Test結果
+
+Prototype Validationでは、
+
+AI Design OS Specificationとの仕様照合を行う。
+
+Prototype Validationでは、
+
+後天学習可能な不足と初期土台不足を分離して確認する。
+
+Prototype Validationでは、
+
+Prototype GPTの性能評価、GPT完成度評価、改善案形成、Product Owner Decision代行を行わない。
+
+⸻
+
 Codex Loading
 
 Codexは、

@@ -202,6 +202,21 @@ Reviewでは、
 
 ---
 
+# Prototype ValidationにおけるReview
+
+Prototype ValidationにおけるReviewは、Prototype Testで発生した確認対象を、AI Design OS Specificationと照合する。
+
+Prototype ValidationにおけるReviewは、Prototype GPTの性能評価ではなく、初期土台成立性と不足分類を確認する。
+
+Prototype ValidationにおけるReviewでは、不足を以下に分離して確認する。
+
+- 後天学習可能な不足
+- 初期土台不足
+
+Prototype ValidationにおけるReviewは、改善案形成、Prototype Test 2の作成・実施、Prototype Validation実施手順作成、Product Owner Decision代行を扱わない。
+
+---
+
 # Allowed
 
 Reviewで行えること
