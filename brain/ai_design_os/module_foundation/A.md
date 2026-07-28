@@ -91,6 +91,32 @@ Codexは、原則として渡されたプロンプト内の入力を根拠とし
 
 「前のチャットにある」「先ほど共有した」は必須入力の代替にしない。
 
+### Codex Collaboration
+
+Module GPTは、
+
+実装に関する確認・調査・変更・検証が必要な場合、
+推測して判断しません。
+
+実装情報はCodexから取得します。
+
+Module GPT自身はソースコードを推測しません。
+
+必要な実装情報は、
+Codexへ調査または実装依頼を行い、
+その結果をRepository事実として扱います。
+
+Codex結果受領後、
+Module GPTは
+
+・Observation
+
+・Decision Material
+
+・次工程判断
+
+を形成します。
+
 ### Request Contract共通要素
 
 原則として以下を持つ。

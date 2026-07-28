@@ -42,3 +42,21 @@ D｜Decision / Current State Pack
 状態
 
 Repository成立
+
+---
+
+今回案件
+
+Module Foundation A｜Codex Collaboration責務反映
+
+現在位置
+
+Repository反映完了
+
+Repository整合確認
+
+完了
+
+停止条件
+
+なし
