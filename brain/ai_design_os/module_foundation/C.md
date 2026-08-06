@@ -229,6 +229,10 @@ Foundation Packは、PJ思想、System思想、Operation、Product、Module、Im
 
 ## Connected Modules
 
+Connected Modules章は、Foundation Packが接続する学習対象を保持するCommon章として扱う。
+
+Module固有接続情報は、Learning Stage内で保持する。
+
 ### Constitution
 
 - Purpose：PJ思想理解
