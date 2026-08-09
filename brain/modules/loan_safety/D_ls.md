@@ -39,13 +39,13 @@ Module
 Module Name
 loan_safety
 Module Decision History対象
-* System成熟
-* Operation成熟
-* 全体設計Decision
-* 横断整合レビュー
-* Foundation成熟
-* AI Design OS成熟
+Formation材料なし
 Module Current State
+* Foundation Packの現在Stage
+* 読了済み.md
+* 次に読み込む.md
+* 不明点
+* 停止条件
 * 現実接触moduleとして扱う。
 * 感情decisionを現実へ接触させるmoduleである。
 * 補助decision更新レイヤーとして存在する。
@@ -138,15 +138,40 @@ Non Responsibility
 
 Loading
 読み込み対象
-Formation材料なし
+* projects/iekau/products/loan_safety/README.md
+* projects/iekau/products/loan_safety/product_concept.md
+* projects/iekau/products/loan_safety/data_connection.md
+* projects/iekau/products/loan_safety/diagnosis_logic.md
+* projects/iekau/products/loan_safety/completion_definition.md
+* projects/iekau/products/loan_safety/state_labels.md
+* projects/iekau/products/loan_safety/ui_result_flow.md
+* projects/iekau/products/loan_safety/character_templates.md
+* projects/iekau/products/property_reader/loan_safety_connection.md
+* Foundation Packの現在Stage
+* 読了済み.md
+* 次に読み込む.md
+* 不明点
+* 停止条件
 読み込み目的
-Formation材料なし
+loan_safetyがPJを推測せず理解し、PJ内SoTを根拠として判断できる状態を形成する。
+現在位置として、Foundation Packの現在Stage、読了済み.md、次に読み込む.md、不明点、停止条件を保持する。
 
 Transfer
 Transfer対象
-Formation材料なし
+* Foundation Packの現在Stage
+* 読了済み.md
+* 次に読み込む.md
+* 不明点
+* 停止条件
+* loan_context
+* risk_understanding
+* life_context
+* tolerance_context
+* reality_contact
+* reason_material
 Transfer目的
-Formation材料なし
+現在位置を次Stageへ接続する。
+loan_safetyの出力を材料としてdecisionへ接続する。
 
 Connected Modules
 System成熟
@@ -175,4 +200,10 @@ Stageごとの到達状態
 Formation材料なし
 
 完了条件
-Formation材料なし
+* Foundation Packの現在Stage、読了済み.md、次に読み込む.md、不明点、停止条件を説明できる。
+* loan_safetyは現実接触、許容整理、decision更新補助を担うと説明できる。
+* loan_safetyは判断主体をユーザーに維持し、推薦しない、決めさせないと説明できる。
+* loan_safetyは次decisionへ進めるdecision更新準備を扱い、decision自体は更新しないと説明できる。
+* loan_safetyはSTATE生成・保存を扱わないと説明できる。
+* loan_safetyはproperty_readerの物件判断を侵食せず、物件評価しないと説明できる。
+* loan_safetyは買う／やめるを出さず、理解だけ渡すと説明できる。

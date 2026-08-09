@@ -168,24 +168,77 @@ comparisonはdecisionを決定しない。
 Loading
 読み込み対象
 
-Formation材料なし
+brain/system/decision_os_role.md
+brain/system/decision_framework.md
+brain/system/state_definition.md
+brain/system/state_detection.md
+brain/system/state_to_cta_connection.md
+brain/system/comparison_role.md
+brain/system/decision_update_triggers.md
+projects/iekau/products/decision_os/product_concept.md
+projects/iekau/products/decision_os/ux_flow.md
+projects/iekau/products/decision_os/data_connection.md
+projects/iekau/products/decision_os/feature_scope_mvp.md
+projects/iekau/products/decision_os/screen_structure.md
+projects/iekau/products/decision_os/decision_memory.md
+projects/iekau/products/external_property_search/decision_connection.md
 
 読み込み目的
 
-Formation材料なし
+decision_OS moduleがPJを推測せず理解し、PJ内SoTを根拠として判断できる状態を形成する。
+decision_OSが現在判断を整理し、次のdecision更新へ接続するmoduleであることを理解する。
+decision_OSがdecision progression、drift recovery、本命形成循環を扱うことを理解する。
+decision_osがdecisionを受け取り、stateを解釈し、比較・更新・再判断へつなげる接続設計を理解する。
 
 Transfer
 Transfer対象
 
-Formation材料なし
+decision一覧
+検討中 / 保留 / 見送り
+current decision更新
+STATE解釈
+次のCTA
+comparison / 再整理への接続
+property_readerへの遷移
+external_property_searchへの導線
+次decision更新
+decision_OSへ戻る判断
+decision continuity
 
 Transfer目的
 
-Formation材料なし
+現在判断を整理し、次のdecision更新へ接続する。
+decisionを受け取り、stateを解釈し、比較・更新・再判断へつなげる。
+decision continuityを維持し、判断を切らずに継続可能状態を維持する。
 
 Connected Modules
 
-Formation材料なし
+decision_OS moduleのConnected Modulesは以下とする。
+
+Constitution
+decision_framework
+decision_OS_role
+decision_OS module
+Implementation
+property_reader
+comparison
+LINE
+Supabase
+external_property_search
+state_to_cta_connection
+fixed_core_definition
+drift_detection
+decision_update_triggers
+
+接続事実：
+
+property_readerはdecision_osの入力元である。
+comparisonはdecision_osの入力元である。
+LINE再開はdecision_osの入力元である。
+external経由の新規物件はproperty_reader経由で追加する。
+decision_osの出力先はproperty_reader、comparison、external_property_search、LINEである。
+decision_osはSupabaseのdecisionsテーブルを中核とする。
+state_to_cta_connectionは、判定されたSTATEを次のdecision更新へ接続する方法を扱う。
 
 Learning
 Learning Stage
@@ -213,4 +266,10 @@ Formation材料なし
 
 完了条件
 
-Formation材料なし
+decision_OSが現在判断を整理し、次のdecision更新へ接続するmoduleであることを説明できる。
+decision主体はユーザー本人であり、各moduleはdecision形成を支える責務のみを持つことを説明できる。
+decision_OSがdecision progression、drift recovery、本命形成循環を扱うことを説明できる。
+decision_osがdecisionを受け取り、stateを解釈し、比較・更新・再判断へつなげる接続設計を説明できる。
+decision_OSはrecommendation、dashboard化、task管理、current decision固定、decision主体変更、decision生成を行わないと説明できる。
+STATEは保存せず、current decisionから毎回算出すると説明できる。
+CTAはrecommendationではなく、decision更新の入口として扱うと説明できる。

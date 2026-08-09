@@ -14,15 +14,44 @@
 
 ### Decision History原則
 
-Formation材料なし
+継承対象：
+
+- Observation
+- Decision
+- Decision理由
+- 成熟として残した背景
+- 今後も保持すべき判断原則
+
+扱い方：
+
+- Decisionだけを継承しない
+- 理由まで理解する
+- 過去Decisionを現在へ強制適用しない
+- 現在案件に必要な判断材料として接続する
+- 現在SoTと不整合なら確認する
 
 ### Common Decision History対象
 
-Formation材料なし
+- Constitution成熟
+- Product成熟
 
 ### Common Current State
 
-Formation材料なし
+最低限保持するもの：
+
+- 現在Phase
+- 現在案件
+- 案件状態
+- 現在Stage
+- 前工程成果物
+- Product Owner Decisionの有無
+- 停止条件
+- 未反映差分
+- Maturity状態
+- Git状態
+- 次工程候補
+
+Current StateはDecision Historyと分離し、現在位置のみを扱う。
 
 ---
 
@@ -68,32 +97,23 @@ Connected ModulesのStop Conditionは、思想理解に必要なSoT不足、Syst
 
 #### System成熟
 
-- 未来の住居選択可能性
-- future cognition
-- future decision module
-- future drift
-- fixed_core整理
-- 前提ズレ
-- 購入可能性理解
-- 未来想像補助
-- 時間リスク可視化
-- 現状維持リスク整理
-- 意思形成STATE
-- 状態ラベル
-- rabbit_types
-- character_templates
-- LINE前後の役割変化
-- decision progression network
-- decision drift
-- fixed_core
-- future decision
-- future cognition labels
-- 未来認識状態
-- future decision UX
+- 1案件＝1論点
+- ObservationとDecisionを分離する
+- 横断レビューでは修正しない
+- Observationから案件化する
+- decision主体は常にユーザー本人
+- System・Product・Module・AIはdecisionを生成しない
+- current decisionは主体ではなく参照中心
+- 思想変更ではなく読解境界を整える
 
 #### Operation成熟
 
-Formation材料なし
+- Role責務を変更せずInput品質を整える
+- Builder前にSoT読解・設計方針・構造確認を行える
+- Implementationは採用済み成果物を変更せずRepositoryへ反映する
+- Implementation ValidationはBuilder成果物とRepository反映結果を照合する
+- 比較対象不足時は停止する
+- Codex用プロンプトは自己完結させる
 
 ---
 
@@ -101,59 +121,17 @@ Formation材料なし
 
 ### Decision History Boundary
 
-Formation材料なし
+Decision Historyは、過去Decisionを現在へ強制適用しない。
+
+Decision Historyは、現在案件に必要な判断材料として接続する。
+
+Decision Historyは、現在SoTと不整合なら確認する。
 
 ### Current State Boundary
 
-rent_vs_buyが扱える範囲は、未来decisionが停止している状態を扱うが、購入decisionは扱わない。
+Current StateはDecision Historyと分離し、現在位置のみを扱う。
 
-Foundation PackはPJ思想、System思想、Operation、Product、Module、Implementationを変更しない。
-
-不明点がある場合は推測せず停止する。
-
-すべてのプロダクトは決断代行を行わない。
-
-役割はユーザー本人によるdecision形成・decision更新の支援である。
-
-- Builder成果物作成は禁止
-- Builder Input Sheet作成は禁止
-- Design Validationは禁止
-- Reviewは禁止
-- Implementationは禁止
-- Implementation Validationは禁止
-- Prototype Validationは禁止
-- Repository更新は禁止
-- Solution形成は禁止
-- 改善案は禁止
-- 推測は禁止
-- Template変更は禁止
-- Repository本文から確認できる事実のみObservationする
-
-Knowledgeは、未来の住居選択可能性、future cognition、future decision module、future drift、fixed_core整理、前提ズレ、購入可能性理解、未来想像補助、時間リスク可視化、現状維持リスク整理、意思形成STATE、状態ラベル、rabbit_types、character_templates、LINE前後の役割変化、decision progression network、decision drift、fixed_core、future decision、future cognition labels、未来認識状態、future decision UXを扱う。
-
-rent_vs_buyは、以下を扱わない。
-
-- 賃貸が損か得かを断定しない
-- 購入を正当化しない
-- 「今買うべきか」を断定しない
-- 購入decisionを扱わない
-- 購入誘導を扱わない
-- 賃貸否定を扱わない
-- 損得断定を扱わない
-- 比較煽りを扱わない
-- 正解提示を扱わない
-- 未来不安だけを煽らない
-- 「賃貸 vs 購入」の勝敗を決めない
-- 買わせるための装置ではない
-- 賃貸否定ツールではない
-- 購入誘導コンテンツではない
-- 損得比較ツールではない
-- 投資シミュレーターではない
-- type_diagnosisと同じ分類にしない
-- decisionOS思想を前面に出しすぎて難しくしない
-- LINE登録しないと価値がない状態にしない
-- decisionを作らない状態にしない
-- 持ち家推奨、数値煽り、恐怖訴求を行わない
+Current Stateは、過去Decisionの蓄積そのものを扱わない。
 
 ---
 
@@ -161,11 +139,20 @@ rent_vs_buyは、以下を扱わない。
 
 ### 読み込み対象
 
-Formation材料なし
+Decision / Current State Packでは、以下を読み込み対象として扱う。
+
+- Decision History原則
+- Common Decision History対象
+- Module Decision History対象
+- 主要判断原則
+- Common Current State
+- Module Current State
 
 ### 読み込み目的
 
-Formation材料なし
+過去Decision、Decision理由、成熟経緯を現在案件へ接続する。
+
+現在Phase、現在案件、現在Stage、前工程成果物、停止条件、次工程候補を整理する。
 
 ---
 
@@ -173,11 +160,21 @@ Formation材料なし
 
 ### Transfer対象
 
-Formation材料なし
+Decision / Current State Packは、以下を次工程へ受け渡す。
+
+- 現在案件へ接続すべきDecision
+- Decision理由
+- 成熟経緯
+- 現在Phase
+- 現在案件
+- 現在Stage
+- 前工程成果物
+- 停止条件
+- 次工程候補
 
 ### Transfer目的
 
-Formation材料なし
+過去Decisionと現在状況を混同せず、現在案件に必要な判断材料のみを次工程へ接続する。
 
 ---
 
@@ -185,19 +182,43 @@ Formation材料なし
 
 ### System成熟
 
-Formation材料なし
+- Purpose：System成熟に関するDecision Historyを現在判断へ接続する
+- Responsibility：System成熟の主要判断原則を保持する
+- Boundary：System変更は扱わない
+- Input：System成熟Decision / Observation / Decision理由
+- Output：現在案件に必要なSystem成熟判断材料
+- Transfer：現在案件へ接続する
+- Stop Condition：現在SoTと不整合がある場合
 
 ### Operation成熟
 
-Formation材料なし
+- Purpose：Operation成熟に関するDecision Historyを現在判断へ接続する
+- Responsibility：Operation成熟の主要判断原則を保持する
+- Boundary：Operation変更は扱わない
+- Input：Operation成熟Decision / Observation / Decision理由
+- Output：現在案件に必要なOperation成熟判断材料
+- Transfer：現在案件へ接続する
+- Stop Condition：現在SoTと不整合がある場合
 
 ### Foundation成熟
 
-Formation材料なし
+- Purpose：Foundation成熟に関するDecision Historyを現在判断へ接続する
+- Responsibility：Foundation成熟の履歴対象を保持する
+- Boundary：Foundation変更は扱わない
+- Input：Foundation成熟Decision / Observation / Decision理由
+- Output：現在案件に必要なFoundation成熟判断材料
+- Transfer：現在案件へ接続する
+- Stop Condition：現在SoTと不整合がある場合
 
 ### AI Design OS成熟
 
-Formation材料なし
+- Purpose：AI Design OS成熟に関するDecision Historyを現在判断へ接続する
+- Responsibility：AI Design OS成熟の履歴対象を保持する
+- Boundary：AI Design OS変更は扱わない
+- Input：AI Design OS成熟Decision / Observation / Decision理由
+- Output：現在案件に必要なAI Design OS成熟判断材料
+- Transfer：現在案件へ接続する
+- Stop Condition：現在SoTと不整合がある場合
 
 ---
 

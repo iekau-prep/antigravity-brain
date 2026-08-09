@@ -39,12 +39,7 @@ Module
 Module Name
 comparison
 Module Decision History対象
-* System成熟
-* Operation成熟
-* 全体設計Decision
-* 横断整合レビュー
-* Foundation成熟
-* AI Design OS成熟
+Formation材料なし
 Module Current State
 * comparisonは、物件を評価するmoduleではない。現在判断を整理するmoduleである。
 * relative reasonを整理する。
@@ -131,15 +126,27 @@ Non Responsibility
 
 Loading
 読み込み対象
-Formation材料なし
+* brain/system/comparison_role.md
+* projects/iekau/products/property_reader/comparison_flow.md
 読み込み目的
-Formation材料なし
+comparison moduleがPJを推測せず理解し、PJ内SoTを根拠として判断できる状態を形成する。
+comparisonが物件評価ではなく現在判断を整理するmoduleであることを理解する。
+comparisonが本命形成・迷い構造可視化・decision更新支援を扱うことを理解する。
 
 Transfer
 Transfer対象
-Formation材料なし
+* relative reason
+* 保存
+* 保留
+* 見送り
+* reason
+* 本命感
+* decision_OSへ戻す判断
+* 本命形成
+* current decision更新支援材料
 Transfer目的
-Formation材料なし
+判断材料を整理し、ユーザー本人によるcurrent decision更新を支援する。
+comparison単独で完結せず、decision_OSへ判断を戻す。
 
 Connected Modules
 System成熟
@@ -161,4 +168,9 @@ Stageごとの到達状態
 Formation材料なし
 
 完了条件
-Formation材料なし
+* comparisonが物件評価ではなく現在判断を整理するmoduleであることを説明できる。
+* comparisonが「どちらが良いか」を決める場所ではなく、本命形成・迷い構造可視化・decision更新支援を扱うことを説明できる。
+* comparison_role.mdがcomparison moduleの責務、relative reason、comparison flow、decision update support、module boundaryを扱うことを説明できる。
+* comparison_flow.mdがcomparison体験設計、decision progression UX、本命形成UX、future drift、許容構造、fixed_core整合、decision_OSへの戻りを扱うことを説明できる。
+* comparisonはdecisionを決定せず、recommendation、ranking、score化、AI判断、decision主体変更を行わないと説明できる。
+* comparison単独で完結せず、decision_OSへ判断を戻すと説明できる。

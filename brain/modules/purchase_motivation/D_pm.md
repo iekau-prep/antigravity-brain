@@ -1,4 +1,4 @@
-D_pm# D｜Decision / Current State Pack
+# D｜Decision / Current State Pack
 
 ## Purpose
 
@@ -70,48 +70,11 @@ purchase_motivation
 
 ### Module Current State
 
-purchase_motivationは、Common Current Stateに加えて、以下を現在判断へ接続する。
-
-* fixed_core整理moduleとして定義されている。
-* 補助decision更新レイヤーとして位置付けられている。
-* 「decision更新基準」として存在することが定義されている。
-* 購入動機を構造化し、判断軸を明確にするプロダクトとして定義されている。
-* 「物件を選ぶ」ためではなく、「選び方を決める」ためのプロダクトとして定義されている。
-
-* 「自分はなぜ家を買いたいのか」を構造化すること。
-* 「decisionの固定核形成」を扱うこと。
-* decision drift修正に影響し、「何を優先して判断するか」を再固定すること。
-* 「何を本当に重視するか」を再整理すること。
-* 購入動機を構造化し、判断軸を明確にし、意思決定の精度と納得感を高めること。
-* 「何を基準にdecisionすべきか」を整理すること。
-* 固定核と可変条件を分離して扱うこと。
-
-* 購入動機を構造化し、判断軸を明確にすること。
-* 「自分はなぜ家を買いたいのか」を構造化すること。
-* 「何を本当に重視するか」を再整理すること。
-* 「何を基準にdecisionすべきか」を整理すること。
-
-* fixed_core整理module。
-* 補助decision更新レイヤー。
-* 「decision更新基準」として存在する。
-* 「物件を選ぶ」ためではなく、「選び方を決める」ためのプロダクト。
-
-* ユーザーの回答
-
-* 購入動機（要約）
-* 必要条件
-* 十分条件
-* 判断軸の優先順位
-* 注意すべきズレ
-* 次に確認すべきこと
-* トリガー
-* 固定核
-* 可変条件
-* 判断軸
-* あなたのタイプとの関係
-* 現在地コメント
-* 次の現実接触（CTA）
-* decision現在地表示
+- Foundation Packの現在Stage
+- 読了済み.md
+- 次に読み込む.md
+- 不明点
+- 停止条件
 
 ---
 
@@ -119,23 +82,25 @@ purchase_motivationは、Common Current Stateに加えて、以下を現在判�
 
 ### 主要判断原則
 
-Formation材料なし
+#### System成熟
 
-### Module SoT
+- 1案件＝1論点
+- ObservationとDecisionを分離する
+- 横断レビューでは修正しない
+- Observationから案件化する
+- decision主体は常にユーザー本人
+- System・Product・Module・AIはdecisionを生成しない
+- current decisionは主体ではなく参照中心
+- 思想変更ではなく読解境界を整える
 
-* projects/iekau/products/purchase_motivation/README.md
-* projects/iekau/products/purchase_motivation/product_concept.md
-* projects/iekau/products/purchase_motivation/question_design.md
-* projects/iekau/products/purchase_motivation/diagnosis_logic.md
-* projects/iekau/products/purchase_motivation/output_logic.md
-* projects/iekau/products/purchase_motivation/result_screen.md
-* projects/iekau/products/purchase_motivation/ui_flow.md
-* projects/iekau/products/purchase_motivation/discomfort_connection.md
-* projects/iekau/products/purchase_motivation/property_reader_connection.md
+#### Operation成熟
 
-### Module Repository
-
-* projects/iekau/products/purchase_motivation/
+- Role責務を変更せずInput品質を整える
+- Builder前にSoT読解・設計方針・構造確認を行える
+- Implementationは採用済み成果物を変更せずRepositoryへ反映する
+- Implementation ValidationはBuilder成果物とRepository反映結果を照合する
+- 比較対象不足時は停止する
+- Codex用プロンプトは自己完結させる
 
 ---
 
@@ -155,45 +120,26 @@ Current StateはDecision Historyと分離し、現在位置のみを扱う。
 
 Current Stateは、過去Decisionの蓄積そのものを扱わない。
 
-### Product Owner Boundary
-
-Formation材料なし
-
-### Codex Boundary
-
-Formation材料なし
-
-### General Design GPT Boundary
-
-Formation材料なし
-
-### Knowledge Boundary
-
-Formation材料なし
-
-### Authority Boundary
-
-Formation材料なし
-
-### Non Responsibility
-
-* 条件ランキングは行わない。
-* 自動最適化は行わない。
-* 物件推薦は行わない。
-* 「あなたに最適」の提示は行わない。
-* メイン導線ではなく、decision更新時に必要に応じて呼び出される補助層として定義されている。
-
 ---
 
 ## Loading
 
 ### 読み込み対象
 
-Formation材料なし
+Decision / Current State Packでは、以下を読み込み対象として扱う。
+
+- Decision History原則
+- Common Decision History対象
+- Module Decision History対象
+- 主要判断原則
+- Common Current State
+- Module Current State
 
 ### 読み込み目的
 
-Formation材料なし
+過去Decision、Decision理由、成熟経緯を現在案件へ接続する。
+
+現在Phase、現在案件、現在Stage、前工程成果物、停止条件、次工程候補を整理する。
 
 ---
 
@@ -201,11 +147,21 @@ Formation材料なし
 
 ### Transfer対象
 
-Formation材料なし
+Decision / Current State Packは、以下を次工程へ受け渡す。
+
+- 現在案件へ接続すべきDecision
+- Decision理由
+- 成熟経緯
+- 現在Phase
+- 現在案件
+- 現在Stage
+- 前工程成果物
+- 停止条件
+- 次工程候補
 
 ### Transfer目的
 
-Formation材料なし
+過去Decisionと現在状況を混同せず、現在案件に必要な判断材料のみを次工程へ接続する。
 
 ---
 
@@ -213,46 +169,49 @@ Formation材料なし
 
 ### System成熟
 
-Formation材料なし
+- Purpose：System成熟に関するDecision Historyを現在判断へ接続する
+- Responsibility：System成熟の主要判断原則を保持する
+- Boundary：System変更は扱わない
+- Input：System成熟Decision / Observation / Decision理由
+- Output：現在案件に必要なSystem成熟判断材料
+- Transfer：現在案件へ接続する
+- Stop Condition：現在SoTと不整合がある場合
 
 ### Operation成熟
 
-Formation材料なし
+- Purpose：Operation成熟に関するDecision Historyを現在判断へ接続する
+- Responsibility：Operation成熟の主要判断原則を保持する
+- Boundary：Operation変更は扱わない
+- Input：Operation成熟Decision / Observation / Decision理由
+- Output：現在案件に必要なOperation成熟判断材料
+- Transfer：現在案件へ接続する
+- Stop Condition：現在SoTと不整合がある場合
 
 ### Foundation成熟
 
-Formation材料なし
+- Purpose：Foundation成熟に関するDecision Historyを現在判断へ接続する
+- Responsibility：Foundation成熟の履歴対象を保持する
+- Boundary：Foundation変更は扱わない
+- Input：Foundation成熟Decision / Observation / Decision理由
+- Output：現在案件に必要なFoundation成熟判断材料
+- Transfer：現在案件へ接続する
+- Stop Condition：現在SoTと不整合がある場合
 
 ### AI Design OS成熟
 
-Formation材料なし
-
----
-
-## Learning
-
-### Learning Stage
-
-Formation材料なし
-
-### Learning対象.md
-
-* projects/iekau/products/purchase_motivation/README.md
-* projects/iekau/products/purchase_motivation/product_concept.md
-* projects/iekau/products/purchase_motivation/question_design.md
-* projects/iekau/products/purchase_motivation/diagnosis_logic.md
-* projects/iekau/products/purchase_motivation/output_logic.md
-* projects/iekau/products/purchase_motivation/result_screen.md
-* projects/iekau/products/purchase_motivation/ui_flow.md
-* projects/iekau/products/purchase_motivation/discomfort_connection.md
-* projects/iekau/products/purchase_motivation/property_reader_connection.md
-
-### Stageごとの到達状態
-
-Formation材料なし
+- Purpose：AI Design OS成熟に関するDecision Historyを現在判断へ接続する
+- Responsibility：AI Design OS成熟の履歴対象を保持する
+- Boundary：AI Design OS変更は扱わない
+- Input：AI Design OS成熟Decision / Observation / Decision理由
+- Output：現在案件に必要なAI Design OS成熟判断材料
+- Transfer：現在案件へ接続する
+- Stop Condition：現在SoTと不整合がある場合
 
 ---
 
 ## 完了条件
 
-Formation材料なし
+- 過去Decisionを理由まで説明できる
+- 現在案件へ必要なDecisionだけを接続できる
+- 過去Decisionと現在状況を混同しない
+- 現在地・次工程・停止条件を説明できる
