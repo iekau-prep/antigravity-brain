@@ -227,7 +227,11 @@ decision_OS
 
 decision_OS は、
 
-decision を保存しない。
+decision DataのPersistence Responsibility Ownerとしては確定しない。
+
+現在Repository / Implementation上、
+decision_OSを経由したTechnical Persistence Executionが存在することと、
+decision_OSがdecision DataのPersistence Responsibilityを所有することは同一視しない。
 
 ---
 

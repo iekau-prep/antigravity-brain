@@ -45,6 +45,26 @@ decision_os は物件一覧ではない
 
 ---
 
+補足：
+
+decision_os における
+Supabase decisions table、
+save API、
+upsert、
+decision保存処理は、
+
+現在Repository / Implementationに存在する
+Technical Persistence Executionとして扱う。
+
+これらは、
+decision_OS ModuleのProduct Responsibility、
+またはdecision DataのPersistence Responsibility Ownerを
+一意に定義する根拠ではない。
+
+Data Persistence Responsibility Ownerは未確定として保持する。
+
+---
+
 ② stateは保存しない
 
 ---
@@ -494,6 +514,9 @@ decision_os の data_connection とは、
 👉 Supabase に安定保存し  
 👉 state を解釈しながら  
 👉 比較・更新・再判断へつなげるための接続設計である
+
+この保存はTechnical Persistence Executionであり、
+decision_OS ModuleのProduct Responsibility Owner確定ではない。
 
 ---
 

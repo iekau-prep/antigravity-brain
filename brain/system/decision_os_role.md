@@ -122,6 +122,38 @@ decision更新の入口として扱う。
 
 ⸻
 
+Persistence Boundary
+
+decision_OSは、
+
+decision主体ではない。
+
+decision_OSは、
+
+decision形成・更新・整理・解釈・continuity接続を支援する。
+
+この支援責務をもって、
+
+decision DataのPersistence Responsibility Ownerとはしない。
+
+Data Persistence Responsibility Ownerは、
+
+現時点では一意に確定しない。
+
+Supabase decisions table、
+save API、
+upsert等は、
+
+現在Repository / Implementationに存在する
+Technical Persistence Executionとして扱う。
+
+現在decision_OSを経由してdecisionが保存されていることと、
+
+decision_OSがdecision DataのPersistence Responsibilityを所有することを
+同一視しない。
+
+⸻
+
 Design Rules
 
 System設計では、
