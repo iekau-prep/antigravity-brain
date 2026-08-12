@@ -924,7 +924,7 @@ decision OS は、
 
 property_reader：
 
-👉 decisionを生成する場所
+👉 本人decision形成の起点となる場所
 
 ---
 

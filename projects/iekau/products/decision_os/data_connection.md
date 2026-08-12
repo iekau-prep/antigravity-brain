@@ -317,7 +317,7 @@ decision_os の入力元は以下。
 ---
 
 ① property_reader  
-👉 decision生成
+👉 本人decision形成の起点
 
 ② comparison  
 👉 decision更新
@@ -510,7 +510,7 @@ decision_os の data_connection で一番重要なのは、
 
 decision_os の data_connection とは、
 
-👉 property_readerで生まれた decision を受け取り  
+👉 property_readerから接続された本人decisionを受け取り  
 👉 Supabase に安定保存し  
 👉 state を解釈しながら  
 👉 比較・更新・再判断へつなげるための接続設計である

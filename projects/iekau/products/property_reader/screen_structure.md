@@ -43,11 +43,11 @@ property_reader は、
 
 ⭕ reason を生成し、
 
-⭕ 本命形成decisionを生み出す
+⭕ 本人decision形成へ接続する
 
 ための：
 
-👉 decision generation interface
+👉 decision formation support interface
 
 である。
 
@@ -1565,7 +1565,7 @@ property_reader の画面とは、
 
 を整理する、
 
-decision generation interfaceである。
+decision formation support interfaceである。
 
 ---
 
@@ -1580,7 +1580,7 @@ screen_structureとは、
 👉 軽い入口で違和感と気づきを生みながら  
 👉 内部では fixed_core・reason・drift を処理し  
 👉 現実接触を通じて  
-👉 本命形成decisionを生成し  
+👉 本人decision形成へ接続し  
 👉 comparison・decision_OS・次decisionへ接続する  
 property_reader の中核UX構造である。
 

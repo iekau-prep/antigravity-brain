@@ -12,7 +12,7 @@ Status: Core
 家買う予備校における property_reader の
 
 👉 UX構造
-👉 decision生成導線
+👉 decision形成支援導線
 👉 現実接触体験
 👉 future drift整理
 👉 本命形成フロー
@@ -39,7 +39,7 @@ property_reader は、
 ⭕ reasonを生成し、
 ⭕ future driftを想像し、
 ⭕ 許容構造を形成し、
-⭕ 本命形成decisionを生み出す
+⭕ 本人decision形成へ接続する
 現実接触UX」
 
 として扱う。
@@ -67,7 +67,7 @@ property_reader は、
 
 =============================
 
-① 「正解提示」ではなく「decision生成」を行う
+① 「正解提示」ではなく「decision形成支援」を行う
 
 ---
 
@@ -94,7 +94,7 @@ property_reader の役割は、
 
 ではなく、
 
-⭕ decision生成
+⭕ decision形成支援
 
 を扱う。
 
@@ -350,7 +350,7 @@ property_reader は：
 
 ---
 
-property_reader で生まれるdecisionは、
+property_reader から接続される本人decisionは、
 
 ❌ 一発確定
 
@@ -466,7 +466,7 @@ state_labels を使用する。
 ↓
 ⑦ drift検知
 ↓
-⑧ 本命形成decision
+⑧ 本命形成decisionへの接続
 ↓
 ⑨ decision更新
 ↓
@@ -533,7 +533,7 @@ property_reader の入口は以下。
 
 入口は違っても、
 
-⭕ 「decision生成UX」
+⭕ 「decision形成支援UX」
 
 として一貫させる。
 
@@ -908,7 +908,7 @@ property_reader は：
 
 =============================
 
-■ STEP8 本命形成decision
+■ STEP8 本命形成decisionへの接続
 
 =============================
 
@@ -940,7 +940,7 @@ property_reader は：
 
 ---
 
-⭕ 本命形成decision
+⭕ 本命形成decisionへの接続
 
 である。
 
@@ -1301,7 +1301,7 @@ CTAは：
 
 property_reader：
 
-👉 decisionを生成する
+👉 本人decision形成の起点となる
 
 ---
 
@@ -1404,7 +1404,7 @@ property_reader の強みは、
 
 ではなく、
 
-⭕ decision生成
+⭕ decision形成支援
 
 だから。
 
@@ -1423,7 +1423,7 @@ property_readerとは、
 👉 future driftを想像し
 👉 許容構造を形成し
 👉 driftを可視化し
-👉 本命形成decisionを生み出す
+👉 本人decision形成へ接続する
 現実接触UXである。
 
 ---
@@ -1440,9 +1440,9 @@ property_readerとは、
 👉 内部ではfixed_core・reason・drift・future driftを処理し
 👉 現実接触を通じて
 👉 許容構造を形成し
-👉 本命形成decisionを生み出し
+👉 本人decision形成へ接続し
 👉 decision progressionへ接続する
-中核decision生成UXである。
+中核decision形成支援UXである。
 
 ---
 

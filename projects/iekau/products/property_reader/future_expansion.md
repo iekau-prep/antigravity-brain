@@ -106,7 +106,7 @@ property_readerは
 
 ### ■ 時系列（フェーズ）
 
-- Phase1：MVP（入口＋decision生成）
+- Phase1：MVP（入口＋decision形成支援）
 - Phase2：実務強化（比較＝decision整理）
 - Phase3：判断OS化（decision統合）
 - Phase4：完全パーソナライズ（decision最適化）
@@ -160,7 +160,7 @@ property_readerは
 
 ---
 
-👉 「気づき＋decision生成」に特化  
+👉 「気づき＋decision形成支援」に特化  
 
 ---
 
