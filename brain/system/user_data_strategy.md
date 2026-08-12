@@ -290,6 +290,8 @@ Source Moduleの出力、判断材料の参照・統合利用は、本人の判�
 
 👉 物件そのもの
 
+本人が継続して判断対象として扱う物件を表す。URL、source、raw input、一回のreading、analysis、本人のcurrent decisionそのものとは同一視しない。
+
 ---
 
 MVP：
@@ -310,6 +312,7 @@ MVP：
 補足：
 
 ・ユーザー依存情報は持たない  
+・`id`（`property_id`として参照される）は、このpropertyを継続して参照するためのIdentityとして扱う。URL・掲載・実物・readingの同一性、生成・統合Ruleはここで確定しない。
 
 ---
 
@@ -321,7 +324,9 @@ MVP：
 
 役割：
 
-👉 物件の評価結果
+👉 対象propertyについての現在の読み（評価結果）
+
+固定的・絶対的な物件評価ではなく、本人のdecisionを生成・代替しない判断材料として扱う。
 
 ---
 
@@ -336,11 +341,15 @@ MVP：
 ・ai_comments  
 ・created_at  
 
+・`id`（`analysis_id`として参照される）は、`property_id`と分離されたanalysis側Identityとして扱う。識別対象、発行・再発行・再利用Ruleはここで確定しない。
+
 ---
 
 意味：
 
 👉 「この物件をどう見たか」
+
+同一propertyを再読した場合、analysisは再整理・変化し得る。このことは、analysisの生成・上書き・保存・履歴・versioning・ID運用を定めるものではない。
 
 ---
 

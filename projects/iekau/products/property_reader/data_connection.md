@@ -101,6 +101,8 @@ property_reader は単体でも使える。
 👉 **あなた仕様の判断**  
 へ進化する
 
+ここでの一般評価とあなた仕様の判断はanalysisの読み方を表し、物件価値の絶対評価、recommendation、購入可否、本人decisionの代替を意味しない。
+
 ---
 
 ## データ構造（全体像）
@@ -178,6 +180,8 @@ decision
 - status（検討中 / 保留 / 見送り）
 - created_at
 - updated_at
+
+`property_id`は継続して参照する判断対象propertyを、`analysis_id`はproperty identityと分離されたanalysis側Identityを参照する。analysisは対象propertyについての現在の読みであり、本人のdecisionとは別Conceptの判断材料として扱う。
 
 ---
 
