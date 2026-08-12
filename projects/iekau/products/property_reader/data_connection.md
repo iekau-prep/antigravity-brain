@@ -450,7 +450,7 @@ history / decision / profile_context / state
 - timestamp
 - user_action（閲覧・保存・比較など）
 - status
-- profile_context更新結果
+- profile_context更新結果（本人の判断前提の自動変更を意味しない）
 - current_state
 
 ---
@@ -478,8 +478,10 @@ history / decision / profile_context / state
 
 ### ■ ② 条件の明確化
 
-- ユーザーの優先軸抽出
-- 無意識の傾向可視化
+- ユーザーの優先軸抽出（判断材料の抽出）
+- 無意識の傾向可視化（判断材料の可視化）
+
+これらの抽出・可視化は、本人の判断前提変更とは別のResponsibilityとして扱う。
 
 ---
 
@@ -532,7 +534,7 @@ history / decision / profile_context / state
 
 ## 最重要ポイント
 
-👉 **LINEが“記憶装置”ではなく“判断の脳”になる**
+👉 **LINEが“記憶装置”にとどまらず、判断材料をつなぐ場になる**
 
 ---
 

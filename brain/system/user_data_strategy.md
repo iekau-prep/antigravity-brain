@@ -240,6 +240,9 @@ MVP：
 
 👉 判断前提の統合
 
+`profile_context`は、各Source Moduleとの接続を通じて形成された本人の判断前提を統合して扱うContextである。
+判断前提を生成する主体でも、本人に代わって自動確定する主体でもない。
+
 ---
 
 MVP：
@@ -272,6 +275,8 @@ MVP：
 ・property_readerの判断材料補助  
 ・decision continuity上で必要なCTA提示  
 ・判断文脈に応じた出力整理  
+
+Source Moduleの出力、判断材料の参照・統合利用は、本人の判断前提そのものの自動確定または自動変更を意味しない。
 
 ---
 
