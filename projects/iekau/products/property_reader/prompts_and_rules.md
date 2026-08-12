@@ -719,7 +719,7 @@ rules
 ↓
 AI翻訳
 ↓
-reason生成
+reason形成支援
 ↓
 comparison
 ↓

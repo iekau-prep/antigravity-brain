@@ -242,7 +242,7 @@ comparison は、
 ---
 
 ⭕ fixed_core露出
-⭕ relative reason生成
+⭕ relative reason整理
 ⭕ drift整理
 
 を扱う。
@@ -1329,7 +1329,7 @@ decision continuity
 
 ---
 
-relative reason生成
+relative reason整理
 
 ---
 

@@ -36,7 +36,7 @@ property_reader は、
 ---
 
 ⭕ 「fixed_core と現実を接触させ、
-⭕ reasonを生成し、
+⭕ reason形成を支援し、
 ⭕ future driftを想像し、
 ⭕ 許容構造を形成し、
 ⭕ 本人decision形成へ接続する
@@ -103,7 +103,7 @@ property_reader の役割は、
 property_reader は：
 
 ・迷いを可視化する
-・reasonを生成する
+・reason形成を支援する
 ・fixed_coreと照合する
 ・現実と接触させる
 ・future driftを想像させる
@@ -428,7 +428,7 @@ state_labels を使用する。
 
 ---
 
-⭕ ラベル → 読みどころ → reason生成 → decision
+⭕ ラベル → 読みどころ → reason形成支援 → decision
 
 である。
 
@@ -440,7 +440,7 @@ state_labels を使用する。
 ・注意点把握
 ・現実接触
 ・future drift理解
-・reason生成
+・reason形成支援
 
 を補助するために存在する。
 
@@ -456,7 +456,7 @@ state_labels を使用する。
 ↓
 ② 一瞬で意味を掴む
 ↓
-③ reason生成
+③ reason形成支援
 ↓
 ④ fixed_core照合
 ↓
@@ -640,7 +640,7 @@ decisionポイントになりそうです」
 
 =============================
 
-■ STEP3 reason生成
+■ STEP3 reason形成支援
 
 =============================
 
@@ -653,7 +653,7 @@ decisionポイントになりそうです」
 
 ---
 
-ここで生成されるのは：
+ここで言語化を支援するのは：
 
 ⭕ absolute reason
 
@@ -1142,13 +1142,13 @@ comparisonは：
 
 ---
 
-⭕ 「relative reason生成装置」
+⭕ 「relative reason整理装置」
 
 である。
 
 ---
 
-property_reader で生まれた：
+property_reader で形成支援された：
 
 absolute reason
 
@@ -1419,7 +1419,7 @@ property_reader の強みは、
 property_readerとは、
 
 👉 fixed_core と現実を接触させ
-👉 reasonを生成し
+👉 reason形成を支援し
 👉 future driftを想像し
 👉 許容構造を形成し
 👉 driftを可視化し

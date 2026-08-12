@@ -428,7 +428,7 @@ external（SUUMO等）
 ↓
 property_reader（読む）
 ↓
-reason生成
+reason形成支援
 ↓
 decision（保存 / 保留 / 見送り）
 ↓

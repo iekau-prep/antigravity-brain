@@ -581,7 +581,7 @@ comparison は、
 ---
 
 ⭕ 「fixed_core露出装置」
-⭕ 「relative reason生成装置」
+⭕ 「relative reason整理装置」
 ⭕ 「decision drift整理装置」
 
 として扱う。
@@ -944,7 +944,7 @@ decision OS：
 
 property_readerで：
 
-・reason生成
+・reason形成支援
 ・fixed_core照合
 ・現実接触
 ・drift発生
