@@ -147,6 +147,8 @@ decision logではなく、
 decision continuityを支える
 System構造として扱う。
 
+`decision_log`は、本人のdecision形成・更新時点の判断文脈を現在判断へ再接続可能にするrecordであり、本人decision、current decision、またはhistoryそのものではない。過去recordはcurrent decisionを固定・復元・優先しない。
+
 
 ⸻
 

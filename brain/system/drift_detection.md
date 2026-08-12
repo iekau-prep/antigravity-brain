@@ -43,6 +43,8 @@ driftそのものではなく、
 
 を理解可能にすることを目的とする。
 
+`decision_result`が同一でも、reason、comparison、fixed_core、drift、analysis、現実接触等に関する意味のある判断文脈変化は生じ得る。この変化の存在は、`decision_log`の生成Trigger、生成条件、生成Ruleを定めるものではない。
+
 ---
 
 Scope

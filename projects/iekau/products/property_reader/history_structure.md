@@ -180,6 +180,8 @@ decision_log
 👉 UIはシンプルに  
 👉 内部はdecision構造で管理する  
 
+`history_item`はUI上の表示構造、`decision_log`は判断文脈record、historyはdecision continuityを支えるSystem構造として扱う。これらを同一Conceptとして確定しない。`decision_log`は本人decision・current decisionそのものではなく、現在判断を固定・復元・優先しない。
+
 ---
 
 ### ■ 最低限保持する情報

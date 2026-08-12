@@ -315,11 +315,15 @@ LINEの本質は：
 
 decision_log
 
+`decision_log`は、本人decision・current decisionそのものではなく、判断文脈を現在判断へ再接続可能にするrecordとして扱う。historyがdecision continuityを支えるSystem構造であり、`decision_log`単体が判断を生成・確定・推薦するものではない。
+
 ---
 
 👉 保持タイミング：
 
 👉 **decisionが発生した瞬間**
+
+この表現は判断文脈に接続され得る時点の例であり、`decision_log`の生成Trigger、生成条件、生成Ruleを定めるものではない。
 
 ---
 
