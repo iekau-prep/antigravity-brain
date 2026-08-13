@@ -123,6 +123,72 @@ property_readerの`scoring_logic.md`には、肯定形の`decision生成`およ�
 - 関連Boundary：ユーザー本人のdecision主体、Module・AI・recommendationの非生成、property_readerの本人decision形成への接続・起点・支援
 - Formation Knowledgeの位置付け：Candidateを過去の表現だけで広範な責務問題へ再拡大せず、Current Boundary Revalidationにより限定された差分として扱う。
 
+## PO-04 Formation Knowledge
+
+### Problem Structure
+
+旧PO-04は、reason系Concept / Data Boundaryを一体の縮小Candidateとして扱っていた。Current Repository Revalidationにより、この括りには成立済みConcept・成立済みData・未定義Connection・将来項目・未定義Rule・表現整合候補が混在しており、一体のProduct Owner Decision Subjectとして維持できないことが確認された。
+
+### Candidate Reduced / Decomposition
+
+旧Candidateは、少なくとも以下の異なるLayerへ分解して扱う。
+
+- System Concept
+- Decision Data
+- Data間Connection
+- Future Data Candidate
+- Update / Sync Rule
+- Repository Responsibility Expression
+
+これは新しい分類体系や新規Responsibilityではない。旧PO-04 Candidateを必要以上に一体化しないための、確認済みRevalidation結果の保持である。
+
+### Established Boundary / Current Fact Separation
+
+以下はFormation Knowledgeの根拠となる成立済みCurrent Factとして参照し、DFK内で新たなCurrent SoTとして再定義しない。
+
+- `reason`のSystem Concept Boundaryは成立している
+- `reasons`はDecision Data最小構造に存在し、「判断理由（複数選択可）」として記載される
+- `reason_material`はloan_safety / loan_context側の判断材料であり、結論ではない
+- `reason_code`はCurrent Dataではなく将来項目である
+- ModuleのCurrent Responsibilityとして、本人reasonの代行生成ではなく、形成支援・整理・判断材料提示が確認される
+
+一方、`reason`と`reasons`の正式Boundary、各Data間の接続、同期、表現の個別主体は未確定として分離する。
+
+### Non-Decision / Separate Gap
+
+以下は今回決定・解決せず、PO-04へ再統合しない。
+
+- `reason` / `reasons`のData Boundary
+- `reason_material`の接続・変換・保存Boundary
+- `reason_code`の将来採用・使用・保存責務
+- `reason` / `reasons`と`decision_result`の同期Rule
+- `reason生成`表現における個別の主体・対象・粒度
+
+Separate Gapの存在は、旧PO-04 Candidateを継続・再Openする根拠にも、PO-04 Formation Knowledge Updateの未完了理由にも扱わない。
+
+### Repository Formation Follow-up Boundary
+
+`reason生成`および`reason生成装置`には、Current上位Boundaryとの表現上の緊張がある。ただし、生成主体、生成対象、reasonの粒度、置換先はRepository Evidenceから一意に確定できない。したがって、PO-01 / PO-02のような限定的Repository Formation Follow-upへ直行しない。
+
+修正文言、置換先、個別表現の責務は形成しない。
+
+### Repository Interpretation Change
+
+後続判断では、旧PO-04の「reason系」という括りだけを理由に、成立済みSystem Concept・成立済みDecision Data・未定義Connection・Future Data Candidate・未定義Update / Sync Rule・Repository Responsibility Expressionを一つのDecision Subjectへ再統合・再拡大しない。
+
+これは各Gapを解決済みと扱うものではなく、異なるLayerの問題を旧Candidate名だけで混同しないための読解Boundaryである。
+
+### PO-04 Traceability
+
+以下はCurrent SoTをDFKへ複製するためではなく、旧PO-04の分解・未統合Boundaryを後続判断で確認するためのTraceabilityとして参照する。
+
+- `brain/system/decision_reason_design.md`
+- `projects/iekau/products/decision_os/data_connection.md`
+- `projects/iekau/products/loan_safety/data_connection.md`
+- `brain/system/user_data_strategy.md`
+- `projects/iekau/products/property_reader/comparison_flow.md`
+- `projects/iekau/products/property_reader/screen_structure.md`
+
 ## Boundary
 
 本書は、Schema、API、Persistence、Implementation、Identity運用、更新Trigger、Owner、Lifecycle、詳細Loading Ruleを定めない。また、GD-001以外の案件Knowledgeを形成しない。
