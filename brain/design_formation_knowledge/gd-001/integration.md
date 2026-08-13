@@ -67,6 +67,62 @@ GD-001のFormation Knowledgeは、現在有効なRepository本文および各Dec
 - Current System SoT：`brain/system/state_definition.md`
 - Formation Knowledgeの位置付け：PO-01 Product Owner DecisionとCurrent System SoTの間で、何を減算的に整理し、何を未決定として切り離したかを後続判断へ再接続する。
 
+## PO-02 Formation Knowledge
+
+### Problem Structure
+
+property_readerの`scoring_logic.md`には、肯定形の`decision生成`および`decision生成入口`が残存していた。この孤立表現は、Moduleが本人decisionを生成しないCurrent Boundaryと表現上不整合だった。
+
+### Candidate Reduced
+
+当初のCandidateは「decision生成という表現の責務境界」だった。Current SoTを再確認した結果、ユーザー本人がdecision主体であり、Module・AI・recommendationは生成せず、property_readerは本人decision形成への接続・起点・支援を担うBoundaryが既に成立していた。
+
+そのため、大きなdecision責務の再Formationは不要となり、Candidateは`scoring_logic.md`の2表現のみのRepository整合差分へ縮小された。
+
+### Conflict / Current Boundary
+
+不整合対象は、以下の既存Boundaryである。
+
+- decision主体はユーザー本人
+- Module、AI、recommendationは本人decisionを生成・代替しない
+- Moduleは本人decision形成を支援する
+- property_readerは本人decision形成への接続・起点・支援を担う
+- decision_OSは整理・解釈・更新支援・continuity接続を担い、decision生成主体ではない
+
+### Formation Resolution
+
+新しいdecision Responsibilityを形成せず、対象2表現を既存Boundaryへ整合した。
+
+- `decision生成へ接続する` → `本人decision形成へ接続する`
+- `decision生成入口` → `本人decision形成への起点`
+
+これは、property_readerが本人decisionを生成する責務を採用するのではなく、既存の本人decision形成への接続・支援責務をRepository表現へ反映する整理である。
+
+### Non-Decision / Separate Gap
+
+以下はPO-02で決定・解消せず、Separate Gapとして切り離して保持する。
+
+- decision DataのPersistence Responsibility Owner
+- Technical Persistenceの詳細責務
+- decision更新表現全体
+- 各decision更新の具体的な操作・永続化主体
+- Persistenceとdecision形成支援の全体関係
+- 新しいdecision Concept
+- property_readerまたはdecision_OSの新規・変更Responsibility
+
+これらはPO-02の未完了理由ではない。
+
+### Repository Interpretation Change
+
+今後、property_reader内の`decision生成`のような旧・孤立表現を、ユーザー主体／Module支援のCurrent Boundaryより優先するResponsibilityとして採用しない。同時に、上位Boundaryがあることだけを理由に、明示的な肯定形不整合表現を放置可能とも扱わず、Repository表現整合の差分として切り分ける。
+
+### PO-02 Traceability
+
+- 対象Repository：`projects/iekau/products/property_reader/scoring_logic.md`
+- Current System SoT：`brain/system/decision_framework.md`
+- 関連Boundary：ユーザー本人のdecision主体、Module・AI・recommendationの非生成、property_readerの本人decision形成への接続・起点・支援
+- Formation Knowledgeの位置付け：Candidateを過去の表現だけで広範な責務問題へ再拡大せず、Current Boundary Revalidationにより限定された差分として扱う。
+
 ## Boundary
 
 本書は、Schema、API、Persistence、Implementation、Identity運用、更新Trigger、Owner、Lifecycle、詳細Loading Ruleを定めない。また、GD-001以外の案件Knowledgeを形成しない。
