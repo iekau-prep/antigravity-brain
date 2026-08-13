@@ -1157,7 +1157,7 @@ property_reader は、
 
 という、
 
-👉 decision生成
+👉 本人decision形成
 
 へ接続する。
 
@@ -1173,7 +1173,7 @@ property_reader は：
 
 ---
 
-⭕ decision生成入口
+⭕ 本人decision形成への起点
 
 である。
 
