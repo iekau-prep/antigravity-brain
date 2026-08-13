@@ -183,6 +183,7 @@ Product責務：
 - release_checklist.md
 - kpi_metrics.md
 - external_property_search.md
+- 過去の重要Formation、Legacy表現、Remaining Gap、またはCurrent BoundaryへのTraceabilityが判断上必要な案件では、`brain/design_formation_knowledge/index.md`を参照する
 
 ---
 

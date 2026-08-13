@@ -132,7 +132,13 @@ antigravity-brain/
 │   │
 │   ├── system/
 │   │
-│   └── research_database/
+│   ├── research_database/
+│   │
+│   └── design_formation_knowledge/
+│       ├── README.md
+│       ├── index.md
+│       └── gd-001/
+│           └── integration.md
 │
 ├── projects/
 │
@@ -489,7 +495,13 @@ antigravity-brain/
 │   │   ├── external_property_search.md
 │   │   └── ...
 │   │
-│   └── research_database/
+│   ├── research_database/
+│   │
+│   └── design_formation_knowledge/
+│       ├── README.md
+│       ├── index.md
+│       └── gd-001/
+│           └── integration.md
 │
 ├── projects/
 │   └── iekau/
@@ -510,6 +522,8 @@ antigravity-brain/
 各ディレクトリは、
 責務ごとに分離され、
 同一責務を複数レイヤーで重複定義しない。
+
+`brain/design_formation_knowledge/`は、Current SoTのみでは再構成できない横断的Design Formation Knowledgeを保持する独立領域である。`brain/design/`のUX・UI・体験設計責務、System設計、Operation進行、Maturity管理の代替として扱わない。
 
 ⸻
 
@@ -612,4 +626,3 @@ Module、
 実装が一方向に継承され、
 責務の重複や矛盾を防ぎながら、
 長期的に保守可能なbrain構造を維持する。
-
