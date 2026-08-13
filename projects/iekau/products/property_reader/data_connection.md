@@ -185,16 +185,6 @@ decision
 
 ---
 
-### ■ 状態データ
-
-state
-
-- user_id
-- current_state
-- state_updated_at
-
----
-
 👉 **これらを統合して最終アウトプットを生成する**
 
 ---
@@ -441,13 +431,13 @@ property_price = 48000000
 
 ## 役割
 
-👉 **履歴蓄積 × パーソナライズ × 判断の進化 × 状態更新**
+👉 **履歴蓄積 × パーソナライズ × 判断の進化**
 
 ---
 
 ## 保存データ
 
-history / decision / profile_context / state
+history / decision / profile_context
 
 - property_id
 - score
@@ -455,7 +445,6 @@ history / decision / profile_context / state
 - user_action（閲覧・保存・比較など）
 - status
 - profile_context更新結果（本人の判断前提の自動変更を意味しない）
-- current_state
 
 ---
 
@@ -497,15 +486,7 @@ history / decision / profile_context / state
 
 ---
 
-### ■ ④ state更新
-
-- 今は比較フェーズか
-- 今は資金不安フェーズか
-- 今は迷走状態か
-
----
-
-### ■ ⑤ CTA最適化
+### ■ ④ CTA最適化
 
 - 次に property_reader を出すべきか
 - 先に loan_safety を出すべきか
@@ -589,7 +570,6 @@ property_readerは
 - buy_vs_rent_state
 - safe_budget
 - history（履歴）
-- current_state
 
 ---
 
@@ -601,11 +581,10 @@ AI出力生成
 ---
 
 ### STEP7  
-decision / state 更新
+decision更新
 
 - user_action を保存
 - status を更新
-- current_state を更新
 
 ---
 
@@ -636,7 +615,6 @@ decision / state 更新
 - loan_safety連携（簡易）  
 - 単体物件分析  
 - decision保存  
-- 基本state更新  
 
 ---
 
@@ -658,7 +636,6 @@ decision / state 更新
 ### フェーズ2
 - 比較機能
 - 条件フィルター強化
-- state精度向上
 
 ---
 
