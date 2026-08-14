@@ -30,6 +30,131 @@ Process Status、Candidate分類、横断因果はFormation Input由来のKnowle
 
 GD-001のFormation Knowledgeは、現在有効なRepository本文および各DecisionのCurrent SoTを根拠として再確認する。過去Formationは現在のBoundaryを置換・優先しない。
 
+## GD-001 Navigation / Traceability Knowledge
+
+### Origin / Original Mainline
+
+GD-001の起点には、以下のOriginal 10-Issueが存在した。
+
+1. STATE と decisionState の関係
+2. reasons の責務範囲
+3. fixed_core の責務範囲
+4. raw_input / confirmed_input / reading_context の扱い
+5. loan_context を含む loan_safety の責務
+6. profile_context の扱い
+7. property data / analysis data の扱い
+8. type_diagnosis / purchase_motivation / rent_vs_buy の横断接続
+9. selected_property_ids の扱い
+10. LINE前 / LINE後（User Phase）の扱い
+
+Original Mainlineでは、Issue 10から扱う予定だった。
+
+このOriginおよびOriginal Mainlineは、Repository Current Factや新しいCurrent SoTではない。GD-001のFormation因果として保持する。
+
+### Branch Reason
+
+Issue 10をRepositoryから確認する過程で、Issue 10単体に閉じないCross-Issue Interactionが確認された。
+
+確認対象は他Issueおよび複数のSystem / Module / Data Boundaryへ接続していたため、Issue 10を孤立してFormationせず、GD-001｜Cross-Issue Repository ObservationへBranchした。
+
+このBranchはOriginal 10-Issueを置換、破棄、再定義するものではない。各Issueを個別Formationする前に、Current Definition、Responsibility Boundary、Data Boundary、Shared Concept、Module / System Connection、Cross-Issue InteractionをRepository事実から横断確認するためのFormation経路である。
+
+Original 10-Issueは、Branch後に再接続するMainlineとして維持する。
+
+### Formation Path
+
+GD-001 Branchでは、Cross-Issue Repository Observation、追加Repository Fact Confirmation、Pass群、PO-01〜08、必要なRepository Formation Follow-up、Design Formation Knowledgeへの還元、Original 10-Issue Current Resolution Checkを経て、Original Mainlineへ再接続した。
+
+このPathは、各Stageの完了記録を保存する工程ログではない。
+
+保持するのは、横断確認によってOriginal Issueの問題構造を再確認し、Resolution、Candidate Reduction、Decomposition、Separate Gapへの切離しが発生し、その結果をOriginal Issue Setへ再接続する必要が生じたFormation因果である。
+
+### Resolution Connection
+
+GD-001 BranchはOriginal 10-Issueを別Issue Setへ置換したのではなく、横断Formationによって各Original IssueのCurrent Resolutionを再確認可能にした。
+
+Formation因果上、Original 10-Issueは以下のResolution / Separationへ接続される。
+
+- Resolved
+  - Issue 1｜STATE と decisionState
+  - Issue 3｜fixed_core
+  - Issue 4｜raw_input / confirmed_input / reading_context
+  - Issue 5｜loan_context / loan_safety
+  - Issue 6｜profile_context
+  - Issue 7｜property data / analysis data
+  - Issue 8｜Module横断接続
+  - Issue 9｜selected_property_ids
+
+- Separated
+  - Issue 2｜reasons
+
+- Partially Resolved
+  - Issue 10｜LINE前 / LINE後（User Phase）
+
+このResolution区分は、新しいCurrent SoT、Issue Status管理、またはMaturity管理ではない。GD-001 BranchによってOriginal Issue SetがどのようにResolution / Separationされ、どこへReturnしたかを再構成するFormation Traceabilityとして扱う。
+
+各Issueの現在のDefinition、Responsibility、Data Boundaryは、Current Repository SoTを優先する。
+
+### Issue 2 / Separate Gap Boundary
+
+Issue 2｜reasonsは、GD-001内のRevalidationにより、一体のDecision Subjectとして維持するのではなく、異なるLayerの独立Gap群へ分離された。
+
+旧Original Issue名だけを理由に、分離済みGapをIssue 2へ再統合しない。
+
+同様に、GD-001で露出・分離されたSeparate Gapについては、以下を維持する。
+
+> Separate Gapが未解決であること
+> ≠
+> Original Issueが未完了であること
+
+current_stateの意味・置換先、STATE / decision_stateの詳細接続、decision Data Persistence Responsibility Owner、Technical Persistence、reason / reasons Data Boundary、reason_material接続、reason_code、reason同期Rule、profile_contextの具体的更新条件・操作主体、property Identity、analysis versioning / generation、DB / UI historyとSystem history、LINE保持・再開、decision_log、decision_state Persistence等を、Original 10-Issueへ自動的に戻さない。
+
+これは各Gapを解決済みとするものではなく、Original IssueとSeparate Gapを再混同しないためのNavigation Boundaryである。
+
+### Remaining Mainline / Return Point
+
+GD-001 Branch後のOriginal Mainline上のReturn Pointは、Issue 10｜LINE前 / LINE後（User Phase）である。
+
+ただし、以下を維持する。
+
+> Return Point
+> ≠
+> Issue 10の仕様Formation開始Decision
+
+Return Pointは、Issue 10の残存論点をCurrent Repository Factから再確認可能な地点として扱う。
+
+Formation因果上、Issue 10では、LINE前後でModuleの利用状態・役割差が存在し、LINE後はdecision continuity等への接続範囲が拡張する一方、System横断の正式なUser Phase Conceptは確認されていない地点へ戻る。
+
+User Phase Concept、Phase遷移、LINE保持、Persistence Responsibility等を、このNavigation / Traceability Knowledgeから自動形成しない。
+
+### Repository Interpretation Change
+
+GD-001以降、Original 10-Issueを読む際には、Original Issue名だけから現在の問題範囲を復元しない。
+
+GD-001 Branchで成立したResolution、Candidate Reduction、Decomposition、Separate Gapへの切離し、Current Boundaryとの再接続を経たFormation経路を参照し、Original Issueを過去の問題サイズへ自動的に再拡大しない。
+
+同時に、このNavigation / Traceability Knowledge自体をCurrent SoTとして使用しない。
+
+現在のConcept、Responsibility、Data、Connection等を判断する場合はCurrent Repository SoTを優先する。DFKは、なぜ現在の問題構造へ到達したかを理解するFormation Knowledgeとして使用する。
+
+### Existing GD-001 Knowledgeとの接続
+
+本節は既存PO Knowledgeを置換・複製しない。
+
+- PO-01：state保存・更新表現とSTATE Boundaryに関する減算的整理
+- PO-02：広範なdecision責務Candidateが2表現のRepository整合差分へ縮小されたFormation
+- PO-04：reason系の旧一体Candidateが異なるLayerの独立Gap群へ分解されたFormation
+
+本節は、それらの個別Formationより上位で、Original Mainline、Branch、横断Formation、Resolution / Separation、Original MainlineへのReturnというGD-001全体のNavigationを接続する。
+
+### Current Fact / Formation Knowledge Boundary
+
+Original 10-Issue、Issue 10から開始予定だったOriginal Mainline、Cross-Issue InteractionによるBranch、Formation Path、Original IssueへのResolution Connection、Remaining Mainline、Return Pointは、Formation Input由来のFormation因果として保持する。
+
+これらをRepository Current Factや新しいCurrent SoTへ昇格させない。
+
+Current Responsibility、Current System Definition、Current Module Definition、Current Data Definitionは、引き続きCurrent Repository SoTを優先する。
+
 ## PO-01 Formation Knowledge
 
 ### Problem Structure
