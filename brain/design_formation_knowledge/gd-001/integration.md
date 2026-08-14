@@ -165,6 +165,70 @@ LINE保持・再開、Persistence Responsibility、decision Data Persistence、d
 
 Issue 10 Close後のOriginal Mainlineは、Original 10-Issue Mainline Closure Checkへ接続可能である。ただし、これはOriginal 10-Issue全体のClosureを判定・確定するものではない。
 
+### Original 10-Issue Mainline Closure Follow-up
+
+Issue 10 Close可能となった後、Original 10-Issue Mainline Closure Checkを行った。
+
+Closure Checkの結果、Original Mainline上に独立して継続すべきDecision Subjectは残っていないことが確認された。
+
+このClosureは、以下のFormation因果として保持する。
+
+> Original Mainline
+> ↓
+> GD-001 Branch
+> ↓
+> 横断Formation
+> ↓
+> Original Issue SetへのFormation Effect還元
+> ↓
+> Issue 1・3〜9：Resolved
+> Issue 2：Separated
+> Issue 10：Close可能
+> ↓
+> Original Mainline上の独立Decision Subjectなし
+> ↓
+> Original 10-Issue Mainline Closure可能
+
+Mainline Closureが成立する理由は、全Gapが解決したことではない。Separate GapをOriginal Mainlineから分離したうえで、Original Mainlineとして継続すべき独立Decision Subjectが残っていないためである。
+
+Issue 2｜reasonsはSeparatedとして保持する。
+
+> Issue 2 Separated
+> ≠
+> Issue 2 Unresolved
+
+分離されたGapをIssue 2またはOriginal Mainlineへ再統合しない。
+
+同様に、current_stateの意味・置換先、STATE / decision_stateの詳細接続、Data Persistence Responsibility Owner、Technical Persistence、reason / reasons境界、reason_material、reason_code、同期Rule、profile_contextの具体的更新条件・操作主体、property Identity、analysis versioning / generation、temporary_id移行、LINE保持 / 再開Implementation、DB / UI history、decision_log、decision_state Persistence、API / DB schema / LINE認証等のSeparate GapをOriginal IssueまたはOriginal Mainlineへ戻さない。
+
+Mainline Closureは、以下を意味しない。
+
+> Original 10-Issue Mainline Closure
+> ≠
+> Separate Gap Close
+> ≠
+> 全System設計完了
+> ≠
+> Implementation完了
+> ≠
+> Repository上の全未確定事項解消
+> ≠
+> 次案件開始承認
+
+また、既存の以下のBoundaryを維持する。
+
+> Issue 10 Close
+> ≠
+> User Phase不要Decision
+
+本節は、過去のOriginal Mainline、GD-001 Branch、Resolution / Separation、Original Mainline Return、Issue 10 Return Point、Issue 10 Close Check、Issue 10 Close可能、Mainline Closure Checkへ接続可能というFormation経緯を削除・否定・上書きしない。
+
+それらの後続Formationとして、Original 10-Issue Mainline Closure可能へ到達した経路を接続する。
+
+このClosure結果はNavigation / Traceability Knowledgeであり、新しいCurrent System Definition、Current Module Definition、Current Data Definition、Current SoT、Maturity、または進捗管理状態として扱わない。
+
+現在のConcept、Responsibility、Data、Connection等の判断では、引き続きCurrent Repository SoTを優先する。
+
 ### Repository Interpretation Change
 
 GD-001以降、Original 10-Issueを読む際には、Original Issue名だけから現在の問題範囲を復元しない。
