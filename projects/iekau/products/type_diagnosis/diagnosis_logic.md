@@ -154,6 +154,48 @@ axis_score -= 1（感情寄り）
 
 ---
 
+## ■ Diagnosis Score Authority（実装参照）
+
+初期値：
+
+axis_score = 0
+speed_score = 0
+base_score = 0
+
+Q1 / Q4 / Q7：
+
+A：axis_score -= 1
+B：axis_score += 1
+
+Q2 / Q5 / Q8：
+
+A：speed_score += 1
+B：speed_score -= 1
+
+Q3 / Q6：
+
+A：base_score -= 1
+B：base_score += 1
+
+判定：
+
+axis_score < 0 → emotional
+axis_score >= 0 → logical
+speed_score > 0 → fast
+speed_score <= 0 → slow
+base_score < 0 → self
+base_score >= 0 → external
+
+Tie：
+
+axis_score = 0 → logical
+speed_score = 0 → slow
+base_score = 0 → external
+
+3軸の判定結果を、既存の8タイプマッピングへ入力する。
+
+---
+
 ## ■ 境界値の扱い
 
 スコアが 0 の場合は：

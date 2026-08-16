@@ -346,6 +346,31 @@ CTAは以下の優先順位で選定する：
 
 =============================
 
+■ SNS入口Mainline固定CTA Connection Authority
+
+=============================
+
+SNS入口Mainlineでは、以下を実表示CTAの固定Authorityとして使用する。
+
+既存の内部CTA候補およびCTA選定Strategyは維持する。SNS入口Mainlineでは、内部候補から再選定しない。
+
+`rabbit_types.md`の「推奨CTA」は8タイプDefinition上の既存参考Definitionとして維持し、SNS入口Mainlineの実表示CTAを決定するAuthorityとはしない。
+
+| タイプ | CTA | 固定接続先Module |
+| --- | --- | --- |
+| ヒラメキうさぎ | この条件で安全度チェックする | loan_safety |
+| 流されうさぎ | 判断基準を整理する | purchase_motivation |
+| じっくりうさぎ | 期限を決める | property_reader |
+| きにしすぎうさぎ | 安全ラインを確認する | loan_safety |
+| 即断うさぎ | 見落としポイントを確認する | loan_safety |
+| 正解さがしうさぎ | 判断基準を言語化する | purchase_motivation |
+| 比べすぎうさぎ | この条件で物件を見てみる | property_reader |
+| 迷子うさぎ | 判断基準を整理する | purchase_motivation |
+
+---
+
+=============================
+
 ■ 2人比較時CTA
 
 =============================
