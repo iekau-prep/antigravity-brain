@@ -507,6 +507,98 @@ Return Pathは以下をSoTとして参照する。
 
 Return Pathは返却経路のみを統括し、停止条件はStop Conditionで扱う。
 
+## 4.5 Limited Resume after Stop
+
+### Purpose
+
+Stop後に案件全体またはStage全体を無条件でRestartせず、Correctionの影響を受けていない成立済み状態を保持し、既存Return Pathに整合するValidな地点から必要最小範囲だけLifecycleをResumeする共通原則を定義する。
+
+### Limited Resume Principle
+
+Limited Resume after Stopとは、Correction成立後に、Correctionの影響を受けていない既存Valid状態を保持し、既存Lifecycle / Return Pathに整合する一意のResume Entryから、必要最小範囲だけLifecycleを再接続することである。
+
+任意の途中再開、案件全体Restart、Stage全体Restart、または過去Artifactからの推測Resumeとして扱わない。
+
+### Established State Preservation
+
+Stop発生だけを理由に、Stop前のArtifact、Result、Decision、Validation、Review、Authority、Stage Resultを自動無効化しない。
+
+ただし、一度成立した状態を永久にValidとは扱わない。Correctionにより前提が変化し、影響を受けると確認された状態は保持対象から外す。
+
+### Correction / Resume Separation
+
+Correctionは、Stop原因となった不足またはConflictを、既存の正しいRole、Stage、Decision主体で解消することである。
+
+Resumeは、Correction成立後、保持可能なValid状態と既存Return Pathに基づき、ValidなResume EntryからLifecycleを再接続することである。
+
+Candidate EはCorrection内容そのものを代行しない。
+
+### Limited Invalidation Check
+
+Correction成立後、Stop前の成立済み状態について、Correctionの影響を受けるかを限定的に確認する。
+
+影響がないと確認できる状態は保持可能とする。影響がある状態は自動保持せず、必要な既存Role / Stageへ戻し、既存責務に従って再確認、再Formation、再Validationその他の必要な既存工程へ接続する。
+
+全面Dependency Graph、Candidate E独自の依存関係、未知影響の推測、独自Validation / Review判定、独自無効化Authorityは形成しない。
+
+### Resume Entry / Condition
+
+Correction後にLifecycleをどこからResumeするかを一意に識別可能とする。Resume Entryは、元の停止Role / Stage、既存Return Pathから再接続されるStage、またはPO Decision後に指定された既存Stageのうち、現在のValid状態および既存Lifecycle / Return Pathと整合する地点とする。
+
+固定の一律Resume Entryは形成しない。Resume Entryを一意に識別できない場合は、推測してResumeしない。
+
+Limited Resume開始前に、元Stop原因が解消済みであること、必要Correctionが成立済みであること、必要Input / Artifact / Authorityを受領・識別できること、Target / Scopeに未解消Conflictがないこと、保持対象の有効性を確認できること、Resume Entryが一意であること、既存Return Path / Lifecycleと整合すること、新たなStop Conditionがないことを確認可能とする。
+
+これは固定Resume Checklist Templateを新設するものではない。
+
+### Re-execution Boundary
+
+Stop原因およびCorrectionと無関係で、有効性を保持しているStage、Artifact、Result、Decision、Validation、Reviewは、Limited Resumeのみを理由に再実行しない。
+
+Correctionが既存成立状態の前提に影響する場合は、必要な既存Stageまで戻る。「一度PASSした工程は再実行しない」という永久Ruleは形成しない。
+
+### Resume Scope Limitation
+
+Limited Resumeの対象範囲は、元Stop、必要Correction、Correctionによる影響範囲に限定する。
+
+Resumeを理由に、Target、Scope、Product Definition、Architecture、Repository範囲、他Candidateを拡張しない。Scope拡張が必要な場合は既存Authority / DecisionへReturnする。
+
+### Return Information for Resume
+
+Stop時およびCorrection後の再接続に必要な情報を、既存Transfer / Return責務へ接続する。
+
+少なくとも、Stopped Stage / Role、Stop point / Stop reason、Missing Input / Artifact / Authority、Conflict、Target / Scope、Return target、Required correction、保持候補となる成立済みArtifact / Result / Decision、有効性再確認が必要な範囲、Resume candidate pointを識別可能とする。
+
+固定Resume Record Templateは形成しない。
+
+### Repeated Stop
+
+Resume後に同一または別のStop Conditionが再発した場合、Candidate E固有のRetry Loopへ入らず、既存Stop / Returnへ再接続する。
+
+自動Retry、無限Retry、回数ベースRetry、Candidate E専用Retry Stageは形成しない。
+
+### Candidate Boundary
+
+Candidate Eは、現在の正規Lifecycle内でStop地点、Stop原因、Return先、成立済み状態を確認できるCaseのみ扱う。
+
+過去Validation履歴、過去Review履歴、Adoption履歴、Authority Lifecycle、Current Handoffが不明で、何がValidかを現在Lifecycleから確認できないCaseはCandidate Fの責務である。過去Artifactから最新・Valid・採用済みらしきArtifactを推測してResumeしない。
+
+Candidate A、B、C、DのAuthority Readiness、Implementation Handoff Sufficiency、Stage Artifact Handoff、Prompt Artifact Receivingは再Formationしない。これらの不足によってStopした場合も、不足自体は既存責務側で解消し、本章は解消後のValid State PreservationとLimited Resumeのみを扱う。
+
+### Resume Authority Boundary
+
+新しいResume Authority Roleは作らない。
+
+- Stop：既存受領RoleおよびStop Condition
+- Correction先：既存Return Path、既存Stage責務、必要なProduct Owner Decision
+- Resume Connection：既存LifecycleとReturn Pathに基づく既存Role / Stageへの再接続
+
+Module / General Design GPTは、Current State、前工程成果物、Stop情報、次Stage候補を整理できるが、PO Decision、Design Formation、Validation判定、Review判定、Authority Adoptionを代行しない。
+
+### Responsibility Boundary
+
+本章は既存Stop Condition、既存Return Path、Stage固有Return Flow、Role Authority、Artifact Authority、Record責務、Stage Architecture、Lifecycle Architectureを変更しない。
+
 # 5. Loading Rule
 
 Loading Ruleは、各Roleが責務遂行に必要な設計資産のみを読み込み、責務混線を防ぐための共通原則を定義する。
