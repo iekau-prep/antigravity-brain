@@ -65,6 +65,8 @@ Operation Principleは以下を保持する。
 - Stageごとに責務を完結させる原則
 - Request Contract範囲内で責務を遂行する原則
 - Transfer Informationによって成果物を受け渡す原則
+- Authority Inputを次Roleが識別可能な状態でTransferする原則
+- Current Lifecycleへの接続に必要な範囲でAuthority Source、Current usable state、対象対応のTraceabilityを保持する原則
 - Product Ownerのみが最終Decisionを行う原則
 - 必要最小限のLoadingを維持する原則
 - 不足情報を推測せず停止する原則
@@ -321,6 +323,7 @@ Stop Conditionは以下を保持する。
 - Input不足時停止
 - 責務越境時停止
 - SoT不足時停止
+- Authority Input不足または責務外の推測が必要な場合のStop / Return原則
 - Request Scope外停止
 - 推測禁止原則
 
@@ -457,6 +460,8 @@ Transfer Informationは以下をSoTとして参照する。
 - Role Input Contract
 
 Transfer Informationは成果物受渡しのみを扱い、依頼条件はRequest Contractで扱う。
+
+Authority Inputは、次Roleが識別可能な状態でTransferする。Current Lifecycleへの接続に必要な範囲で、Authority Source、Current usable state、対象対応のTraceabilityを保持する。
 
 ## 4.4 Return Path
 

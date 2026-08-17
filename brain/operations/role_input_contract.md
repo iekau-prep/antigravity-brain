@@ -55,6 +55,29 @@ Common Input Contract
 
 ---
 
+Authority Input Readiness
+
+Definition / ArtifactがRepositoryまたはMainlineに存在するだけでは、Implementation Authority Readyとは扱わない。
+
+今回のImplementationに使用するAuthority Inputは、少なくとも以下を識別可能とする。
+
+* exact Authority Source
+* 今回のImplementation対象との対応
+* Authorityとして使用する対象範囲
+* Current usable state
+* Implementationに必要なDefinition範囲の充足
+* 不足またはConflictの有無
+
+複数Sourceの存在自体は禁止しない。複数Sourceがある場合も、今回どのSourceおよびどの範囲をAuthority Inputとして扱うかを一意に識別可能とする。
+
+Current usable stateは、当該Sourceに必要な既存Lifecycle、Decision、Artifact状態を根拠として識別する。全Definitionに対してPO Adoption、Design Validation、Review、Repository Reflection、Git Reflectionを一律必須とはしない。過去Lifecycle全履歴の完全再構成も要求しない。
+
+Authority Inputを必要とするRoleは、自身の開始前にAuthority SourceとReady状態を確認する。Authority Inputを必要としないRoleへ、Implementation固有確認を一律要求しない。
+
+Authority Source不明、Authority Source競合、Current usable state不明、Implementation対象との対応不明、必要Definition不足、または必要なSoTを確認できない場合、Authority Readyとは扱わない。Inputを受けるRoleはConflictを独自に解消せず、Sourceを独自選択・推測・補完せず開始しない。
+
+---
+
 Builder Input Contract
 
 Builderへ渡す最低限入力
@@ -125,6 +148,8 @@ Implementationへ渡す最低限入力
 * Transfer Information
 
 Implementationは、確定Design差分以外を実装対象にしない。
+
+Implementationは、Authority Sourceが一意かつCurrent usableなInputとして識別され、必要Definition範囲が確認可能な場合にのみ開始する。いずれかが不明または不足する場合、承認済み設計を推測で補完して実装しない。
 
 ---
 
@@ -221,6 +246,17 @@ Transfer対象が実装または検証を含む場合は、以下も含める。
 * 実装対象本文
 * 対象ファイル
 * 禁止事項
+
+Authority Ready不成立時は、既存Transfer Informationに加え、必要な範囲で以下を保持する。
+
+* Authority Ready不成立の対象
+* 確認したexact Authority Source、または識別不能箇所
+* Current usable stateの確認結果または不明箇所
+* Implementation対象との対応状況
+* 不足Definition
+* Conflict内容
+* 確認不能箇所
+* Stop理由
 
 ---
 
