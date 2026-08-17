@@ -636,6 +636,40 @@ Implementation Validationでは、
 設計を変更しない。
 
 実装内容・影響範囲・副作用のみ返却する。
+
+---
+
+Production Technical / Git Execution Operation
+
+Candidate JのProduction系Technical / Git Executionを行うCodexは、既存Implementation / IVの内部Stageとしてではなく、成立済みProduction Reflection Gateおよびexplicit execution authorityをInputとして以下を読み込む。
+
+README
+
+↓
+
+AI Role Architecture
+
+↓
+
+AI Loading Map
+
+↓
+
+Git Push Operation
+
+↓
+
+成立済みProduction Reflection Gate
+
+↓
+
+explicit execution authority
+
+↓
+
+target scope
+
+Candidate Jでは、git_push_operation.mdをProduction系Technical / Git Executionの必要なOperation Sourceとして読み込む。
 ⸻
 
 Product Owner Loading

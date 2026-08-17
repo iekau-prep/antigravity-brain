@@ -150,6 +150,14 @@ Implementation運用ルール。
 
 ---
 
+## Git Push Execution
+
+- git_push_operation.md
+
+Production Reflection Gate成立後に、明示Authorityを受けたCodexが行うTechnical / Git Execution Operation。
+
+---
+
 ## Observation
 
 - observation_operation.md
