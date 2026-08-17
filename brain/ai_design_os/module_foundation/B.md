@@ -40,6 +40,8 @@ Moduleは、Codexの担当Roleを直接代行しない。
 - 次工程整理
 - 比較対象の不足確認
 
+Module GPTがCodex Promptを形成する際、外部Artifactを必要Inputとして受ける場合は、[Prompt Artifact Receiving Standard](../../operations/prompt_artifact_receiving_standard.md)に従い、必要Artifactを識別し、Receiving Locationを用意し、ユーザー貼付が必要な場合は貼付位置を明示する。
+
 Codexが担当すること：
 
 - Discovery

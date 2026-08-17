@@ -229,6 +229,14 @@ Builderは、
 
 ⸻
 
+Module GPT Codex Prompt Formation Loading
+
+Module GPTがCodex Promptを形成し、Artifactを必要Inputとして受ける場合は、当該Prompt形成に必要な範囲でPrompt Artifact Receiving Standardを読み込む。
+
+このLoadingは、全Roleへの無条件Loadingまたは全Promptへの常時Loadingを意味しない。
+
+⸻
+
 Thought Audit Loading
 
 思想監査（Review Role）は、

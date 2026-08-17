@@ -110,6 +110,14 @@ AI全体の役割と責務を定義する。
 
 ---
 
+## Prompt Artifact Receiving
+
+- prompt_artifact_receiving_standard.md
+
+Artifact Inputを必要とするPromptのReceiving Locationと受領確認を定義するStandard。
+
+---
+
 ## Builder Interpretation
 
 - builder_interpretation_guide.md
