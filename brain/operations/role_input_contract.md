@@ -151,6 +151,26 @@ Implementationは、確定Design差分以外を実装対象にしない。
 
 Implementationは、Authority Sourceが一意かつCurrent usableなInputとして識別され、必要Definition範囲が確認可能な場合にのみ開始する。いずれかが不明または不足する場合、承認済み設計を推測で補完して実装しない。
 
+Implementation Handoff Sufficiency
+
+Implementation Handoff Sufficiencyとは、今回のImplementationに必要なInputについて、今回のImplementationとの対応が一意であり、必要Inputが受領済みで、Input間に不足またはConflictがなく、ScopeおよびConstraintsが明確で、開始に必要な限定Current Stateを識別でき、必要なAuthority InputがReadyかつ受領済みであり、推測による補完が不要である状態である。
+
+上流、過去チャット、Repository内に情報が存在するだけでは、今回のImplementation Handoff Inputとして受領済みとは扱わない。
+
+既存Request ContractはImplementation HandoffのBoundary Inputとして受領し、Purpose、Scope、Allowed、Forbidden、Out of Scope、Deliverables、Stop Conditions等の既存境界が今回のImplementation対象と対応していることを確認可能とする。Request Contractは必要Inputの一部であり、単体でHandoff Sufficiency成立とは扱わない。
+
+承認済みBuilder / Design Artifact、実装対象本文、必要Design差分は、今回どのArtifactおよびどの差分を実装対象とするかが一意に識別・受領されていることを要する。Artifactの存在だけでHandoff Sufficiency成立とは扱わない。
+
+今回Authority Inputが必要な場合、Candidate AでReadyとなったInputがHandoff Inputとして受領済みであることを要する。Authority Readyを確認できない場合は、Authority Input ReadinessのStop責務に従う。
+
+Implementation開始に必要な限定Current State、既存のAllowed Change、Forbidden Change、Out of Scope、Role Boundary、Stop Condition等のConstraint、既存Transfer Information、Repository Target、変更Scope、対象ファイルは、今回のHandoff Inputとして対応を識別可能とする。Implementation Roleは、未指定のRepository内容を独自探索してScope化せず、Constraintを補完・再解釈・新設しない。
+
+Implementation Roleは受領Inputが開始に十分かを確認するが、不足Artifactの作成、Authorityの採用、Constraintの新設、Current Stateの推測、Scope拡張、上流Decisionの補完によってSufficiencyを成立させない。
+
+必要Input未受領または一意に識別不能、Request Contractと実装対象の不一致、承認済みDesign / Artifactの不足または不明、必要Authority Inputの未Readyまたは未受領、限定Current State・必要Constraint・Transfer Informationの不足、Repository TargetまたはScope不明、Input間Conflict、または推測・補完が必要な場合、Handoff Sufficiencyは不成立とする。Implementationは開始せず、承認済み設計、Repository状態、過去会話または一般知識を根拠に不足を推測・補完して実装しない。
+
+Handoff Sufficiency不成立時は、既存Transfer / Return責務に従い、不足Input、識別不能Input、Conflict、Current State不足、Authority不足、Constraint不足、Scope / Target不明、確認不能箇所、Stop理由を保持する。Return先は既存Implementation Return Pathに従う。
+
 ---
 
 Implementation Validation Input Contract
