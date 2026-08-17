@@ -599,6 +599,95 @@ Module / General Design GPTは、Current State、前工程成果物、Stop情報
 
 本章は既存Stop Condition、既存Return Path、Stage固有Return Flow、Role Authority、Artifact Authority、Record責務、Stage Architecture、Lifecycle Architectureを変更しない。
 
+## 4.6 Past Lifecycle Unknown
+
+### Purpose
+
+過去Artifactは存在するが、現在必要なValidation、Review、Adoption、Repository Reflection、Authority、Current Handoff等のLifecycle成立状態を、現在確認可能なEvidenceから一意に追跡できない場合に、過去を推測復元せず、現在必要なLifecycle状態だけを既存Role / Stageで再成立させる共通原則を定義する。
+
+単なるRecord欠落や軽微な記録不足ではなく、現在のLifecycle接続に必要な成立状態が確認不能なCaseを扱う。
+
+### Past Lifecycle Unknown Principle
+
+Past Lifecycle Unknownとは、Artifactが存在していても、Validation、Review、PO Adoption、Repository Reflection、Authority、Current Handoff等の過去Lifecycle成立状態を、現在確認可能な明示Evidenceから一意に確認できない状態である。
+
+Artifact Existsは、Validated、Reviewed、Adopted、Current Authority、またはCurrent Handoffを意味しない。Artifact本文がRepository等に存在するだけで、過去Lifecycle成立を推測しない。
+
+### Evidence Boundary
+
+Past Lifecycle成立状態の確認には、Repository current state、Record、Artifact body、明示的Validation Result、明示的Review Result、PO Decision record、Repository Reflection evidence、Git evidence、Current Authority source等の現在確認可能な明示Evidenceを用いる。
+
+Artifact filename、timestamp、近いcommit、過去チャット記憶、名称上の最新版、「以前成立したはず」という推測を、単独でLifecycle成立Evidenceとしない。固定Evidence Checklist / Matrixは形成しない。
+
+### Past Lifecycle Reconstruction Boundary
+
+Past Lifecycle Unknown時に、過去Stage PASS、Validation / Review成立、PO Adoption、Repository Reflection、Authority成立、Current Handoff、Artifact採用順序を推測で再構築しない。
+
+明示Evidenceで確認できる過去成立状態まで自動的に破棄しない。
+
+### Confirmed Past State Preservation
+
+明示Evidenceから、現在も有効でありUnknown部分の影響を受けないと確認できるArtifact、Result、Decision、Lifecycle Stateは保持可能とする。
+
+Unknown部分がその成立前提に含まれる場合は自動保持せず、必要な既存Role / Stageで現在時点の責務として再確認または再成立させる。Unknownが一つあることを、全Lifecycle Restartの根拠としない。
+
+### Current Lifecycle Re-establishment
+
+目的は過去Lifecycleの復元ではなく、現在必要なLifecycle状態を、現在のInput、Authority、Scope、Repository Stateに基づき、既存Role / Stageで正規に再成立させることである。
+
+Candidate F自身はDesign Validation、Review、PO Adoption、Implementation Authority採用を代行しない。
+
+### Recovery Entry / Latest Artifact Boundary
+
+Current Lifecycleをどこから再成立させるかは、現在確認可能なEvidenceと現在必要なLifecycle状態に基づき、一意に識別可能とする。Recovery Entryは、明示Evidenceで確認可能な既存ArtifactをCurrent Inputとして扱えるStage、現在必要なAuthorityを正規に成立させられるStage、または必要なPO Decisionへ接続する既存Stageとなり得る。
+
+「最後のValid Artifact」または「最新Artifact」という名称・時系列だけで、ArtifactやRecovery Entryを自動選択しない。latestはvalid、adopted、authority、またはCurrent Handoffを意味しない。
+
+Recovery Entryを一意に識別できない場合は、推測して開始しない。
+
+### Re-validation / Re-review Boundary
+
+過去Validation、Review、Adoption等を追跡できず、その成立状態が現在必要なAuthorityまたはLifecycle進行条件に影響する場合は、必要な既存Stageを現在時点で再成立させる。
+
+すべてのCaseでDesign Validation、Review、PO Decision、Repository Reflectionを固定再実行するRuleは形成しない。
+
+### Authority Re-establishment / Past Artifact Reuse Boundary
+
+Candidate AのAuthority Ready条件は再定義しない。Current Authority Readyを確認するために必要なValidation、Review、Adoption、Reflection等がPast Lifecycle Unknownにより確認不能な場合、必要なCurrent Lifecycleを既存Stageで再成立させる。Candidate F自身がAuthorityを直接付与しない。
+
+Past Artifact本文は現在のLifecycle Inputとして再利用できる場合がある。ただし、Artifact本文の再利用は、過去Validation、Review、Adoption、Current Authority、Current Handoffの自動再利用を意味しない。再利用可否は、現在のScope、Authority、Repository State、Role Inputに基づき確認する。
+
+### Conflict / Recovery Scope Boundary
+
+Past Artifactが現在のDefinition、Authority、Scope、Repository StateとConflictする場合、Past Artifactを優先しない。Candidate FはConflictを独自解消せず、必要な既存Role、Stage、Product Owner DecisionへReturnする。
+
+Current Lifecycle再成立の対象は、Unknown範囲、現在必要なLifecycle状態、その成立に必要な最小範囲に限定する。Past Lifecycle Unknownを理由に、Product Definition、Architecture、全Module、全Stage、全Repository、他Candidateを再Formationしない。
+
+全Case共通の固定Recovery SequenceまたはRecovery Checklistは形成しない。
+
+### Candidate / Record Boundary
+
+Candidate Eは、現在の正規Lifecycle内でStop地点、Stop原因、Return先、Valid Stateを確認できるCaseのLimited Resumeを扱う。Candidate Fは、過去Lifecycle成立状態自体がEvidenceから確認できないCaseを扱い、Stop Point、Correction、Resume Entryを再Formationしない。
+
+Candidate AはCurrent Authority InputがReadyかを扱う。本章は、そのReady確認に必要な過去Lifecycle成立状態がUnknownな場合、現在必要なLifecycleを既存Stageで再成立させる責務を扱う。Candidate AのReady条件、Authority Source、Conflict、Current Usable Stateは変更しない。
+
+Recordは現在状態、工程履歴、事実を記録する。Candidate FはRecord不足をValidity判断で補完せず、Record OperationへValidity判定、Authority判定、Adoption判定、Recovery Entry決定Authorityを追加しない。
+
+### Recovery Authority Boundary
+
+新しいRecovery Authority Roleは作らない。
+
+- General Design / Module GPT：現在地、確認可能Evidence、Unknown範囲、現在必要状態、次Stage候補を整理する
+- 既存Stage Owner / Role：必要な既存Stage責務を正規に実行する
+- Product Owner：Adoption、Implementation進行、必要な最終Decisionを保持する
+- Record：現在状態 / 工程履歴を事実記録する
+
+Candidate FはPO Decision、Validation判定、Review判定、Authority Adoptionを代行しない。
+
+### Responsibility Boundary
+
+本章は既存Lifecycle Stage定義、既存Role責務、既存Record責務、既存Authority責務、Artifact Authority、Current Handoff責務、Transfer / Return責務、Candidate E Limited Resume責務を変更しない。
+
 # 5. Loading Rule
 
 Loading Ruleは、各Roleが責務遂行に必要な設計資産のみを読み込み、責務混線を防ぐための共通原則を定義する。
