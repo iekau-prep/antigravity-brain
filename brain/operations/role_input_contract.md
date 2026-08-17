@@ -55,6 +55,18 @@ Common Input Contract
 
 ---
 
+Current Handoff Input Connection
+
+受領Roleは、現在の正規Stage進行内で正式に渡されたCurrent Handoffを、自身の既存Role Input Contractに対応するInputとして受領する。
+
+次Stage開始前に、必要Current Handoffを受領していること、必要なArtifact / Result / Authorityが一意であること、自身のRole Inputと対応すること、Target / Scopeが一致すること、必要Statusを確認できること、およびConflictまたは不明がないことを確認する。
+
+必要Current Handoff未受領、Artifact / Result / Authorityの一意識別不能、Current Handoffの送出元または受領先を確認できない、必要Transfer Informationが不足する、Role Inputとの対応不明、Target / Scope不一致、必要Status不明、Conflict、または推測・補完が必要な場合、受領Roleは開始しない。
+
+受領Roleは、不足Artifact生成、Result再判定、Authority採用、Current Artifactの推測選択、Target / Scope再定義、または前Stage責務の代行によってHandoffを成立させない。不足、不明、ConflictおよびStop理由は既存Transfer / Return責務へ接続する。
+
+---
+
 Authority Input Readiness
 
 Definition / ArtifactがRepositoryまたはMainlineに存在するだけでは、Implementation Authority Readyとは扱わない。

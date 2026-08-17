@@ -463,6 +463,16 @@ Transfer Informationは成果物受渡しのみを扱い、依頼条件はReques
 
 Authority Inputは、次Roleが識別可能な状態でTransferする。Current Lifecycleへの接続に必要な範囲で、Authority Source、Current usable state、対象対応のTraceabilityを保持する。
 
+Stage Artifact Handoffは、前StageのArtifactが存在するだけでなく、次Stage責務に必要なArtifact、Result、Authority、Target、Statusが、現在の正規Stage進行内のCurrent Handoffとして一意に識別され、次Stage Roleへ正式に受け渡される状態とする。
+
+Artifactが存在すること、過去チャットに存在すること、またはRepository内に存在することは、それぞれ次StageへのHandoff済みまたはCurrent Handoffを意味しない。Current Handoffは、Repository上または時系列上の最新Artifact、AIが最適と判断したArtifact、または受領Roleが複数候補から独自選択したArtifactとして扱わない。過去LifecycleからLatest Valid Artifactを探索・復元しない。
+
+Current Handoffは、既存Transfer InformationのFrom、To、Next Stage、Purpose、Target、Status等との接続を維持する。必要なArtifact本文、Validation Result、Review Result、Implementation Result、Implementation Validation Result、PO Decision / Status、Stop Status、Authorityは、送出Stage、受領Stage、Role Input Contract、現在のTarget / Scopeに応じてCurrent Handoffとの対応を保って受け渡す。これらを全Stage共通の固定Artifact一覧として新設しない。
+
+Stageを跨いでも、Target、Scope、対象Artifact、必要Repository Targetを一貫して識別可能とする。Current Handoffの送出元または受領先が不明な場合、必要Transfer Informationが不足する場合、またはHandoffが不足、不明、競合、推測・補完を要する場合、Stage Artifact Handoffは不成立とし、次Stageを開始せず、不足・不明内容を既存Transfer / Return責務へ保持する。
+
+既存Stage接続を維持し、ReviewからImplementationまたはRepository Reflectionへ接続する場合も既存Decisionを迂回しない。
+
 ## 4.4 Return Path
 
 ### Purpose
