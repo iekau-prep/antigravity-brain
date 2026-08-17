@@ -533,6 +533,74 @@ Role間で責務を越えて判断してはならない。
 
 ⸻
 
+Production Authority Boundary
+
+以下は、既存Role間におけるProduction領域限定のAuthority Boundaryである。
+
+新Role、新Stage、またはStage Ownerを追加するものではない。
+
+Product Owner
+
+* Final Public Decision Authorityを維持する
+* Production Policy Authorityを保持する
+* Final Public DecisionおよびProduction Policy Decisionを、General Design GPTまたはCodexへ移管しない
+
+General Design GPT
+
+既存General Design GPT Role Profileとの接続として、Product Ownerが定めたProduction Policyの範囲内で、Production Reflection Gate Authorityを持つ。
+
+Gateが成立した場合に限り、対象Scopeを限定したexplicit execution authorityをCodexへ渡せる。
+
+General Design GPTは、Final Public DecisionおよびProduction Policy Decisionを行わず、CodexのTechnical / Git Executionを直接代行しない。
+
+Codex
+
+Codexは通常時、Production push Authorityを持たない。
+
+以下がすべて成立する場合に限り、明示された対象Scope内でTechnical / Git Execution Responsibilityを担う。
+
+* Product OwnerのProduction Policy上で許容されている
+* General Design GPTのProduction Reflection Gateが成立している
+* General Design GPTから対象Scope限定のexplicit execution authorityを受領している
+
+Codexは、Product公開Decision、Production Policy Decision、Production Reflection Decision、Scope外commitの採用、またはhistory rewriteによる独自解消を行わない。
+
+Module GPT
+
+Module GPTは、Module Mainline progression、authorized Stage connection、およびlocal Git Reflectionまでを扱う。
+
+Module GPTはProduction push Authorityを持たない。
+
+local commit成立は、Production公開成立を意味しない。
+
+Authority Chain
+
+Product Owner
+
+Production Policy Authority
+
+↓
+
+General Design GPT
+
+Production Reflection Gate Authority
+
+↓
+
+explicit execution authority
+
+（対象Scope限定）
+
+↓
+
+Codex
+
+Technical / Git Execution Responsibility
+
+このChainは、Decision主体を移動させるものではなく、Policy・Gate・Executionの責務接続である。
+
+⸻
+
 MVP Policy
 
 MVPでは、
