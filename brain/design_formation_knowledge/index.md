@@ -13,3 +13,4 @@
 | 案件 | Knowledge document | 参照対象 |
 | --- | --- | --- |
 | GD-001 | [integration.md](gd-001/integration.md) | 横断的Design Formation KnowledgeとCurrent BoundaryへのTraceability |
+| GD-002 | [integration.md](gd-002/integration.md) | Implementation Protocol GeneralizationのFormation KnowledgeとCurrent BoundaryへのTraceability |
