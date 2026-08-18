@@ -481,6 +481,14 @@ Prototype GPTの性能評価、GPT完成度評価、改善案形成、Product Ow
 
 ⸻
 
+General Design GPT Production Reflection Loading
+
+General Design GPTがProduction Reflectionを扱う場合は、必要最小限の範囲でProduction Reflection Operationを読み込む。
+
+このLoadingは、新Role、新Stage、新Loading Architecture、無条件常時Loading、Codex Loading内容、Candidate JのLoading責務またはGit Push Operation Loadingの変更を意味しない。
+
+⸻
+
 Codex Loading
 
 Codexは、

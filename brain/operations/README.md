@@ -160,6 +160,10 @@ Implementation運用ルール。
 
 Implementation Validation成立後に、Validated Scopeをlocal Git historyへ固定するGit Reflection Operation。
 
+- production_reflection_operation.md
+
+Production対象のRepository / Authority / Scope状態をGateとして確認するProduction Reflection Operation。
+
 ---
 
 ## Git Push Execution
