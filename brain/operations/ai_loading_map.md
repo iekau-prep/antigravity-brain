@@ -694,6 +694,14 @@ explicit execution authority
 target scope
 
 Candidate Jでは、git_push_operation.mdをProduction系Technical / Git Executionの必要なOperation Sourceとして読み込む。
+
+---
+
+Deployment Observation Operation
+
+CodexがCandidate Kのtechnical deployment observationを実行する場合は、必要最小限の範囲でDeployment Observation Operationを読み込む。
+
+このLoadingは、Codexの常時Loading、General Design GPTまたはProduct Ownerの常時Loading、Candidate H / JのLoading責務またはGit Push Operation Loadingの変更、新Role、新Stage、新Loading Architectureを意味しない。
 ⸻
 
 Product Owner Loading

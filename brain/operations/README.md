@@ -180,6 +180,10 @@ Production Reflection Gate成立後に、明示Authorityを受けたCodexが行�
 
 Observation運用ルール。
 
+- deployment_observation_operation.md
+
+Deployment対象とrevisionを対応づけ、deployment resultを事実として確認するDeployment Observation Operation。
+
 ---
 
 ## Record
