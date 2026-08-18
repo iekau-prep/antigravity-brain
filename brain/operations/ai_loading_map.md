@@ -647,6 +647,14 @@ Implementation Validationでは、
 
 ---
 
+Git Reflection Operation
+
+CodexがImplementation Validation成立後にValidated Scopeをlocal Git historyへReflectionする場合は、Production Technical / Git Execution Operationの前に、必要最小限の範囲でGit Reflection Operationを読み込む。
+
+この接続は、新Role、新Stage、新Loading Architecture、無条件常時Loading、Candidate JのLoading責務またはProduction push Loadingの変更を意味しない。
+
+---
+
 Production Technical / Git Execution Operation
 
 Candidate JのProduction系Technical / Git Executionを行うCodexは、既存Implementation / IVの内部Stageとしてではなく、成立済みProduction Reflection Gateおよびexplicit execution authorityをInputとして以下を読み込む。

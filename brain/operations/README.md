@@ -156,6 +156,10 @@ Review（思想監査）運用ルール。
 
 Implementation運用ルール。
 
+- git_reflection_operation.md
+
+Implementation Validation成立後に、Validated Scopeをlocal Git historyへ固定するGit Reflection Operation。
+
 ---
 
 ## Git Push Execution
