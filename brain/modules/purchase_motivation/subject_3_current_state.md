@@ -37,6 +37,67 @@
 - Dedicated Role：`purchase_motivation_dev_observer`
 - Current Formal DB Read-only Access Method：Official MCP Route成立
 
+## Current Status
+
+Subject 3 Technical Case：
+
+Primary Requirement Closed /
+Non-Blocking Residual Items Remain
+
+Current Developmentで必要なPrimary Supabase Access Requirementは成立している。
+
+残存Technical Itemは存在するが、Current Development進行のBlocking Conditionではない。
+
+### Primary Requirement Closed
+
+Current Statusの根拠：
+
+- Official MCP Read-only：Formal Primary Route成立
+- Position：Conditional Primary
+- M11：PASS / Close維持
+- Operational Safety：Formation済み
+- Development Supabase Observation Route：利用可能
+
+### Non-Blocking Residual Items
+
+Provider-side OAuth Revoke：
+
+- State：未Closed
+- Position：Non-Blocking Residual
+
+Dedicated PostgreSQL Role：
+
+- Role：`purchase_motivation_dev_observer`
+- Position：Fallback / Frozen
+- Phase 3：STOP維持
+- STOP Scope：Fallback Route限定
+
+Large Object ACL：
+
+- State：未Closed
+- Position：Fallback Technical Residual
+
+これらをSubject 3全体のSTOPまたは未Closedとして扱わない。
+
+### Technical Investigation Boundary
+
+Current Development用途におけるSupabase Technical Investigationは、Blocking Taskとして終了可能である。
+
+以下のTriggerがない限り再OPENしない。
+
+- Production利用
+- Security Requirement強化
+- Incident
+- MCP config drift
+- tool drift
+- OAuth drift
+- Supabase仕様変更
+- Codex MCP仕様変更
+- safer official route成立
+- Current Official MCP Routeで具体的Requirement不足が成立
+
+Triggerなしに、Provider-side revoke、Dedicated Role、Large Object ACLをBlocking Investigationとして継続しない。
+
 ## Current Formal Route
 
 Official MCP Read-onlyは、Development環境のTarget Project `duecfeexhqjzriwaewrv`に対するFormal Primary Routeとして成立している。
