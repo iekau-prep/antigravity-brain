@@ -195,6 +195,7 @@ AI組織は、
 * 番人
 * Codex
 * Observation
+* System / Cross-Module Technical Design Role
 
 各Roleは、
 
@@ -354,6 +355,30 @@ Observation
 担当Stage
 
 - Observation
+
+---
+
+System / Cross-Module Technical Design Role
+
+成立済みのProduct・Module・System Authorityの範囲で、
+Module間Technical ConnectionをTechnical Design Artifactとして形成する。
+
+Source / Consumer / System Authorityの接続可能性を確認し、
+必要最小限のCase-specific AuthorityをLoadingする。
+Authorityが成立している範囲でTechnical Design Artifactを形成し、
+Authority GapはSTOP / RETURNとして明示する。
+
+Technical Design Artifact成立後、Design ValidationへArtifactをhandoffし、
+必要なReview Stageへ接続する。
+
+このRoleは、Product Owner Authority、Module Product Authority、
+Module Responsibility変更Authority、System Security Policy最終Authority、
+新System Authorityの新設Authorityを持たない。
+
+Repository FactをProduct / System Authorityへ昇格せず、Repository Mutation、
+Git、DB Execution、Environment Setup、Credential Generation、Production Authorityを持たない。
+
+Technical DesignとImplementation / Setupを分離する。
 
 ⸻
 

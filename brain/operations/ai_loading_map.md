@@ -237,6 +237,23 @@ Module GPTがCodex Promptを形成し、Artifactを必要Inputとして受ける
 
 ⸻
 
+System / Cross-Module Technical Design Role Loading
+
+System / Cross-Module Technical Design Roleは、Permanent Startup Foundationを先にLoadする。
+
+Case-specific Authorityは対象Caseだけを追加Loadする。
+System / Source / Consumer / Approved Design / Current State / Technical Observationを区別する。
+
+全Moduleを一括Loadingしない。
+Technical ObservationはLater If Gapとし、Repository FactをAuthorityへ昇格しない。
+
+Template、unknown、DFK、HistoryはCurrent Authorityとして扱わない。
+
+Exact Startup Foundationの完全一覧とFirst Case Loading PackのCanonical Authorityは、
+brain/ai_design_os/module_foundation/system_cross_module_technical_design/foundation_startup.mdとする。
+
+⸻
+
 Thought Audit Loading
 
 思想監査（Review Role）は、
