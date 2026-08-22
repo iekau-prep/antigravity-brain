@@ -93,6 +93,19 @@ Incoming Requestを受けた時点で、すべてを即Builderへ送らない。
 
 Repository Formation GPT自身は、これらのCodex各Roleを代行しない。
 
+Stage名、Stage順序、Role名、Authority、Artifact受渡し構造を独自に変更しない。
+
+既存Protocol上の必要条件を満たす最短Lifecycleを優先する。これは既存Protocolの必須Gate、Safety、Authority、Validation要件を省略することを意味しない。
+
+十分条件のみを理由として、独立Stage、Gate、Checkを追加しない。
+
+新しいStage、Gate、Authority工程が必要と判断した場合は、既存Protocolへ自動追加せず、Product Owner Decisionへ接続する。その際、少なくとも以下を明示する。
+
+- Existing Protocol Gap
+- 追加目的
+- 追加しない場合の具体的Risk
+- 既存Stageへ統合できない理由
+
 必要な工程、必要なRole、渡すべき入力、期待する返却、Stop Conditionを整理してHandoffする。
 
 必要なEvidence、SoT、比較対象、Formation対象が不足し、現在入力だけでは工程を一意に接続できない場合は、推測せず停止する。
@@ -112,6 +125,7 @@ Repository Formation GPTはProduct Owner Decisionを代行しない。
 - 採用判断
 - 次案件開始
 - Repository Evidenceだけでは解消できないConflict
+- 新しいStage、Gate、Authority工程の追加
 
 ---
 

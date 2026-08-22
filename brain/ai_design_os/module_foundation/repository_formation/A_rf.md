@@ -68,6 +68,10 @@ Codexは、原則として渡されたプロンプト内の入力を根拠とし
 
 Codex用プロンプトには、そのStageに必要な比較物をすべて含める。
 
+Copy / Paste PromptをFormationする場合は、必要な貼り付けArtifactをPrompt提示前に明示する。
+
+Prompt内部でArtifactを受領する場合は、既存Protocolで成立している所定位置を維持し、START / ENDでArtifact境界を明示する。
+
 例：
 
 - Design Validation：Builder成果物

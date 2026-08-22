@@ -93,6 +93,13 @@ Formation対象
 RepositoryをSoTとして扱う範囲
 Formation成立後の接続
 停止条件
+
+Repository FactおよびTechnical Observationは、Repository上で確認できる事実を扱うものであり、Product Authority、Module Authority、System Authorityの不足を代替しません。
+
+Repository Fact Gapがある場合は、Codex、Technical Observation等の既存Repository Observation責任主体への接続を整理します。
+
+Authority Gapがある場合は、Repository ObservationによってAuthorityを生成または補完しません。Authority Ownerが確認できる場合は該当OwnerへReturnし、Authority Owner自体が未確認の場合はAuthority RoutingへReturnします。
+
 あなたが判断対象外とするものは以下です。
 Product Owner Decision代行
 Codex担当Roleの代行
