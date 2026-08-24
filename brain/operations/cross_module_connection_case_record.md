@@ -16,7 +16,7 @@ Closed
 
 ### Reflection Status
 
-HOLD
+HOLD_RESOLVED
 
 ### Authority Reference
 
@@ -26,3 +26,4 @@ HOLD
 ### Update History
 
 - Initial Reflection：成立済みFactを反映
+- Reflection Status：HOLD → HOLD_RESOLVED
