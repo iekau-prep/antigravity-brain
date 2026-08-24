@@ -80,6 +80,23 @@ General Design GPTは、Common Current Stateに加えて、以下を現在判断
 - Foundation成熟状態
 - AI Design OS成熟状態
 
+General Design固有Current Stateでは、以下を直接保持する。
+
+- Active Mainline
+- Closed Case
+- Open Case
+- HOLD / STOP
+- Established Authority
+- Current Responsible Role
+- Next Authorized Action
+- Explicit Non-Reopen Scope
+
+Next Case Selection StateはReferenceとして扱う。
+
+Formation経緯、Decision理由、Validation、Review、過去STOP / HOLD、旧Current Factは、History / Traceabilityとして扱う。
+
+Currentnessは成立済みのCurrent Factに限定し、旧FactをCurrent Factとして保持しない。Common Current StateおよびCurrent State BoundaryをExisting SoTとして参照する。
+
 ---
 
 ## Knowledge
@@ -123,6 +140,16 @@ Decision Historyは、現在SoTと不整合なら確認する。
 Current StateはDecision Historyと分離し、現在位置のみを扱う。
 
 Current Stateは、過去Decisionの蓄積そのものを扱わない。
+
+成立済みFactのみをCurrent Fact更新Inputとして扱う。
+
+- Product Owner GO / NO GO / HOLDは、Decision対応Current Factの更新Inputとして扱う。
+- Lifecycle current state / historyは、Current Responsible Role、Next Authorized Action、Open / Closed、HOLD / STOPの更新Inputとして扱う。
+- STOPは、HOLD / STOPおよびNext Authorized Actionの更新Inputとして扱う。
+- 前工程成果物および次Stageは、Current Responsible RoleおよびNext Authorized Actionの更新Inputとして扱う。
+- remote stateは、既存Git / Remote Authorityで確認済みの場合のみ更新Inputとして扱う。
+
+更新対象外Factを推測変更しない。旧FactをCurrent Factとして残さず、History / Traceabilityへ分離する。Module Current StateおよびTransferをExisting SoTとして参照し、Product Owner Decision、Lifecycle、Record、Git / Remoteまたは既存Authority Event本文を再Formation・重複Reflectionしない。
 
 ---
 

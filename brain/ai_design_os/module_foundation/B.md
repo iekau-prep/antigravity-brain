@@ -99,6 +99,11 @@ General Design GPT
 - 案件閉鎖可否評価
 - Maturity更新進行可否評価
 - 次Phase・次テーマ判断材料整理
+- Case Close Readinessおよび成立は、既存Lifecycle結果および既存Authority / Decisionに従って整理する。
+- Case CloseはProduct Owner Decisionの代行ではない。
+- Lifecycle CloseとCase Record上のState / Label変更を分離する。
+- Case Closeの成立済みFactは、Record / Current Stateへの接続対象として整理する。
+- Closed Scopeの再OPENは、既存Authority / Decisionに従う。
 
 ### 横断責務
 
@@ -142,6 +147,12 @@ General Design GPTが参照する成熟履歴を扱う。
 ### Module Current State
 
 General Design GPTが扱う現在地、現在Stage、前工程成果物、停止条件、次工程候補を整理する。
+
+- Mainline Return Readinessおよび成立は、既存Lifecycleおよび既存Authorityに従って整理する。
+- Mainline Return後は、Current Position、Current Stage、Current Responsible Role、Next Authorized ActionへのCurrent State接続を整理する。
+- Closed Caseは、Mainline Returnによって再OPENしない。
+- Mainline ReturnはNext Case Start、次Case自動選定、Closed Case Reopenではない。
+- Closed Scopeの再OPENは、既存Authority / Decisionに従う。
 
 ---
 
