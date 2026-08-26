@@ -1,275 +1,160 @@
-D｜Decision / Current State Pack
-Purpose
+# D｜Decision / Current State Pack
+
+## Purpose
 
 過去Decisionを履歴として暗記するのではなく、Observation・Decision理由・成熟経緯を現在判断へ接続する。
 
 同時に、現在のPhase・案件・未完了工程を保持する。
 
-Common
-Decision History原則
+---
+
+## Common
+
+### Decision History原則
 
 継承対象：
 
-Observation
-Decision
-Decision理由
-成熟として残した背景
-今後も保持すべき判断原則
+Formation材料なし
 
-扱い方：
+decision_OS固有のDecision History、Decision理由、成熟経緯、現在も保持すべき個別Decisionは形成しない。
 
-Decisionだけを継承しない
-理由まで理解する
-過去Decisionを現在へ強制適用しない
-現在案件に必要な判断材料として接続する
-現在SoTと不整合なら確認する
-Common Decision History対象
-Constitution成熟
-Product成熟
-Common Current State
+### Common Decision History対象
 
-最低限保持するもの：
+Formation材料なし
 
-現在Phase
-現在案件
-案件状態
-現在Stage
-前工程成果物
-Product Owner Decisionの有無
-停止条件
-未反映差分
-Maturity状態
-Git状態
-次工程候補
+### Common Current State
+
+Formation材料なし
+
+Current Phase、Current Case、案件状態、Current Stage、前工程成果物、Product Owner Decisionの有無、停止条件、未反映差分、Maturity状態、Git状態、次工程候補を推測しない。
 
 Current StateはDecision Historyと分離し、現在位置のみを扱う。
 
-Module
-Module Name
+---
 
-decision_os
+## Module
 
-Module Decision History対象
+### Module Name
 
-Formation材料なし
+decision_OS
 
-Module Current State
-decision_OSは、現在判断を整理し、次のdecision更新へ接続するmoduleである。
-decision_OSが扱うのは、現在の判断状態である。
-decision_OSは、過去を管理するmoduleではない。
-過去の判断材料を、現在判断へ接続する責務を持つ。
-continuityは、現在判断を理解するための補助として扱う。
-decision主体は、常にユーザー本人である。
-decision_OSはdecisionを生成する主体ではない。
-current decisionを反映する。
-STATEを解釈する。
-decision continuityを維持する。
-次のCTAを現在判断へ適用する。
-comparison結果を現在判断へ接続する。
-decision更新を支援する。
-保存、保留、見送りを扱う。
-過去の判断材料を現在判断へ接続する。
-decisionからSTATEを解釈する。
-STATEは保存しない。current decisionから毎回算出する。
-現在判断に対して、次のdecision更新を支援するCTAを適用する。
-CTAはrecommendationではない。decision更新の入口として扱う。
-現在判断を整理し、次のdecision更新へ接続する。
-current decisionを更新可能に保つ。
-decision continuityを維持する。
-現在の自分として、何度でも判断形成を再開できるdecision loopを支える。
-前moduleの判断形成を壊さず、次moduleで判断形成を再開できる状態を維持する。
-現在判断を整理し、次のdecision更新へ接続するmodule。
-現在の判断状態を扱う。
-過去を管理するmoduleではない。
-過去の判断材料を現在判断へ接続する。
-decisionを生成するmoduleではない。
-decision主体は常にユーザー本人である。
-comparisonはdecision_OSの途中工程として存在する。
-CTAはrecommendationではなく、decision更新の入口として扱う。
-current decision
-reason
-fixed_core
-comparison状況
-現実との接触状況
-decision更新状況
-STATE
-STATEは1つのみ。
-STATEは保存せず、decisionから動的に導出する。
-主CTAは1つのみ。
-CTAは次画面ではなく、decision更新を開始する入口として扱う。
-Knowledge
-主要判断原則
+### Module Decision History対象
 
 Formation材料なし
 
-Module SoT
-brain/system/decision_os_role.md
-brain/system/decision_framework.md
-brain/system/state_definition.md
-brain/system/state_detection.md
-brain/system/state_to_cta_connection.md
-brain/system/comparison_role.md
-brain/system/decision_update_triggers.md
-projects/iekau/products/decision_os/product_concept.md
-projects/iekau/products/decision_os/ux_flow.md
-projects/iekau/products/decision_os/data_connection.md
-projects/iekau/products/decision_os/feature_scope_mvp.md
-projects/iekau/products/decision_os/screen_structure.md
-projects/iekau/products/decision_os/decision_memory.md
-projects/iekau/products/external_property_search/decision_connection.md
-Module Repository
-projects/iekau/products/decision_os/
-Boundary
-Decision History Boundary
+### Module Current State
+
+Formation材料なし
+
+decision_OS固有のCurrent Phase、Current Case、Open / Closed / HOLD / STOP、前工程成果物、Current Responsible Role、Next Formal State、Current Blocking、Required Input、Implementation Current Stateを形成しない。
+
+---
+
+## Knowledge
+
+### 主要判断原則
+
+#### System成熟
+
+- decision主体はユーザー本人
+- decisionを生成しない
+- current decisionを固定しない
+- current decisionは参照中心として扱う
+
+#### Operation成熟
+
+Formation材料なし
+
+---
+
+## Boundary
+
+### Decision History Boundary
 
 Decision Historyは、過去Decisionを現在へ強制適用しない。
 
-Decision Historyは、現在案件に必要な判断材料として接続する。
+decision_OS固有Decision HistoryのFormation材料がない場合、System Core原則をModule固有Decision Historyへ変換しない。
 
-Decision Historyは、現在SoTと不整合なら確認する。
-
-Current State Boundary
+### Current State Boundary
 
 Current StateはDecision Historyと分離し、現在位置のみを扱う。
 
-Current Stateは、過去Decisionの蓄積そのものを扱わない。
+NOT IDENTIFIEDのFactを推測してCurrent Factとして形成しない。
 
-Product Owner Boundary
+A / B / C完了またはD未完了から、Current Case、Current Responsible Role、Next Formal Stateを推測しない。
 
-Formation材料なし
+---
 
-Codex Boundary
+## Loading
 
-Formation材料なし
+### 読み込み対象
 
-General Design GPT Boundary
+- Decision History原則
+- Common Decision History対象
+- Module Decision History対象
+- 主要判断原則
+- Common Current State
+- Module Current State
 
-Formation材料なし
+### 読み込み目的
 
-Knowledge Boundary
+過去Decision、Decision理由、成熟経緯を現在判断へ接続する。
 
-Formation材料なし
+現在Phase、現在案件、現在Stage、前工程成果物、停止条件、次工程候補を整理する。
 
-Authority Boundary
+---
 
-Formation材料なし
+## Transfer
 
-Non Responsibility
-recommendationしない。
-dashboard化しない。
-task管理しない。
-current decisionを固定しない。
-decision主体を変更しない。
-decisionをmoduleが生成しない。
-decisionをAIが生成しない。
-recommendationによってdecisionを生成しない。
-CTAはrecommendationではない。
-comparisonはdecisionを決定しない。
-Loading
-読み込み対象
-
-brain/system/decision_os_role.md
-brain/system/decision_framework.md
-brain/system/state_definition.md
-brain/system/state_detection.md
-brain/system/state_to_cta_connection.md
-brain/system/comparison_role.md
-brain/system/decision_update_triggers.md
-projects/iekau/products/decision_os/product_concept.md
-projects/iekau/products/decision_os/ux_flow.md
-projects/iekau/products/decision_os/data_connection.md
-projects/iekau/products/decision_os/feature_scope_mvp.md
-projects/iekau/products/decision_os/screen_structure.md
-projects/iekau/products/decision_os/decision_memory.md
-projects/iekau/products/external_property_search/decision_connection.md
-
-読み込み目的
-
-decision_OS moduleがPJを推測せず理解し、PJ内SoTを根拠として判断できる状態を形成する。
-decision_OSが現在判断を整理し、次のdecision更新へ接続するmoduleであることを理解する。
-decision_OSがdecision progression、drift recovery、本命形成循環を扱うことを理解する。
-decision_osがdecisionを受け取り、stateを解釈し、比較・更新・再判断へつなげる接続設計を理解する。
-
-Transfer
-Transfer対象
-
-decision一覧
-検討中 / 保留 / 見送り
-current decision更新
-STATE解釈
-次のCTA
-comparison / 再整理への接続
-property_readerへの遷移
-external_property_searchへの導線
-次decision更新
-decision_OSへ戻る判断
-decision continuity
-
-Transfer目的
-
-現在判断を整理し、次のdecision更新へ接続する。
-decisionを受け取り、stateを解釈し、比較・更新・再判断へつなげる。
-decision continuityを維持し、判断を切らずに継続可能状態を維持する。
-
-Connected Modules
-
-decision_OS moduleのConnected Modulesは以下とする。
-
-Constitution
-decision_framework
-decision_OS_role
-decision_OS module
-Implementation
-property_reader
-comparison
-LINE
-Supabase
-external_property_search
-state_to_cta_connection
-fixed_core_definition
-drift_detection
-decision_update_triggers
-
-接続事実：
-
-property_readerはdecision_osの入力元である。
-comparisonはdecision_osの入力元である。
-LINE再開はdecision_osの入力元である。
-external経由の新規物件はproperty_reader経由で追加する。
-decision_osの出力先はproperty_reader、comparison、external_property_search、LINEである。
-decision_osはSupabaseのdecisionsテーブルを中核とする。
-state_to_cta_connectionは、判定されたSTATEを次のdecision更新へ接続する方法を扱う。
-
-Learning
-Learning Stage
+### Transfer対象
 
 Formation材料なし
 
-Learning対象.md
-brain/system/decision_os_role.md
-brain/system/decision_framework.md
-brain/system/state_definition.md
-brain/system/state_detection.md
-brain/system/state_to_cta_connection.md
-brain/system/comparison_role.md
-brain/system/decision_update_triggers.md
-projects/iekau/products/decision_os/product_concept.md
-projects/iekau/products/decision_os/ux_flow.md
-projects/iekau/products/decision_os/data_connection.md
-projects/iekau/products/decision_os/feature_scope_mvp.md
-projects/iekau/products/decision_os/screen_structure.md
-projects/iekau/products/decision_os/decision_memory.md
-projects/iekau/products/external_property_search/decision_connection.md
-Stageごとの到達状態
+### Transfer目的
+
+過去Decisionと現在状況を混同せず、現在案件に必要な判断材料のみを次工程へ接続する。
+
+---
+
+## Connected Modules
+
+### System成熟
+
+- Purpose：System成熟に関するDecision Historyを現在判断へ接続する
+- Responsibility：System成熟の主要判断原則を保持する
+- Boundary：System変更は扱わない
+- Input：System Maturity Observation｜Constitution整合：進行中
+- Output：Formation材料なし
+- Transfer：Formation材料なし
+- Stop Condition：現在SoTと不整合がある場合
+
+System Maturity Observationを、decision_OSのCurrent Phase、Current Case、Current Stage、Maturity状態、またはCurrent Stateへ変換しない。
+
+### Operation成熟
 
 Formation材料なし
 
-完了条件
+### Foundation成熟
 
-decision_OSが現在判断を整理し、次のdecision更新へ接続するmoduleであることを説明できる。
-decision主体はユーザー本人であり、各moduleはdecision形成を支える責務のみを持つことを説明できる。
-decision_OSがdecision progression、drift recovery、本命形成循環を扱うことを説明できる。
-decision_osがdecisionを受け取り、stateを解釈し、比較・更新・再判断へつなげる接続設計を説明できる。
-decision_OSはrecommendation、dashboard化、task管理、current decision固定、decision主体変更、decision生成を行わないと説明できる。
-STATEは保存せず、current decisionから毎回算出すると説明できる。
-CTAはrecommendationではなく、decision更新の入口として扱うと説明できる。
+- Purpose：Foundation成熟に関するDecision Historyを現在判断へ接続する
+- Responsibility：Foundation成熟の履歴対象を保持する
+- Boundary：Foundation変更は扱わない
+- Input：decision_OS Foundation Progress Observation｜A / B / C完了、D未完了
+- Output：Formation材料なし
+- Transfer：Formation材料なし
+- Stop Condition：現在SoTと不整合がある場合
+
+Foundation Progress Observationを、Current Case、Current Responsible Role、Next Formal Stateへ変換しない。
+
+### AI Design OS成熟
+
+Formation材料なし
+
+---
+
+## 完了条件
+
+- 過去Decisionを理由まで説明できる
+- 現在案件へ必要なDecisionだけを接続できる
+- 過去Decisionと現在状況を混同しない
+- 現在地・次工程・停止条件を説明できる
