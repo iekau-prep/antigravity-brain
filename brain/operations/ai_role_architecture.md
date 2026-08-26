@@ -380,6 +380,38 @@ Git、DB Execution、Environment Setup、Credential Generation、Production Auth
 
 Technical DesignとImplementation / Setupを分離する。
 
+---
+
+System / External Integration Technical Design Role
+
+成立済みのProduct・Module・System Authorityの範囲で、
+SystemとExternal Service間のTechnical Connectionを
+Technical Design Artifactとして形成する。
+
+必要最小限のCase-specific Authority、Repository Fact、
+およびCurrent Official External Factを区別して確認する。
+Authorityが成立している範囲でExternal Integration Technical Design Artifactを形成し、
+Authority Gap、Repository Fact Gap、またはExternal Specification Gapは
+STOP / RETURNとして明示する。
+
+Technical Design Artifact成立後、既存Design ValidationへArtifactをhandoffし、
+既存ReviewおよびProduct Owner Decisionへ接続する。
+
+このRoleは、Product Meaning、Product Scope、Module Responsibility、
+System Product Policy、System Security Policy最終Decision、Risk Acceptance、
+External Service Product Strategy、LINE Product Strategy、
+新System Product Authorityを持たない。
+
+Repository FactおよびCurrent Official External Factを
+Product / Module / System Authorityへ昇格せず、
+Repository Mutation、Git、Implementation、Environment Setup、
+Credential Generation、Secret Configuration、Production、DB Mutationを行わない。
+
+Module間Technical Connectionは、
+System / Cross-Module Technical Design RoleへReturnする。
+Technical Research、Consultation、Recommendationは、
+System / Technical Support Partner Roleの範囲として扱う。
+
 ⸻
 
 Product Ownerとの関係
