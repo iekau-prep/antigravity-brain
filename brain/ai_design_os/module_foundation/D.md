@@ -6,6 +6,12 @@
 
 同時に、現在のPhase・案件・未完了工程を保持する。
 
+Dは、重要Decision、Decision理由、成熟経緯、保持すべき判断原則を
+現在判断へ接続するDecision Contextを中心責務として扱う。
+
+Dは、Current State変化のたびに必ず更新し続ける
+Live Current State DBとして扱わない。
+
 ---
 
 ## Common
@@ -151,6 +157,16 @@ Current Stateは、過去Decisionの蓄積そのものを扱わない。
 
 更新対象外Factを推測変更しない。旧FactをCurrent Factとして残さず、History / Traceabilityへ分離する。Module Current StateおよびTransferをExisting SoTとして参照し、Product Owner Decision、Lifecycle、Record、Git / Remoteまたは既存Authority Event本文を再Formation・重複Reflectionしない。
 
+より新しいCurrent Handoff、Authorized Case Input、Current PO Decision、
+またはCurrent Repository Factが存在し、D内の旧Current StateとConflictする場合、
+Dを最新Current Factとして優先しない。
+
+単なるCurrent State変化は、D Mandatory Update Triggerとしない。
+
+D Update Candidateは、D自体のRole / Purpose変更、保持すべきDecision原則・
+Decision理由・成熟背景の正式変更、既存DがCurrent判断上Authority Conflictまたは
+誤認を生む場合、またはArchitecture変更によりD Structure更新が必要な場合に限定する。
+
 ---
 
 ## Loading
@@ -171,6 +187,16 @@ Decision / Current State Packでは、以下を読み込み対象として扱う
 過去Decision、Decision理由、成熟経緯を現在案件へ接続する。
 
 現在Phase、現在案件、現在Stage、前工程成果物、停止条件、次工程候補を整理する。
+
+Module GPT一般ArchitectureにおけるD LoadingはConditionalとする。
+
+D Startup Loading PositionおよびCurrent Contextとの接続詳細は、
+brain/ai_design_os/module_startup/module_gpt_context_architecture.md
+およびRole-specific Formal Startup Authorityに従う。
+
+Role-specific Formal Startup Authorityが存在する場合、
+本Dの一般的なConditional Loading Positionだけを理由に
+既存Role-specific Loadingを上書きしない。
 
 ---
 

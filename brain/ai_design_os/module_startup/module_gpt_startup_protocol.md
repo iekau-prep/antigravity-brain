@@ -23,11 +23,47 @@ Foundationを理解し、
 
 ## Timing
 
-Foundation A〜D読了後、
-実案件投入前に実施する。
+Permanent Foundation Loading後、実案件投入前に実施する。
+
+Current Repository Contextおよび必要なConditional Context Loadingは、
+既存Authorityに従って確認する。
+
+D｜Decision / Current State Packは、
+Module GPT一般StartupにおけるGeneral Mandatory Loadingとして固定しない。
+
+DはConditional Context Candidateとして扱い、
+Loading詳細は
+brain/ai_design_os/module_startup/module_gpt_context_architecture.md
+およびRole-specific Formal Startup Authorityに従う。
+
+Role-specific Formal Startup AuthorityにおいてD Mandatoryが成立している場合は、
+当該Mandatory Authorityを維持する。
 
 Startup Protocol完了前に、
 新規案件を開始しない。
+
+New Module GPT Startupでは、以下の順序でContextを確認する。
+
+1. Permanent Foundation Loading
+2. Current Repository Context Loading
+3. 必要時のみCurrent Implementation Observation
+4. Current Context Confirmation
+5. 既存Operational Ready / Case Handoff
+
+Long-idle Re-entryでは、以下の順序でContextを確認する。
+
+1. Foundation Change Check
+2. Foundation変更がある場合のみ必要なFoundation差分をReload
+3. Current Repository Context Refresh
+4. 必要時のみCurrent Implementation Observation
+5. Re-entry Confirmation
+6. Current Case Handoff
+
+長期未使用だけを理由に、Foundation全再LearningをMandatoryとしない。
+
+詳細Ruleは、
+brain/ai_design_os/module_startup/module_gpt_context_architecture.md
+をFormal Referenceとする。
 
 ---
 
@@ -112,6 +148,14 @@ Module GPTをOperational Readyとして扱う。
 - Step2 Pass
 - Step3 Pass
 
+- 必要なCurrent Context Confirmationが成立している
+
+Current Context Confirmation後、既存のNext Process / Handoff Validationに従って
+Case Handoffへ接続する。
+
+Current Authority、Current Handoff、必要Current Fact、Target、Scope、Statusが不足・不明・Conflictの場合、
+Operational ReadyまたはCase Handoffを推測で成立させず、既存STOP / RETURNへ接続する。
+
 Operational Readyは、
 
 Module GPTが未知の案件を
@@ -134,6 +178,9 @@ Module GPTが未知の案件を
 - Implementation
 - Repository変更
 - 新規案件開始
+- Current Repository ContextをFoundationと混同すること
+- Current Implementation ObservationをAuthorityへ昇格すること
+- Role-specific Formal Startup AuthorityをGeneral Defaultで上書きすること
 
 ---
 
@@ -147,3 +194,14 @@ Step1〜Step3のみを保持する。
 
 実運用上の必要性が確認された場合のみ、
 追加を判断する。
+
+本Protocolは、
+brain/ai_design_os/module_startup/module_gpt_context_architecture.md
+で定義されるGeneral Context ArchitectureへのConnectionを保持する。
+
+Role-specific Formal Startup Authorityが存在する場合、
+当該Role-specific Authorityを維持する。
+
+General Architectureだけを理由に、
+既存のMandatory Loading、Conditional Loading、Boundary Loading、
+Case-specific Loadingを自動変更しない。
