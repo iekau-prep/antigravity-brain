@@ -354,6 +354,77 @@ fixed_core（固定核）は埋もれやすくなります
 
 ---
 
+## Authority Confirmation / Result Boundary
+
+本Result Screenは、
+
+authoritative current fixed_coreを
+新しく形成する画面ではない。
+
+Authority Confirmationは、
+Result到達前に成立する。
+
+成立Event：
+
+Q10で本人自身が必要条件を選択
+＋
+Q10で選択した全条件について
+Q10-2固定強度Selectionを完了
+
+＝
+Authority Confirmation
+
+とする。
+
+したがって、
+
+Result表示
+≠
+Authority Confirmation
+
+LINE保存
+≠
+Authority Confirmation
+
+LINE接続
+≠
+Authority Confirmation
+
+ロック解除
+≠
+Authority Confirmation
+
+とする。
+
+Result上の
+
+・fixed_core表示
+・言語化
+・判断順序
+・drift preview
+・注意
+・Next Action
+・その他派生表現
+
+も、
+
+authoritative current fixed_core Source
+
+そのものではない。
+
+authoritative current fixed_core Sourceは、
+
+・Q10で本人が選択した必要条件
+・Q10-2で本人が各条件について選択した固定強度
+
+の組み合わせのみ。
+
+Result Screenは、
+本人確認済みcurrent fixed_coreを
+表示・再認識・decision更新へ接続する役割を担う。
+
+---
+
 ## 非LINE状態（初期表示）
 
 ---

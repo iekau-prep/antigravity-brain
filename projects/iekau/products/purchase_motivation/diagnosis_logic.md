@@ -164,6 +164,44 @@
 
 を扱う
 
+## Authoritative Current Fixed Core Source Boundary
+
+Diagnosis Logicが形成する
+
+・fixed_core判定
+・fixed_core / 可変条件の分離
+・Priority
+・ズレ
+・その他派生Result
+
+は、
+
+authoritative current fixed_core Source
+
+そのものではない。
+
+authoritative current fixed_coreの本人Confirmation Sourceは、
+
+1. Q10で本人自身が選択した必要条件
+2. Q10で選択した全条件について、Q10-2で本人自身が選択した固定強度
+
+の組み合わせのみとする。
+
+Authority Confirmation Eventは、
+
+Q10で選択した全条件について
+Q10-2固定強度Selectionが完了した時点
+
+で成立する。
+
+Q10 SelectionのみではAuthority Confirmationは成立しない。
+
+Diagnosis Logicは、
+本人確認済みcurrent fixed_coreを説明・整理・比較補助へ利用できるが、
+
+Diagnosis Logic自身の判定または派生Outputを
+authoritative current fixed_core Sourceへ昇格しない。
+
 ---
 
 ## ロジック全体フロー
@@ -385,6 +423,13 @@ STEP9：最終出力を生成する
 ---
 
 ## STEP5 固定核 / 可変条件の分離（重要）
+
+### Authority Boundary
+
+本STEPによる固定核 / 可変条件の分離はDiagnosis Logic上の派生判定である。
+
+authoritative current fixed_core Sourceは、
+Q10 + Q10-2で本人自身が明示した入力に限定する。
 
 ### 目的
 

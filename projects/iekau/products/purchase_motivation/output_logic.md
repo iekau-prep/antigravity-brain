@@ -341,6 +341,39 @@ purchase_motivationは、
 
 👉 「崩すと後悔しやすいもの」を明確化する
 
+### Authority Source Boundary
+
+本Outputに表示されるfixed_coreの
+
+・言語化
+・要約
+・表示順
+・Priority
+・補足説明
+
+は、
+
+authoritative current fixed_core Source
+
+そのものではない。
+
+authoritative current fixed_core Sourceは、
+
+・Q10で本人自身が選択した必要条件
+・Q10で選択した全条件について、
+  Q10-2で本人自身が選択した固定強度
+
+の組み合わせのみ。
+
+Authority Confirmationは、
+Q10 + Q10-2全対象Selection完了時点で成立する。
+
+Output Logicは、
+その本人入力を表示・整理・言語化できるが、
+
+Output Logicによる派生表現を
+Authority Sourceへ混入させない。
+
 ---
 
 ### 出力ルール
@@ -479,6 +512,11 @@ decisionしやすくなります
 ### 目的
 
 👉 decisionの順番を作る
+
+### Authority Boundary
+
+ここで表示される判断順序・Priorityは派生Outputであり、
+authoritative current fixed_core Sourceではない。
 
 ---
 

@@ -547,6 +547,26 @@ STEP8 固定強度確認
 
 を整理することが重要。
 
+### Authority Boundary
+
+Q10は、
+
+👉 本人自身が必要条件をSelectionするStep
+
+である。
+
+ただし、
+
+Q10 Selection完了のみ
+≠
+Authority Confirmation
+
+とする。
+
+authoritative current fixed_coreのConfirmationは、
+Q10で本人が選択した全条件について、
+Q10-2の固定強度Selectionが完了した時点で成立する。
+
 ---
 
 ## STEP8 固定強度確認（重要）
@@ -559,6 +579,27 @@ STEP8 固定強度確認
 ・かなり守りたい  
 ・できれば守りたい  
 ・状況次第で変わる  
+
+### Authority Confirmation
+
+Q10で本人が選択した全条件について、
+本人自身がQ10-2の固定強度Selectionを完了した時点を、
+
+Authority Confirmation Event
+
+とする。
+
+本人確認済みのauthoritative current fixed_core Sourceは、
+
+・Q10で本人自身が選択した必要条件
+・Q10-2で本人自身が各条件について選択した固定強度
+
+の組み合わせのみ。
+
+Diagnosis Logic、
+AI要約、
+Output Logicによる説明・Priority・注意・Next Action等の派生Outputは、
+Authority Confirmation Sourceへ含めない。
 
 ---
 
@@ -691,13 +732,18 @@ Q8 / Q9
 
 ---
 
-### 最終確定
+### 必要条件Selection
 Q10
+
+※Q10単独ではAuthority Confirmationではない。
 
 ---
 
-### 固定強度
+### 固定強度Selection
 Q10-2
+
+※Q10で選択した全条件についてQ10-2が完了した時点で、
+Authority Confirmationが成立する。
 
 ---
 

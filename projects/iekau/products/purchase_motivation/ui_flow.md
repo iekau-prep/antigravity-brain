@@ -147,13 +147,17 @@ purchase_motivation は単独でも使えるが、
 ↓  
 8. 必要条件確定  
 ↓  
-9. 結果画面  
+9. 固定強度確認  
 ↓  
-10. LINE保存導線  
+10. Authority Confirmation  
 ↓  
-11. 次の一手CTA  
+11. 結果画面  
 ↓  
-12. type_diagnosis / property_reader / loan_safety へ接続  
+12. LINE保存導線  
+↓  
+13. 次の一手CTA  
+↓  
+14. type_diagnosis / property_reader / loan_safety へ接続  
 
 ---
 
@@ -411,7 +415,54 @@ purchase_motivation は単独でも使えるが、
 
 ---
 
-## 9. 結果画面（最重要）
+### Authority Boundary
+
+この画面で必要条件をSelectionしただけでは、
+Authority Confirmationは成立しない。
+
+Q10 Selection完了後、
+選択した全条件について固定強度確認へ進む。
+
+---
+
+## 9. 固定強度確認画面
+
+### 目的
+
+👉 Q10で本人が選択した必要条件について、
+本人自身がそれぞれの固定強度を明示する
+
+### 対象
+
+Q10で選択した全条件
+
+### 選択
+
+・かなり守りたい
+・できれば守りたい
+・状況次第で変わる
+
+### Authority Confirmation Boundary
+
+Q10で選択した全条件について、
+固定強度Selectionが完了した時点で、
+
+Authority Confirmation
+
+が成立する。
+
+Authority Scopeは、
+
+・本人がQ10で選択した必要条件
+・本人がQ10-2で選択した各条件の固定強度
+
+の組み合わせのみ。
+
+その後、Resultへ進む。
+
+---
+
+## 10. 結果画面（最重要）
 
 ### 目的
 
@@ -484,7 +535,7 @@ purchase_motivation は単独でも使えるが、
 
 ---
 
-## 10. LINE保存導線（重要）
+## 11. LINE保存導線（重要）
 
 ### 目的
 
@@ -544,7 +595,7 @@ LINE接続後は、
 
 ---
 
-## 10.5 STATEによるCTA出し分け
+## 11.5 STATEによるCTA出し分け
 
 ### 目的
 
@@ -599,7 +650,7 @@ LINE接続後は、
 
 ---
 
-## 11. 次の一手CTA
+## 12. 次の一手CTA
 
 ### 目的
 
@@ -741,7 +792,7 @@ LINE：
 
 ---
 
-## 12. type_diagnosisとの接続
+## 13. type_diagnosisとの接続
 
 ### 目的
 
@@ -767,7 +818,7 @@ LINE：
 
 ---
 
-## 13. property_readerとの接続
+## 14. property_readerとの接続
 
 ### 目的
 
@@ -791,7 +842,7 @@ LINE：
 
 ---
 
-## 14. loan_safetyとの接続
+## 15. loan_safetyとの接続
 
 ### 目的
 
@@ -809,7 +860,7 @@ LINE：
 
 ---
 
-## 15. シェア設計
+## 16. シェア設計
 
 ### 目的
 
@@ -832,7 +883,7 @@ LINE：
 
 ---
 
-## 16. モバイルUI原則
+## 17. モバイルUI原則
 
 - 1画面1質問
 - 選択中心
@@ -843,7 +894,7 @@ LINE：
 
 ---
 
-## 17. NG
+## 18. NG
 
 - 最初からLINE必須
 - 診断前登録要求
@@ -856,7 +907,7 @@ LINE：
 
 ---
 
-## 18. 最重要ポイント
+## 19. 最重要ポイント
 
 purchase_motivation のUIで最も重要なのは、
 
