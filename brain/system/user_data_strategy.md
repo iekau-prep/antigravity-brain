@@ -481,7 +481,7 @@ status：
 
 LINE接続前に形成した判断・判断材料等は、LINE接続後に同じ本人の判断形成の続きとして再接続可能なものとして扱う。LINE接続そのものは、それらの内容変更または再生成を意味しない。
 
-temporary_idは現在の技術的な管理表現であり、本人Identity、内部ID、他のidentifierとのConcept上の関係や接続方法はここで確定しない。
+temporary_idは、LINE接続前のanonymous continuity contextを表すSystem-level technical management conceptであり、canonical identity、internal_id、LINE identityではない。
 
 ---
 
@@ -504,6 +504,276 @@ temporary_idは現在の技術的な管理表現であり、本人Identity、内
 👉 OS化する  
 
 ---
+
+# Anonymous Identity / Continuity System Authority
+
+
+## 1｜temporary_id
+
+temporary_idは、
+
+LINE接続前の
+
+anonymous continuity context
+
+を表す
+
+System-level technical management concept。
+
+
+canonical identityではない。
+
+
+internal_idではない。
+
+
+LINE identityではない。
+
+
+temporary_idという名称の
+別UUID生成自体を要求しない。
+
+
+## 2｜
+temporary_id /
+localStorage.user_id /
+person_reference Relationship
+
+temporary_id：
+
+anonymous continuity contextという
+System concept。
+
+
+localStorage.user_id：
+
+同anonymous continuity contextの
+Current Browser-side technical reference。
+
+
+person_reference：
+
+同anonymous continuity contextを
+System / persistence側から参照する
+technical reference。
+
+
+Current implementationで
+
+localStorage.user_id
+と
+person_reference
+
+が同じUUID valueを使用することを許容する。
+
+
+ただし、
+
+いずれもcanonical identityではない。
+
+
+## 3｜internal_id Establishment Timing
+
+Pre-LINEでは、
+
+internal_id存在を必須としない。
+
+
+anonymous continuity contextのまま
+
+judgment formation /
+continuity
+
+を保持可能。
+
+
+LINE接続時に、
+
+verified LINE external identityを基に
+
+internal_id
+
+をresolve / establishする。
+
+
+Post-LINEでは、
+
+internal_idを
+
+System canonical identity
+
+として扱う。
+
+
+## 4｜Anonymous Context → internal_id Claim Rule
+
+LINE接続時、
+
+Current anonymous continuity contextを、
+
+LINE external identityから
+resolve / establishされた
+
+internal_id
+
+へclaim / bindする。
+
+
+LINE接続前の
+
+decision /
+authority /
+continuity context
+
+を、
+
+同じinternal_idへ接続し、
+
+接続後も同一本人の
+decision continuityとして扱えるようにする。
+
+
+ただし、
+
+Browserから提示された
+
+localStorage.user_id /
+person_reference
+
+という値だけを根拠として、
+
+任意anonymous contextを
+internal_idへclaimしてはならない。
+
+
+claim対象は、
+
+System上で正当に成立・確認された
+
+anonymous continuity context
+
+に限定する。
+
+
+具体的な
+
+claim mechanism /
+DB schema /
+RPC /
+migration /
+duplicate handling /
+conflict handling
+
+は今回Authorityでは確定しない。
+
+
+## 5｜System Session / Current Identity Authority
+
+Pre-LINE：
+
+anonymous continuity contextを
+
+Current continuity reference
+
+として扱う。
+
+
+anonymous continuity contextを
+canonical identityへ昇格しない。
+
+
+Post-LINE：
+
+verified LINE external identityから
+
+internal_id
+
+がresolve / establishされた時点以降、
+
+internal_idを
+
+System identity authority /
+canonical continuity identity
+
+として扱う。
+
+
+System application sessionを形成する場合、
+
+canonical identity成立後の
+identity authorityは
+
+internal_id。
+
+
+line_id /
+LINE user_id
+
+は、
+
+internal_idへ接続する
+
+external linking identity
+
+として維持する。
+
+
+## Formal Authority Summary
+
+Pre-LINE：
+
+anonymous continuity context
+↓
+localStorage.user_id
+↓
+person_reference
+↓
+existing anonymous continuity /
+persistence
+
+
+LINE Connection：
+
+verified LINE external identity
+↓
+internal_id resolve / establish
+
+＋
+
+verified Current anonymous continuity context
+↓
+internal_id claim / bind
+
+
+Post-LINE：
+
+internal_id
+↓
+System canonical identity
+↓
+decision continuity authority
+
+
+## Explicit Authority Boundaries
+
+以下を成立させない。
+
+
+・temporary_id = canonical identity
+
+・localStorage.user_id = canonical identity
+
+・person_reference = canonical identity
+
+・line_id / LINE user_id =
+  System primary identity
+
+・Browser提供identifierだけによる
+  arbitrary claim
+
+・LINE接続前internal_id生成の必須化
+
+・automatic account merge
 
 =============================
 
