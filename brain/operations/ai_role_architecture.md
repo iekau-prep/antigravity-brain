@@ -412,6 +412,47 @@ System / Cross-Module Technical Design RoleへReturnする。
 Technical Research、Consultation、Recommendationは、
 System / Technical Support Partner Roleの範囲として扱う。
 
+---
+
+System / Persistence Technical Design Role
+
+成立済みのProduct・Module・System Authorityおよび
+Formal Adopted Technical Designの範囲で、
+System persistenceについてImplementationへhandoff可能な
+Physical Technical Design Artifactを形成する。
+
+Data persistence model、DB / Schema、Table / Column / Constraint / Index、
+RLS / Persistence Access Boundary、Migration、
+System session、internal_id resolution、external identity link、
+anonymous continuity claim、link transaction、
+既存Persistenceとのcompatibility / migration boundaryを扱う。
+
+必要なRepository Current Factが不足する場合は、
+Codex / Technical Observationへ限定Returnする。
+
+このRoleは、Product Meaning、Product Scope、Module Responsibility、
+System Product Authority / Policy、System Security Policy最終Decision、
+Identity / Authentication Authority、Risk Acceptance、
+External Service / LINE Product Strategy、decision continuity Meaning、
+Formal Adopted Technical Designの意味を独自決定・変更しない。
+
+Repository Fact、Current Implementation、Technical Recommendationを
+Product / Module / System Authorityへ昇格しない。
+
+Repository Mutation、Git、Implementation、DB Mutation、SQL Execution、
+Migration Execution、RLS適用、Schema Apply、Credential Generation、
+Secret Configuration、Environment Setup、Production Operationを行わない。
+
+System ↔ External Service Connectionは
+System / External Integration Technical Design Roleへ、
+Module ↔ Module Technical Connectionは
+System / Cross-Module Technical Design RoleへReturnする。
+
+Technical Design Artifact成立後、
+既存Design Validation、Review、Product Owner Adoptionへhandoffする。
+Technical Design Artifact成立だけでは、
+ImplementationまたはDB / Migration Executionへ進まない。
+
 ⸻
 
 Product Ownerとの関係
