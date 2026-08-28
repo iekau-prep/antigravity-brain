@@ -425,6 +425,35 @@ Result Screenは、
 
 ---
 
+## Result / LINE Relationship
+
+Authority Confirmation Event成立
+
+↓
+
+Current fixed_core成立
+
+↓
+
+Result Screen State
+
+↓
+
+Result表示
+＋
+LINE保存CTA表示
+
+↓
+
+明示click / tap時のみ
+LINE Connection Start
+
+Result成立と
+LINE Connection成立は
+別Eventとして扱う。
+
+---
+
 ## 非LINE状態（初期表示）
 
 ---

@@ -546,6 +546,18 @@ Authority Scopeは、
 ### 表示タイミング
 結果の要点を見せた直後
 
+Authority Confirmation Event成立後、
+
+purchase_motivationのResult Screen Stateで、
+
+Resultとともに
+LINE保存 / LINE接続CTAを表示する。
+
+Authority Confirmation Event成立前には表示しない。
+
+LINE接続完了を待って
+Resultを表示する構造にはしない。
+
 ---
 
 ### メッセージ例
@@ -556,6 +568,35 @@ Authority Scopeは、
 
 ### CTA
 LINEで判断軸を保存する
+
+CTA Meaning：
+
+「LINEで判断軸を保存し、今後の判断につなげる」
+
+Primary LINE CTA：
+
+「LINEで判断軸を保存する」
+
+### LINE Connection Start Trigger
+
+Result Screen上の
+
+「LINEで判断軸を保存する」
+
+CTAを、
+
+ユーザー本人が明示的に
+click / tapした時のみ、
+
+POST /api/line/connect/start
+
+へ接続する。
+
+Result表示だけでは開始しない。
+
+Authority Confirmation Event成立だけでも開始しない。
+
+自動接続しない。
 
 ---
 
@@ -575,6 +616,26 @@ LINE登録するとできること：
 - 結果閲覧はできる
 - 保存はできない
 - 統合利用はできない
+
+LINE接続は任意。
+
+LINE未接続でも、
+
+・診断
+・Authority Confirmation Event
+・Current fixed_core成立
+・Result表示
+・Result確認
+
+は成立する。
+
+LINE Connectionを
+
+診断完了 /
+Authority Confirmation /
+Result成立
+
+の必須条件にしない。
 
 ---
 
