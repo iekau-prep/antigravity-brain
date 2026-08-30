@@ -48,6 +48,64 @@ Reusable Operational Rule：
 
 Product / Migration Design 本文、case-specific migration version、case-specific Supabase Project Ref は保持しない。
 
+## Supabase CLI / Local State Operations
+
+### CLI Invocation and Version Governance
+
+Production / migration operationでは、Repositoryで明示された固定versionを指定してSupabase CLIをinvocationする。
+
+Current Repository-declared Pin：`2.115.0`
+
+Reference invocation：`npx --yes supabase@2.115.0 ...`
+
+- machineごとのglobal installを必須Routeとしない
+- global CLIを使用する場合も、version correspondence未確認では進めない
+- floating latestをProduction operationで使用しない
+- actual invocation versionとRepository-declared versionが一致しない場合はSTOPする
+- version変更時はnew exact versionを明示し、operational compatibility確認とRepository Reflectionを経る
+- `supabase/.temp/cli-latest`をversion Authorityとしない
+
+### CLI Authentication
+
+- CLI authenticationはoperation prerequisiteとする
+- unauthenticated / expired / invalidならSTOPする
+- credential / token valueをRepositoryへ保存しない
+- authentication success ≠ target confirmation ≠ Production DB Execution Authorization
+- reauthentication後はtarget correspondenceを再確認する
+
+### Project Link / Wrong-target Prevention
+
+- previous linked stateをAuthorityとして信用しない
+- expected environment / projectをAuthorized Inputから確認する
+- explicit link後にactual linked targetを再確認する
+- Development → Production、Production → Developmentの双方でtarget correspondenceを再確認する
+- Production migration apply直前にもtarget correspondenceをGateとして確認する
+- mismatchならSTOPする
+- `supabase/.temp/project-ref`だけでProduction targetをAuthorizeしない
+- reusable Ruleへcase-specific Project Refを固定しない
+
+### Local CLI State and Repository Configuration
+
+`supabase/.temp`はlocal machine上のephemeral CLI operational stateとして扱う。
+
+- Repository SoT：NO
+- Production Target Authority：NO
+- Git：DO NOT TRACK
+- read-only Current Fact確認材料として参照可能だが、単独Authorityにはしない
+- CLIによりgenerate / updateされ得る
+- scope外処理目的で勝手にclean / deleteしない
+
+`supabase/config.toml`はRepository-managed reproducibility inputとして扱う。
+
+- local Supabase CLI development configurationおよびsecret-free shared CLI configurationを保持する
+- Production Project Ref Authority、Production target selection source、credential holder、local linked-project state holderではない
+- Git：TRACK
+
+`supabase/.gitignore`はRepository-managed local-state exclusion policyとして扱う。
+
+- Git：TRACK
+- `supabase/.temp`およびsecret / credential-bearing local files：DO NOT TRACK
+
 ## Supabase Production Migration Operation
 
 ```text
