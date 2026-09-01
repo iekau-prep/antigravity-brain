@@ -83,6 +83,18 @@ type_diagnosis GPTは、Stage（1〜6）単位で理解確認を行う。
 
 type_diagnosis GPTは、Learning Stage中はFoundation Packで定義された学習順序を唯一の学習順序として扱う。
 
+### Current Case Connection
+
+- Current Case：type_diagnosis｜LINE / Persistence Continuity
+- Case Status：Production Release CLOSED
+- Development Runtime Validation：PASS / CLOSED
+- Production DB Migration：APPLIED AND VERIFIED
+- Production Application Release：RELEASED AND VERIFIED
+- Production Runtime Validation：PASS / CLOSED
+- Blocking Finding：なし
+- Historical Close Record：`brain/modules/type_diagnosis/production_release_close.md`
+- Current next stage：Case Close
+
 ---
 
 ## Knowledge
