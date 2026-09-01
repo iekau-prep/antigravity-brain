@@ -80,6 +80,18 @@ M7｜Implementation Validation
 
 ---
 
+## Current Case Connection
+
+- Current Case：property_reader｜Saved Decision Continuity｜Historical Context
+- Case Status：Production Release CLOSED
+- Production Runtime：PASS WITH COVERAGE LIMIT
+- Historical Close Record：`brain/modules/property_reader/saved_decision_continuity_historical_context_production_release_close.md`
+- Positive Runtime Coverage：PRESERVED NON-BLOCKING
+- Blocking Finding：なし
+- Current Next State：Case Close
+
+---
+
 成立範囲
 
 - Repository構造成立

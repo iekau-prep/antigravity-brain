@@ -208,6 +208,36 @@ decision_log
 
 =============================
 
+■ Historical Saved Decision Context
+
+=============================
+
+### Decision A｜Historical Context Display
+
+Status：ADOPT
+
+現在propertyについて保存済みのdecision・reasonsを、property_reader再訪時のHistorical Context / reference informationとして表示してよい。
+
+Purpose：
+
+前回どこまで判断していたかをユーザーが思い出せるようにする。
+
+Historical Contextは参照情報であり、current interaction / current decision stateを自動更新しない。
+
+### Decision B｜Current Selection Restore
+
+Status：NOT ADOPT
+
+saved reasonをcurrent sessionのselectedReasonへauto-restoreしない。
+
+selectedReasonはcurrent sessionでユーザーが明示的に選択したinteraction stateとして扱う。
+
+Historical Saved ReasonとCurrent Selectionは別Product Meaning。
+
+---
+
+=============================
+
 ■ ステータス設計（＝decision_result）
 
 =============================
