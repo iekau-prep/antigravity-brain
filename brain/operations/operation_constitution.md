@@ -347,6 +347,74 @@ Stop Conditionは以下をSoTとして参照する。
 
 Stop Conditionは停止条件のみを統括し、返却経路は定義しない。
 
+## 3.4 Execution Target Correspondence Gate
+
+### Purpose
+
+Remote systemへ影響し得るenvironment / target-bound mutationの直前に、Current Effective Execution TargetとAuthorized Exact TargetのCorrespondenceを確認するCross-platform共通Safety Gateを定義する。
+
+### Responsibility
+
+Current Effective Execution Targetをread-only Observationする。
+
+そのCurrent Targetが案件で明示AuthorizeされたAuthorized Exact Targetと一致する場合のみ、mutationへ進行可能とする。
+
+以下の場合はSTOPする。
+
+- UNKNOWN
+- UNRESOLVED
+- MISMATCH
+
+AI / Human Operator Supportは、推測によってmutationへ進まない。
+
+### Memory Prohibition
+
+Current Target determinationのAuthorityとして以下を使用しない。
+
+- 前回Chatの記憶
+- AI memory
+- 過去に確認したtarget
+- previous successful command
+- 以前のlink / target state
+- repository名だけからの推測
+- branch名だけからの推測
+- environment名だけからの推測
+- 通常利用する環境という前提
+
+必ずexecution直前のCurrent Stateをread-only Observationする。
+
+### Target Switch Boundary
+
+Current TargetとAuthorized Exact Targetが一致しない場合、AI / Human Operator Supportは独自にtarget switchしない。
+
+Target Switch / Link Mutation等が必要な場合、その案件でexplicit authorityが成立した場合のみ変更可能とする。
+
+変更後は、再度Current Effective Execution Targetをread-only Observationする。
+
+Exact Correspondence成立後のみmutationへ進行可能とする。
+
+### Platform Boundary
+
+上位Ruleへ具体的Platform commandを固定しない。
+
+PlatformごとのCurrent Effective Execution Targetの例は以下とする。
+
+- Supabase：actual project / linked execution target
+- Git：remote / destination branch / revision
+- Deployment：project / environment / source revision
+- Cloud / external service：actual execution destination
+
+具体的Observation方法は各Platform固有Operationへ委ねる。
+
+### Responsibility Separation
+
+- Common Safety Principle：`brain/operations/operation_constitution.md`
+- Supabase / LINE-connected Production：`brain/operations/line_connected_production_release_operation.md`
+- Git：`brain/operations/git_push_operation.md`
+- Deployment：`brain/operations/deployment_observation_operation.md`
+
+既存Platform固有procedureをoperation_constitution.mdへコピーしない。
+
 # 4. Artifact Management
 
 Artifact Managementは、Operation全体で扱う成果物と受け渡し原則を定義する。
