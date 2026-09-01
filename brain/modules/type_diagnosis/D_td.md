@@ -85,15 +85,12 @@ type_diagnosis GPTは、Learning Stage中はFoundation Packで定義された学
 
 ### Current Case Connection
 
-- Current Case：type_diagnosis｜LINE / Persistence Continuity
+- Current Case：type_diagnosis → property_reader Connection → Diagnosis Context Use
 - Case Status：Production Release CLOSED
-- Development Runtime Validation：PASS / CLOSED
-- Production DB Migration：APPLIED AND VERIFIED
-- Production Application Release：RELEASED AND VERIFIED
-- Production Runtime Validation：PASS / CLOSED
+- Production Runtime：PASS / CLOSED
+- Historical Close Record：`brain/modules/type_diagnosis/property_reader_diagnosis_context_use_production_release_close.md`
 - Blocking Finding：なし
-- Historical Close Record：`brain/modules/type_diagnosis/production_release_close.md`
-- Current next stage：Case Close
+- Current Next State：Case Close
 
 ---
 
