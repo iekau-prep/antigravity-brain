@@ -82,11 +82,12 @@ M7｜Implementation Validation
 
 ## Current Case Connection
 
-- Current Case：property_reader｜Saved Decision Continuity｜Historical Context
+- Current Case：property_reader → comparison｜Entry Connection
 - Case Status：Production Release CLOSED
 - Production Runtime：PASS WITH COVERAGE LIMIT
-- Historical Close Record：`brain/modules/property_reader/saved_decision_continuity_historical_context_production_release_close.md`
-- Positive Runtime Coverage：PRESERVED NON-BLOCKING
+- Release Classification：RELEASED WITH COVERAGE LIMIT
+- Coverage：PRESERVED NON-BLOCKING
+- Historical Close Record：`brain/modules/property_reader/comparison_entry_connection_production_release_close.md`
 - Blocking Finding：なし
 - Current Next State：Case Close
 

@@ -524,6 +524,37 @@ comparison = decision更新
 
 ---
 
+### property_reader → comparison｜Direct UX Entry
+
+property_reader → comparisonの接続は、Direct UX Connectionである。
+
+Direct UX Connection
+≠
+Direct Data Connection
+
+Candidate Source：
+
+same-user canonical persisted decisions
+
+Eligible：
+
+・保存
+・保留
+
+Current propertyは、active candidate setへの存在を必須とする。
+
+Counterpart：
+
+・0件：unavailable
+・1件：unique counterpart
+・2件以上：USER selection required
+
+2件以上の場合のSelection AuthorityはUSERであり、System Auto-selectionは行わない。
+
+unavailable時はnavigationしない。
+
+---
+
 =============================
 
 ■ 他プロダクトとの接続
