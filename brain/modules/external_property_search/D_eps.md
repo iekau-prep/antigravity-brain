@@ -349,6 +349,17 @@ Formation材料なし
 AI Design OS成熟
 Formation材料なし
 
+## Current Case Connection
+
+- Current Case：external_property_search → property_reader｜Connection
+- Case Status：CLOSED
+- Production Runtime：PASS WITH COVERAGE LIMIT
+- Release Classification：RELEASED WITH COVERAGE LIMIT
+- Coverage：PRESERVED NON-BLOCKING
+- Historical Close Record：`brain/modules/external_property_search/property_reader_connection_production_release_close.md`
+- Blocking Finding：なし
+- Current Next State：NONE — CASE CLOSED
+
 Learning
 Learning Stage
 Formation材料なし
