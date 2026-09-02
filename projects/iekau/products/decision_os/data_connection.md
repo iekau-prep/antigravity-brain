@@ -256,11 +256,11 @@ decision_os は property 本体を主に持たず、参照する。
 
 =============================
 
-■ ④ state算出用データ
+■ ④ STATE算出用データ
 
 =============================
 
-decision_os で使う state は保存しない。
+decision_os で使う STATE は保存しない。
 
 ---
 
@@ -273,16 +273,9 @@ decision_os で使う state は保存しない。
 
 ---
 
-例：
+STATEは、decision構造から導出される「現在もっとも整理が必要な判断領域」である。
 
-- 検討中あり → 検討中STATE
-- 保留多い → 迷い中STATE
-- 見送りのみ → 整理済みSTATE
-
----
-
-👉 state は  
-👉 「今の判断状況の解釈」である
+STATEとdecision_stateは別概念であり、混在させない。
 
 ---
 
