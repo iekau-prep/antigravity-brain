@@ -334,31 +334,16 @@ decision_result によって3分割：
 
 =============================
 
-STATEに応じて：
+主CTAは、
+現在のSTATEに基づいて表示する。
 
----
+STATEの定義・判定・CTAとの対応は、
+System Authorityに従う。
 
-STATE1（初期）
-👉 CTA：前提理解
+本書では、
+STATE taxonomyおよびSTATE mappingを定義しない。
 
----
-
-STATE2（検討中）
-👉 CTA：property_reader or 比較
-
----
-
-STATE3（不安）
-👉 CTA：loan_safety
-
----
-
-STATE4（迷い）
-👉 CTA：比較 or 決断
-
----
-
-👉 表示は1つのみ
+主CTAは1つのみ表示する。
 
 ---
 
