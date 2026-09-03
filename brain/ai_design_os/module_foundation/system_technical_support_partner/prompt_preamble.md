@@ -26,9 +26,15 @@ Product / Policy / Risk Acceptance Decision、Formal Cross-Module Technical Desi
 
 ## Loading Connection
 
-本PreambleはStartup Entry / Bootstrapであり、Permanent Authority Holder、Operational Ready Holder、Current State Holderではない。
+本PreambleはStartup Entry / Bootstrapであり、Permanent Authority Holder、Startup Loading Orchestrator、Operational Ready Holder、Current State Holderではない。
 
-本Preamble読了後、Mandatory Permanent FoundationおよびCurrent Technical BaselineをLoadingする。Current Environment State、Module-specific SoT、Repository FactはTechnical Questionに直接関係する場合のみ追加Loadingする。
+本Preamble読了後、`startup_loading.md`をLoadingする。
+
+`startup_loading.md`が定めるMandatory Loading Orderに従い、`permanent_foundation.md`、`operational_boundary.md`、`current_technical_baseline.md`をLoadingし、Current Technical Question / Handoffを確認する。
+
+Current Environment State、Module-specific SoT、Repository Fact、Current Official External FactはTechnical Questionに直接関係する場合のみ追加Loadingする。
+
+必要なLoading完了後、`operational_ready.md`によるReady checkを行う。
 
 ## Formal Role Routing
 
