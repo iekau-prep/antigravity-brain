@@ -41,11 +41,9 @@ Current Fact、Source、Observed / Verified point、Freshness statusのいずれ
 
 ## Current Fact Register
 
-Current Fact未投入。
+以下の3 Factのみ、Current / Replaceableなrole-general environment / tool capability baselineとして投入する。
 
-本Foundation Completionでは、Current Technical Factのtechnical research、Repository Observation、現行環境確認を行わない。
-
-したがって、以下の各CategoryにはCurrent Factを推測して記載しない。
+それ以外のCategoryにはCurrent Factを推測して記載しない。
 
 | Category | Current Fact | Source | Observed / Verified point | Freshness status |
 |---|---|---|---|---|
@@ -53,7 +51,9 @@ Current Fact未投入。
 | adopted major platform / tool family | 未投入 | 未投入 | 未投入 | 未確認 |
 | AI / development tooling baseline | 未投入 | 未投入 | 未投入 | 未確認 |
 | repository / tool interaction model | 未投入 | 未投入 | 未投入 | 未確認 |
-| role-general environment / tool capability baseline | 未投入 | 未投入 | 未投入 | 未確認 |
+| role-general environment / tool capability baseline | Current local Mac上で、`/Users/hiroyukiishizawa/.npm/_npx/66b4952730d9cac8/node_modules/.bin/supabase` が存在し、そのpackage metadataは `supabase` version `2.115.0` を示す。local tool-distribution factに限定する。 | `current_technical_baseline.md｜Supabase CLI / Development DB Operational Baseline｜Additional Technical Observation Result` | Current local Mac environmentで、cached package pathとpackage metadataを2026-09-08にREAD-ONLY確認。 | observed local path / package metadataに限定してcurrent validityを扱う。relevant tool / platform current-state change時、またはfreshness-sensitive questionでvalidityを保証できない場合に再確認。 |
+| role-general environment / tool capability baseline | Current local Mac上で、`/Users/hiroyukiishizawa/.npm/_npx/b96a6bd565c470ce/node_modules/.bin/supabase` が存在し、そのpackage metadataは `supabase` version `2.116.0` を示す。local package-distribution factに限定する。 | `current_technical_baseline.md｜Supabase CLI / Development DB Operational Baseline｜Additional Technical Observation Result` | Current local Mac environmentで、cached package pathとpackage metadataを2026-09-08にREAD-ONLY確認。 | observed local packageに限定してcurrent validityを扱う。relevant tool / platform state change時、またはfreshness-sensitive questionでvalidityを保証できない場合に再確認。 |
+| role-general environment / tool capability baseline | Fact 2のplatform binaryは、Current local Mac上でMach-O arm64、Identifier `com.supabase.cli`、Signature `adhoc`、TeamIdentifier `not set`、SHA-256 `42a9fe8b8a266bc0fbde804c08efb75cc0653480e91ba3f20fba1c3c27a7b49a` と観測された。local binary-identity factに限定する。 | `current_technical_baseline.md｜Supabase CLI / Development DB Operational Baseline｜Additional Technical Observation Result` | Current local Mac environmentで、binary / codesign metadataを2026-09-08にREAD-ONLY確認。 | observed local binary identityに限定してcurrent validityを扱う。relevant tool / executable / platform state change時、またはfreshness-sensitive questionでvalidityを保証できない場合に再確認。 |
 | reusable Current Official Fact | 未投入 | 未投入 | 未投入 | 未確認 |
 
 ## Update / Revalidation Trigger
