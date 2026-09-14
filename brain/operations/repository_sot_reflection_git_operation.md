@@ -1,6 +1,18 @@
 # Repository SoT Reflection Git Operation
 
-Status: Proposed
+Status: Active
+
+---
+
+# Proposed Status / Formal Adoption Lifecycle
+
+`Proposed`は、本OperationがFormal executable Operationとして未activationであることを意味する。
+
+Proposed stateのまま、本Operationをcaseへsilent applicabilityさせず、Operation executionへ接続しない。
+
+Formal Adoption AuthorityはProduct Ownerにある。actual statusまたはactivation stateの変更は、Product Owner Formal Adoption成立後にのみ扱う。
+
+Operation Adoptionは、case-specific Local Commit Authorityを意味しない。
 
 ---
 
@@ -43,6 +55,16 @@ Repository Reflection Completion Evidenceを、Implementation Validation Evidenc
 
 ---
 
+# Implementation / IV Relationship
+
+Repository SoT Formation / Reflectionのみを扱い、application / product implementation mutationを含まないscopeでは、ImplementationおよびImplementation ValidationはNOT APPLICABLEとする。
+
+同一scopeにimplementation deltaが共存する場合、そのimplementation scopeは既存Implementation / Implementation Validation governanceへ接続する。
+
+本OperationはImplementationまたはImplementation Validationを所有、再Formation、免除しない。
+
+---
+
 # Entry Condition
 
 本Operationは、以下がすべて確認可能な場合のみ開始する。
@@ -64,6 +86,78 @@ Repository Reflection Completion Evidenceを、Implementation Validation Evidenc
 いずれかが不足、不明、Conflict、または推測を必要とする場合は開始しない。
 
 本Operationは、Product Owner Formal Adoption、Repository Reflection、pre-commit validation、Commit Authorityを独自に成立させない。
+
+---
+
+## Pre-Commit Validation Connection
+
+Pre-Commit Validationは、Technical / Git Observation responsibilityとして、Codex｜READ-ONLYで行う。
+```text
+Repository SoT Reflection
+↓
+Post-Reflection Validation PASS
+↓
+exact commit candidate scope / message formation
+↓
+Technical / Git Observation｜Pre-Commit Validation
+↓
+PASS
+↓
+Product Owner｜case-specific Local Commit Authority
+↓
+Codex｜Technical Git Execution
+```
+
+Pre-Commit ValidationはProduct Ownerによるcase-specific Local Commit Authorityを先取りしない。validation時点では、Formal Commit Authority Owner、Authority requirement、decision route、exact candidate scope、exact candidate commit instruction / message、およびGit Push boundaryのcorrespondenceまでを確認する。
+
+Pre-Commit Validationでは、`git add`、`git commit`、`git push`、file edit、restore、reset、checkout / switch、stash、rebase、merge、amend、staged diff modification、unstage、またはcleanupによるscope形成を行わない。
+
+Pre-Commit Validationは、少なくとも以下を一体として確認する。
+
+1. Formal Adoption correspondence
+2. Repository Reflection ESTABLISHED
+3. exact repository correspondence
+4. exact branch correspondence
+5. exact reflected files
+6. exact reflected delta only
+7. additional delta none
+8. working tree scope correspondence
+9. current staged state correspondence
+10. untracked state correspondence
+11. unexpected post-reflection change none
+12. excluded scope preservation
+13. Formal Commit Authority requirement / owner / decision route correspondence
+14. exact candidate commit instruction / message correspondence
+15. Git Push boundary
+
+current staged stateを観測する。existing staged diffが存在しない場合、validation継続候補とする。existing staged diffが存在する場合、今回のRepository SoT Reflection commit scopeと安全かつ一意に分離可能であることを確認する。safe / exact separation不能の場合はSTOPする。Pre-Commit Validation自身がstaged stateを変更して分離を成立させない。
+
+Pre-Commit Validation Resultは以下とする。
+
+- PASS：Formal correspondenceが成立し、case-specific Local Commit Authority Decisionへ進行可能。
+- STOP：Current fact、scope、staging、authorityその他にexact discrepancyがあり、self-repairせず停止する。
+- FAIL：Formal Contract間にcorrespondence contradictionがある。
+
+### Authorized External Delta Correspondence
+
+scope-external modified deltaまたはuntracked deltaが存在する場合、Pre-Commit ValidationはREAD-ONLYで、以下を一体として確認する。
+
+1. external delta inventory
+2. exact file pathおよびdelta scope identity
+3. Case identity
+4. authorityまたはFormal Reflection / authorized lifecycle identity
+5. Current working treeに存在するexpected state
+6. current candidate scopeからのexplicit exclusion
+7. candidate deltaとのsafe / unique isolation
+8. candidate commit packageへのcontamination absence
+9. external delta preservation
+10. untracked state correspondence
+
+Authorized Safe Isolationが成立する場合、validation継続候補とする。
+
+identity、authority、expected state、explicit exclusion、safe / unique isolation、candidate contamination absence、またはexternal preservationを確認できない場合、Pre-Commit ValidationはSTOPする。
+
+Pre-Commit Validation自身は、working tree、staged state、external delta、またはcandidate scopeを変更してsafe stateを成立させない。
 
 ---
 
@@ -100,33 +194,55 @@ Local Git Commit Entry開始前に、少なくとも以下を区別可能とす�
 - existing staged diff
 - その他未commit差分
 
-目的は、成立済みRepository Reflection scopeとscope外状態を区別することにある。
+目的は、成立済みRepository Reflection scope、Authorized External Delta、およびUnexpected / Unauthorized External Deltaを区別することにある。
 
-scope外差分を整えるための自動包含、自動破棄、自動stash、自動resetを行わない。
+scope外modified deltaまたはuntracked deltaが存在しない場合、既存のscope correspondence確認に従う。
 
-scope外modified file、scope外untracked file、その他scope外未commit差分が存在する場合、authorized target diffと区別可能であっても、本Operationを継続しない。
+scope外modified deltaまたはuntracked deltaが存在する場合、そのdeltaがAuthorized External Deltaとしてexactに識別され、current candidate scopeから明示的にexcludedされ、candidate commitへ混入せず、安全かつ一意に分離可能であることをREAD-ONLYで確認できる場合に限り、validation継続候補とする。
 
-当該状態では、既存Authorityに従いSTOP / RETURNする。
+identity、authority、expected state、explicit exclusion、safe / unique isolation、またはcandidate contamination absenceを確認できないexternal deltaは、Unexpected / Unauthorized External DeltaとしてSTOP / RETURNする。
+
+scope外差分を整えるための自動包含、自動破棄、自動stash、自動reset、その他working treeを変更してsafe stateを作る操作を行わない。
+
+## Authorized External Delta
+
+Authorized External Deltaは、以下すべてを満たすscope-external modified deltaまたはuntracked deltaである。
+
+1. 別Caseまたは別の既存Formal Authorityに対応する。
+2. exact file pathおよびdelta scopeが識別されている。
+3. Current working treeに存在することがexpectedである。
+4. Current candidate scopeから明示的にexcludedされている。
+5. candidate deltaとstaging unit上で安全かつ一意に分離可能である。
+6. candidate commitへ混入しない。
+7. Pre-Commit ValidationおよびTechnical Git Executionが当該external deltaを変更、cleanup、stage、unstage、discard、rewriteしない。
+
+Authorized External Deltaは、その存在のみを理由にSTOPしない。
+
+candidate deltaとexternal deltaが同一file内に共存し、exact path stagingで安全かつ一意に分離できない場合はSTOPする。interactive hunk stagingその他の新しい分離方式を本Operationで形成しない。
 
 ---
 
 # Unexpected Change Boundary
 
-scope外working tree差分が存在する場合、authorized target diffと安全に区別可能かどうかにかかわらず、対象scope限定で進行しない。
+Authorized External Deltaは、Unexpected Changeではない。
 
-以下の場合は停止する。
+以下のいずれかを満たすexternal deltaは、Unexpected / Unauthorized External Deltaとして扱い、STOPする。
 
-- scope外working tree差分の存在
-- scope外modified fileの存在
-- scope外untracked fileの存在
-- その他scope外未commit差分の存在
+- source不明
+- Case不明
+- Authority不明
+- expected working-tree deltaとして確認不能
+- exact file pathまたはdelta scope不明
+- candidate scopeからのexplicit exclusion不明
+- candidate scopeとのsafe / unique isolation不能
+- candidate commitへの混入risk
+- unauthorized fileまたはdiff
+- unexpected post-reflection mutation
 - authorized target diffとscope外差分を区別できない
 - existing staged diffとのConflictがある
-- scope外混入リスクがある
 - commit対象の一意性がない
-- Unexpected Changeがある
 
-本Operationは、scope外差分の自動包含、自動破棄、自動stash、自動reset、自動stage、自動commitを行わない。
+本Operationは、Unexpected / Unauthorized External Deltaを自動包含、自動破棄、自動stash、自動reset、自動stage、自動commit、またはその他のself-repairによって解消しない。
 
 ---
 
@@ -151,6 +267,28 @@ Local Git Commitを開始するには、今回のOperationに適用されるForm
 BuilderはCommit Authority Ownerではない。
 
 本Operationは、新しいCommit Authority Owner、新しいExecution Role、Product Owner Authorityの変更を形成しない。
+
+---
+
+## Formal Commit Authority Owner
+
+Formal Commit Authority OwnerはProduct Ownerとする。
+
+Local Git Commitには、Product Ownerによるcase-specific Local Commit Authorityを必要とする。Operation Adoptionは、case-specific Local Commit Authorityを意味しない。
+
+case-specific Local Commit Authorityは、少なくとも以下を一意に識別可能とする。
+
+- exact repository
+- exact branch
+- exact file scope
+- exact reflected Case scope
+- Local Commit only
+- additional file：NOT AUTHORIZED
+- history rewrite：NOT AUTHORIZED
+- Git Push：NOT AUTHORIZED
+- exact commit instruction / message
+
+本ContractはProposed Operationをactivationせず、case-specific Local Commit Authorityを付与しない。
 
 ---
 
@@ -182,9 +320,38 @@ Execution Responsible Role、実行Authority、または対象scopeとの対応�
 
 ---
 
+Codex｜Technical Git Executionは、Pre-Commit Validation PASSおよびProduct Ownerによるcase-specific Local Commit GOが成立した場合に限り、exact staging、staged diff verification、local commit、post-commit technical confirmationを扱う。
+
+Repository Formation GPTはmutation executorではない。
+
+本接続は新Execution Roleを形成せず、既存Technical / Git Execution responsibilityへのspecific connectionのみを示す。
+
+## Authorized External Delta Scope Integrity
+
+Codex｜Technical Git Executionは、Pre-Commit ValidationでAuthorized Safe Isolationを確認済みの場合、authorized external deltaを保持したまま、exact authorized candidate pathsのみをstageする。
+
+Technical Git Executionは、以下を確認する。
+
+1. staged packageがcandidate scopeだけである。
+2. authorized external modified fileまたはuntracked deltaをstageしない。
+3. external deltaをedit、unstage、cleanup、discard、rewriteしない。
+4. stash、reset、restore、checkout / switchを行わない。
+5. local commitにはcandidate packageだけを含める。
+6. post-commit technical confirmationで、committed candidate scopeおよびremaining authorized external deltaを双方確認する。
+
+safe / unique isolationに失敗した場合、self-repairせずSTOP / RETURNする。
+
+---
+
 # Commit Message Boundary
 
 Commit messageは、既存Repository conventionと整合し、Formation CaseおよびRepository Reflection内容を追跡可能なものとする。
+
+Commit message自体に独立したFormal Authorityを設けない。
+
+case-specific commit messageを本Operation ArtifactへPermanentに固定しない。
+
+exact commit messageは、case-specific Local Commit Authorityに対応するactual authorized Git execution instructionで固定する。
 
 新しい固定prefix、新しいmandatory template、新しいRepository-wide naming ruleは形成しない。
 
