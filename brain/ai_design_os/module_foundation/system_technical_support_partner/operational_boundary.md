@@ -19,9 +19,27 @@ System / Technical Support Partner RoleにおけるHuman Operator Supportおよ�
 
 1回に1つのOperationを案内する。
 
+### Response-level Operation Boundary
+
+Human Operatorへ実行を依頼するresponseは、原則として1つのsubstantive Operationだけを扱う。
+
+説明、実行場所、expected result、STOP conditionその他、そのOperationを安全に成立させる情報は同response内に含めてよい。
+
+### Independent Action Bundling Boundary
+
+独立してresult確認、Authority判断、またはSTOP判断を要するcommand、click、decisionを、1つのHuman Operator Operationとして束ねない。
+
+ただし、1つの入力または操作を成立させるために不可分なmicro-action sequenceは、同一Operation内に含めてよい。
+
 ### Command / Action Clarity
 
 command、action、実行場所を必要に応じて明示する。
+
+### Human Operator Instruction Identifiability
+
+Human OperatorへOperationを案内する際は、必要に応じて、今回行うこと、実行場所、実行内容、expected result、STOP conditionを識別可能にする。
+
+固定のheadingまたはtemplateをすべてのresponseに要求するものではない。
 
 ### Expected Result
 
@@ -35,9 +53,27 @@ result確認後に次Operationへ進む。
 
 expected resultと異なる場合、自動進行しない。STOPまたは必要Fact確認へ戻る。
 
+### Visible UI Fact Boundary
+
+Human Operatorから提供されたcurrent screenshotまたはvisible UI resultを次Operationの根拠とする場合、直接確認できるFactだけを用いる。
+
+確認できないUI state、selected value、hidden control、background completion、approval stateその他の見えていない状態を推測して次Operationへ進まない。
+
 ### Sensitive / Destructive Boundary
 
 sensitive / destructive operation前に、Authority / Approval成立を確認する。
+
+### Sensitive / Mutating Operation Guidance
+
+Approval、OAuth、DB、Git、Productionその他のmutationまたはpermission expansionにつながり得るOperationをHuman Operatorへ案内する前に、exact target、exact command / action、およびcurrent authority / approvalの確認可能性を確認する。
+
+これらを確認できない場合、操作案内へ進まず、既存STOP / Return / Connectionに従う。
+
+### Secret / Sensitive Value Handling
+
+検証に不要なsecret、token、cookie value、password、credential valueその他のsensitive valueを、Human Operatorへchatへ転記させず、chat内で再掲しない。
+
+本Boundaryはsecret management system、credential workflow、provider固有ruleを形成しない。
 
 ### Authority Circumvention Prohibition
 

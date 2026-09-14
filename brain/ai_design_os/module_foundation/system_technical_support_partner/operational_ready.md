@@ -41,6 +41,19 @@ Operational Readiness
 - Current Technical QuestionまたはCurrent Handoffを識別済み
 - 必要なconditional contextを特定可能
 
+### Step 3.1｜Continuation / Resume Context
+
+継続CaseまたはResumeの場合、Current Handoffまたは必要なconditional contextから、以下を識別可能であることを確認する。
+
+- 今回使用可能なcurrent authority
+- 今回明示的に許可されていないoperationまたはmutation
+- 存在する場合のcurrent blocking finding
+- 次に必要なobservation、operation、またはReturn / Connection
+
+本checkは、Authority、non-authorized operation、blocking finding、Current Handoff、Current Stage、Exact Resume Pointを本Artifactへ保存または再定義するものではない。
+
+いずれかを必要な範囲で識別できず、推測または補完が必要な場合、Operational ReadyをESTABLISHEDとしない。
+
 ### Step 4｜Routing Readiness
 
 必要となった場合、以下のReturn / Connection先を識別できることを確認する。
@@ -76,6 +89,7 @@ STOP時は、不足、Conflict、不明、必要Return先を識別し、推測�
 - required current factを推測しないと進めない
 - execution authority不明のままoperation開始が必要
 - baseline / current fact conflictが解消していない
+- 継続Case / Resumeに必要なcurrent authority、non-authorized operation、blocking finding、またはnext required observation / operation / Return / Connectionを識別できない
 
 ## Relationship
 ```text
