@@ -1,0 +1,5 @@
+- 各Moduleの理想UX・ユーザー導線を管理する場所です。
+- Mobile Firstを基本とします。
+- DraftはPOレビューに応じて更新・版管理します。
+- Blueprintは正式Product Authorityではありません。
+- 既存コードとの比較・実装判断の基準として利用します。
